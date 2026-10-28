@@ -1,0 +1,163 @@
+/* Article body typography, ported from the source's `#pf-blog-detail-2026 .pf-bd-content` rules.
+   The body is CMS HTML injected at render time, so it is styled with descendant selectors. */
+
+#pf-blog-detail-2026 .pf-bd-content h2 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 30px;
+  color: #000;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  padding-top: 32px;
+  border-top: 1px solid #e5e7eb;
+}
+#pf-blog-detail-2026 .pf-bd-content > h2:first-child {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+#pf-blog-detail-2026 .pf-bd-content h3 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  color: #1a1a1a;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+#pf-blog-detail-2026 .pf-bd-content h4 {
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #1a1a1a;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+#pf-blog-detail-2026 .pf-bd-content h5,
+#pf-blog-detail-2026 .pf-bd-content h6 {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+#pf-blog-detail-2026 .pf-bd-content h5 { font-size: 22px; line-height: 1.2; }
+#pf-blog-detail-2026 .pf-bd-content h6 { font-size: 20px; line-height: 1.2; }
+#pf-blog-detail-2026 .pf-bd-content p {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #555;
+  margin-bottom: 1rem;
+}
+#pf-blog-detail-2026 .pf-bd-content ul,
+#pf-blog-detail-2026 .pf-bd-content ol {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #2e2e2e;
+  margin-bottom: 24px;
+  padding-left: 22px;
+}
+#pf-blog-detail-2026 .pf-bd-content ul {
+  list-style: disc;
+  padding-left: 38px;
+}
+#pf-blog-detail-2026 .pf-bd-content ul li::marker { color: #00aeef; }
+#pf-blog-detail-2026 .pf-bd-content ol { list-style: decimal; }
+#pf-blog-detail-2026 .pf-bd-content li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 22px;
+}
+#pf-blog-detail-2026 .pf-bd-content a {
+  color: #b5482e;
+  text-decoration: underline;
+  text-decoration-color: rgba(181, 72, 46, 0.3);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.15s;
+}
+#pf-blog-detail-2026 .pf-bd-content a:hover { text-decoration-color: #b5482e; }
+#pf-blog-detail-2026 .pf-bd-content strong,
+#pf-blog-detail-2026 .pf-bd-content b {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+#pf-blog-detail-2026 .pf-bd-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 15px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+#pf-blog-detail-2026 .pf-bd-content table th {
+  background: #00aeef;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 16px;
+  text-align: left;
+  border: 1px solid #0099d4;
+  letter-spacing: 0.02em;
+}
+#pf-blog-detail-2026 .pf-bd-content table td {
+  padding: 10px 16px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  line-height: 22px;
+  color: #2e2e2e;
+  vertical-align: top;
+}
+#pf-blog-detail-2026 .pf-bd-content table td:first-child {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+#pf-blog-detail-2026 .pf-bd-content table tbody tr:nth-child(odd) { background: #f9fafb; }
+#pf-blog-detail-2026 .pf-bd-content table tbody tr:nth-child(even) { background: #fff; }
+#pf-blog-detail-2026 .pf-bd-content table tbody tr:hover {
+  background: #e8f7fd;
+  transition: background 0.15s;
+}
+#pf-blog-detail-2026 .pf-bd-content blockquote {
+  margin: 32px 0;
+  padding: 20px 28px;
+  border-left: 3px solid #b5482e;
+  background: #fafafa;
+  border-radius: 0 6px 6px 0;
+  font-size: 19px;
+  line-height: 1.6;
+  font-style: italic;
+  color: #3a3a3a;
+}
+#pf-blog-detail-2026 .pf-bd-content blockquote p:last-child { margin-bottom: 0; }
+#pf-blog-detail-2026 .pf-bd-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 32px 0;
+  display: block;
+}
+#pf-blog-detail-2026 .pf-bd-content figure { margin: 32px 0; }
+#pf-blog-detail-2026 .pf-bd-content figcaption {
+  font-size: 14px;
+  color: #8a8f98;
+  text-align: center;
+  margin-top: 8px;
+}
+
+@media (max-width: 767px) {
+  #pf-blog-detail-2026 .pf-bd-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 575px) {
+  #pf-blog-detail-2026 .pf-bd-content h2 {
+    font-size: 24px;
+    margin-top: 36px;
+  }
+  #pf-blog-detail-2026 .pf-bd-content h3 { font-size: 19px; }
+  #pf-blog-detail-2026 .pf-bd-content p,
+  #pf-blog-detail-2026 .pf-bd-content ul,
+  #pf-blog-detail-2026 .pf-bd-content ol { font-size: 16px; }
+}
