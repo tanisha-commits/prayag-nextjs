@@ -1,0 +1,117 @@
+{
+ "/sites/default/files/2024-07/action-plan.pdf": {
+  "local": "/sites/prayag/files/2024-07/action-plan.pdf",
+  "from": "backup",
+  "bytes": 462119
+ },
+ "/sites/default/files/2024-07/csr-policy.pdf": {
+  "local": "/sites/prayag/files/2024-07/csr-policy.pdf",
+  "from": "backup",
+  "bytes": 912009
+ },
+ "/sites/default/files/2024-08/education%20for%20all.webp": {
+  "local": "/sites/prayag/files/2024-08/education-for-all.webp",
+  "from": "backup",
+  "bytes": 133558
+ },
+ "/sites/default/files/2026-10/ACTION%20PLAN%202024%E2%80%9325.webp": {
+  "local": "/sites/prayag/files/2026-10/ACTION-PLAN-2024-25.webp",
+  "from": "backup",
+  "bytes": 133068
+ },
+ "/sites/default/files/2026-10/CSR%20policy.webp": {
+  "local": "/sites/prayag/files/2026-10/CSR-policy.webp",
+  "from": "backup",
+  "bytes": 149594
+ },
+ "/sites/default/files/2026-10/Healthcare.webp": {
+  "local": "/sites/prayag/files/2026-10/Healthcare.webp",
+  "from": "backup",
+  "bytes": 133374
+ },
+ "/sites/default/files/2026-10/Prayas%20Trust.webp": {
+  "local": "/sites/prayag/files/2026-10/Prayas-Trust.webp",
+  "from": "backup",
+  "bytes": 287976
+ },
+ "/sites/default/files/2026-10/Social%20Activities.webp": {
+  "local": "/sites/prayag/files/2026-10/Social-Activities.webp",
+  "from": "backup",
+  "bytes": 289514
+ },
+ "/sites/default/files/2026-10/Sustainability%20top%20banner.webp": {
+  "local": "/sites/prayag/files/2026-10/Sustainability-top-banner.webp",
+  "from": "backup",
+  "bytes": 352638
+ },
+ "/themes/custom/prayag/assets/images//Facebook.webp": {
+  "local": "/sites/prayag/theme/Facebook.webp",
+  "from": "backup",
+  "bytes": 1152
+ },
+ "/themes/custom/prayag/assets/images//Instagram.webp": {
+  "local": "/sites/prayag/theme/Instagram.webp",
+  "from": "backup",
+  "bytes": 2984
+ },
+ "/themes/custom/prayag/assets/images//Youtube.webp": {
+  "local": "/sites/prayag/theme/Youtube.webp",
+  "from": "backup",
+  "bytes": 1420
+ },
+ "/themes/custom/prayag/assets/images//logo.png": {
+  "local": "/sites/prayag/theme/logo.png",
+  "from": "backup",
+  "bytes": 3803
+ },
+ "/themes/custom/prayag/assets/images//twitter.webp": {
+  "local": "/sites/prayag/theme/twitter.webp",
+  "from": "backup",
+  "bytes": 2768
+ },
+ "/themes/custom/prayag/assets/images/Facebook.webp": {
+  "local": "/sites/prayag/theme/Facebook.webp",
+  "from": "backup",
+  "bytes": 1152
+ },
+ "/themes/custom/prayag/assets/images/Instagram.webp": {
+  "local": "/sites/prayag/theme/Instagram.webp",
+  "from": "backup",
+  "bytes": 2984
+ },
+ "/themes/custom/prayag/assets/images/Logo-black.webp": {
+  "local": "/sites/prayag/theme/Logo-black.webp",
+  "from": "MISSING (live returned HTML 404 page; file deleted, asset unused)",
+  "bytes": 0
+ },
+ "/themes/custom/prayag/assets/images/Youtube.webp": {
+  "local": "/sites/prayag/theme/Youtube.webp",
+  "from": "backup",
+  "bytes": 1420
+ },
+ "https://prayagindia.com/sites/default/files/2024-09/Warranty_Policy.pdf": {
+  "local": "/sites/prayag/files/2024-09/Warranty_Policy.pdf",
+  "from": "backup",
+  "bytes": 514000
+ },
+ "https://prayagindia.com/sites/default/files/2025-01/about-prayag%20%281%29.webp": {
+  "local": "/sites/prayag/files/2025-01/about-prayag-1-.webp",
+  "from": "backup",
+  "bytes": 32750
+ },
+ "https://prayagindia.com/sites/default/files/2025-01/blog%20%281%29.webp": {
+  "local": "/sites/prayag/files/2025-01/blog-1-.webp",
+  "from": "backup",
+  "bytes": 27140
+ },
+ "https://prayagindia.com/sites/default/files/2025-01/contact-us%20%281%29.webp": {
+  "local": "/sites/prayag/files/2025-01/contact-us-1-.webp",
+  "from": "backup",
+  "bytes": 19348
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/product%20drop%20down.webp": {
+  "local": "/sites/prayag/theme/product-drop-down.webp",
+  "from": "backup",
+  "bytes": 146900
+ }
+}

@@ -1,0 +1,325 @@
+
+/* ==========================================================================
+   Prayag – CEO Profile page
+   Brand colours only: #000, #fff, #40ADE3
+   Every rule is scoped under .ceo-profile-page (header/footer/banner untouched).
+   Layout: full width, 90px side padding – same as the rest of the site.
+   ========================================================================== */
+
+.ceo-profile-page {
+  --ceo-black: #000;
+  --ceo-white: #fff;
+  --ceo-accent: #40ADE3;
+  --ceo-text: rgba(0, 0, 0, 0.82);
+  --ceo-muted: rgba(0, 0, 0, 0.6);
+  --ceo-line: rgba(0, 0, 0, 0.14);
+  --ceo-pad: 90px;               /* side padding, same as your site */
+
+  display: block;
+  background: var(--ceo-white);
+  color: var(--ceo-text);
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.ceo-profile-page *,
+.ceo-profile-page *::before,
+.ceo-profile-page *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Layout ---------- */
+.ceo-profile-page .ceo-body {
+  padding: clamp(3rem, 6vw, 6rem) 0;
+}
+
+.ceo-profile-page .ceo-wrap {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 var(--ceo-pad);
+}
+
+.ceo-profile-page .ceo-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: center;           /* text sits centred next to the portrait */
+}
+
+
+.ceo-profile-page .ceo-story ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ceo-profile-page .ceo-story li,
+.ceo-profile-page .ceo-story > p {
+  position: static;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  color: var(--ceo-text);
+  font-size: clamp(1rem, 0.4vw + 0.9rem, 1.125rem);
+  line-height: 1.75;
+  list-style: none;
+}
+
+.ceo-profile-page .ceo-story li::before,
+.ceo-profile-page .ceo-story li::after {
+  content: none;
+}
+
+/* Opening paragraph = introduction (flush left, accent bar above) */
+.ceo-profile-page .ceo-story li:first-child,
+.ceo-profile-page .ceo-story > p:first-child {
+  margin-bottom: 2rem;
+  color: var(--ceo-black);
+  font-size: clamp(1.25rem, 0.8vw + 1rem, 1.75rem);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.ceo-profile-page .ceo-story li:first-child::before,
+.ceo-profile-page .ceo-story > p:first-child::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  margin-bottom: 1.25rem;
+  background: var(--ceo-accent);
+}
+
+/* Closing summary */
+.ceo-profile-page .ceo-story li:last-child:not(:first-child),
+.ceo-profile-page .ceo-story > p:last-child:not(:first-child) {
+  margin-top: 2.5rem;
+  margin-bottom: 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--ceo-line);
+  color: var(--ceo-black);
+  font-weight: 500;
+}
+
+.ceo-profile-page .ceo-story strong,
+.ceo-profile-page .ceo-story b {
+  color: var(--ceo-black);
+  font-weight: 600;
+}
+
+.ceo-profile-page .ceo-story .is-folded {
+  display: none;
+}
+
+.ceo-profile-page .ceo-aside {
+    width: 100%;
+    max-width: 30rem;
+    margin: 0 auto;
+    justify-self: end;
+    padding: 0 1rem 1rem 0;
+}
+
+.ceo-profile-page .ceo-portrait {
+  position: relative;
+  margin: 0;
+  isolation: isolate;
+}
+
+.ceo-profile-page .ceo-portrait::before {
+  content: "";
+  position: absolute;
+  inset: 1rem -1rem -1rem 1rem;
+  border: 2px solid var(--ceo-accent);
+  z-index: -1;
+}
+
+.ceo-profile-page .ceo-portrait img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;                  /* natural proportions, never stretched */
+  background: var(--ceo-line);
+}
+
+/* ---------- Key facts: full-width strip ---------- */
+.ceo-profile-page .ceo-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 clamp(1.5rem, 3vw, 3rem);
+  margin: clamp(3rem, 5vw, 5rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ceo-profile-page .ceo-facts li {
+  margin: 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--ceo-line);
+  list-style: none;
+}
+
+.ceo-profile-page .ceo-facts li::before {
+  content: none;
+}
+
+.ceo-profile-page .ceo-facts strong {
+  display: block;
+  color: var(--ceo-black);
+  font-size: clamp(2rem, 3.2vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;   /* digits keep equal width while counting */
+}
+
+.ceo-profile-page .ceo-facts span {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--ceo-muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* ---------- "Read the full profile" button ---------- */
+.ceo-profile-page .ceo-more {
+  display: inline-flex;
+  align-items: center;
+  margin: 0.5rem 0 0;
+  padding: 0.85rem 1.5rem;
+  border: 2px solid var(--ceo-black);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ceo-black);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: none;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.ceo-profile-page .ceo-more:hover,
+.ceo-profile-page .ceo-more:focus-visible {
+  border-color: var(--ceo-accent);
+  background: var(--ceo-accent);
+  color: var(--ceo-black);       /* black on #40ADE3 keeps good contrast */
+}
+
+.ceo-profile-page .ceo-more:focus-visible {
+  outline: 3px solid var(--ceo-black);
+  outline-offset: 3px;
+}
+
+/* ---------- Pop-up ---------- */
+.ceo-profile-page .ceo-modal {
+  width: min(820px, calc(100% - 2rem));
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-top: 4px solid var(--ceo-accent);
+  background: var(--ceo-white);
+  color: var(--ceo-text);
+  overflow: hidden;
+}
+
+.ceo-profile-page .ceo-modal[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.ceo-profile-page .ceo-modal::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.ceo-profile-page .ceo-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--ceo-line);
+  background: var(--ceo-white);
+}
+
+.ceo-profile-page .ceo-modal__title {
+  margin: 0;
+  color: var(--ceo-black);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.ceo-profile-page .ceo-modal__close {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ceo-black);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ceo-profile-page .ceo-modal__close:hover {
+  background: var(--ceo-accent);
+}
+
+.ceo-profile-page .ceo-modal__close:focus-visible {
+  outline: 3px solid var(--ceo-black);
+  outline-offset: -3px;
+}
+
+.ceo-profile-page .ceo-modal__body {
+  max-width: none;
+  padding: 2rem clamp(1.25rem, 4vw, 2.5rem) 2.5rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+body.ceo-modal-open {
+  overflow: hidden;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1199.98px) {
+  .ceo-profile-page { --ceo-pad: 40px; }
+}
+
+@media (max-width: 991.98px) {
+  .ceo-profile-page .ceo-grid {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .ceo-profile-page .ceo-aside {
+    order: -1;                   /* portrait first on small screens */
+    max-width: 26rem;
+    justify-self: start;
+  }
+
+  .ceo-profile-page .ceo-story {
+    max-width: none;
+  }
+
+  .ceo-profile-page .ceo-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .ceo-profile-page { --ceo-pad: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ceo-profile-page .ceo-more {
+    transition: none;
+  }
+}

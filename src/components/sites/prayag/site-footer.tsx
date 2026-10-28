@@ -9,10 +9,10 @@ export function SiteFooter() {
     <footer className="bg-[#171717] text-[18px] leading-[1.6]">
       <div className="prayag-container">
         <div className="-mx-3 flex flex-wrap">
-          <div className="mb-[30px] w-full border-b border-[#4e4e4e] px-3 pt-[50px] pb-5 md:mb-[50px] lg:pt-20">
+          <div className="mb-[30px] w-full border-b border-[#4e4e4e] px-3 pt-[50px] pb-5 lg:mb-[50px] lg:pt-20">
             <div className="-mx-3 flex flex-wrap">
               <div className="w-full px-3 md:w-3/4">
-                <h3 className="mb-[18px] text-[20px] leading-[30px] font-medium text-white md:mb-2 md:text-[22px] md:leading-[1.4]">
+                <h3 className="mb-[18px] text-[20px] leading-[30px] font-medium text-white lg:mb-2 lg:text-[22px] lg:leading-[1.4]">
                   Folllow Us On
                 </h3>
               </div>
@@ -80,7 +80,7 @@ export function SiteFooter() {
 
       <div className="mt-10 bg-[#171717] py-[17px] md:mt-6">
         <div className="prayag-container">
-          <p className="mb-0 flex w-full flex-col items-start justify-between gap-2 text-[12px] leading-[25px] text-white sm:flex-row sm:items-center sm:gap-0 md:text-[16px] md:leading-7">
+          <p className="mb-0 flex w-full flex-col items-start justify-between gap-2 text-[12px] leading-[25px] text-white sm:flex-row sm:items-center sm:gap-0 md:text-[16px] md:leading-6 xl:leading-7">
             <span>© Prayag Polymers Limited. 2026. All Rights Reserved</span>
             <span>
               Developed by{" "}
