@@ -52,7 +52,7 @@ export const megaMenus: (MegaMenu | NavLink)[] = [
   {
     label: "Inspiration",
     links: [
-      { label: "Press Coverage", href: `${SOURCE}/press-coverages` },
+      { label: "Press Coverage", href: "/press-coverages" },
       { label: "Product Video", href: "/product-video" },
       { label: "Video / TV Advertisement", href: "/video-tv-advertisement" },
       warrantyPolicy,
@@ -103,7 +103,7 @@ export const panelQuickLinks: NavLink[] = [
   { label: "CEO Profile", href: "/ceo-profile" },
   { label: "Sustainability", href: "/sustainability" },
   { label: "Manufacturing Process", href: "/manufacturing-process" },
-  { label: "Press Coverage", href: `${SOURCE}/press-coverages` },
+  { label: "Press Coverage", href: "/press-coverages" },
   { label: "Product Video", href: "/product-video" },
   { label: "Video / TV Advertisement", href: "/video-tv-advertisement" },
   warrantyPolicy,
@@ -266,7 +266,7 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
   {
     title: "Media",
     links: [
-      { label: "Press Coverage", href: `${SOURCE}/press-coverages` },
+      { label: "Press Coverage", href: "/press-coverages" },
       { label: "Product Videos", href: "/product-video" },
       { label: "Video / TV Advertisement", href: "/video-tv-advertisement" },
       { label: "Feedback Videos", href: "/feedback-videos" },

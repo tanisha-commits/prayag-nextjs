@@ -1,0 +1,354 @@
+/*
+ * /press-coverages — ported from the source theme rules for `section.press_wrapper` / `.press_item`
+ * (themes/custom/prayag style.css + Bootstrap grid), keeping the source class names.
+ * Breakpoints are the source's own: Bootstrap col-lg (992), theme max-width 1399/1199/767.
+ */
+section.press_wrapper {
+  position: relative;
+  padding: 60px 0;
+  background: #f5f5f5;
+}
+
+.press_wrapper .press-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -12px;
+}
+
+/* `.col-6 .col-sm-6 .col-md-6 .col-lg-3` + `section.press_wrapper .row .col-… { margin-bottom: 24px }` */
+.press_wrapper .press-col {
+  flex: 0 0 auto;
+  width: 50%;
+  max-width: 100%;
+  padding: 0 12px;
+  margin-bottom: 24px;
+}
+
+.press_item {
+  height: 100%;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #eee;
+  background: #fff;
+  font-size: 18px;
+  line-height: 28.8px;
+  color: #212529;
+}
+
+.press_item .press-img-link {
+  display: block;
+  color: #000;
+}
+
+.press_item img {
+  display: block;
+  width: 100%;
+  height: 199px;
+  object-fit: cover;
+}
+
+.press_item .press_title {
+  margin: 15px 0 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #000;
+}
+
+.press_item .press_details {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #555;
+}
+
+.press_item .press-more {
+  color: #000;
+  text-decoration: none;
+}
+
+.press_item:hover {
+  background: #000;
+  color: #fff;
+}
+
+.press_item:hover a,
+.press_item:hover .press_title,
+.press_item:hover .press_details {
+  color: #fff;
+}
+
+.press_item a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+@media (min-width: 992px) {
+  .press_wrapper .press-col {
+    width: 25%;
+  }
+}
+
+@media (max-width: 1399px) {
+  .press_item .press_details {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .press_item {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 767px) {
+  section.press_wrapper {
+    padding: 50px 0;
+  }
+
+  /* Same fixed card height as the source: long titles overflow the card (source behaviour). */
+  .press_item {
+    height: 280px;
+    max-height: 100%;
+    margin-bottom: 24px;
+    padding: 14px;
+  }
+
+  .press_item img {
+    height: 180px;
+  }
+
+  .press_item .press_title {
+    margin: 17px 0;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+  }
+
+  .press_item .press_details {
+    font-size: 15px;
+    line-height: 25px;
+  }
+}
+
+/* ---------- Lightbox (reproduces the source's Fancybox v4 gallery look) ---------- */
+.press-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 1000100;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #fff;
+  font-size: 18px;
+  outline: none;
+  animation: press-lb-fade 0.15s ease both;
+  --lb-btn: 48px;
+  --lb-svg: 24px;
+}
+
+.press-lb__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(24, 24, 27, 0.92);
+}
+
+.press-lb__toolbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.008) 8.1%, rgba(0, 0, 0, 0.02) 15.5%, rgba(0, 0, 0, 0.047) 22.5%, rgba(0, 0, 0, 0.08) 29%, rgba(0, 0, 0, 0.114) 35.3%, rgba(0, 0, 0, 0.157) 41.2%, rgba(0, 0, 0, 0.196) 47.1%, rgba(0, 0, 0, 0.235) 52.9%, rgba(0, 0, 0, 0.271) 58.8%, rgba(0, 0, 0, 0.302) 64.7%, rgba(0, 0, 0, 0.329) 71%, rgba(0, 0, 0, 0.351) 77.5%, rgba(0, 0, 0, 0.367) 84.5%, rgba(0, 0, 0, 0.376) 91.9%, rgba(0, 0, 0, 0.38) 100%);
+}
+
+.press-lb__items {
+  display: flex;
+}
+
+.press-lb__counter {
+  min-width: 72px;
+  padding: 0 10px;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+  line-height: var(--lb-btn);
+  text-align: center;
+}
+
+.press-lb__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--lb-btn);
+  height: var(--lb-btn);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.press-lb__btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linejoin: bevel;
+  stroke-linecap: round;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
+}
+
+.press-lb__btn svg circle[data-dot] {
+  fill: currentColor;
+}
+
+.press-lb__btn:focus-visible,
+.press-lb__thumb:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(1, 210, 232, 0.94);
+}
+
+.press-lb__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 40;
+  transform: translateY(-50%);
+}
+
+.press-lb__nav svg {
+  width: var(--lb-svg);
+  height: var(--lb-svg);
+}
+
+.press-lb__nav--prev {
+  left: 8px;
+}
+
+.press-lb__nav--next {
+  right: 8px;
+}
+
+.press-lb__stage {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 8px 8px;
+  touch-action: pan-y;
+}
+
+.press-lb__image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  user-select: none;
+  animation: press-lb-zoom 0.2s ease both;
+}
+
+.press-lb__thumbs {
+  display: flex;
+  flex: 0 0 auto;
+  overflow-x: auto;
+  padding: 0 3px;
+  scrollbar-width: none;
+}
+
+.press-lb__thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.press-lb__thumb {
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: content-box;
+  width: 96px;
+  padding: 8px 3px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.press-lb__thumb img {
+  display: block;
+  width: 96px;
+  height: 64px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  object-fit: cover;
+}
+
+.press-lb__thumb::after {
+  content: "";
+  position: absolute;
+  inset: 8px 3px;
+  border: 5px solid rgba(34, 213, 233, 0.96);
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.press-lb__thumb[aria-current="true"]::after {
+  opacity: 0.92;
+}
+
+@media (min-width: 1024px) {
+  .press-lb {
+    --lb-svg: 27px;
+  }
+
+  .press-lb__toolbar {
+    padding: 8px;
+  }
+
+  .press-lb__nav--prev {
+    left: 40px;
+  }
+
+  .press-lb__nav--next {
+    right: 40px;
+  }
+
+  .press-lb__stage {
+    padding: 64px 100px;
+  }
+}
+
+@keyframes press-lb-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes press-lb-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press-lb,
+  .press-lb__image {
+    animation: none;
+  }
+}
