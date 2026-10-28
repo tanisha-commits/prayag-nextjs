@@ -1,5 +1,5 @@
 // Content for the Prayag homepage, taken from https://prayagindia.com/ (page--homepage.html.twig).
-// Routes not yet cloned point at the live site; swap them for local paths as pages are migrated.
+// Cloned routes use local paths; routes not yet cloned still point at the live site (SOURCE).
 
 export const SOURCE = "https://prayagindia.com";
 const ASSET = "/sites/prayag";
@@ -60,14 +60,14 @@ export const megaMenus: (MegaMenu | NavLink)[] = [
     image: `${ASSET}/files/2025-01/blog-1-.webp`,
     columns: 1,
   },
-  { label: "Blog", href: `${SOURCE}/blog` },
+  { label: "Blog", href: "/blog" },
   {
     label: "About",
     links: [
-      { label: "About Prayag", href: `${SOURCE}/about-prayag` },
-      { label: "CEO Profile", href: `${SOURCE}/ceo-profile` },
-      { label: "Sustainability", href: `${SOURCE}/sustainability` },
-      { label: "Manufacturing Process", href: `${SOURCE}/manufacturing-process` },
+      { label: "About Prayag", href: "/about-prayag" },
+      { label: "CEO Profile", href: "/ceo-profile" },
+      { label: "Sustainability", href: "/sustainability" },
+      { label: "Manufacturing Process", href: "/manufacturing-process" },
     ],
     image: `${ASSET}/files/2025-01/about-prayag-1-.webp`,
     columns: 1,
@@ -75,8 +75,8 @@ export const megaMenus: (MegaMenu | NavLink)[] = [
   {
     label: "Contact",
     links: [
-      { label: "Dealership Enquiry", href: `${SOURCE}/dealership-enquiry` },
-      { label: "Contact Us", href: `${SOURCE}/contact-us` },
+      { label: "Dealership Enquiry", href: "/dealership-enquiry" },
+      { label: "Contact Us", href: "/contact-us" },
     ],
     image: `${ASSET}/files/2025-01/contact-us-1-.webp`,
     columns: 1,
@@ -99,17 +99,17 @@ export const plumbingSubcategories: NavLink[] = [
 ];
 
 export const panelQuickLinks: NavLink[] = [
-  { label: "About Prayag", href: `${SOURCE}/about-prayag` },
-  { label: "CEO Profile", href: `${SOURCE}/ceo-profile` },
-  { label: "Sustainability", href: `${SOURCE}/sustainability` },
-  { label: "Manufacturing Process", href: `${SOURCE}/manufacturing-process` },
+  { label: "About Prayag", href: "/about-prayag" },
+  { label: "CEO Profile", href: "/ceo-profile" },
+  { label: "Sustainability", href: "/sustainability" },
+  { label: "Manufacturing Process", href: "/manufacturing-process" },
   { label: "Press Coverage", href: `${SOURCE}/press-coverages` },
   { label: "Product Video", href: `${SOURCE}/product-video` },
   { label: "Video / TV Advertisement", href: `${SOURCE}/video-tv-advertisement` },
   warrantyPolicy,
-  { label: "Blog", href: `${SOURCE}/blog` },
-  { label: "Dealership Enquiry", href: `${SOURCE}/dealership-enquiry` },
-  { label: "Contact Us", href: `${SOURCE}/contact-us` },
+  { label: "Blog", href: "/blog" },
+  { label: "Dealership Enquiry", href: "/dealership-enquiry" },
+  { label: "Contact Us", href: "/contact-us" },
 ];
 
 export const heroSlides = [
@@ -227,19 +227,19 @@ export const sponsors = [
 // including the ".webp" the source shows on the first card.
 export const insights = [
   {
-    href: `${SOURCE}/double-bowl-kitchen-sink-price`,
+    href: "/double-bowl-kitchen-sink-price",
     src: `${ASSET}/files/2026-10/Double-Bowl-Kitchen-Sink-Price-Complete-Size-Buying-Guide.webp`,
     alt: "Double Bowl Kitchen Sink Price Complete Size Buying Guide.",
     title: "Double Bowl Kitchen Sink Price Complete Size Buying Guide.webp",
   },
   {
-    href: `${SOURCE}/kitchen-sink-with-drain-board-price`,
+    href: "/kitchen-sink-with-drain-board-price",
     src: `${ASSET}/files/2026-10/Kitchen-Sink-with-Drain-Board-Price-Complete-Buying-Guide.webp`,
     alt: "Kitchen Sink with Drain Board Price Complete Buying Guide",
     title: "Kitchen Sink with Drain Board Price and Buying Guide",
   },
   {
-    href: `${SOURCE}/single-bowl-kitchen-sink-price`,
+    href: "/single-bowl-kitchen-sink-price",
     src: `${ASSET}/files/2026-10/Single-Bowl-Kitchen-Sink-Price-Complete-Size-Buying-Guide.webp`,
     alt: "Single Bowl Kitchen Sink Price Complete Size Buying Guide",
     title: "Single Bowl Kitchen Sink Price Complete Size Buying Guide",
@@ -275,13 +275,13 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
   {
     title: "Information",
     links: [
-      { label: "CEO  Profile", href: `${SOURCE}/ceo-profile` },
-      { label: "Sustainability", href: `${SOURCE}/sustainability` },
-      { label: "Blogs", href: `${SOURCE}/blog` },
+      { label: "CEO  Profile", href: "/ceo-profile" },
+      { label: "Sustainability", href: "/sustainability" },
+      { label: "Blogs", href: "/blog" },
       { label: "Download", href: `${SOURCE}/download-cataglogue` },
       warrantyPolicy,
       { label: "FAQ's", href: `${SOURCE}/faq` },
-      { label: "Contact Us", href: `${SOURCE}/contact-us` },
+      { label: "Contact Us", href: "/contact-us" },
       { label: "Privacy Policy", href: `${SOURCE}/privacy-policy`, external: true },
     ],
   },
@@ -299,9 +299,9 @@ export const contact = {
 
 export const logo = `${ASSET}/theme/logo.png`;
 export const pageLinks = {
-  manufacturing: `${SOURCE}/manufacturing-process`,
-  contact: `${SOURCE}/contact-us`,
-  blog: `${SOURCE}/blog`,
+  manufacturing: "/manufacturing-process",
+  contact: "/contact-us",
+  blog: "/blog",
   hdpe: `${SOURCE}/hdpe`,
   bablu: `${SOURCE}/prayag-ka-bablu-plumbers-loyalty-program`,
   developer: "https://abacusdesk.co.in/",
