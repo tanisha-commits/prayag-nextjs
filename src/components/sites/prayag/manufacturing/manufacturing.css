@@ -1,0 +1,682 @@
+
+/* ==========================================================================
+   Prayag – Manufacturing Process page (editorial / technical redesign)
+   Brand colours only: #000, #fff, #40ADE3
+   Every rule is scoped under .mf-page (header / footer / banner untouched).
+   Layout: full width, 90px side padding – same as the rest of the site.
+   Story: 01 Intro → 02 Film → 03 Plant & machinery → 04 O-PVC
+   ========================================================================== */
+
+.mf-page {
+  --mf-black: #000;
+  --mf-white: #fff;
+  --mf-accent: #40ADE3;
+  --mf-text: rgba(0, 0, 0, 0.82);
+  --mf-muted: rgba(0, 0, 0, 0.55);
+  --mf-line: rgba(0, 0, 0, 0.14);
+  --mf-pad: 90px;                                  /* side padding, same as your site */
+  --mf-ease: cubic-bezier(0.2, 0.7, 0.2, 1);       /* calm ease-out, no bounce */
+  --mf-section: clamp(3.5rem, 7vw, 7rem);          /* one vertical rhythm for every section */
+  --mf-header-offset: 6.5rem;                      /* sticky header height + breathing room */
+
+  /* type scale – the only sizes used on this page */
+  --fs-display: clamp(2.25rem, 3.6vw, 4rem);                /* section heading */
+  --fs-lead: clamp(1.25rem, 0.6vw + 1.05rem, 1.625rem);     /* lead text */
+  --fs-body: clamp(1rem, 0.3vw + 0.95rem, 1.125rem);        /* body text */
+  --fs-sm: 0.875rem;                                        /* technical markers */
+
+  position: relative;
+  display: block;
+  background: var(--mf-white);
+  color: var(--mf-text);
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.mf-page *,
+.mf-page *::before,
+.mf-page *::after {
+  box-sizing: border-box;
+}
+
+.mf-page .mf-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 var(--mf-pad);
+}
+
+.mf-page [hidden] {
+  display: none !important;
+}
+
+.mf-page img {
+  display: block;
+  max-width: 100%;
+  height: auto;                                    /* never stretched */
+}
+
+/* ==========================================================================
+   Typography – section heading → lead → body.
+   Editor's inline colours / sizes / fonts are neutralised (words untouched).
+   ========================================================================== */
+.mf-page .mf-text :is(h1, h2, h3, h4) {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  color: var(--mf-black) !important;
+  font-family: inherit !important;
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-transform: none;
+}
+
+.mf-page .mf-text :is(p, li) {
+  color: var(--mf-text) !important;
+  font-family: inherit !important;
+  font-size: var(--fs-body) !important;
+  font-weight: 400;
+  line-height: 1.8 !important;
+}
+
+.mf-page .mf-text :is(span, font) {
+  background: none !important;
+  color: inherit !important;
+  font: inherit !important;
+}
+
+.mf-page .mf-text p {
+  margin: 0 0 1.25rem;
+}
+
+.mf-page .mf-text p:first-of-type {                 /* lead */
+  color: var(--mf-black) !important;
+  font-size: var(--fs-lead) !important;
+  line-height: 1.55 !important;
+}
+
+.mf-page .mf-text p:last-child {
+  margin-bottom: 0;
+}
+
+.mf-page .mf-text ul,
+.mf-page .mf-text ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.mf-page .mf-text ul { list-style: disc; }
+.mf-page .mf-text ol { list-style: decimal; }
+
+.mf-page .mf-text li {
+  margin: 0 0 0.5rem;
+  padding-left: 0.25rem;
+  list-style: inherit;
+}
+
+.mf-page .mf-text li::marker { color: var(--mf-accent); }
+
+.mf-page .mf-text :is(strong, b) {
+  color: var(--mf-black) !important;
+  font-weight: 600;
+}
+
+.mf-page .mf-text img {
+  width: 100%;
+  margin: 0 0 1.25rem;
+}
+
+/* ==========================================================================
+   Technical details (decorative only – no data, no measurements)
+   ========================================================================== */
+/* chapter marker: number + thin line that draws in */
+.mf-page .mf-marker {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 clamp(1.75rem, 3vw, 2.75rem);
+  color: var(--mf-black);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.mf-page .mf-marker i {
+  position: relative;
+  display: block;
+  flex: 0 1 clamp(4rem, 12vw, 10rem);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+  transform-origin: left;
+}
+
+.mf-page .mf-marker i::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  background: var(--mf-accent);
+}
+
+.mf-page .mf-dark .mf-marker {
+  color: var(--mf-white);
+}
+
+/* corner ticks on photos and videos */
+.mf-page .mf-corners {
+  position: absolute;
+  inset: 0.8rem;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--mf-accent), var(--mf-accent)) top left / 1.4rem 2px,
+    linear-gradient(var(--mf-accent), var(--mf-accent)) top left / 2px 1.4rem,
+    linear-gradient(var(--mf-accent), var(--mf-accent)) top right / 1.4rem 2px,
+    linear-gradient(var(--mf-accent), var(--mf-accent)) top right / 2px 1.4rem,
+    linear-gradient(var(--mf-accent), var(--mf-accent)) bottom left / 1.4rem 2px,
+    linear-gradient(var(--mf-accent), var(--mf-accent)) bottom left / 2px 1.4rem,
+    linear-gradient(var(--mf-accent), var(--mf-accent)) bottom right / 1.4rem 2px,
+    linear-gradient(var(--mf-accent), var(--mf-accent)) bottom right / 2px 1.4rem;
+  background-repeat: no-repeat;
+  transition: inset 0.6s var(--mf-ease);
+}
+
+.mf-page .mf-media:hover .mf-corners,
+.mf-page .mf-video:hover .mf-corners {
+  inset: 0.5rem;
+}
+
+/* ==========================================================================
+   Photo frame: soft mask reveal + calm zoom
+   ========================================================================== */
+.mf-page .mf-media {
+  position: relative;
+  margin: 0;
+  border: 0;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.mf-page .mf-media__frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--mf-line);
+}
+
+.mf-page .mf-media__frame img {
+  width: 100%;
+  transition: transform 0.9s var(--mf-ease);
+}
+
+.mf-page .mf-media:hover .mf-media__frame img { transform: scale(1.03); }
+
+/* ==========================================================================
+   Video (click-to-play poster → YouTube iframe)
+   ========================================================================== */
+.mf-page .mf-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--mf-black);
+}
+
+.mf-page .mf-video--cinema {                        /* big film: never taller than the screen */
+  width: min(100%, calc(82vh * 16 / 9));
+  margin-inline: auto;
+}
+
+.mf-page .mf-video__poster {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--mf-black);
+  color: var(--mf-white);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.mf-page .mf-video__poster img {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--mf-ease), opacity 0.4s ease;
+}
+
+.mf-page .mf-video__poster::before {                /* soft shade so the play button always reads */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 60%);
+  pointer-events: none;
+}
+
+.mf-page .mf-video__poster:hover img,
+.mf-page .mf-video__poster:focus-visible img {
+  transform: scale(1.04);
+}
+
+.mf-page .mf-video__play {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: clamp(3.75rem, 7vw, 6rem);
+  aspect-ratio: 1;
+  background: var(--mf-accent);
+  translate: -50% -50%;
+  transition: background-color 0.3s ease, scale 0.4s var(--mf-ease);
+}
+
+.mf-page .mf-video__play::before {                  /* triangle */
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 0.2em;
+  border-left: 0.95em solid var(--mf-black);
+  border-top: 0.6em solid transparent;
+  border-bottom: 0.6em solid transparent;
+  font-size: clamp(1.1rem, 1.9vw, 1.75rem);
+}
+
+.mf-page .mf-video__poster:hover .mf-video__play,
+.mf-page .mf-video__poster:focus-visible .mf-video__play {
+  background: var(--mf-white);
+  scale: 1.08;
+}
+
+.mf-page .mf-video__poster:focus-visible {
+  outline: 3px solid var(--mf-white);
+  outline-offset: -8px;
+}
+
+.mf-page .mf-video__frame {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.mf-page .mf-video__frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.mf-page .mf-video.is-playing .mf-video__poster { display: none; }
+.mf-page .mf-video.is-playing .mf-video__frame  { display: block; }
+.mf-page .mf-video.is-playing .mf-corners       { display: none; }
+
+/* loading / fallback message (copy is set by the script) */
+.mf-page .mf-video__status {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem clamp(1rem, 2vw, 1.5rem);
+  background: rgba(0, 0, 0, 0.88);
+  color: var(--mf-white);
+  font-size: var(--fs-body);
+  line-height: 1.4;
+}
+
+.mf-page .mf-video__status:not(:empty) { display: flex; }
+
+.mf-page .mf-video__status::before {
+  content: "";
+  flex: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--mf-accent);
+  animation: mf-spin 0.8s linear infinite;
+}
+
+.mf-page .mf-video__status.is-slow::before { display: none; }
+
+.mf-page .mf-video__status a {
+  color: var(--mf-white);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--mf-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.mf-page .mf-video__status a:focus-visible {
+  outline: 3px solid var(--mf-accent);
+  outline-offset: 3px;
+}
+
+@keyframes mf-spin { to { transform: rotate(360deg); } }
+
+/* ==========================================================================
+   01 Intro – large text + tall photo
+   ========================================================================== */
+.mf-page .mf-intro {
+  padding: var(--mf-section) 0;
+}
+
+.mf-page .mf-intro__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: start;                              /* text and photo start on the same line */
+}
+
+.mf-page .mf-intro__grid--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.mf-page .mf-intro__grid--single .mf-intro__main {
+  max-width: 64rem;
+}
+
+.mf-page .mf-intro__main > .mf-text + .mf-text {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.mf-page .mf-intro__side {
+  position: sticky;
+  top: var(--mf-header-offset);                    /* photo stays beside the long text */
+}
+
+/* ==========================================================================
+   02 Film – black band, one big cinematic video
+   ========================================================================== */
+.mf-page .mf-film {
+  padding: var(--mf-section) 0;
+  background: var(--mf-black);
+}
+
+/* ==========================================================================
+   03 Plant & machinery – blueprint grid, text + machinery index + video
+   ========================================================================== */
+.mf-page .mf-plant {
+  position: relative;                               /* no overflow rule here: overflow:hidden would stop the sticky video from sticking */
+  padding: var(--mf-section) 0;
+}
+
+.mf-page .mf-plant::before {                        /* fine blueprint grid, fades out top and bottom */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+          mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+  pointer-events: none;
+}
+
+.mf-page .mf-plant__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: start;
+}
+
+.mf-page .mf-plant__side {
+  position: sticky;
+  top: var(--mf-header-offset);
+}
+
+/* machinery index – a scannable list of the machines named in the text above */
+.mf-page .mf-index {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+  margin: clamp(2rem, 4vw, 3.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--mf-line);
+}
+
+.mf-page .mf-index li {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.15rem 0.5rem 1.15rem 0;
+  border-bottom: 1px solid var(--mf-line);
+  color: var(--mf-black);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.4;
+  list-style: none;
+  transition: padding-left 0.4s var(--mf-ease), border-color 0.4s ease;
+}
+
+.mf-page .mf-index li::before {
+  content: none;
+}
+
+.mf-page .mf-index b {
+  flex: none;
+  min-width: 1.75rem;
+  color: var(--mf-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.4s ease;
+}
+
+.mf-page .mf-index li:hover {
+  padding-left: 0.6rem;
+  border-bottom-color: var(--mf-accent);
+}
+
+.mf-page .mf-index li:hover b {
+  color: var(--mf-black);
+}
+
+/* ==========================================================================
+   04 O-PVC – black feature band, then numbered technical copy
+   ========================================================================== */
+.mf-page .mf-opvc {
+  padding: var(--mf-section) 0;
+  background: var(--mf-black);
+}
+
+.mf-page .mf-opvc__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: center;
+}
+
+.mf-page .mf-opvc__title {
+  margin: 0;
+  padding: 0;
+  color: var(--mf-white);
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-transform: none;
+}
+
+.mf-page .mf-opvc__title::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  margin-bottom: 1.5rem;
+  background: var(--mf-accent);
+}
+
+.mf-page .mf-detail {
+  padding: var(--mf-section) 0;
+}
+
+.mf-page .mf-detail__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: start;
+}
+
+.mf-page .mf-detail__side {
+  position: sticky;
+  top: var(--mf-header-offset);
+}
+
+.mf-page .mf-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mf-page .mf-steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 0 clamp(1rem, 2vw, 1.75rem);
+  margin: 0;
+  padding: clamp(1.5rem, 2.6vw, 2.25rem) 0;
+  list-style: none;
+}
+
+.mf-page .mf-steps li::before {                     /* line that draws in */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--mf-black);
+  opacity: 0.25;
+  transform-origin: left;
+}
+
+.mf-page .mf-steps__n {
+  color: var(--mf-accent);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  line-height: 2.2;
+}
+
+.mf-page .mf-steps p {
+  margin: 0;
+  color: var(--mf-text);
+  font-size: var(--fs-body);
+  line-height: 1.85;
+}
+
+.mf-page .mf-steps li:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================================================
+   Scroll reveals (only when JS runs and motion is allowed)
+   ========================================================================== */
+.mf-js .mf-rv {
+  opacity: 0;
+  translate: 0 22px;
+  transition: opacity 0.7s ease var(--d, 0ms), translate 0.8s var(--mf-ease) var(--d, 0ms);
+}
+
+.mf-js .mf-rv.is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.mf-js .mf-mask .mf-media__frame {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.mf-js .mf-mask .mf-media__frame img {
+  transform: scale(1.08);
+}
+
+.mf-js .mf-mask.is-in .mf-media__frame {
+  clip-path: inset(0 0 0 0);
+}
+
+.mf-js .mf-mask.is-in .mf-media__frame img {
+  transform: scale(1);
+  transition: transform 1.4s var(--mf-ease);
+}
+
+.mf-js .mf-mask.is-in:hover .mf-media__frame img {
+  transform: scale(1.03);
+  transition: transform 0.9s var(--mf-ease);
+}
+
+.mf-js .mf-marker:not(.is-in) i,
+.mf-js .mf-steps li:not(.is-in)::before {
+  transform: scaleX(0);
+}
+
+.mf-js .mf-marker i,
+.mf-js .mf-steps li::before {
+  transition: transform 1s var(--mf-ease) 0.15s;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1199.98px) {
+  .mf-page { --mf-pad: 40px; }
+}
+
+@media (max-width: 991.98px) {
+  .mf-page .mf-intro__grid,
+  .mf-page .mf-plant__grid,
+  .mf-page .mf-opvc__grid,
+  .mf-page .mf-detail__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mf-page .mf-intro__side,
+  .mf-page .mf-plant__side,
+  .mf-page .mf-detail__side {
+    position: static;
+    max-width: 40rem;
+  }
+
+  .mf-page .mf-index {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .mf-page { --mf-pad: 20px; }
+
+  .mf-page .mf-steps li {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mf-page *,
+  .mf-page *::before,
+  .mf-page *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

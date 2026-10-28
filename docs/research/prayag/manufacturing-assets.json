@@ -1,0 +1,102 @@
+{
+ "/sites/default/files/2024-09/Prayag%20started%20its%20journey%20in%201986%20under%20the%20visionary%20leadership%20of%20Mr.%20V.K.%20Aggarwal.webp": {
+  "local": "/sites/prayag/files/2024-09/Prayag-started-its-journey-in-1986-under-the-visionary-leadership-of-Mr.-V.K.-Aggarwal.webp",
+  "from": "backup",
+  "bytes": 241434
+ },
+ "/sites/default/files/2026-10/Manufacturing%20Process.webp": {
+  "local": "/sites/prayag/files/2026-10/Manufacturing-Process.webp",
+  "from": "backup",
+  "bytes": 175820
+ },
+ "/themes/custom/prayag/assets/images//Facebook.webp": {
+  "local": "/sites/prayag/theme/Facebook.webp",
+  "from": "backup",
+  "bytes": 1152
+ },
+ "/themes/custom/prayag/assets/images//Instagram.webp": {
+  "local": "/sites/prayag/theme/Instagram.webp",
+  "from": "backup",
+  "bytes": 2984
+ },
+ "/themes/custom/prayag/assets/images//Youtube.webp": {
+  "local": "/sites/prayag/theme/Youtube.webp",
+  "from": "backup",
+  "bytes": 1420
+ },
+ "/themes/custom/prayag/assets/images//logo.png": {
+  "local": "/sites/prayag/theme/logo.png",
+  "from": "backup",
+  "bytes": 3803
+ },
+ "/themes/custom/prayag/assets/images//twitter.webp": {
+  "local": "/sites/prayag/theme/twitter.webp",
+  "from": "backup",
+  "bytes": 2768
+ },
+ "/themes/custom/prayag/assets/images/Facebook.webp": {
+  "local": "/sites/prayag/theme/Facebook.webp",
+  "from": "backup",
+  "bytes": 1152
+ },
+ "/themes/custom/prayag/assets/images/Instagram.webp": {
+  "local": "/sites/prayag/theme/Instagram.webp",
+  "from": "backup",
+  "bytes": 2984
+ },
+ "/themes/custom/prayag/assets/images/Logo-black.webp": {
+  "local": "/sites/prayag/theme/Logo-black.webp",
+  "from": "MISSING (live returned HTML 404 page; file deleted, asset unused)",
+  "bytes": 0
+ },
+ "/themes/custom/prayag/assets/images/Youtube.webp": {
+  "local": "/sites/prayag/theme/Youtube.webp",
+  "from": "backup",
+  "bytes": 1420
+ },
+ "https://prayagindia.com/sites/default/files/2024-09/Warranty_Policy.pdf": {
+  "local": "/sites/prayag/files/2024-09/Warranty_Policy.pdf",
+  "from": "backup",
+  "bytes": 514000
+ },
+ "https://prayagindia.com/sites/default/files/2025-01/about-prayag%20%281%29.webp": {
+  "local": "/sites/prayag/files/2025-01/about-prayag-1-.webp",
+  "from": "backup",
+  "bytes": 32750
+ },
+ "https://prayagindia.com/sites/default/files/2025-01/blog%20%281%29.webp": {
+  "local": "/sites/prayag/files/2025-01/blog-1-.webp",
+  "from": "backup",
+  "bytes": 27140
+ },
+ "https://prayagindia.com/sites/default/files/2025-01/contact-us%20%281%29.webp": {
+  "local": "/sites/prayag/files/2025-01/contact-us-1-.webp",
+  "from": "backup",
+  "bytes": 19348
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/Manufacturing_Process_imaes_new.webp": {
+  "local": "/sites/prayag/theme/Manufacturing_Process_imaes_new.webp",
+  "from": "backup",
+  "bytes": 127910
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/product%20drop%20down.webp": {
+  "local": "/sites/prayag/theme/product-drop-down.webp",
+  "from": "backup",
+  "bytes": 146900
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/thumbnail-1-prayag.webp": {
+  "local": "/sites/prayag/theme/thumbnail-1-prayag.webp",
+  "from": "backup",
+  "bytes": 58768
+ },
+ "https://img.youtube.com/vi/K7SWObS2Ki4/maxresdefault.jpg": {
+  "local": "/sites/prayag/files/youtube/K7SWObS2Ki4-maxresdefault.jpg",
+  "from": "live (img.youtube.com GET)",
+  "bytes": 67576
+ },
+ "https://img.youtube.com/vi/z4hP8UXawtE/maxresdefault.jpg": {
+  "local": "/sites/prayag/files/youtube/z4hP8UXawtE-maxresdefault.jpg",
+  "from": "live (img.youtube.com GET)",
+  "bytes": 146015
+ }
+}

@@ -40,8 +40,13 @@ for u in sorted(urls):
     else:
         try:
             req = urllib.request.Request('https://prayagindia.com' + urllib.parse.quote(p), headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req, timeout=60) as r, open(dest, 'wb') as o: o.write(r.read())
-            origin = 'live'
+            with urllib.request.urlopen(req, timeout=60) as r: data = r.read()
+            # The live site answers missing files with an HTML page (HTTP 200); never save that as an asset.
+            if data[:15].lstrip().lower().startswith((b'<!doctype', b'<html')):
+                origin = 'MISSING (live returned HTML)'
+            else:
+                open(dest, 'wb').write(data)
+                origin = 'live'
         except Exception as e:
             origin = 'FAILED ' + str(e)
     res[u] = {'local': '/sites/prayag/' + rel, 'from': origin, 'bytes': os.path.getsize(dest) if os.path.exists(dest) else 0}

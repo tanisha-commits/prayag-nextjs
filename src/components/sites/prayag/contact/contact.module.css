@@ -1,0 +1,21 @@
+/* Source inline CSS on /contact-us: `.contact-section { animation: fadeIn 1s ease-in; }` */
+@keyframes contactFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeIn {
+  animation: contactFadeIn 1s ease-in;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fadeIn {
+    animation: none;
+  }
+}

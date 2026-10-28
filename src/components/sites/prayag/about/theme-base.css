@@ -1,0 +1,73 @@
+/*
+ * Element defaults from the source theme (themes/custom/prayag style.css on top of Bootstrap
+ * reboot) that the ported page CSS of About / CEO / Sustainability / Manufacturing relies on.
+ * Scoped with :where() so specificity stays at element level, exactly like the theme rules,
+ * and every page-specific rule still wins. Unlayered, so it beats Tailwind's preflight.
+ */
+:where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) :where(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: #000;
+  font-weight: 500;
+  line-height: 1.4em;
+}
+
+:where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) h2 {
+  margin-bottom: 18px;
+  font-size: 52px;
+  line-height: 62px;
+}
+
+:where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) h3 {
+  font-size: 30px;
+}
+
+:where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) h4 {
+  font-size: 28px;
+}
+
+:where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) p {
+  margin: 0;
+  color: #555;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+:where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) a {
+  color: #000;
+  text-decoration: none;
+}
+
+:where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) figure {
+  margin: 0;
+  background: #f7f9fa;
+}
+
+:where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) :where(img, svg) {
+  vertical-align: middle;
+}
+
+@media (max-width: 1399px) {
+  :where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  :where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) h2 {
+    font-size: 38px;
+    line-height: 46px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* theme: `body p` */
+  :where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) p {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  :where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}

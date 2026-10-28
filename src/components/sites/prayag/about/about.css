@@ -1,0 +1,571 @@
+
+/* ==========================================================================
+   Prayag – History page
+   Brand colours only: #000, #fff, #40ADE3
+   Every rule is scoped under .hist-page (header / footer / banner untouched).
+   Layout: full width, 90px side padding – same as the rest of the site.
+   ========================================================================== */
+
+.hist-page {
+  --hp-black: #000;
+  --hp-white: #fff;
+  --hp-accent: #40ADE3;
+  --hp-text: rgba(0, 0, 0, 0.82);
+  --hp-muted: rgba(0, 0, 0, 0.6);
+  --hp-line: rgba(0, 0, 0, 0.14);
+  --hp-pad: 90px;                /* side padding, same as your site */
+  --hp-header-offset: 6.5rem;    /* sticky header height + breathing room */
+
+  display: block;
+  background: var(--hp-white);
+  color: var(--hp-text);
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.hist-page *,
+.hist-page *::before,
+.hist-page *::after {
+  box-sizing: border-box;
+}
+
+.hist-page .hist-wrap {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 var(--hp-pad);
+}
+
+/* shared heading look */
+.hist-page .hist-lead h1,
+.hist-page .hist-lead h2,
+.hist-page .hist-lead h3,
+.hist-page .hist-lead h4,
+.hist-page .hist-miles__title {
+  margin: 0 0 1rem;
+  padding: 0;
+  color: var(--hp-black);
+  font-size: clamp(2rem, 3.4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+/* ---------- 1. Intro: lead statement across the full width ---------- */
+.hist-page .hist-intro {
+  padding: clamp(3rem, 6vw, 6rem) 0 clamp(2rem, 4vw, 4rem);
+}
+
+.hist-page .hist-lead {
+  max-width: none;
+}
+
+.hist-page .hist-lead::before,
+.hist-page .hist-miles__title::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  margin-bottom: 1.5rem;
+  background: var(--hp-accent);
+  column-span: all;
+}
+
+.hist-page .hist-lead p {
+    margin: 0 0 1rem;
+    color: var(--hp-black);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    text-align: justify;
+}
+
+.hist-page .hist-lead p:last-child {
+  margin-bottom: 0;
+}
+
+/* wide screens: the long lead runs in two columns so lines stay readable
+   and the right side is filled instead of left empty */
+@media (min-width: 1400px) {
+  .hist-page .hist-lead {
+    column-count: 2;
+    column-gap: clamp(3rem, 5vw, 6rem);
+  }
+}
+
+/* ---------- 2. Image + description ---------- */
+.hist-page .hist-story {
+  padding: 0 0 clamp(3rem, 5vw, 5rem);
+}
+
+.hist-page .hist-story__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 28rem) minmax(0, 1fr);
+  column-gap: clamp(2rem, 6vw, 7rem);
+  align-items: center;           /* image and text share the same centre line */
+}
+
+.hist-page .hist-desc {
+  max-width: 62rem;
+}
+
+.hist-page .hist-desc p {
+    margin: 0 0 1.25rem;
+}
+section.hist-intro .hist-wrap .hist-lead {
+    border-bottom: 1px solid var(--hp-line);
+    padding-bottom: 42px;
+}
+
+.hist-page .hist-desc p:last-child {
+  margin-bottom: 0;
+}
+
+/* first paragraph opens the story */
+.hist-page .hist-desc > p:first-child:not(:last-child) {
+  margin-bottom: 1.75rem;
+  color: var(--hp-black);
+  font-size: clamp(1.25rem, 0.6vw + 1.05rem, 1.55rem);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* last paragraph closes it – set apart by a hairline */
+.hist-page .hist-desc > p:last-child:not(:first-child) {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--hp-line);
+  color: var(--hp-black);
+  font-weight: 500;
+}
+
+.hist-page .hist-desc h1,
+.hist-page .hist-desc h2,
+.hist-page .hist-desc h3,
+.hist-page .hist-desc h4 {
+  margin: 0 0 1rem;
+  color: var(--hp-black);
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.hist-page .hist-desc ul,
+.hist-page .hist-desc ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.hist-page .hist-desc li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.hist-page .hist-desc li::marker {
+  color: var(--hp-accent);
+}
+
+.hist-page .hist-desc strong,
+.hist-page .hist-desc b {
+  color: var(--hp-black);
+  font-weight: 600;
+}
+
+.hist-page .hist-figure {
+  width: 100%;
+  margin: 0;
+  padding: 0 1rem 1rem 0;       /* room for the offset outline */
+}
+
+.hist-page .hist-figure__frame {
+  position: relative;
+  margin: 0;
+  isolation: isolate;
+}
+
+.hist-page .hist-figure__frame::before {
+  content: "";
+  position: absolute;
+  inset: 1rem -1rem -1rem 1rem;
+  border: 2px solid var(--hp-accent);
+  z-index: -1;
+}
+
+.hist-page .hist-figure img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;                  /* natural proportions, never stretched */
+  background: var(--hp-line);
+}
+
+/* ---------- 3. Counters (black band) ---------- */
+.hist-page .hist-counters {
+  padding: clamp(2.5rem, 4vw, 4rem) 0;
+  background: var(--hp-black);
+  color: var(--hp-white);
+}
+
+.hist-page .hist-counters__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 2rem clamp(1.5rem, 3vw, 3rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hist-page .hist-counters__list > li {
+  margin: 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  list-style: none;
+}
+
+.hist-page .hist-counters__list > li::before {
+  content: none;
+}
+
+.hist-page .hist-counters h3 {
+  margin: 0;
+  padding: 0;
+  color: var(--hp-white);
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  font-variant-numeric: tabular-nums;   /* digits keep equal width while counting */
+}
+
+
+
+.hist-page .hist-counters h4,
+.hist-page .hist-counters p {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  text-transform: none;
+}
+
+/* ---------- 4. Key milestones: scroll-linked timeline ---------- */
+.hist-page .hist-miles {
+  padding: clamp(3rem, 6vw, 6rem) 0 clamp(4rem, 7vw, 7rem);
+}
+
+.hist-page .hist-miles__title {
+  margin-bottom: clamp(2rem, 4vw, 4rem);
+}
+
+.hist-page .hist-track {
+    --yr: 38px;
+    --mid: calc(1.5rem + var(--yr) * 0.55);
+    --spine: clamp(3rem, 5vw, 5rem);
+    --ease-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
+    --p: 1;
+    position: relative;
+}
+
+/* spine: grey track + accent fill that grows with scroll */
+.hist-page .hist-spine {
+  position: absolute;
+  top: var(--spine-top, 3rem);
+  bottom: var(--spine-bottom, 3rem);
+  left: 7px;                                      /* mobile: sits on the left */
+  width: 2px;
+  margin-left: -1px;
+  background: var(--hp-line);
+  pointer-events: none;
+}
+
+.hist-page .hist-spine__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--hp-accent);
+  transform-origin: top;
+  transform: scaleY(var(--p));
+  will-change: transform;
+}
+
+.hist-page .hist-spine__head {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: calc(var(--p) * 100%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--hp-accent);
+  transform: translate(-50%, -50%);
+}
+
+.hist-page .hist-spine__head::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--hp-accent);
+  animation: hist-pulse 2.2s ease-out infinite;
+}
+
+@keyframes hist-pulse {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+
+.hist-page.hist-js .hist-spine__head {
+  display: block;
+}
+
+.hist-page .hist-timeline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hist-page .hist-item {
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 2.75rem;
+  list-style: none;
+}
+
+/* node on the spine */
+.hist-page .hist-node {
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--mid) - 7px);
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--hp-accent);
+  border-radius: 50%;
+  background: var(--hp-accent);
+  transition: background-color 0.35s, border-color 0.35s, transform 0.5s var(--ease-spring), box-shadow 0.4s;
+}
+
+/* card */
+.hist-page .hist-card {
+  position: relative;
+  padding: 1.5rem 1.75rem 1.75rem;
+  border: 1px solid var(--hp-line);
+  background: var(--hp-white);
+  transition:
+    opacity 0.6s ease,
+    translate 0.9s var(--ease-spring),
+    transform 0.5s var(--ease-spring),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* connector from node to card */
+.hist-page .hist-card::before {
+  content: "";
+  position: absolute;
+  top: var(--mid);
+  left: calc(-2.75rem + 14px);
+  width: calc(2.75rem - 14px);
+  height: 2px;
+  margin-top: -1px;
+  background: var(--hp-accent);
+  transition: background-color 0.35s;
+}
+
+.hist-page .hist-year {
+  display: block;
+  color: var(--hp-black);
+  font-size: var(--yr);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.4s ease, opacity 0.6s ease 0.12s, translate 0.8s var(--ease-spring) 0.12s;
+}
+
+.hist-page .hist-text {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  color: var(--hp-text);
+  font-size: clamp(1.05rem, 0.4vw + 0.95rem, 1.25rem);
+  font-weight: 500;
+  line-height: 1.45;
+  text-transform: none;
+  transition: opacity 0.6s ease 0.24s, translate 0.8s var(--ease-spring) 0.24s;
+}
+
+/* latest milestone: solid black card */
+.hist-page .hist-item:last-child .hist-card {
+  border-color: var(--hp-black);
+  background: var(--hp-black);
+}
+
+.hist-page .hist-item:last-child .hist-year,
+.hist-page .hist-item:last-child .hist-text {
+  color: var(--hp-white);
+}
+
+/* hover / active: card lifts, accent offset shadow (same motif as the photo outline) */
+.hist-page .hist-item:hover .hist-card,
+.hist-page .hist-item.is-active .hist-card {
+  border-color: var(--hp-black);
+  box-shadow: 6px 6px 0 var(--hp-accent);
+  transform: translate(-3px, -3px);
+}
+
+.hist-page .hist-item.is-active .hist-node {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 6px rgba(64, 173, 227, 0.25);
+}
+
+/* ---- JS enhancements (only when the script runs and motion is allowed) ---- */
+.hist-page.hist-js .hist-item:not(.is-passed):not(.is-active) .hist-node {
+  border-color: rgba(0, 0, 0, 0.25);
+  background: var(--hp-white);
+}
+
+.hist-page.hist-js .hist-item:not(.is-passed):not(.is-active) .hist-card::before {
+  background: var(--hp-line);
+}
+
+.hist-page.hist-js .hist-item:not(.is-passed):not(:last-child):not(.is-active):not(:hover) .hist-year {
+  color: rgba(0, 0, 0, 0.55);           /* upcoming: dimmer, still AA-contrast */
+}
+
+/* staggered entrance: card → year → title */
+.hist-page.hist-js .hist-item:not(.is-in) .hist-card {
+  opacity: 0;
+  translate: var(--dx, 0) 28px;
+}
+
+.hist-page.hist-js .hist-item:not(.is-in) .hist-year,
+.hist-page.hist-js .hist-item:not(.is-in) .hist-text {
+  opacity: 0;
+  translate: 0 14px;
+}
+
+.hist-page .hist-item.is-in .hist-card,
+.hist-page .hist-item.is-in .hist-year,
+.hist-page .hist-item.is-in .hist-text {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* ---- desktop: alternating cards around a centre spine ---- */
+@media (min-width: 992px) {
+  .hist-page .hist-track .hist-spine {
+    left: 50%;
+  }
+
+  .hist-page .hist-timeline {
+    grid-template-columns: minmax(0, 1fr) var(--spine) minmax(0, 1fr);
+    grid-auto-rows: minmax(5.25rem, auto);
+    row-gap: 0;
+  }
+
+  .hist-page .hist-item {
+    padding: 0 0 1.25rem;
+  }
+
+  .hist-page .hist-item:nth-child(odd)  { grid-column: 1; --dx: -36px; }
+  .hist-page .hist-item:nth-child(even) { grid-column: 3; --dx: 36px; }
+
+  /* interleave: item n starts on row n and spans two rows */
+  .hist-page .hist-item:nth-child(1) { grid-row: 1 / span 2; }
+  .hist-page .hist-item:nth-child(2) { grid-row: 2 / span 2; }
+  .hist-page .hist-item:nth-child(3) { grid-row: 3 / span 2; }
+  .hist-page .hist-item:nth-child(4) { grid-row: 4 / span 2; }
+  .hist-page .hist-item:nth-child(5) { grid-row: 5 / span 2; }
+  .hist-page .hist-item:nth-child(6) { grid-row: 6 / span 2; }
+  .hist-page .hist-item:nth-child(7) { grid-row: 7 / span 2; }
+  .hist-page .hist-item:nth-child(8) { grid-row: 8 / span 2; }
+  .hist-page .hist-item:nth-child(9) { grid-row: 9 / span 2; }
+  .hist-page .hist-item:nth-child(10) { grid-row: 10 / span 2; }
+  .hist-page .hist-item:nth-child(11) { grid-row: 11 / span 2; }
+  .hist-page .hist-item:nth-child(12) { grid-row: 12 / span 2; }
+  .hist-page .hist-item:nth-child(13) { grid-row: 13 / span 2; }
+  .hist-page .hist-item:nth-child(14) { grid-row: 14 / span 2; }
+  .hist-page .hist-item:nth-child(15) { grid-row: 15 / span 2; }
+  .hist-page .hist-item:nth-child(16) { grid-row: 16 / span 2; }
+  .hist-page .hist-item:nth-child(17) { grid-row: 17 / span 2; }
+  .hist-page .hist-item:nth-child(18) { grid-row: 18 / span 2; }
+  .hist-page .hist-item:nth-child(19) { grid-row: 19 / span 2; }
+  .hist-page .hist-item:nth-child(20) { grid-row: 20 / span 2; }
+  .hist-page .hist-item:nth-child(21) { grid-row: 21 / span 2; }
+  .hist-page .hist-item:nth-child(22) { grid-row: 22 / span 2; }
+  .hist-page .hist-item:nth-child(23) { grid-row: 23 / span 2; }
+  .hist-page .hist-item:nth-child(24) { grid-row: 24 / span 2; }
+  .hist-page .hist-item:nth-child(25) { grid-row: 25 / span 2; }
+  .hist-page .hist-item:nth-child(26) { grid-row: 26 / span 2; }
+  .hist-page .hist-item:nth-child(27) { grid-row: 27 / span 2; }
+  .hist-page .hist-item:nth-child(28) { grid-row: 28 / span 2; }
+  .hist-page .hist-item:nth-child(29) { grid-row: 29 / span 2; }
+  .hist-page .hist-item:nth-child(30) { grid-row: 30 / span 2; }
+
+  .hist-page .hist-card {
+    max-width: 46rem;
+  }
+
+  /* left cards hug the spine on their right, right cards on their left */
+  .hist-page .hist-item:nth-child(odd) .hist-card  { margin-left: auto; }
+  .hist-page .hist-item:nth-child(even) .hist-card { margin-right: auto; }
+
+  .hist-page .hist-item:nth-child(odd) .hist-node  { left: auto; right: calc(var(--spine) / -2 - 7px); }
+  .hist-page .hist-item:nth-child(even) .hist-node { left: calc(var(--spine) / -2 - 7px); }
+
+  .hist-page .hist-item:nth-child(odd) .hist-card::before {
+    left: 100%;
+    width: calc(var(--spine) / 2 - 7px);
+  }
+
+  .hist-page .hist-item:nth-child(even) .hist-card::before {
+    left: auto;
+    right: 100%;
+    width: calc(var(--spine) / 2 - 7px);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1199.98px) {
+  .hist-page { --hp-pad: 40px; }
+}
+
+@media (max-width: 991.98px) {
+  .hist-page .hist-story__grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2rem;
+    align-items: start;
+  }
+
+  .hist-page .hist-figure {
+    max-width: 26rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hist-page { --hp-pad: 20px; }
+
+  .hist-page .hist-card {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hist-page .hist-node,
+  .hist-page .hist-card,
+  .hist-page .hist-year,
+  .hist-page .hist-text,
+  .hist-page .hist-card::before {
+    transition: none;
+  }
+
+  .hist-page .hist-spine__head::after {
+    animation: none;
+  }
+}
