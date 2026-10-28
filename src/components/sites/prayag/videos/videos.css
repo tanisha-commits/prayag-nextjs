@@ -1,0 +1,292 @@
+/* ==========================================================================
+   Prayag video pages: /product-video, /feedback-videos (inline click-to-play cards)
+   and /video-tv-advertisement (cards opening a modal player).
+   Port of the theme rules for `section.video_wrapper`, `.video_item`, `.video_modal_outer`
+   (+ Bootstrap `.modal`) and the inline <style> of the product/feedback pages, which
+   overrides the theme's `.video_item` margin and heading weight on those two pages.
+   Unlayered, so it beats Tailwind's preflight; every rule is scoped under .vd-page.
+   ========================================================================== */
+
+.vd-page {
+  position: relative;
+  padding: 60px 0;
+}
+
+@media (max-width: 767px) {
+  .vd-page {
+    padding: 50px 0;
+  }
+}
+
+/* --- card ---------------------------------------------------------------- */
+
+.vd-page .vd-item {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.vd-page .vd-item h3 {
+  margin: -10px 0 0;
+  padding: 24px;
+  border-left: 1px solid #c5bfbf;
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+/* Product / feedback pages (page <style> wins over the theme). */
+.vd-page .vd-item--inline {
+  margin-bottom: 30px;
+}
+
+.vd-page .vd-item--inline h3 {
+  margin-top: 0;
+  font-weight: 500;
+}
+
+.vd-page button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.vd-page button:focus-visible {
+  outline: 3px solid #40ade3;
+  outline-offset: 2px;
+}
+
+/* --- inline player (source .video-thumbnail-wrapper) --------------------- */
+
+.vd-page .vd-thumb-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.vd-page .vd-thumb {
+  position: relative;
+  height: 250px;
+}
+
+.vd-page .vd-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.vd-page .vd-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.vd-page .vd-play::after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 25px solid #333;
+}
+
+.vd-page .vd-play:hover {
+  background: #fff;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.vd-page .vd-frame {
+  display: block;
+  width: 100%;
+  height: 250px;
+  border: 0;
+}
+
+/* --- TV cards (source a.video-link > .icon + img) ------------------------ */
+
+.vd-page .vd-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Positioned against the whole card (image + heading), exactly as the source. */
+.vd-page .vd-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  color: #fff;
+  transform: translate(-50%, -50%);
+}
+
+.vd-page .vd-icon svg {
+  width: 38px;
+  height: 38px;
+}
+
+@media (max-width: 991px) {
+  .vd-page .vd-icon {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .vd-page .vd-link img {
+    height: 250px;
+  }
+
+  .vd-page .vd-icon {
+    top: 40%;
+    padding: 13px;
+  }
+}
+
+/* --- modal (Bootstrap .modal.fade + .modal-dialog-centered) -------------- */
+
+.vd-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0;
+  transition: opacity 0.15s linear;
+}
+
+.vd-backdrop.is-shown {
+  opacity: 0.5;
+}
+
+.vd-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1055;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  opacity: 0;
+  transition: opacity 0.15s linear;
+}
+
+.vd-modal.is-shown {
+  opacity: 1;
+}
+
+.vd-dialog {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: auto;
+  max-width: 100%;
+  min-height: calc(100% - 1rem);
+  margin: 0.5rem;
+  pointer-events: none;
+  transform: translate(0, -50px);
+  transition: transform 0.3s ease-out;
+}
+
+.vd-modal.is-shown .vd-dialog {
+  transform: none;
+}
+
+@media (min-width: 576px) {
+  .vd-dialog {
+    max-width: 90%;
+    min-height: calc(100% - 3.5rem);
+    margin: 1.75rem auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .vd-dialog {
+    max-width: 60%;
+  }
+}
+
+.vd-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+}
+
+/* Inline inside the body, as the source: the line box adds a ~9px strip below the 600px player. */
+.vd-content iframe {
+  display: inline;
+  vertical-align: baseline;
+  width: 100%;
+  height: 600px;
+  border: 0;
+}
+
+.vd-content .vd-frame-gap {
+  height: 609px;
+}
+
+/* Not in the source (it relies on Esc / backdrop click): shown only to keyboard users. */
+.vd-page .vd-close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.vd-page .vd-close:focus-visible {
+  outline: 3px solid #40ade3;
+  outline-offset: 2px;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vd-page .vd-play,
+  .vd-backdrop,
+  .vd-modal,
+  .vd-dialog {
+    transition: none;
+  }
+}

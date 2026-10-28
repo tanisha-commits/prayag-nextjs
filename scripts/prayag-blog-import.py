@@ -31,7 +31,9 @@ slugs = {a["slug"] for a in articles}
 # Local routes that exist in the clone; everything else stays on the live site.
 LOCAL_PAGES = {
     "", "about-prayag", "ceo-profile", "sustainability", "manufacturing-process",
-    "dealership-enquiry", "contact-us", "blog",
+    "dealership-enquiry", "contact-us", "blog", "warranty-policy",
+    "press-coverages", "product-video", "video-tv-advertisement", "feedback-videos",
+    "download-cataglogue", "faq", "privacy-policy",
 }
 
 asset_map = {}

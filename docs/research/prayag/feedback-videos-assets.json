@@ -1,0 +1,37 @@
+{
+ "/sites/default/files/2025-08/feedback-banner.webp": {
+  "local": "/sites/prayag/files/2025-08/feedback-banner.webp",
+  "from": "backup",
+  "bytes": 56262
+ },
+ "https://img.youtube.com/vi/LZXPJD1JCsM/hqdefault.jpg": {
+  "local": "/sites/prayag/files/youtube/LZXPJD1JCsM-hqdefault.jpg",
+  "from": "img.youtube.com",
+  "bytes": 8228
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/Dealer%20trust%20speaker.webp": {
+  "local": "/sites/prayag/theme/Dealer-trust-speaker.webp",
+  "from": "backup",
+  "bytes": 69634
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/Distributor%20feedback%20video.webp": {
+  "local": "/sites/prayag/theme/Distributor-feedback-video.webp",
+  "from": "backup",
+  "bytes": 122592
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/Distributor%20feedback%20video2.webp": {
+  "local": "/sites/prayag/theme/Distributor-feedback-video2.webp",
+  "from": "backup",
+  "bytes": 120114
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/Employee%20feedback.webp": {
+  "local": "/sites/prayag/theme/Employee-feedback.webp",
+  "from": "backup",
+  "bytes": 129250
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/Feedback-prayag.webp": {
+  "local": "/sites/prayag/theme/Feedback-prayag.webp",
+  "from": "backup",
+  "bytes": 114408
+ }
+}
