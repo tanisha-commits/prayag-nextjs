@@ -1,20 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { StoreProvider } from "./store-provider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// Graphik is the face the Prayag Drupal theme ships (themes/custom/prayag/assets/fonts).
+const graphik = localFont({
+  src: [
+    { path: "../../public/sites/prayag/fonts/Graphik-Light.woff2", weight: "300", style: "normal" },
+    { path: "../../public/sites/prayag/fonts/Graphik-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../../public/sites/prayag/fonts/Graphik-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../../public/sites/prayag/fonts/Graphik-Semibold.woff2", weight: "600", style: "normal" },
+    { path: "../../public/sites/prayag/fonts/Graphik-Bold.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-graphik",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Website Clone",
-  description: "Pixel-perfect website clone",
+  metadataBase: new URL("https://prayagindia.com"),
+  title: "Prayag Polymers Limited - India's No.1 Sanitaryware Manufacturer",
+  description:
+    "Prayag Polymers Limited is India’s leading Sanitaryware manufacturing brand. It offers a premium, wide range of reliable, and affordable sanitary products in India.",
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({
@@ -23,11 +30,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${graphik.variable} antialiased`}>
+      <body>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }
