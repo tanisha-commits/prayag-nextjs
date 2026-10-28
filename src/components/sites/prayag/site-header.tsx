@@ -13,6 +13,8 @@ import { logo, megaMenus, searchHref, type MegaMenu, type NavLink } from "./data
 import { SearchIcon } from "./icons";
 
 const STICKY_OFFSET = 90; // source: header height; `.sticky` once scrollTop exceeds it
+// header.js only adds `.sticky` in its `viewport-lg` mode (window >= 1200px).
+const STICKY_MIN_WIDTH = 1200;
 
 function isMega(item: MegaMenu | NavLink): item is MegaMenu {
   return "links" in item;
@@ -38,10 +40,15 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
   const [openSub, setOpenSub] = useState<string | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setSticky(window.scrollY > STICKY_OFFSET);
+    const onScroll = () =>
+      setSticky(window.innerWidth >= STICKY_MIN_WIDTH && window.scrollY > STICKY_OFFSET);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -57,17 +64,17 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
       data-dark={solid || sticky}
       data-solid={solid}
       className={cn(
-        "group/header relative z-[99] w-full bg-white py-[15px] text-[16px] leading-[1.42857] text-[#212529] lg:py-0",
+        "group/header relative z-[99] w-full bg-white py-[15px] text-[16px] leading-[1.42857] text-[#212529] md:py-0",
         solid
-          ? "lg:bg-white"
-          : "lg:absolute lg:inset-x-0 lg:top-0 lg:bg-transparent lg:transition-[background-color] lg:duration-500 lg:ease-in-out lg:hover:bg-white",
-        sticky && "lg:fixed lg:inset-x-0 lg:top-0 lg:bg-white lg:animate-[prayag-sticky-in_0.5s_both]",
+          ? "md:bg-white"
+          : "md:absolute md:inset-x-0 md:top-0 md:bg-transparent md:transition-[background-color] md:duration-500 md:ease-in-out md:hover:bg-white",
+        sticky && "fixed inset-x-0 top-0 bg-white animate-[prayag-sticky-in_0.5s_both]",
       )}
     >
       <div className="w-full px-6 py-3 md:px-[60px] md:py-0 2xl:px-[90px]">
         <div
           className={cn(
-            "relative flex flex-col items-center gap-x-[30px] lg:static sm:flex-row sm:flex-wrap sm:justify-between",
+            "relative flex flex-col items-center gap-x-[30px] sm:gap-x-0 sm:flex-row sm:flex-wrap sm:justify-between md:flex-nowrap lg:static",
             "lg:h-[90px] lg:flex-nowrap lg:group-data-[sticky=true]/header:h-[70px]",
           )}
         >
@@ -98,8 +105,8 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
                 className={cn(
                   "h-auto w-[133px] object-cover brightness-0 sm:w-[85%]",
                   solid
-                    ? "lg:brightness-100 lg:group-data-[sticky=true]/header:brightness-0"
-                    : "lg:brightness-[10000] lg:group-hover/header:brightness-0 lg:group-data-[sticky=true]/header:brightness-0",
+                    ? "md:brightness-100 md:group-data-[sticky=true]/header:brightness-0"
+                    : "md:brightness-[10000] md:group-hover/header:brightness-0 md:group-data-[sticky=true]/header:brightness-0",
                 )}
               />
             </Link>
@@ -112,7 +119,8 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
             aria-expanded={mobileOpen}
             onClick={() => dispatch(toggleMobileNav())}
             className={cn(
-              "absolute top-[5px] right-8 flex h-[17px] w-5 cursor-pointer flex-col justify-between transition-transform duration-[330ms] ease-out sm:top-[10px] lg:hidden",
+              // Source base rule is top 35px / right 14px; mobile overrides move it to 10px/32px (and 5px <= 575px).
+              "absolute top-[5px] right-8 flex h-[17px] w-5 cursor-pointer flex-col justify-between transition-transform duration-[330ms] ease-out sm:top-[10px] md:top-[35px] md:right-[14px] lg:hidden",
               mobileOpen && "-rotate-45",
             )}
           >
@@ -131,47 +139,49 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
             />
           </button>
 
-          {/* Desktop navigation */}
-          <nav aria-label="Main" className="hidden items-center lg:flex">
-            <ul className="flex flex-wrap items-center justify-end">
-              {megaMenus.map((item, idx) => {
-                const last = idx === megaMenus.length - 1;
-                const topLink = cn(
-                  "relative flex h-[30px] items-start whitespace-nowrap text-[17px] leading-6 font-medium text-white transition-colors duration-200 ease-in-out",
-                  "group-hover/header:text-black group-data-[sticky=true]/header:h-[70px] group-data-[sticky=true]/header:leading-[70px] group-data-[dark=true]/header:text-black",
-                  last ? "pr-0 pl-5" : "px-[25px]",
-                );
-                if (!isMega(item)) {
+          {/* Desktop navigation (links from 991px; the search icon already shows from 769px) */}
+          <div className="hidden items-center md:flex">
+            <nav aria-label="Main" className="hidden items-center lg:flex">
+              <ul className="flex flex-wrap items-center justify-start">
+                {megaMenus.map((item, idx) => {
+                  const last = idx === megaMenus.length - 1;
+                  const topLink = cn(
+                    "relative flex h-[30px] items-start whitespace-nowrap text-[17px] leading-6 font-medium text-white transition-colors duration-200 ease-in-out",
+                    "group-hover/header:text-black group-data-[sticky=true]/header:h-[70px] group-data-[sticky=true]/header:leading-[70px] group-data-[dark=true]/header:text-black",
+                    last ? "pr-0 pl-5" : "px-[25px]",
+                  );
+                  if (!isMega(item)) {
+                    return (
+                      <li key={item.label}>
+                        <a href={item.href} className={topLink}>
+                          {item.label}
+                        </a>
+                      </li>
+                    );
+                  }
                   return (
-                    <li key={item.label}>
-                      <a href={item.href} className={topLink}>
+                    <li key={item.label} className="group/item">
+                      <button type="button" className={cn(topLink, "cursor-pointer")} aria-haspopup="true">
                         {item.label}
-                      </a>
+                        <span
+                          aria-hidden="true"
+                          className={cn(
+                            "relative -top-[3px] box-content size-1 self-center rotate-[135deg] border-t-2 border-r-2 border-[#f7f7f7] group-hover/header:border-black group-data-[solid=true]/header:border-black",
+                            // Source markup has a trailing space after "Inspiration" before the caret.
+                            item.label === "Inspiration" ? "ml-[12.5px]" : "ml-2",
+                          )}
+                        />
+                      </button>
+                      <MegaPanel menu={item} />
                     </li>
                   );
-                }
-                return (
-                  <li key={item.label} className="group/item">
-                    <button type="button" className={cn(topLink, "cursor-pointer")} aria-haspopup="true">
-                      {item.label}
-                      <span
-                        aria-hidden="true"
-                        className={cn(
-                          "relative -top-[3px] box-content size-1 self-center rotate-[135deg] border-t-2 border-r-2 border-[#f7f7f7] group-hover/header:border-black group-data-[solid=true]/header:border-black",
-                          // Source markup has a trailing space after "Inspiration" before the caret.
-                          item.label === "Inspiration" ? "ml-[12.5px]" : "ml-2",
-                        )}
-                      />
-                    </button>
-                    <MegaPanel menu={item} />
-                  </li>
-                );
-              })}
-            </ul>
+                })}
+              </ul>
+            </nav>
             <a href={searchHref} aria-label="search" className="ml-[50px] block text-white group-hover/header:text-black group-data-[dark=true]/header:text-black">
               <SearchIcon />
             </a>
-          </nav>
+          </div>
 
           {/* Mobile navigation */}
           {mobileOpen && (
