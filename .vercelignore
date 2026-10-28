@@ -1,0 +1,5 @@
+# Files never uploaded by `vercel deploy` (CLI deploys only; Git deploys use the repo contents)
+*.deb
+node_modules
+.next
+.env*

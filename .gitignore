@@ -50,3 +50,4 @@ temp/
 
 # Local-only large files (not part of the project)
 *.deb
+.env*
