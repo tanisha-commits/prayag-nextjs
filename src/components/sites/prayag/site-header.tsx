@@ -23,11 +23,14 @@ function linkProps(link: NavLink) {
 }
 
 /**
- * Desktop (>= 991px): transparent over the hero with white text, white on hover,
- * fixed + white after scrolling past 90px. Below 991px: static white bar with a
- * burger that slides the menu open.
+ * Desktop (>= 991px): `overlay` (homepage) sits transparent over the hero with white
+ * text and turns white on hover; `solid` (inner pages) is an in-flow white bar with the
+ * original-colour logo. Both become fixed + white after scrolling past 90px (on inner
+ * pages the content jumps up by the header height, as on the source). Below 991px:
+ * static white bar with a burger that slides the menu open.
  */
-export function SiteHeader() {
+export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "solid" }) {
+  const solid = variant === "solid";
   const dispatch = useAppDispatch();
   const panelOpen = useAppSelector((s) => s.ui.categoryPanelOpen);
   const mobileOpen = useAppSelector((s) => s.ui.mobileNavOpen);
@@ -51,10 +54,14 @@ export function SiteHeader() {
   return (
     <header
       data-sticky={sticky}
+      data-dark={solid || sticky}
+      data-solid={solid}
       className={cn(
-        "group/header relative z-[99] w-full bg-white py-[15px] text-[16px] leading-[1.42857] text-[#212529]",
-        "lg:absolute lg:inset-x-0 lg:top-0 lg:bg-transparent lg:py-0 lg:transition-[background-color] lg:duration-500 lg:ease-in-out lg:hover:bg-white",
-        sticky && "lg:fixed lg:bg-white lg:animate-[prayag-sticky-in_0.5s_both]",
+        "group/header relative z-[99] w-full bg-white py-[15px] text-[16px] leading-[1.42857] text-[#212529] lg:py-0",
+        solid
+          ? "lg:bg-white"
+          : "lg:absolute lg:inset-x-0 lg:top-0 lg:bg-transparent lg:transition-[background-color] lg:duration-500 lg:ease-in-out lg:hover:bg-white",
+        sticky && "lg:fixed lg:inset-x-0 lg:top-0 lg:bg-white lg:animate-[prayag-sticky-in_0.5s_both]",
       )}
     >
       <div className="w-full px-6 py-3 md:px-[60px] md:py-0 2xl:px-[90px]">
@@ -77,7 +84,7 @@ export function SiteHeader() {
               {[0, 1, 2].map((i) => (
                 <span
                   key={i}
-                  className="block h-0.5 w-[22px] bg-white transition-[background-color] duration-500 ease-in-out group-hover/header:bg-[#111] group-data-[sticky=true]/header:bg-[#111]"
+                  className="block h-0.5 w-[22px] bg-white transition-[background-color] duration-500 ease-in-out group-hover/header:bg-[#111] group-data-[dark=true]/header:bg-[#111]"
                 />
               ))}
             </button>
@@ -90,7 +97,9 @@ export function SiteHeader() {
                 height={30}
                 className={cn(
                   "h-auto w-[133px] object-cover brightness-0 sm:w-[85%]",
-                  "lg:brightness-[10000] lg:group-hover/header:brightness-0 lg:group-data-[sticky=true]/header:brightness-0",
+                  solid
+                    ? "lg:brightness-100 lg:group-data-[sticky=true]/header:brightness-0"
+                    : "lg:brightness-[10000] lg:group-hover/header:brightness-0 lg:group-data-[sticky=true]/header:brightness-0",
                 )}
               />
             </Link>
@@ -129,7 +138,7 @@ export function SiteHeader() {
                 const last = idx === megaMenus.length - 1;
                 const topLink = cn(
                   "relative flex h-[30px] items-start whitespace-nowrap text-[17px] leading-6 font-medium text-white transition-colors duration-200 ease-in-out",
-                  "group-hover/header:text-black group-data-[sticky=true]/header:h-[70px] group-data-[sticky=true]/header:leading-[70px] group-data-[sticky=true]/header:text-black",
+                  "group-hover/header:text-black group-data-[sticky=true]/header:h-[70px] group-data-[sticky=true]/header:leading-[70px] group-data-[dark=true]/header:text-black",
                   last ? "pr-0 pl-5" : "px-[25px]",
                 );
                 if (!isMega(item)) {
@@ -148,7 +157,7 @@ export function SiteHeader() {
                       <span
                         aria-hidden="true"
                         className={cn(
-                          "relative -top-[3px] box-content size-1 self-center rotate-[135deg] border-t-2 border-r-2 border-[#f7f7f7] group-hover/header:border-black",
+                          "relative -top-[3px] box-content size-1 self-center rotate-[135deg] border-t-2 border-r-2 border-[#f7f7f7] group-hover/header:border-black group-data-[solid=true]/header:border-black",
                           // Source markup has a trailing space after "Inspiration" before the caret.
                           item.label === "Inspiration" ? "ml-[12.5px]" : "ml-2",
                         )}
@@ -159,7 +168,7 @@ export function SiteHeader() {
                 );
               })}
             </ul>
-            <a href={searchHref} aria-label="search" className="ml-[50px] block text-white group-hover/header:text-black group-data-[sticky=true]/header:text-black">
+            <a href={searchHref} aria-label="search" className="ml-[50px] block text-white group-hover/header:text-black group-data-[dark=true]/header:text-black">
               <SearchIcon />
             </a>
           </nav>
