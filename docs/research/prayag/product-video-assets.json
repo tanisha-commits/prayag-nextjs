@@ -1,0 +1,27 @@
+{
+ "/sites/default/files/2025-08/product%20video.webp": {
+  "local": "/sites/prayag/files/2025-08/product-video.webp",
+  "from": "backup",
+  "bytes": 159122
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/Prayag%20DuralifeCPVC_Pipe_Put_to_the_Test%E2%80%93Unbelievable_Strength_Flexibility.webp": {
+  "local": "/sites/prayag/theme/Prayag-DuralifeCPVC_Pipe_Put_to_the_Test-Unbelievable_Strength_Flexibility.webp",
+  "from": "backup",
+  "bytes": 36664
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/Tested%20for%20Trust.webp": {
+  "local": "/sites/prayag/theme/Tested-for-Trust.webp",
+  "from": "backup",
+  "bytes": 26356
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/This%20Smart%20Toilet%20Redefines%20Luxury%20Hygiene%20X%20Prayag.webp": {
+  "local": "/sites/prayag/theme/This-Smart-Toilet-Redefines-Luxury-Hygiene-X-Prayag.webp",
+  "from": "backup",
+  "bytes": 30938
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/product_video_testimonial.webp": {
+  "local": "/sites/prayag/theme/product_video_testimonial.webp",
+  "from": "backup",
+  "bytes": 80922
+ }
+}
