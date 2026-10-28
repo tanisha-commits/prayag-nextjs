@@ -36,10 +36,10 @@ export const visibleProductCategories = productCategories.filter(
   (c) => c.label !== "Pipes & Fittings",
 );
 
+// Local page offering View/Download of the official PDF (byte-identical copy of the live file).
 const warrantyPolicy: NavLink = {
   label: "Warranty Policy",
-  href: `${SOURCE}/sites/default/files/2024-09/Warranty_Policy.pdf`,
-  external: true,
+  href: "/warranty-policy",
 };
 
 export const megaMenus: (MegaMenu | NavLink)[] = [
