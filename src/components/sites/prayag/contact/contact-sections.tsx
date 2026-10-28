@@ -98,7 +98,7 @@ export function ContactInfoSection() {
 const BOXES = [
   { title: "Our Product", image: "/sites/prayag/files/2024-10/products-1-.webp", href: "https://prayagindia.com/products" },
   { title: "Become a Dealer", image: "/sites/prayag/files/2024-09/Banner_0.webp", href: "/dealership-enquiry" },
-  { title: "FAQ", image: "/sites/prayag/files/2024-08/FAQS.webp", href: "https://prayagindia.com/latest-faqs" },
+  { title: "FAQ", image: "/sites/prayag/files/2024-08/FAQS.webp", href: "/faq" /* source: /latest-faqs, which 301-redirects to the homepage on the live site */ },
 ];
 
 /** Source `section.contact_main_box`: three link cards (always three columns). */

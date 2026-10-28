@@ -1,0 +1,207 @@
+/*
+ * /faq — ported from the source theme rules for `section.faq .faq_content` (vertical pills + Bootstrap 5
+ * flush accordions), keeping the source class names. Bootstrap defaults the theme relies on are inlined.
+ */
+section.faq {
+  position: relative;
+  padding: 60px 0;
+}
+
+.faq_content {
+  font-size: 18px;
+  line-height: 28.8px;
+  color: #212529;
+}
+
+.faq_content .faq-layout {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* `.nav.flex-column.nav-pills.me-5` + `.faq_content .nav { width: 25% }` */
+.faq_content .nav {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin-right: 48px;
+}
+
+.faq_content .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+  border-radius: 0;
+  background: none;
+  font: inherit;
+  color: #000;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.faq_content .nav-link:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+/* 20x20 like the source's width/height attributes; may shrink when the label wraps (source too). */
+.faq_content .nav-link svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.faq_content .nav-link svg path {
+  fill: #000;
+}
+
+.faq_content .nav-link.active {
+  padding-left: 10px;
+  background-color: #000;
+  color: #fff;
+}
+
+.faq_content .nav-link.active svg {
+  margin-right: 10px;
+}
+
+.faq_content .nav-link.active svg path {
+  fill: #fff;
+}
+
+.faq_content .tab-content {
+  width: 75%;
+  padding-left: 10px;
+}
+
+.faq_content .tab-pane {
+  animation: faq-fade 0.15s linear;
+}
+
+.faq_content .accordion-item {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.faq_content .accordion-item:first-child {
+  border-top: 0;
+}
+
+.faq_content .accordion-item:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.faq_content .accordion-header {
+  margin: 0;
+}
+
+.faq_content .accordion-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0;
+  border: 0;
+  border-radius: 0;
+  background-color: #fff;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #000;
+  text-align: left;
+  overflow-anchor: none;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+}
+
+.faq_content .accordion-button::after {
+  content: "";
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  background-image: url("/sites/prayag/icons/faq-accordion-chevron.svg");
+  background-repeat: no-repeat;
+  background-size: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.faq_content .accordion-button[aria-expanded="true"] {
+  background-color: transparent;
+}
+
+.faq_content .accordion-button[aria-expanded="true"]::after {
+  transform: rotate(-180deg);
+}
+
+/* The source removes every focus indicator here; keep one for keyboard users only. */
+.faq_content .nav-link:focus-visible,
+.faq_content .accordion-button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: -2px;
+}
+
+.faq_content .nav-link.active:focus-visible {
+  outline-color: #fff;
+}
+
+.faq_content .accordion-collapse {
+  overflow: hidden;
+  transition: height 0.35s ease;
+}
+
+.faq_content .accordion-body {
+  padding: 16px 20px;
+}
+
+.faq_content .accordion-body p {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #555;
+}
+
+@media (max-width: 1399px) {
+  .faq_content .accordion-body p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  section.faq {
+    padding: 50px 0;
+  }
+
+  .faq_content .accordion-body p {
+    font-size: 15px;
+    line-height: 25px;
+  }
+}
+
+@keyframes faq-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq_content .tab-pane {
+    animation: none;
+  }
+
+  .faq_content .nav-link,
+  .faq_content .accordion-button,
+  .faq_content .accordion-button::after,
+  .faq_content .accordion-collapse {
+    transition: none;
+  }
+}
