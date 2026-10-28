@@ -1,0 +1,113 @@
+/*
+ * /privacy-policy — ported from the source theme rules for `section.privacy_policy` plus the theme /
+ * Bootstrap element defaults the CMS body relies on (p, ul, a, h3, h4, code).
+ */
+section.privacy_policy {
+  position: relative;
+  padding: 60px 0;
+}
+
+.privacy_policy .privacy-body {
+  font-size: 18px;
+  line-height: 28.8px;
+  color: #212529;
+  overflow-wrap: break-word;
+}
+
+.privacy_policy .privacy-body p {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #555;
+}
+
+.privacy_policy .privacy-body strong {
+  font-weight: bolder;
+}
+
+.privacy_policy .privacy-body ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.privacy_policy .privacy-body a {
+  font-weight: 400;
+  color: #000;
+  text-decoration: none;
+}
+
+.privacy_policy .privacy-body a:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.privacy_policy .privacy-body h3,
+.privacy_policy .privacy-body h4 {
+  margin: 0;
+  font-weight: 500;
+  color: #000;
+}
+
+.privacy_policy .privacy-body h3 {
+  margin-bottom: 18px;
+  font-size: 25px;
+  line-height: 35px;
+  scroll-margin-top: 20px;
+}
+
+/* Deep links (#section-N): from 1200px the shared header turns fixed (90px) once the page scrolls and
+   the content moves up by its height, so leave room for both. */
+@media (min-width: 1200px) {
+  .privacy_policy .privacy-body h3 {
+    scroll-margin-top: 200px;
+  }
+}
+
+.privacy_policy .privacy-body h4 {
+  margin-bottom: 8px;
+  font-size: 28px;
+  line-height: 39.2px;
+}
+
+/* Bootstrap `code` (the source body contains stray <code> tags in sections 2-3) */
+.privacy_policy .privacy-body code {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875em;
+  color: #d63384;
+  overflow-wrap: break-word;
+  direction: ltr;
+  unicode-bidi: bidi-override;
+}
+
+@media (max-width: 1399px) {
+  .privacy_policy .privacy-body p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  section.privacy_policy {
+    padding: 50px 0;
+  }
+
+  .privacy_policy .privacy-body p {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 24px;
+  }
+
+  .privacy_policy .privacy-body ul {
+    padding-left: 20px;
+  }
+
+  .privacy_policy .privacy-body ul li {
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 25px;
+    list-style: disc;
+  }
+}
