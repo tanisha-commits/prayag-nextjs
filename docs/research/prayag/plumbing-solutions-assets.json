@@ -1,0 +1,72 @@
+{
+ "https://prayagindia.com/sites/default/files/2026-05/banner%20main.webp": {
+  "local": "/sites/prayag/files/2026-05/banner-main.webp",
+  "from": "backup",
+  "bytes": 258682
+ },
+ "https://prayagindia.com/sites/default/files/2026-07/Composite_pipecategroy.webp": {
+  "local": "/sites/prayag/files/2026-07/Composite_pipecategroy.webp",
+  "from": "backup",
+  "bytes": 103998
+ },
+ "https://prayagindia.com/sites/default/files/2026-07/UDG%20pipes_BANNER.webp": {
+  "local": "/sites/prayag/files/2026-07/UDG-pipes_BANNER.webp",
+  "from": "backup",
+  "bytes": 380684
+ },
+ "https://prayagindia.com/sites/default/files/2026-08/PPR-main-banner.webp": {
+  "local": "/sites/prayag/files/2026-08/PPR-main-banner.webp",
+  "from": "backup",
+  "bytes": 363098
+ },
+ "https://prayagindia.com/sites/default/files/styles/medium/public/2026-08/Plumbing%20%20pipe.png?itok=nrEanbXP": {
+  "local": "/sites/prayag/files/styles/medium/public/2026-08/Plumbing-pipe.png",
+  "from": "backup",
+  "bytes": 44268
+ },
+ "https://prayagindia.com/sites/default/files/styles/thumbnail/public/2026-08/Plumbing%20%20pipe.png?itok=vOaTFhDU 300w,\n                          https://prayagindia.com/sites/default/files/styles/thumbnail/public/2026-08/Plumbing%20%20pipe.png?itok=vOaTFhDU 600w,\n                          https://prayagindia.com/sites/default/files/styles/large/public/2026-08/Plumbing%20%20pipe.png?itok=4GM5syFG 1200w,\n                          https://prayagindia.com/sites/default/files/styles/wide/public/2026-08/Plumbing%20%20pipe.png?itok=P8d43wVb 2000w": {
+  "local": "/sites/prayag/files/styles/thumbnail/public/2026-08/Plumbing-pipe.png",
+  "from": "backup",
+  "bytes": 11102
+ },
+ "https://prayagindia.com/sites/default/files/styles/wide/public/2026-08/Casing%20pipe%20banner.webp?itok=59UAtFHk": {
+  "local": "/sites/prayag/files/styles/wide/public/2026-08/Casing-pipe-banner.webp",
+  "from": "backup",
+  "bytes": 122746
+ },
+ "https://prayagindia.com/sites/default/files/styles/wide/public/2026-09/img1.png?itok=dE8hr9Ug": {
+  "local": "/sites/prayag/files/styles/wide/public/2026-09/img1.png",
+  "from": "backup",
+  "bytes": 960025
+ },
+ "https://prayagindia.com/sites/default/files/styles/wide/public/2026-09/section1.webp?itok=umhlwwYO": {
+  "local": "/sites/prayag/files/styles/wide/public/2026-09/section1.webp",
+  "from": "backup",
+  "bytes": 68034
+ },
+ "https://prayagindia.com/media/1613": {
+  "local": "/sites/prayag/files/2026-10/main-banner-hdpe.webp",
+  "from": "backup (sites/default/files/2026-10/main-banner-hdpe.webp; SHA-256 equal to the live /media/1613 response)",
+  "bytes": 350950
+ },
+ "https://prayagindia.com/media/1574": {
+  "local": "/sites/prayag/files/2026-09/hero-section.webp",
+  "from": "backup (sites/default/files/2026-09/hero section.webp; SHA-256 equal to the live /media/1574 response)",
+  "bytes": 687492
+ },
+ "https://prayagindia.com/media/1573": {
+  "local": "/sites/prayag/files/2026-09/cpvcO.webp",
+  "from": "backup (sites/default/files/2026-09/cpvcO.webp; SHA-256 equal to the live /media/1573 response)",
+  "bytes": 897502
+ },
+ "https://prayagindia.com/sites/default/files/styles/large/public/2026-08/Plumbing%20%20pipe.png": {
+  "local": "/sites/prayag/files/styles/large/public/2026-08/Plumbing-pipe.png",
+  "from": "backup",
+  "bytes": 181200
+ },
+ "https://prayagindia.com/sites/default/files/styles/wide/public/2026-08/Plumbing%20%20pipe.png": {
+  "local": "/sites/prayag/files/styles/wide/public/2026-08/Plumbing-pipe.png",
+  "from": "backup",
+  "bytes": 844055
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/3%20meters.webp": {
+  "local": "/sites/prayag/theme/agritec/3-meters.webp",
+  "from": "backup",
+  "bytes": 32464
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/5%20meters.webp": {
+  "local": "/sites/prayag/theme/agritec/5-meters.webp",
+  "from": "backup",
+  "bytes": 31678
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/6%20meters.webp": {
+  "local": "/sites/prayag/theme/agritec/6-meters.webp",
+  "from": "backup",
+  "bytes": 32164
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/Agri%20-%20ELBOW.webp": {
+  "local": "/sites/prayag/theme/agritec/Agri---ELBOW.webp",
+  "from": "backup",
+  "bytes": 62514
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/Agri%20-%20END%20CAP.webp": {
+  "local": "/sites/prayag/theme/agritec/Agri---END-CAP.webp",
+  "from": "backup",
+  "bytes": 67984
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/Agri%20-%20EQUAL%20TEE.webp": {
+  "local": "/sites/prayag/theme/agritec/Agri---EQUAL-TEE.webp",
+  "from": "backup",
+  "bytes": 47298
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/Agri%20-%20PIPE-Photoroom.webp": {
+  "local": "/sites/prayag/theme/agritec/Agri---PIPE-Photoroom.webp",
+  "from": "backup",
+  "bytes": 46474
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/Agri%20-%20REDUCER%20COUPLER.webp": {
+  "local": "/sites/prayag/theme/agritec/Agri---REDUCER-COUPLER.webp",
+  "from": "backup",
+  "bytes": 86886
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/COUPLER%20(1).webp": {
+  "local": "/sites/prayag/theme/agritec/COUPLER-1-.webp",
+  "from": "backup",
+  "bytes": 16370
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/ELBOW(1).webp": {
+  "local": "/sites/prayag/theme/agritec/ELBOW-1-.webp",
+  "from": "backup",
+  "bytes": 17756
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/END%20CAP.webp": {
+  "local": "/sites/prayag/theme/agritec/END-CAP.webp",
+  "from": "backup",
+  "bytes": 20350
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/EQUAL%20TEE(1).webp": {
+  "local": "/sites/prayag/theme/agritec/EQUAL-TEE-1-.webp",
+  "from": "backup",
+  "bytes": 14886
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/REDUCER%20TEE.webp": {
+  "local": "/sites/prayag/theme/agritec/REDUCER-TEE.webp",
+  "from": "backup",
+  "bytes": 20340
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/agritec/mobile%20banner-agri.webp": {
+  "local": "/sites/prayag/theme/agritec/mobile-banner-agri.webp",
+  "from": "backup",
+  "bytes": 267018
+ },
+ "https://prayagindia.com/media/1574": {
+  "local": "/sites/prayag/files/2026-09/hero-section.webp",
+  "from": "backup (live /media/1574 bytes matched by size+SHA-256 to sites/default/files/2026-09/hero section.webp)",
+  "bytes": 687492
+ },
+ "https://prayagindia.com/media/1575": {
+  "local": "/sites/prayag/files/2026-09/2nd-section.webp",
+  "from": "backup (live /media/1575 bytes matched by size+SHA-256 to sites/default/files/2026-09/2nd section.webp)",
+  "bytes": 822738
+ },
+ "https://prayagindia.com/media/1577": {
+  "local": "/sites/prayag/files/2026-09/What-is-Prayag-Agritec-Pipe.webp",
+  "from": "backup (live /media/1577 bytes matched by size+SHA-256 to sites/default/files/2026-09/What is Prayag Agritec Pipe.webp)",
+  "bytes": 1348896
+ },
+ "https://prayagindia.com/media/1578": {
+  "local": "/sites/prayag/files/2026-09/Features-Benefits.webp",
+  "from": "backup (live /media/1578 bytes matched by size+SHA-256 to sites/default/files/2026-09/Features & Benefits.webp)",
+  "bytes": 1033432
+ },
+ "https://prayagindia.com/media/1579": {
+  "local": "/sites/prayag/files/2026-09/Agricultural-Irrigation.webp",
+  "from": "backup (live /media/1579 bytes matched by size+SHA-256 to sites/default/files/2026-09/Agricultural Irrigation.webp)",
+  "bytes": 354586
+ },
+ "https://prayagindia.com/media/1580": {
+  "local": "/sites/prayag/files/2026-09/Agricultural-Water-Supply-Networks.webp",
+  "from": "backup (live /media/1580 bytes matched by size+SHA-256 to sites/default/files/2026-09/Agricultural Water Supply Networks.webp)",
+  "bytes": 395074
+ },
+ "https://prayagindia.com/media/1581": {
+  "local": "/sites/prayag/files/2026-09/Farm-Water-Distribution.webp",
+  "from": "backup (live /media/1581 bytes matched by size+SHA-256 to sites/default/files/2026-09/Farm Water Distribution.webp)",
+  "bytes": 287098
+ },
+ "https://prayagindia.com/media/1582": {
+  "local": "/sites/prayag/files/2026-09/field-water-distribution.webp",
+  "from": "backup (live /media/1582 bytes matched by size+SHA-256 to sites/default/files/2026-09/field water distribution.webp)",
+  "bytes": 425194
+ },
+ "https://prayagindia.com/media/1583": {
+  "local": "/sites/prayag/files/2026-09/Irrigation-Pipeline-Systems.webp",
+  "from": "backup (live /media/1583 bytes matched by size+SHA-256 to sites/default/files/2026-09/Irrigation Pipeline Systems.webp)",
+  "bytes": 382316
+ },
+ "https://prayagindia.com/media/1584": {
+  "local": "/sites/prayag/files/2026-09/agritech-banner.webp",
+  "from": "backup (live /media/1584 bytes matched by size+SHA-256 to sites/default/files/2026-09/agritech banner.webp)",
+  "bytes": 1937702
+ }
+}

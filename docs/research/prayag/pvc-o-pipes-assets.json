@@ -1,0 +1,72 @@
+{
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/Advanced%20Plumbing%20Solutions.png": {
+  "local": "/sites/prayag/theme/opvc/Advanced-Plumbing-Solutions.png",
+  "from": "backup",
+  "bytes": 2199049
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/OPVC_fittings/1.webp": {
+  "local": "/sites/prayag/theme/opvc/OPVC_fittings/1.webp",
+  "from": "backup",
+  "bytes": 17968
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/OPVC_fittings/2.webp": {
+  "local": "/sites/prayag/theme/opvc/OPVC_fittings/2.webp",
+  "from": "backup",
+  "bytes": 21110
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/OPVC_fittings/3.webp": {
+  "local": "/sites/prayag/theme/opvc/OPVC_fittings/3.webp",
+  "from": "backup",
+  "bytes": 20530
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/OPVC_fittings/4.webp": {
+  "local": "/sites/prayag/theme/opvc/OPVC_fittings/4.webp",
+  "from": "backup",
+  "bytes": 27612
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/advantgae.webp": {
+  "local": "/sites/prayag/theme/opvc/advantgae.webp",
+  "from": "backup",
+  "bytes": 223294
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/applications/application-fire-network-all-red-500x500.png": {
+  "local": "/sites/prayag/theme/opvc/applications/application-fire-network-all-red-500x500.png",
+  "from": "backup",
+  "bytes": 624616
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/applications/application-reference-building-supply-500x500.png": {
+  "local": "/sites/prayag/theme/opvc/applications/application-reference-building-supply-500x500.png",
+  "from": "backup",
+  "bytes": 625442
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/applications/application-reference-drinking-water-500x500.png": {
+  "local": "/sites/prayag/theme/opvc/applications/application-reference-drinking-water-500x500.png",
+  "from": "backup",
+  "bytes": 680322
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/applications/application-reference-irrigation-500x500.png": {
+  "local": "/sites/prayag/theme/opvc/applications/application-reference-irrigation-500x500.png",
+  "from": "backup",
+  "bytes": 780753
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/big_banner.png": {
+  "local": "/sites/prayag/theme/opvc/big_banner.png",
+  "from": "backup",
+  "bytes": 2398546
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/mobile%20OPVC.webp": {
+  "local": "/sites/prayag/theme/opvc/mobile-OPVC.webp",
+  "from": "backup",
+  "bytes": 233460
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/opvc/what-%20section.png": {
+  "local": "/sites/prayag/theme/opvc/what--section.png",
+  "from": "backup",
+  "bytes": 1551979
+ },
+ "https://prayagindia.com/media/1573": {
+  "local": "/sites/prayag/files/2026-09/cpvcO.webp",
+  "from": "backup (live /media/1573 bytes matched by size+SHA-256 to sites/default/files/2026-09/cpvcO.webp)",
+  "bytes": 897502
+ }
+}
