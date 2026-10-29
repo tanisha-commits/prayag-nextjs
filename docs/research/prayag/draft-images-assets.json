@@ -1,0 +1,74 @@
+{
+ "https://prayagindia.com/sites/default/files/2024-08/102.webp": {
+  "local": "/sites/prayag/files/2024-08/102.webp",
+  "from": "backup (sites/default/files/2024-08/102.webp)",
+  "bytes": 51372,
+  "sha256": "11d122fa4000162a29a3eed5752dadd0f04df2ed571250d8f61eb7494dc43967",
+  "itemCode": "102",
+  "basis": "file name equals the item code; picture shows the product type; byte-identical to the backup; used by this draft only (approved 2026-10-29)"
+ },
+ "https://prayagindia.com/sites/default/files/2024-08/103.webp": {
+  "local": "/sites/prayag/files/2024-08/103.webp",
+  "from": "backup (sites/default/files/2024-08/103.webp)",
+  "bytes": 49672,
+  "sha256": "4145baba387ae9cba58b5386ab68c1aef637a9cc4298c81f83a6eddb7b0ac4a1",
+  "itemCode": "103",
+  "basis": "file name equals the item code; picture shows the product type; byte-identical to the backup; used by this draft only (approved 2026-10-29)"
+ },
+ "https://prayagindia.com/sites/default/files/2024-08/106.webp": {
+  "local": "/sites/prayag/files/2024-08/106.webp",
+  "from": "backup (sites/default/files/2024-08/106.webp)",
+  "bytes": 26884,
+  "sha256": "df2004a8ec8c579374ef432352e4854215374460560b35abb9392c87224d8ed9",
+  "itemCode": "106",
+  "basis": "file name equals the item code; picture shows the product type; byte-identical to the backup; used by this draft only (approved 2026-10-29)"
+ },
+ "https://prayagindia.com/sites/default/files/2024-08/112.webp": {
+  "local": "/sites/prayag/files/2024-08/112.webp",
+  "from": "backup (sites/default/files/2024-08/112.webp)",
+  "bytes": 49018,
+  "sha256": "8989d32b370faf491fabb4fbcb6d15dc2fd1fef917a605e41919a1cdc41c7460",
+  "itemCode": "112",
+  "basis": "file name equals the item code; picture shows the product type; byte-identical to the backup; used by this draft only (approved 2026-10-29)"
+ },
+ "https://prayagindia.com/sites/default/files/2024-08/190.webp": {
+  "local": "/sites/prayag/files/2024-08/190.webp",
+  "from": "backup (sites/default/files/2024-08/190.webp)",
+  "bytes": 28314,
+  "sha256": "8bc1b79f620228229bd853f767fb0eba39b0438fa42513198847ba69f0836789",
+  "itemCode": "190",
+  "basis": "file name equals the item code; picture shows the product type; byte-identical to the backup; used by this draft only (approved 2026-10-29)"
+ },
+ "https://prayagindia.com/sites/default/files/2024-08/1961.webp": {
+  "local": "/sites/prayag/files/2024-08/1961.webp",
+  "from": "backup (sites/default/files/2024-08/1961.webp)",
+  "bytes": 44118,
+  "sha256": "2dd71c38bb056f57eeb9d6073f14ebf01bcee760b017dc772caad696ba37b194",
+  "itemCode": "1961",
+  "basis": "file name equals the item code; picture shows the product type; byte-identical to the backup; used by this draft only (approved 2026-10-29)"
+ },
+ "https://prayagindia.com/sites/default/files/2024-08/200.webp": {
+  "local": "/sites/prayag/files/2024-08/200.webp",
+  "from": "backup (sites/default/files/2024-08/200.webp)",
+  "bytes": 15934,
+  "sha256": "198f0ae327c3137024940b778ac964fc7c8786d99d929cde4aa8d7214f88c893",
+  "itemCode": "200",
+  "basis": "file name equals the item code; picture shows the product type; byte-identical to the backup; used by this draft only (approved 2026-10-29)"
+ },
+ "https://prayagindia.com/sites/default/files/2024-08/493-W.webp": {
+  "local": "/sites/prayag/files/2024-08/493-W.webp",
+  "from": "backup (sites/default/files/2024-08/493-W.webp)",
+  "bytes": 28566,
+  "sha256": "5073c4a34062dec7556b49ed4749045afbe93c32cb040e1f9b81ecdde2b718b7",
+  "itemCode": "493-W",
+  "basis": "file name equals the item code; picture shows the product type; byte-identical to the backup; used by this draft only (approved 2026-10-29)"
+ },
+ "https://prayagindia.com/sites/default/files/2024-07/8518.webp": {
+  "local": "/sites/prayag/files/2024-07/8518.webp",
+  "from": "backup (sites/default/files/2024-07/8518.webp)",
+  "bytes": 59046,
+  "sha256": "39ad4575d2f50f12f35993d01b15857d395bc52b4d7cc94b070bfcdf855eb22d",
+  "itemCode": "8518",
+  "basis": "file name equals the item code; picture shows the product type; byte-identical to the backup; used by this draft only (approved 2026-10-29)"
+ }
+}
