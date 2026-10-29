@@ -145,12 +145,21 @@ def base(capture, dst):
 
 /*
  * Not from the source: undo Tailwind's global preflight/utilities inside these pages. They live
- * in cascade layers, so this unlayered zero-specificity rule beats them and loses to every ported
- * source rule, leaving browser defaults + source CSS as on prayagindia.com (inline img/svg, UA
- * button colour, and class names like `relative`/`z-1` that are Tailwind utilities here).
+ * in cascade layers, so these unlayered zero-specificity rules beat them and lose to every ported
+ * source rule, leaving browser defaults + source CSS as on prayagindia.com (UA button colour, and
+ * class names like `relative`/`z-1` that are Tailwind utilities here).
+ * SVG content and replaced elements are excluded from `all: revert`: their attributes (`d`, `fill`,
+ * `stroke`, `r`, `cx`, `width`, `height`…) are presentation hints in the author origin, which
+ * `revert` discards — it emptied every inline icon. For those, only the properties preflight sets
+ * (display: block, vertical-align: middle, max-width: 100%) are reverted.
  */
-:where(.pcat, .pcat *) {
+:where(.pcat, .pcat :not(svg, svg *, img, video, canvas, audio, iframe, embed, object)) {
   all: revert;
+}
+:where(.pcat) :where(svg, img, video, canvas, audio, iframe, embed, object) {
+  display: revert;
+  vertical-align: revert;
+  max-width: revert;
 }
 """
     open(dst, "w").write(header + emit(keep, ".pcat"))
