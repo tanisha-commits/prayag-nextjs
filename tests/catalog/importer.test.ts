@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { describe, expect, it } from "vitest";
-import { applyChangeSet, categoryIdByTid, categoryParents, loadCurrent, recordPreview, seedCategories, seedLiveProducts } from "@/lib/catalog/importer";
+import { applyChangeSet, assertMatchesPreview, categoryIdByTid, categoryParents, loadCurrent, recordPreview, seedCategories, seedLiveProducts } from "@/lib/catalog/importer";
 import { liveAssignments, type LiveProduct } from "@/lib/catalog/live";
 import { draftMappings } from "@/lib/catalog/mapping";
 import { listProducts } from "@/lib/catalog/queries";
@@ -56,7 +56,8 @@ describe("import", () => {
     const again = reconcile(records, loadCurrent(db), maps(), categoryParents(db));
     expect(again.counts.category ?? 0).toBe(0);
     expect(again.counts.new ?? 0).toBe(0);
-    applyChangeSet(db, cs, recordPreview(db, cs, "test", "hash", "test"), "test", new Set());
+    // Re-applying the same change set is refused inside the transaction; nothing is written.
+    expect(() => applyChangeSet(db, cs, recordPreview(db, cs, "test", "hash", "test"), "test", new Set())).toThrow(/apply aborted/);
     expect(db.select().from(products).where(eq(products.itemCode, "9999")).all()).toHaveLength(1);
   });
 });
@@ -91,5 +92,36 @@ describe("label normalisation", () => {
     const records = [rec({ tab: "CP", row: 2, code: "1", type: "bib  cock" }), rec({ tab: "CP", row: 3, code: "2", type: "Wall mixer" }), rec({ tab: "CP", row: 4, code: "3", type: "SPOUT" })];
     const maps = draftMappings(records, taxonomy, [{ tab: "CP", field: "type", label: "*", decision: "accept" }], () => undefined, { type: ["Bib Cock"] });
     expect(maps.filter((m) => m.field === "type").map((m) => m.attribute?.value)).toEqual(["Bib Cock", "Wall mixer", "Spout"]);
+  });
+});
+
+describe("apply safeguards", () => {
+  it("rolls everything back when a change would move a product to an unrelated category", () => {
+    const { db } = seeded();
+    const current = loadCurrent(db);
+    const target = current.find((x) => x.itemCode === "6102-RG")!;
+    const other = current.find((x) => x.itemCode === "123-U")!;
+    const before = JSON.stringify(loadCurrent(db));
+    const shower = categoryIdByTid(db)(163)!; // PTMT › Shower: not inside CP Faucets
+    const tampered = {
+      changes: [
+        { action: "category" as const, rec: rec({ tab: "CP", row: 9, code: "123-U" }), product: other, match: "code" as const, set: { attributes: [{ key: "series", value: "Vignette" }] }, contentDiffs: [], pending: [] },
+        { action: "category" as const, rec: rec({ tab: "CP", row: 2, code: "6102-RG" }), product: target, match: "code" as const, set: { categoryIds: [shower] }, contentDiffs: [], pending: [] },
+      ],
+      untouched: [],
+      counts: { category: 2 },
+    };
+    expect(() => applyChangeSet(db, tampered, recordPreview(db, tampered, "t", "h", "t"), "t", new Set())).toThrow(/moved outside its live category/);
+    expect(JSON.stringify(loadCurrent(db))).toBe(before); // the valid first change was rolled back too
+  });
+
+  it("refuses a change set that differs from the stored preview", () => {
+    const { db } = seeded();
+    const records = [rec({ tab: "CP", row: 3, code: "9999", category: "CP Faucets", type: "Sink Mixer" })];
+    const cs = reconcile(records, loadCurrent(db), draftMappings(records, taxonomy, [], categoryIdByTid(db)), categoryParents(db));
+    const runId = recordPreview(db, cs, "t", "h", "t");
+    expect(() => assertMatchesPreview(db, runId, cs)).not.toThrow();
+    const changed = { ...cs, changes: cs.changes.map((c) => (c.action === "new" ? { ...c, attributes: [] } : c)) };
+    expect(() => assertMatchesPreview(db, runId, changed)).toThrow(/differs from preview/);
   });
 });

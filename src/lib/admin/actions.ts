@@ -10,7 +10,7 @@ import { z } from "zod";
 import { prepareReconciliation } from "@/lib/admin/import-run";
 import { applyCategorySuggestion, runCatalogChecks } from "@/lib/ai/assistant";
 import { AuthError, requireAdmin } from "@/lib/auth/server";
-import { applyChangeSet, recordPreview } from "@/lib/catalog/importer";
+import { applyChangeSet, assertMatchesPreview, recordPreview } from "@/lib/catalog/importer";
 import { codeKey, slugify } from "@/lib/catalog/normalize";
 import { reservedSlugs } from "@/lib/catalog/reserved";
 import { writeReport } from "@/lib/catalog/report";
@@ -245,8 +245,11 @@ export async function applyImport(_prev: ActionState, form: FormData): Promise<A
   const prep = prepareReconciliation(db);
   if (!prep.ok) return { ok: false, message: prep.message };
   if (prep.hash !== run.sourceHash) return { ok: false, message: "The source or the approved mappings changed since this preview. Run a new preview." };
-  for (const k of ["category", "new"])
-    if ((prep.cs.counts[k] ?? 0) !== (run.summary[k] ?? 0)) return { ok: false, message: "The catalog changed since this preview. Run a new preview." };
+  try {
+    assertMatchesPreview(db, runId, prep.cs);
+  } catch (e) {
+    return { ok: false, message: `${(e as Error).message}. Run a new preview.` };
+  }
   const backups = path.join(/* turbopackIgnore: true */ process.cwd(), "data/backups");
   fs.mkdirSync(backups, { recursive: true });
   const backupPath = path.join(backups, `prayag-before-run-${runId}-${Date.now()}.db`);
@@ -255,7 +258,12 @@ export async function applyImport(_prev: ActionState, form: FormData): Promise<A
   await conn.sqlite.backup(backupPath);
   conn.sqlite.close();
   db.update(importRuns).set({ backupPath }).where(eq(importRuns.id, runId)).run();
-  const result = applyChangeSet(db, prep.cs, runId, g.actor, reservedSlugs(prep.taxonomy));
+  let result: { categoryUpdates: number; newProducts: number };
+  try {
+    result = applyChangeSet(db, prep.cs, runId, g.actor, reservedSlugs(prep.taxonomy));
+  } catch (e) {
+    return { ok: false, message: `${(e as Error).message} (backup ${path.basename(backupPath)})` };
+  }
   revalidatePath("/", "layout");
   return { ok: true, message: `Applied: ${result.categoryUpdates} mapping update(s), ${result.newProducts} new draft product(s). Backup: ${path.basename(backupPath)}` };
 }

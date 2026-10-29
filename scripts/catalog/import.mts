@@ -9,7 +9,7 @@ import { eq } from "drizzle-orm";
 import { migrateDb, openDb } from "../../src/lib/db/client";
 import { importRuns } from "../../src/lib/db/schema";
 import { prepareReconciliation } from "../../src/lib/admin/import-run";
-import { applyChangeSet, localiseAssets, recordPreview, seedCategories, seedLiveProducts } from "../../src/lib/catalog/importer";
+import { applyChangeSet, assertMatchesPreview, localiseAssets, recordPreview, seedCategories, seedLiveProducts } from "../../src/lib/catalog/importer";
 import { liveAssignments, type LiveProduct, type Membership } from "../../src/lib/catalog/live";
 import type { Taxonomy } from "../../src/lib/catalog/mapping";
 import { reservedSlugs } from "../../src/lib/catalog/reserved";
@@ -56,7 +56,7 @@ if (cmd === "seed") {
   if (!run || run.status !== "preview") throw new Error(`run ${arg} is not an open preview`);
   const { cs, hash } = prepare();
   if (hash !== run.sourceHash) throw new Error("sources or approved mappings changed since the preview; run preview again");
-  for (const k of ["category", "new"]) if ((cs.counts[k] ?? 0) !== (run.summary[k] ?? 0)) throw new Error(`catalog changed since the preview (${k}); run preview again`);
+  assertMatchesPreview(db, runId, cs); // exact same changes as previewed, or abort
   fs.mkdirSync("data/backups", { recursive: true });
   const backupPath = path.join("data/backups", `prayag-before-run-${runId}-${Date.now()}.db`);
   await sqlite.backup(backupPath);

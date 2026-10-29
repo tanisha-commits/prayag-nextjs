@@ -14,7 +14,7 @@ import {
 import { localAsset } from "./assets";
 import type { LiveAssignment, LiveProduct } from "./live";
 import type { Taxonomy } from "./mapping";
-import { codeKey, slugify, textKey } from "./normalize";
+import { codeKey, slugify, textKey, titleCodeCandidate } from "./normalize";
 import { sanitizeHtml } from "./sanitize";
 import type { ChangeSet, CurrentProduct } from "./reconcile";
 import type { SheetRecord } from "./sheet";
@@ -207,6 +207,113 @@ export function recordPreview(db: Db, cs: ChangeSet, source: string, sourceHash:
   });
 }
 
+/** Canonical form of an applicable change, as stored by recordPreview (for exact preview matching). */
+function changeSignature(action: string, ref: string | null, publicId: string | null, after: unknown) {
+  return `${action}|${ref ?? ""}|${publicId ?? ""}|${JSON.stringify(after ?? null)}`;
+}
+
+/**
+ * Throws unless the recomputed change set is exactly the previewed one: the same rows, products,
+ * actions and resulting categories/attributes for every applicable change, and the same counts.
+ */
+export function assertMatchesPreview(db: Conn, runId: number, cs: ChangeSet) {
+  const run = db.select().from(importRuns).where(eq(importRuns.id, runId)).get();
+  if (!run) throw new Error(`run ${runId} not found`);
+  for (const [k, v] of Object.entries(cs.counts))
+    if ((run.summary[k] ?? 0) !== v) throw new Error(`count "${k}" is ${v} now but ${run.summary[k] ?? 0} in the preview`);
+  const stored = db
+    .select()
+    .from(importChanges)
+    .where(and(eq(importChanges.runId, runId), inArray(importChanges.action, ["category", "new"])))
+    .all()
+    .map((c) => changeSignature(c.action, c.sourceRef, c.productPublicId, c.after))
+    .sort();
+  const now = cs.changes
+    .flatMap((c) =>
+      c.action === "category"
+        ? [changeSignature("category", c.rec.ref, c.product.publicId, c.set)]
+        : c.action === "new"
+          ? [changeSignature("new", c.rec.ref, null, { categoryIds: c.categoryIds, attributes: c.attributes })]
+          : [],
+    )
+    .sort();
+  if (stored.length !== now.length || stored.some((x, i) => x !== now[i]))
+    throw new Error(`the change set differs from preview run ${runId} (${now.filter((x) => !stored.includes(x)).length} changed or new entries)`);
+}
+
+/** Everything an apply must not touch, captured inside the transaction before writing. */
+function snapshot(tx: Conn) {
+  const rows = tx.select().from(products).all();
+  const cats = new Map<number, number[]>();
+  for (const pc of tx.select().from(productCategories).all()) cats.set(pc.productId, [...(cats.get(pc.productId) ?? []), pc.categoryId].sort((a, b) => a - b));
+  const attrs = tx.select().from(productAttributes).all();
+  // updatedAt is the one product column an approved mapping update may touch.
+  return { rows: new Map(rows.map((r) => [r.id, JSON.stringify({ ...r, updatedAt: null })])), cats, attrs: new Set(attrs.map((a) => JSON.stringify(a))), ids: new Set(rows.map((r) => r.id)) };
+}
+
+/**
+ * Validation run inside the apply transaction before it commits; any failure throws, so nothing
+ * is written. Checks counts, untouched fields, category safety, attribute additions only, no
+ * duplicate products and draft status of new products.
+ */
+function validateApply(tx: Conn, before: ReturnType<typeof snapshot>, cs: ChangeSet, result: { categoryUpdates: number; newProducts: number }) {
+  const fail = (m: string) => {
+    throw new Error(`apply aborted, nothing written: ${m}`);
+  };
+  const expected = { category: cs.changes.filter((c) => c.action === "category").length, new: cs.changes.filter((c) => c.action === "new").length };
+  if (result.categoryUpdates !== expected.category) fail(`${result.categoryUpdates} updates applied, ${expected.category} expected`);
+  if (result.newProducts !== expected.new) fail(`${result.newProducts} new products created, ${expected.new} expected`);
+  const after = snapshot(tx);
+  if (after.ids.size !== before.ids.size + expected.new) fail(`product count ${after.ids.size}, expected ${before.ids.size + expected.new}`);
+
+  const parents = categoryParents(tx);
+  const ancestors = (id: number) => {
+    const out = [id];
+    for (let p = parents.get(id); p != null && !out.includes(p); p = parents.get(p)) out.push(p);
+    return out;
+  };
+  const byPublic = new Map(tx.select({ id: products.id, publicId: products.publicId }).from(products).all().map((r) => [r.publicId, r.id]));
+  const catChanges = new Map<number, number[]>();
+  const attrProducts = new Set<number>();
+  for (const c of cs.changes)
+    if (c.action === "category") {
+      const id = byPublic.get(c.product.publicId)!;
+      if (c.set.categoryIds) catChanges.set(id, [...c.set.categoryIds].sort((a, b) => a - b));
+      if (c.set.attributes) attrProducts.add(id);
+    }
+  for (const [id, row] of before.rows) {
+    if (after.rows.get(id) !== row) fail(`product ${id}: fields other than the approved mapping changed`);
+    const was = before.cats.get(id) ?? [];
+    const now = after.cats.get(id) ?? [];
+    const approved = catChanges.get(id);
+    if (!approved) {
+      if (JSON.stringify(was) !== JSON.stringify(now)) fail(`product ${id}: category changed without approval`);
+    } else {
+      if (JSON.stringify(now) !== JSON.stringify(approved)) fail(`product ${id}: categories differ from the preview`);
+      if (was.length && !now.every((n) => was.some((w) => ancestors(n).includes(w)))) fail(`product ${id}: moved outside its live category`);
+    }
+  }
+  for (const a of before.attrs) if (!after.attrs.has(a)) fail("an existing attribute value was changed or removed");
+  const newProductIds = new Set([...after.ids].filter((id) => !before.ids.has(id)));
+  for (const a of after.attrs) {
+    if (before.attrs.has(a)) continue;
+    const row = JSON.parse(a) as { productId: number; key: string };
+    if (newProductIds.has(row.productId)) continue;
+    if (!attrProducts.has(row.productId)) fail(`attribute added to product ${row.productId}, which the preview does not include`);
+    const hadKey = [...before.attrs].some((b) => {
+      const x = JSON.parse(b) as { productId: number; key: string };
+      return x.productId === row.productId && x.key === row.key;
+    });
+    if (hadKey) fail(`product ${row.productId}: existing "${row.key}" value would be extended`);
+  }
+  const all = tx.select({ id: products.id, key: products.itemCodeKey, title: products.title, status: products.status, origin: products.origin }).from(products).all();
+  for (const p of all.filter((x) => newProductIds.has(x.id))) {
+    if (p.status !== "draft" || p.origin !== "sheet") fail(`new product ${p.id} is not a sheet draft`);
+    const clash = all.find((o) => o.id !== p.id && p.key && (o.key === p.key || codeKey(titleCodeCandidate(o.title)) === p.key));
+    if (clash) fail(`new product ${p.key} duplicates existing product ${clash.id} ("${clash.title}")`);
+  }
+}
+
 /**
  * Apply the verified changes of a change set in one transaction: mapping updates (categories +
  * missing mapping attributes only) and new products (as drafts). Review/skip rows are not touched.
@@ -214,6 +321,7 @@ export function recordPreview(db: Db, cs: ChangeSet, source: string, sourceHash:
 export function applyChangeSet(db: Db, cs: ChangeSet, runId: number, actor: string, reserved: Set<string>) {
   const result = { categoryUpdates: 0, newProducts: 0 };
   db.transaction((tx) => {
+    const before = snapshot(tx);
     for (const c of cs.changes) {
       if (c.action === "category") {
         const p = tx.select({ id: products.id }).from(products).where(eq(products.publicId, c.product.publicId)).get();
@@ -260,6 +368,7 @@ export function applyChangeSet(db: Db, cs: ChangeSet, runId: number, actor: stri
         result.newProducts++;
       }
     }
+    validateApply(tx, before, cs, result);
     tx.update(importChanges)
       .set({ applied: true })
       .where(and(eq(importChanges.runId, runId), inArray(importChanges.action, ["category", "new"])))
