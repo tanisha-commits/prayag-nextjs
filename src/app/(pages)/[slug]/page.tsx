@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { ArticleShare } from "@/components/sites/prayag/blog/article-share";
 import "@/components/sites/prayag/blog/article.css";
+import { CatalogRoute, catalogMetadata } from "@/components/sites/prayag/catalog/catalog-route";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { blogIndex, getBlogArticle } from "@/lib/blog";
 
-// Blog articles live at the site root on the source (e.g. /double-bowl-kitchen-sink-price).
-// Only known article slugs are generated; any other root path falls through to the 404 page.
-export const dynamicParams = false;
+// Blog articles live at the site root on the source (e.g. /double-bowl-kitchen-sink-price) and are
+// generated statically. Products (/6102-rg-pillar-cock) and category landings (/faucets) also live
+// at the root; they come from the catalog database and render on demand. Anything else is a 404.
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return blogIndex.map((post) => ({ slug: post.slug }));
@@ -18,7 +19,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const article = await getBlogArticle(slug);
-  if (!article) return {};
+  if (!article) return catalogMetadata(slug);
   const meta = pageMetadata({
     title: article.metaTitle ?? `${article.title} | Prayag`,
     description: article.description ?? undefined,
@@ -28,10 +29,10 @@ export async function generateMetadata({ params }: PageProps<"/[slug]">): Promis
   return { ...meta, openGraph: { ...meta.openGraph, type: "article" } };
 }
 
-export default async function BlogArticlePage({ params }: PageProps<"/[slug]">) {
+export default async function BlogArticlePage({ params, searchParams }: PageProps<"/[slug]">) {
   const { slug } = await params;
   const article = await getBlogArticle(slug);
-  if (!article) notFound();
+  if (!article) return <CatalogRoute path={slug} searchParams={searchParams} />;
 
   const url = `https://prayagindia.com/${article.slug}`;
 

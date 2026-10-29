@@ -52,3 +52,9 @@ temp/
 *.deb
 .env*
 !.env.example
+
+# Product catalog: local database, backups and raw source snapshots (may contain internal sheet remarks)
+/data/*.db
+/data/*.db-*
+/data/backups/
+/data/catalog/

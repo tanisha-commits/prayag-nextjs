@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { catalogSlice } from "./features/catalog-slice";
 import { uiSlice } from "./features/ui-slice";
 
 // A store per request/tab (see StoreProvider) so server renders never share state.
@@ -6,6 +7,7 @@ export function makeStore() {
   return configureStore({
     reducer: {
       ui: uiSlice.reducer,
+      catalog: catalogSlice.reducer,
     },
   });
 }
