@@ -1,0 +1,82 @@
+{
+ "https://prayagindia.com/media/1521": {
+  "local": "/sites/prayag/files/2026-07/image3.webp",
+  "from": "backup (sites/default/files/2026-07/image3.webp, matched to live /media/1521 by size+SHA-256)",
+  "bytes": 838010
+ },
+ "https://prayagindia.com/media/1522": {
+  "local": "/sites/prayag/files/2026-07/image4.2.webp",
+  "from": "backup (sites/default/files/2026-07/image4.2.webp, matched to live /media/1522 by size+SHA-256)",
+  "bytes": 572776
+ },
+ "https://prayagindia.com/media/1523": {
+  "local": "/sites/prayag/files/2026-07/image5.webp",
+  "from": "backup (sites/default/files/2026-07/image5.webp, matched to live /media/1523 by size+SHA-256)",
+  "bytes": 494108
+ },
+ "https://prayagindia.com/media/1524": {
+  "local": "/sites/prayag/files/2026-07/image6.2.webp",
+  "from": "backup (sites/default/files/2026-07/image6.2.webp, matched to live /media/1524 by size+SHA-256)",
+  "bytes": 620836
+ },
+ "https://prayagindia.com/media/1525": {
+  "local": "/sites/prayag/files/2026-07/Superior-Strength-Structural-Integrity.webp",
+  "from": "backup (sites/default/files/2026-07/Superior Strength & Structural Integrity.webp, matched to live /media/1525 by size+SHA-256)",
+  "bytes": 20160
+ },
+ "https://prayagindia.com/media/1526": {
+  "local": "/sites/prayag/files/2026-07/High-Hydraulic-Efficiency.webp",
+  "from": "backup (sites/default/files/2026-07/High Hydraulic Efficiency.webp, matched to live /media/1526 by size+SHA-256)",
+  "bytes": 17046
+ },
+ "https://prayagindia.com/media/1527": {
+  "local": "/sites/prayag/files/2026-07/Built-for-a-25-Year-Service-Life.webp",
+  "from": "backup (sites/default/files/2026-07/Built for a 25-Year Service Life.webp, matched to live /media/1527 by size+SHA-256)",
+  "bytes": 29458
+ },
+ "https://prayagindia.com/media/1528": {
+  "local": "/sites/prayag/files/2026-07/Cost-Effective-Installation.webp",
+  "from": "backup (sites/default/files/2026-07/Cost-Effective Installation.webp, matched to live /media/1528 by size+SHA-256)",
+  "bytes": 29554
+ },
+ "https://prayagindia.com/media/1529": {
+  "local": "/sites/prayag/files/2026-07/Engineered-for-Every-Load.webp",
+  "from": "backup (sites/default/files/2026-07/Engineered for Every Load.webp, matched to live /media/1529 by size+SHA-256)",
+  "bytes": 26056
+ },
+ "https://prayagindia.com/sites/default/files/styles/medium/public/2026-07/UDG%20pipes_BANNER_0.webp?itok=--97xFys": {
+  "local": "/sites/prayag/files/styles/medium/public/2026-07/UDG-pipes_BANNER_0.webp",
+  "from": "backup",
+  "bytes": 10084
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/product_categories/UPVC%20Column%20Pipes/Why%20choose%20icon/Corrosion-Free%20&%20Rust-Proof.webp": {
+  "local": "/sites/prayag/theme/product_categories/UPVC Column Pipes/Why choose icon/Corrosion-Free-Rust-Proof.webp",
+  "from": "backup",
+  "bytes": 6996
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ugd_pipes_fittings/UGD_section_about.webp": {
+  "local": "/sites/prayag/theme/ugd_pipes_fittings/UGD_section_about.webp",
+  "from": "backup",
+  "bytes": 103826
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/upvc_column_pipes/lead%20free_prayag-icon.webp": {
+  "local": "/sites/prayag/theme/upvc_column_pipes/lead-free_prayag-icon.webp",
+  "from": "backup",
+  "bytes": 8674
+ },
+ "https://prayagindia.com/sites/default/files/styles/thumbnail/public/2026-07/UDG%20pipes_BANNER_0.webp?itok=B0Q67Atb": {
+  "local": "/sites/prayag/files/styles/thumbnail/public/2026-07/UDG-pipes_BANNER_0.webp",
+  "from": "backup (srcset candidate)",
+  "bytes": 2352
+ },
+ "https://prayagindia.com/sites/default/files/styles/large/public/2026-07/UDG%20pipes_BANNER_0.webp?itok=3zLYg-Cy": {
+  "local": "/sites/prayag/files/styles/large/public/2026-07/UDG-pipes_BANNER_0.webp",
+  "from": "backup (srcset candidate)",
+  "bytes": 41770
+ },
+ "https://prayagindia.com/sites/default/files/styles/wide/public/2026-07/UDG%20pipes_BANNER_0.webp?itok=84FB30g4": {
+  "local": "/sites/prayag/files/styles/wide/public/2026-07/UDG-pipes_BANNER_0.webp",
+  "from": "backup (srcset candidate)",
+  "bytes": 151878
+ }
+}

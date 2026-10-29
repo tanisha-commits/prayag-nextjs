@@ -1,0 +1,262 @@
+{
+ "https://prayagindia.com/media/1533": {
+  "local": "/sites/prayag/files/2026-08/3-iMAGE-.webp",
+  "from": "backup (matched live /media/1533 by size+SHA-256 to sites/default/files/2026-08/3 iMAGE .webp)",
+  "bytes": 234058
+ },
+ "https://prayagindia.com/media/1534": {
+  "local": "/sites/prayag/files/2026-08/3-layaer-.webp",
+  "from": "backup (matched live /media/1534 by size+SHA-256 to sites/default/files/2026-08/3 layaer .webp)",
+  "bytes": 11900
+ },
+ "https://prayagindia.com/media/1535": {
+  "local": "/sites/prayag/files/2026-08/light-weight.webp",
+  "from": "backup (matched live /media/1535 by size+SHA-256 to sites/default/files/2026-08/light weight.webp)",
+  "bytes": 11068
+ },
+ "https://prayagindia.com/media/1536": {
+  "local": "/sites/prayag/files/2026-08/heat-.webp",
+  "from": "backup (matched live /media/1536 by size+SHA-256 to sites/default/files/2026-08/heat .webp)",
+  "bytes": 9594
+ },
+ "https://prayagindia.com/media/1537": {
+  "local": "/sites/prayag/files/2026-08/long-life-.webp",
+  "from": "backup (matched live /media/1537 by size+SHA-256 to sites/default/files/2026-08/long life .webp)",
+  "bytes": 11520
+ },
+ "https://prayagindia.com/media/1538": {
+  "local": "/sites/prayag/files/2026-08/leak-proof-pipe-.webp",
+  "from": "backup (matched live /media/1538 by size+SHA-256 to sites/default/files/2026-08/leak proof pipe .webp)",
+  "bytes": 6148
+ },
+ "https://prayagindia.com/media/1540": {
+  "local": "/sites/prayag/files/2026-08/validate.webp",
+  "from": "backup (matched live /media/1540 by size+SHA-256 to sites/default/files/2026-08/validate.webp)",
+  "bytes": 8570
+ },
+ "https://prayagindia.com/sites/default/files/styles/medium/public/2026-08/PPR-main-banner.webp?itok=m_fbJyXL": {
+  "local": "/sites/prayag/files/styles/medium/public/2026-08/PPR-main-banner.webp",
+  "from": "backup",
+  "bytes": 9290
+ },
+ "https://prayagindia.com/sites/default/files/styles/thumbnail/public/2026-08/PPR-main-banner.webp?itok=zWkVkXHy": {
+  "local": "/sites/prayag/files/styles/thumbnail/public/2026-08/PPR-main-banner.webp",
+  "from": "backup",
+  "bytes": 2680
+ },
+ "https://prayagindia.com/sites/default/files/styles/large/public/2026-08/PPR-main-banner.webp?itok=i1RMd-OF": {
+  "local": "/sites/prayag/files/styles/large/public/2026-08/PPR-main-banner.webp",
+  "from": "backup",
+  "bytes": 33452
+ },
+ "https://prayagindia.com/sites/default/files/styles/wide/public/2026-08/PPR-main-banner.webp?itok=PuBVMOXp": {
+  "local": "/sites/prayag/files/styles/wide/public/2026-08/PPR-main-banner.webp",
+  "from": "backup",
+  "bytes": 127118
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Coupler.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Coupler.webp",
+  "from": "backup",
+  "bytes": 31442
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Elbow%2090.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Elbow-90.webp",
+  "from": "backup",
+  "bytes": 26120
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Equal%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Equal-Tee.webp",
+  "from": "backup",
+  "bytes": 23930
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Female%20Threaded%20Coupler.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Female-Threaded-Coupler.webp",
+  "from": "backup",
+  "bytes": 51132
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Female%20Threaded%20Elbow%20900.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Female-Threaded-Elbow-900.webp",
+  "from": "backup",
+  "bytes": 39248
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Female%20Threaded%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Female-Threaded-Tee.webp",
+  "from": "backup",
+  "bytes": 31018
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Male%20Threaded%20Coupler.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Male-Threaded-Coupler.webp",
+  "from": "backup",
+  "bytes": 42836
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Male%20Threaded%20Elbow%20900.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Male-Threaded-Elbow-900.webp",
+  "from": "backup",
+  "bytes": 43378
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Male%20Threaded%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Male-Threaded-Tee.webp",
+  "from": "backup",
+  "bytes": 38024
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Reducer%20Coupling.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Reducer-Coupling.webp",
+  "from": "backup",
+  "bytes": 29426
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Reducer%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Reducer-Tee.webp",
+  "from": "backup",
+  "bytes": 26214
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Blue/Union.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Blue/Union.webp",
+  "from": "backup",
+  "bytes": 34268
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Coupler.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Coupler.webp",
+  "from": "backup",
+  "bytes": 27512
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Elbow%2090.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Elbow-90.webp",
+  "from": "backup",
+  "bytes": 22814
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Equal%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Equal-Tee.webp",
+  "from": "backup",
+  "bytes": 21682
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Female%20Threaded%20Coupler.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Female-Threaded-Coupler.webp",
+  "from": "backup",
+  "bytes": 37602
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Female%20Threaded%20Elbow%2090.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Female-Threaded-Elbow-90.webp",
+  "from": "backup",
+  "bytes": 35464
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Female%20Threaded%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Female-Threaded-Tee.webp",
+  "from": "backup",
+  "bytes": 28374
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Male%20Threaded%20Coupler.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Male-Threaded-Coupler.webp",
+  "from": "backup",
+  "bytes": 59722
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Male%20Threaded%20Elbow%2090.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Male-Threaded-Elbow-90.webp",
+  "from": "backup",
+  "bytes": 39118
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Male%20Threaded%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Male-Threaded-Tee.webp",
+  "from": "backup",
+  "bytes": 34304
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Reducer%20Coupling.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Reducer-Coupling.webp",
+  "from": "backup",
+  "bytes": 26642
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Reducer%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Reducer-Tee.webp",
+  "from": "backup",
+  "bytes": 21778
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Green/Union.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Green/Union.webp",
+  "from": "backup",
+  "bytes": 32064
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/Versatile_icon.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/Versatile_icon.webp",
+  "from": "backup",
+  "bytes": 13916
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Coupler.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Coupler.webp",
+  "from": "backup",
+  "bytes": 16172
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Elbow%2090.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Elbow-90.webp",
+  "from": "backup",
+  "bytes": 15410
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Equal%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Equal-Tee.webp",
+  "from": "backup",
+  "bytes": 13942
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Female%20Threaded%20Coupler.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Female-Threaded-Coupler.webp",
+  "from": "backup",
+  "bytes": 26372
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Female%20Threaded%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Female-Threaded-Tee.webp",
+  "from": "backup",
+  "bytes": 21258
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Female%20Threaded%20elbow%20900.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Female-Threaded-elbow-900.webp",
+  "from": "backup",
+  "bytes": 27006
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Male%20Threaded%20Coupler.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Male-Threaded-Coupler.webp",
+  "from": "backup",
+  "bytes": 26660
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Male%20Threaded%20Elbow%20900.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Male-Threaded-Elbow-900.webp",
+  "from": "backup",
+  "bytes": 33510
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Male%20Threaded%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Male-Threaded-Tee.webp",
+  "from": "backup",
+  "bytes": 29302
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Reducer%20Coupling.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Reducer-Coupling.webp",
+  "from": "backup",
+  "bytes": 15336
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Reducer%20Tee.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Reducer-Tee.webp",
+  "from": "backup",
+  "bytes": 15096
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/White/Union.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/White/Union.webp",
+  "from": "backup",
+  "bytes": 19120
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/image%204.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/image-4.webp",
+  "from": "backup",
+  "bytes": 199220
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/image%205.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/image-5.webp",
+  "from": "backup",
+  "bytes": 386486
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/ppr-pipes/prayag-advantage-new.webp": {
+  "local": "/sites/prayag/theme/ppr-pipes/prayag-advantage-new.webp",
+  "from": "backup",
+  "bytes": 239276
+ },
+ "https://prayagindia.com/themes/custom/prayag/assets/images/unmatched-new-image.webp": {
+  "local": "/sites/prayag/theme/unmatched-new-image.webp",
+  "from": "backup",
+  "bytes": 161678
+ }
+}

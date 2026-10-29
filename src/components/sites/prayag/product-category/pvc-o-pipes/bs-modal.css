@@ -1,0 +1,24 @@
+/*
+ * Bootstrap 5.1.3 modal rules the generated pcat-base.css cannot contain: they only match the
+ * open state (`.modal.show`) or the backdrop Bootstrap appends to <body>, neither of which was in
+ * the DOM when the base was extracted. Values copied from the source theme's bootstrap.min.css;
+ * the backdrop is rendered next to the modal inside `.pcat`, hence the scope.
+ */
+.pcat .modal.show .modal-dialog {
+  transform: none;
+}
+.pcat .modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+}
+.pcat .modal-backdrop.fade {
+  opacity: 0;
+}
+.pcat .modal-backdrop.show {
+  opacity: 0.5;
+}

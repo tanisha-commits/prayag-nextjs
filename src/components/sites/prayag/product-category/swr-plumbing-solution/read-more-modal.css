@@ -1,0 +1,34 @@
+/*
+ * Bootstrap 5 modal states that swr-plumbing-solution.css / pcat-base.css cannot contain (they were
+ * generated from rules matching the page as loaded, with the modal closed), adapted to the <dialog>
+ * the modal is rebuilt on: reset the UA dialog box so `.modal` (fixed, full-viewport) applies,
+ * `.modal-backdrop.fade.show` (#000 at 0.5) as ::backdrop, and `.modal.show .modal-dialog`.
+ */
+.pcat-swr-plumbing-solution dialog.modal {
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+.pcat-swr-plumbing-solution dialog.modal[open] {
+  display: block;
+}
+.pcat-swr-plumbing-solution dialog.modal::backdrop {
+  background-color: #000;
+  opacity: 0;
+  transition: opacity 0.15s linear;
+}
+.pcat-swr-plumbing-solution dialog.modal.show::backdrop {
+  opacity: 0.5;
+}
+.pcat-swr-plumbing-solution dialog.modal.show .modal-dialog {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pcat-swr-plumbing-solution dialog.modal::backdrop {
+    transition: none;
+  }
+}

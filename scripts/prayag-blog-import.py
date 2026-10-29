@@ -34,6 +34,9 @@ LOCAL_PAGES = {
     "dealership-enquiry", "contact-us", "blog", "warranty-policy",
     "press-coverages", "product-video", "video-tv-advertisement", "feedback-videos",
     "download-cataglogue", "faq", "privacy-policy",
+    "plumbing-solutions", "hdpe", "agritech", "swr-plumbing-solution", "cpvc-plumbing-solution",
+    "casing-pipes", "composite-pipes", "ugd-pipes-fittings", "upvc-column-pipes", "ppr-pipes",
+    "pvc-o-pipes", "prayag-ka-bablu-plumbers-loyalty-program",
 }
 
 asset_map = {}

@@ -19,7 +19,7 @@ export interface MegaMenu {
 }
 
 export const productCategories: NavLink[] = [
-  { label: "Plumbing Solutions", href: `${SOURCE}/plumbing-solutions` },
+  { label: "Plumbing Solutions", href: "/plumbing-solutions" },
   { label: "CP Faucets", href: `${SOURCE}/faucets` },
   { label: "PTMT", href: `${SOURCE}/ptmt-taps` },
   { label: "CeramicWare", href: `${SOURCE}/ceramicware` },
@@ -86,16 +86,17 @@ export const megaMenus: (MegaMenu | NavLink)[] = [
 export const searchHref = `${SOURCE}/search/node?keys=products`;
 
 export const plumbingSubcategories: NavLink[] = [
-  { label: "HDPE", href: `${SOURCE}/hdpe` },
-  { label: "Agritec", href: `${SOURCE}/agritech` },
-  { label: "SWR Pipe", href: `${SOURCE}/swr-plumbing-solution` },
-  { label: "CPVC Pipes", href: `${SOURCE}/cpvc-plumbing-solution` },
-  { label: "Casing Pipes", href: `${SOURCE}/casing-pipes` },
-  { label: "Composite Pipes", href: `${SOURCE}/composite-pipes` },
-  { label: "UGD Pipes & Fittings", href: `${SOURCE}/ugd-pipes-fittings` },
-  { label: "uPVC Column Pipes", href: `${SOURCE}/upvc-column-pipes` },
-  { label: "PPR Pipes", href: `${SOURCE}/ppr-pipes` },
-  { label: "PVC-O Pipes", href: `${SOURCE}/PVC-O%20Pipes` },
+  { label: "HDPE", href: "/hdpe" },
+  { label: "Agritec", href: "/agritech" },
+  { label: "SWR Pipe", href: "/swr-plumbing-solution" },
+  { label: "CPVC Pipes", href: "/cpvc-plumbing-solution" },
+  { label: "Casing Pipes", href: "/casing-pipes" },
+  { label: "Composite Pipes", href: "/composite-pipes" },
+  { label: "UGD Pipes & Fittings", href: "/ugd-pipes-fittings" },
+  { label: "uPVC Column Pipes", href: "/upvc-column-pipes" },
+  { label: "PPR Pipes", href: "/ppr-pipes" },
+  // Source links "/PVC-O%20Pipes", which the live site redirects to /pvc-o-pipes.
+  { label: "PVC-O Pipes", href: "/pvc-o-pipes" },
 ];
 
 export const panelQuickLinks: NavLink[] = [
@@ -302,7 +303,7 @@ export const pageLinks = {
   manufacturing: "/manufacturing-process",
   contact: "/contact-us",
   blog: "/blog",
-  hdpe: `${SOURCE}/hdpe`,
-  bablu: `${SOURCE}/prayag-ka-bablu-plumbers-loyalty-program`,
+  hdpe: "/hdpe",
+  bablu: "/prayag-ka-bablu-plumbers-loyalty-program",
   developer: "https://abacusdesk.co.in/",
 };
