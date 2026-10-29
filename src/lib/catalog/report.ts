@@ -40,6 +40,7 @@ export function writeReport(
     ["unchanged", "Matched, mapping already correct (nothing to change)"],
     ["new", "New products ready to add (as drafts)"],
     ["pending", "Waiting only for a label decision (see the label table)"],
+    ["variant", "Colour codes already covered by an existing product (no new product)"],
     ["review", "Need your review (identity doubts / conflicts / no category)"],
     ["skip", "Skipped (no identity, or a duplicate row with the same mapping)"],
     ["untouched", "Existing products not in the sheet (kept exactly as they are)"],
@@ -81,6 +82,25 @@ export function writeReport(
   for (const x of pendingRows) for (const p of x.pending) pendingBy.set(`${x.rec.tab}: ${p.replace(/ \(suggested.*\)$/, "")}`, (pendingBy.get(`${x.rec.tab}: ${p.replace(/ \(suggested.*\)$/, "")}`) ?? 0) + 1);
   L.push(`## Waiting for label decisions (${pendingRows.length} rows)`, "", "These rows change nothing until the labels below are decided. Most frequent labels:", "");
   for (const [k, n] of [...pendingBy].sort((a, b) => b[1] - a[1]).slice(0, 40)) L.push(`- ${esc(k)} — ${n} row(s)`);
+  L.push("");
+
+  const held = by("review").filter((r) => r.reasons[0].startsWith("held: the sheet gives no product name"));
+  L.push(`## Held — product names missing (${held.length})`, "", "Not imported: the sheet gives only a code. Codes and highlights are kept here for naming.", "", "| Sheet row | Code | Highlights |", "|---|---|---|");
+  for (const h of held) L.push(`| ${h.rec.ref} | ${h.rec.code} | ${esc(h.rec.highlights.join("; ")) || "—"} |`);
+  L.push("");
+
+  const skippedMaps = mappings.filter((m) => m.basis === "skipped");
+  L.push(`## Skipped by decision (${skippedMaps.length} labels)`, "", "Ignored on purpose (live values kept); listed for later review.", "", "| Tab | Column | Sheet value | Rows |", "|---|---|---|---|");
+  for (const m of skippedMaps) L.push(`| ${m.tab} | ${m.field} | ${esc(m.label)} | ${rowsPerLabel.get(`${m.tab}|${m.field}|${m.label.toLowerCase()}`) ?? ""} |`);
+  L.push("");
+
+  const normalised = mappings.filter((m) => m.basis === "approved" && m.attribute && m.attribute.value !== m.label);
+  L.push(`## Normalised values (${normalised.length})`, "", "Sheet spelling -> value that will be stored (audit of every normalisation).", "", "| Tab | Column | Sheet value | Stored as | Rows |", "|---|---|---|---|---|");
+  for (const m of normalised) L.push(`| ${m.tab} | ${m.field} | ${esc(m.label)} | ${esc(m.attribute!.value)} | ${rowsPerLabel.get(`${m.tab}|${m.field}|${m.label.toLowerCase()}`) ?? ""} |`);
+  L.push("");
+
+  L.push(`## Colour codes covered by existing products (${by("variant").length})`, "", "| Sheet row | Code | Existing product | Why |", "|---|---|---|---|");
+  for (const v of by("variant")) L.push(`| ${v.rec.ref} | ${v.rec.code} | ${esc(v.product.title)} | ${esc(v.reasons.join("; "))} |`);
   L.push("");
 
   L.push(`## Skipped (${by("skip").length})`, "", "| Sheet row | Reason |", "|---|---|");

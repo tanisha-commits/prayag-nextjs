@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { describe, expect, it } from "vitest";
-import { applyChangeSet, categoryIdByTid, loadCurrent, recordPreview, seedCategories, seedLiveProducts } from "@/lib/catalog/importer";
+import { applyChangeSet, categoryIdByTid, categoryParents, loadCurrent, recordPreview, seedCategories, seedLiveProducts } from "@/lib/catalog/importer";
 import { liveAssignments, type LiveProduct } from "@/lib/catalog/live";
 import { draftMappings } from "@/lib/catalog/mapping";
 import { listProducts } from "@/lib/catalog/queries";
@@ -16,8 +16,8 @@ const live = (nid: number, path: string, code: string, crumb: string, colours: s
 function seeded() {
   const { db } = memoryDb();
   seedCategories(db, taxonomy);
-  const items = [live(1, "/ba-45", "BA-45", "CP Faucets", ["Chrome"]), live(2, "/6102-rg", "6102-RG", "CP Faucets", ["Gold", "Chrome"]), live(3, "/123-u", "123-U", "Shower")];
-  const membership = { faucets: { all: ["/ba-45", "/6102-rg"], filters: {} }, "ptmt-taps": { all: ["/123-u"], filters: {} } };
+  const items = [live(1, "/ba-45", "BA-45", "Bathroom Accessories", ["Chrome"]), live(2, "/6102-rg", "6102-RG", "CP Faucets", ["Gold", "Chrome"]), live(3, "/123-u", "123-U", "Shower")];
+  const membership = { "bathroom-accessories": { all: ["/ba-45"], filters: {} }, faucets: { all: ["/6102-rg"], filters: {} }, "ptmt-taps": { all: ["/123-u"], filters: {} } };
   seedLiveProducts(db, items, liveAssignments(items, membership, taxonomy));
   return { db, items, membership };
 }
@@ -33,12 +33,13 @@ describe("import", () => {
     expect(shower.categoryIds).toEqual([categoryIdByTid(db)(163)]);
   });
 
-  it("applies a category-only change without touching any other product field, and is idempotent", () => {
+  it("applies a category-only refinement without touching any other product field, and is idempotent", () => {
     const { db } = seeded();
     const before = db.select().from(products).where(eq(products.itemCode, "BA-45")).get()!;
-    const records = [rec({ tab: "CP", row: 2, code: "BA-45", category: "Bathroom Accessories", description: "sheet text" }), rec({ tab: "CP", row: 3, code: "9999", category: "CP Faucets", type: "Sink Mixer" })];
+    // Live: Bathroom Accessories; sheet: its "Accessories" subcategory (a refinement, so it applies).
+    const records = [rec({ tab: "CP", row: 2, code: "BA-45", category: "Accessories", description: "sheet text" }), rec({ tab: "CP", row: 3, code: "9999", category: "CP Faucets", type: "Sink Mixer" })];
     const maps = () => draftMappings(records, taxonomy, [], categoryIdByTid(db));
-    const cs = reconcile(records, loadCurrent(db), maps());
+    const cs = reconcile(records, loadCurrent(db), maps(), categoryParents(db));
     expect(cs.counts).toMatchObject({ category: 1, new: 1 });
     const runId = recordPreview(db, cs, "test", "hash", "test");
     applyChangeSet(db, cs, runId, "test", new Set());
@@ -46,13 +47,13 @@ describe("import", () => {
     const after = db.select().from(products).where(eq(products.itemCode, "BA-45")).get()!;
     // name, description, SEO, slug, status, publicId… all unchanged (only updatedAt moves)
     expect({ ...after, updatedAt: null }).toEqual({ ...before, updatedAt: null });
-    expect(db.select().from(productCategories).where(eq(productCategories.productId, after.id)).all().map((c) => c.categoryId)).toEqual([categoryIdByTid(db)(170)]);
+    expect(db.select().from(productCategories).where(eq(productCategories.productId, after.id)).all().map((c) => c.categoryId)).toEqual([categoryIdByTid(db)(172)]);
 
     const added = db.select().from(products).where(eq(products.itemCode, "9999")).get()!;
     expect(added).toMatchObject({ status: "draft", origin: "sheet", title: "9999 Sink Mixer" });
 
     // Running the same source again finds nothing left to do and creates no duplicates.
-    const again = reconcile(records, loadCurrent(db), maps());
+    const again = reconcile(records, loadCurrent(db), maps(), categoryParents(db));
     expect(again.counts.category ?? 0).toBe(0);
     expect(again.counts.new ?? 0).toBe(0);
     applyChangeSet(db, cs, recordPreview(db, cs, "test", "hash", "test"), "test", new Set());
@@ -63,10 +64,10 @@ describe("import", () => {
 describe("filters", () => {
   it("combines filters (OR within a key, AND across keys) and counts facets against the other filters", () => {
     const { db } = seeded();
-    const all = listProducts(db, { category: "faucets" });
-    expect(all.total).toBe(2);
-    expect(listProducts(db, { category: "faucets", filters: { colour: ["gold"] } }).items.map((i) => i.itemCode)).toEqual(["6102-RG"]);
-    expect(listProducts(db, { category: "faucets", filters: { colour: ["gold", "chrome"] } }).total).toBe(2);
+    expect(listProducts(db, { category: "faucets" }).total).toBe(1);
+    expect(listProducts(db, { filters: { colour: ["gold"] }, q: "" , category: "faucets" }).items.map((i) => i.itemCode)).toEqual(["6102-RG"]);
+    // OR within one key: gold OR chrome across all products (search scope).
+    expect(listProducts(db, { q: "-", filters: { colour: ["gold", "chrome"] } }).total).toBe(2);
     const id = db.select().from(products).where(eq(products.itemCode, "6102-RG")).get()!.id;
     db.insert(productAttributes).values({ productId: id, key: "series", value: "Vignette", valueSlug: "vignette", source: "test" }).run();
     const r = listProducts(db, { category: "faucets", filters: { colour: ["chrome"], series: ["vignette"] } });
@@ -82,5 +83,13 @@ describe("filters", () => {
     expect(listProducts(db, { category: "ptmt-taps" }).total).toBe(0);
     expect(listProducts(db, { category: "ptmt-taps", includeUnpublished: true }).total).toBe(1);
     expect(listProducts(db, { category: "no-such-category" }).total).toBe(0);
+  });
+});
+
+describe("label normalisation", () => {
+  it("accepts a whole column with existing spellings and no duplicate equivalents", () => {
+    const records = [rec({ tab: "CP", row: 2, code: "1", type: "bib  cock" }), rec({ tab: "CP", row: 3, code: "2", type: "Wall mixer" }), rec({ tab: "CP", row: 4, code: "3", type: "SPOUT" })];
+    const maps = draftMappings(records, taxonomy, [{ tab: "CP", field: "type", label: "*", decision: "accept" }], () => undefined, { type: ["Bib Cock"] });
+    expect(maps.filter((m) => m.field === "type").map((m) => m.attribute?.value)).toEqual(["Bib Cock", "Wall mixer", "Spout"]);
   });
 });

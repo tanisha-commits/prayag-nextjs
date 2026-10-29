@@ -1,4 +1,4 @@
-import { codeKey, textKey, titleCodeCandidate } from "./normalize";
+import { codeKey, textKey, titleCodeCandidate, variantBaseKey } from "./normalize";
 import type { SheetRecord } from "./sheet";
 
 /**
@@ -37,18 +37,22 @@ export interface LabelMapping {
   /**
    * exact = label equals an existing taxonomy term; approved = an admin confirmed it; new-value = an
    * attribute column the live site has no taxonomy for (the sheet value fills an empty attribute,
-   * never a category). suggested / unmapped are held back until an admin decides.
+   * never a category). skipped = an admin decided to ignore this label/column (live value kept, field
+   * not pending). suggested / unmapped are held back until an admin decides.
    */
-  basis: "exact" | "approved" | "new-value" | "suggested" | "unmapped";
+  basis: "exact" | "approved" | "new-value" | "skipped" | "suggested" | "unmapped";
   note?: string;
 }
 
-export type MatchKind = "code" | "title-code" | "name";
+/** title-code+ = code only in the live title, confirmed by the sheet's type/name/collection in that title. */
+export type MatchKind = "code" | "title-code" | "title-code+" | "name";
 
 export type Change =
   | { action: "new"; rec: SheetRecord; categoryIds: number[]; attributes: { key: string; value: string }[] }
   | { action: "category"; rec: SheetRecord; product: CurrentProduct; match: MatchKind; set: { categoryIds?: number[]; attributes?: { key: string; value: string }[] }; contentDiffs: string[]; pending: string[] }
   | { action: "unchanged"; rec: SheetRecord; product: CurrentProduct; match: MatchKind; contentDiffs: string[] }
+  /** A colour-suffixed code whose colour the existing product already lists: nothing to add. */
+  | { action: "variant"; rec: SheetRecord; product: CurrentProduct; reasons: string[] }
   /** Nothing applicable yet: waiting for label decisions (see the report's label table). */
   | { action: "pending"; rec: SheetRecord; product?: CurrentProduct; match?: MatchKind; pending: string[] }
   | { action: "review"; rec: SheetRecord; product?: CurrentProduct; candidates?: CurrentProduct[]; match?: MatchKind; reasons: string[] }
@@ -94,6 +98,7 @@ function resolveMapping(rec: SheetRecord, maps: Map<string, LabelMapping>) {
     const label = rec[field];
     if (!label) continue;
     const m = maps.get(mappingKey(rec.tab, field, label));
+    if (m?.basis === "skipped") continue; // ignored by decision; listed in the report
     if (!m || m.basis === "unmapped" || m.basis === "suggested") {
       pending.push(`${field} "${label}"${m?.basis === "suggested" ? ` (suggested: ${m.note ?? "similar"})` : ""}`);
       if (field === "category") categoryPending = true;
@@ -103,6 +108,18 @@ function resolveMapping(rec: SheetRecord, maps: Map<string, LabelMapping>) {
     }
   }
   return { categoryIds, attributes, pending, categoryPending };
+}
+
+/** Code suffix -> colour name, only where the meaning is unambiguous on the live site. */
+const SUFFIX_COLOUR: Record<string, string> = { RG: "rose gold", G: "gold", BK: "black", W: "white", CP: "chrome", CH: "chrome" };
+
+/** Sheet details (type / name / collection) that appear in the live title confirm a title-code match. */
+function confirmingDetails(rec: SheetRecord, title: string) {
+  const t = textKey(title);
+  return (["type", "name", "collection"] as const).filter((f) => {
+    const v = textKey(rec[f]);
+    return v.length >= 3 && t.includes(v);
+  });
 }
 
 const sameSet = <T,>(a: T[], b: T[]) => a.length === b.length && a.every((x) => b.includes(x));
@@ -136,8 +153,38 @@ export function reconcile(records: SheetRecord[], products: CurrentProduct[], ma
   const changes: Change[] = [];
   const seen = new Map<string, SheetRecord>();
   const touched = new Set<string>();
+  const isWithdrawn = (r: SheetRecord) => r.remarks.some((x) => /delete\b.*\bwebsite/i.test(x));
+
+  // Rows sharing a code but disagreeing on the mapping: the row whose type matches the live product's
+  // title is the verified one; if no single row does, every row of the group goes to review.
+  const dupOutcome = new Map<string, Change>();
+  const groups = new Map<string, SheetRecord[]>();
+  for (const r of records) if (r.codeKey && !isWithdrawn(r)) groups.set(r.codeKey, [...(groups.get(r.codeKey) ?? []), r]);
+  for (const [key, group] of groups) {
+    if (group.length < 2) continue;
+    const conflicting = MAPPING_FIELDS.filter((f) => new Set(group.map((r) => textKey(r[f])).filter(Boolean)).size > 1);
+    if (!conflicting.length) continue;
+    const live = products.filter((x) => codeKey(x.itemCode) === key);
+    const agreeing = live.length === 1 ? group.filter((r) => r.type && textKey(live[0].title).includes(textKey(r.type))) : [];
+    for (const r of group) {
+      if (agreeing.length === 1 && r === agreeing[0]) continue; // processed normally below
+      dupOutcome.set(
+        r.ref,
+        agreeing.length === 1
+          ? { action: "skip", rec: r, reasons: [`duplicate of ${agreeing[0].ref}, whose type matches the live product "${live[0].title}"`] }
+          : { action: "review", rec: r, reasons: [`rows ${group.map((g) => g.ref).join(" / ")} share this code but differ in ${conflicting.join(", ")}`] },
+      );
+    }
+  }
+  const liveCodeFlags: Change[] = [];
 
   for (const rec of records) {
+    const decided = dupOutcome.get(rec.ref);
+    if (decided) {
+      changes.push(decided);
+      if (rec.codeKey && !seen.has(rec.codeKey)) seen.set(rec.codeKey, rec);
+      continue;
+    }
     // The sheet's own remarks can withdraw a row ("Delete this from website"): never add or change it;
     // an existing product is only flagged (unpublishing is an admin decision).
     const withdrawn = rec.remarks.find((r) => /delete\b.*\bwebsite/i.test(r));
@@ -149,7 +196,7 @@ export function reconcile(records: SheetRecord[], products: CurrentProduct[], ma
       continue;
     }
     // The same code twice in the sheet: the first row decides, later rows must agree or go to review.
-    if (rec.codeKey && seen.has(rec.codeKey)) {
+    if (rec.codeKey && seen.has(rec.codeKey) && !dupOutcome.has(seen.get(rec.codeKey)!.ref)) {
       const first = seen.get(rec.codeKey)!;
       const differs = MAPPING_FIELDS.filter((f) => textKey(first[f]) !== textKey(rec[f]) && rec[f] && first[f]);
       changes.push(
@@ -169,6 +216,28 @@ export function reconcile(records: SheetRecord[], products: CurrentProduct[], ma
         changes.push({ action: "skip", rec, reasons: ["no item code and no existing product with this name"] });
         continue;
       }
+      // A live page whose *title* starts with this code exists, but under another item code: never
+      // create a second product for it; the code mismatch needs a decision.
+      const titled = products.filter((x) => codeKey(titleCodeCandidate(x.title)) === rec.codeKey);
+      if (titled.length) {
+        titled.forEach((x) => touched.add(x.publicId));
+        changes.push({ action: "review", rec, candidates: titled, reasons: [`live page "${titled[0].title}" has this code in its title but item code ${titled[0].itemCode ?? "(none)"} — same product?`] });
+        continue;
+      }
+      // A "new" code that only differs from an existing product by a colour/finish suffix may be a
+      // variant of it (the live site shows colours on one page): never add it without a decision.
+      const base = variantBaseKey(rec.code);
+      const variants = base ? products.filter((x) => variantBaseKey(x.itemCode ?? titleCodeCandidate(x.title)) === base) : [];
+      if (variants.length) {
+        const colour = SUFFIX_COLOUR[rec.code.trim().toUpperCase().match(/[-\s]?([A-Z]{1,2})$/)?.[1] ?? ""];
+        const covering = colour ? variants.filter((v) => v.attributes.some((a) => a.key === "colour" && textKey(a.value).includes(colour))) : [];
+        if (covering.length === 1) {
+          touched.add(covering[0].publicId);
+          changes.push({ action: "variant", rec, product: covering[0], reasons: [`${covering[0].itemCode ?? covering[0].title} already lists the ${colour} finish — colour of the existing product, no new product`] });
+        } else
+          changes.push({ action: "review", rec, candidates: variants, reasons: [`possible variant of ${variants.map((v) => v.itemCode ?? v.title).join(", ")}${colour ? ` (none lists ${colour})` : ""} — separate product or colour?`] });
+        continue;
+      }
       // A new product is only added once its category is verified. A blank category may use the
       // tab default, but only when an admin approved that default (never for existing products).
       if (!rec.category && !categoryIds.length) {
@@ -181,22 +250,44 @@ export function reconcile(records: SheetRecord[], products: CurrentProduct[], ma
       }
       if (categoryPending) changes.push({ action: "pending", rec, pending });
       else if (!categoryIds.length) changes.push({ action: "review", rec, reasons: ["new product: the sheet gives no category"] });
+      // Never create a product whose name would be its code alone.
+      else if (!rec.type && !rec.name) changes.push({ action: "review", rec, reasons: ["held: the sheet gives no product name (code and highlights kept for naming)"] });
       else changes.push({ action: "new", rec, categoryIds, attributes });
       continue;
     }
     if (found.list.length > 1) {
       found.list.forEach((p) => touched.add(p.publicId));
-      changes.push({ action: "review", rec, candidates: found.list, match: found.kind, reasons: [`${found.list.length} existing products match by ${found.kind}`] });
-      continue;
+      // Two live products carry the same item code: the one whose title starts with the code (and
+      // shows the sheet's type, when given) is the match; the other is flagged for a code correction.
+      const byTitle = found.kind === "code" ? found.list.filter((p) => codeKey(titleCodeCandidate(p.title)) === rec.codeKey) : [];
+      const confirmed = byTitle.length === 1 && (!rec.type || textKey(byTitle[0].title).includes(textKey(rec.type))) ? byTitle[0] : null;
+      if (!confirmed) {
+        changes.push({ action: "review", rec, candidates: found.list, match: found.kind, reasons: [`${found.list.length} existing products match by ${found.kind}`] });
+        continue;
+      }
+      for (const other of found.list.filter((p) => p !== confirmed))
+        liveCodeFlags.push({ action: "review", rec, product: other, reasons: [`live code conflict: "${other.title}" also carries item code ${rec.code}; the sheet row matches "${confirmed.title}" — correct this product's code`] });
+      found.list = [confirmed];
     }
 
     const product = found.list[0];
     touched.add(product.publicId);
     const reasons: string[] = [];
-    if (found.kind !== "code") reasons.push(`matched by ${found.kind} only — confirm it is the same product`);
+    let match: MatchKind = found.kind;
+    if (found.kind === "title-code") {
+      const details = confirmingDetails(rec, product.title);
+      if (details.length) match = "title-code+";
+      else reasons.push("matched by the code in the live title only, and no other detail (type/name/collection) confirms it");
+    } else if (found.kind !== "code") reasons.push(`matched by ${found.kind} only — confirm it is the same product`);
 
     const set: { categoryIds?: number[]; attributes?: { key: string; value: string }[] } = {};
-    if (categoryIds.length && !sameSet(categoryIds, product.categoryIds) && !agrees(categoryIds, product.categoryIds)) set.categoryIds = categoryIds;
+    if (categoryIds.length && !sameSet(categoryIds, product.categoryIds) && !agrees(categoryIds, product.categoryIds)) {
+      // Apply only to fill an empty category or to refine it (sheet category inside the live one).
+      // Anything else contradicts the live category: keep live, report the conflict.
+      const refines = product.categoryIds.length > 0 && categoryIds.every((s) => product.categoryIds.some((l) => ancestorsOrSelf(s).includes(l)));
+      if (!product.categoryIds.length || refines) set.categoryIds = categoryIds;
+      else reasons.push(`category: live and sheet disagree (sheet category ids ${categoryIds.join(", ")} vs live ${product.categoryIds.join(", ")}) — live kept`);
+    }
     const currentAttrs = product.attributes.map(attrKey);
     const newAttrs = attributes.filter((a) => !currentAttrs.includes(attrKey(a)));
     // Replacing an attribute the product already has (e.g. another series) is a conflict, not a fill-in.
@@ -208,11 +299,12 @@ export function reconcile(records: SheetRecord[], products: CurrentProduct[], ma
     if (fills.length) set.attributes = fills;
 
     const diffs = contentDiffs(rec);
-    if (reasons.length) changes.push({ action: "review", rec, product, match: found.kind, reasons: [...reasons, ...pending.map((x) => `pending label: ${x}`)] });
-    else if (set.categoryIds || set.attributes) changes.push({ action: "category", rec, product, match: found.kind, set, contentDiffs: diffs, pending });
-    else if (pending.length) changes.push({ action: "pending", rec, product, match: found.kind, pending });
-    else changes.push({ action: "unchanged", rec, product, match: found.kind, contentDiffs: diffs });
+    if (reasons.length) changes.push({ action: "review", rec, product, match, reasons: [...reasons, ...pending.map((x) => `pending label: ${x}`)] });
+    else if (set.categoryIds || set.attributes) changes.push({ action: "category", rec, product, match, set, contentDiffs: diffs, pending });
+    else if (pending.length) changes.push({ action: "pending", rec, product, match, pending });
+    else changes.push({ action: "unchanged", rec, product, match, contentDiffs: diffs });
   }
+  changes.push(...liveCodeFlags);
 
   const untouched = products.filter((p) => !touched.has(p.publicId));
   const counts: Record<string, number> = { sheetRecords: records.length, existingProducts: products.length, untouched: untouched.length };

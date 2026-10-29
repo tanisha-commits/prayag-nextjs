@@ -26,7 +26,8 @@ describe("reconcile", () => {
   ];
 
   it("proposes a category-only update for an exact code match with a verified label", () => {
-    const cs = reconcile([rec({ tab: "CP", row: 2, code: "BA-45", category: "Bathroom Accessories", description: "new text" })], [p("a", "BA-45", [1])], maps);
+    // The product has no category yet, so the verified sheet category fills it.
+    const cs = reconcile([rec({ tab: "CP", row: 2, code: "BA-45", category: "Bathroom Accessories", description: "new text" })], [p("a", "BA-45", [])], maps);
     const c = cs.changes[0];
     expect(c.action).toBe("category");
     if (c.action !== "category") return;
@@ -45,7 +46,7 @@ describe("reconcile", () => {
   });
 
   it("applies verified fields of a row while holding back its unverified ones", () => {
-    const cs = reconcile([rec({ tab: "CP", row: 2, code: "5", category: "Bathroom Accessories", type: "Bib Cock" })], [p("a", "5", [1])], maps);
+    const cs = reconcile([rec({ tab: "CP", row: 2, code: "5", category: "Bathroom Accessories", type: "Bib Cock" })], [p("a", "5", [])], maps);
     expect(cs.changes[0]).toMatchObject({ action: "category", set: { categoryIds: [170] }, pending: ['type "Bib Cock"'] });
   });
 
@@ -61,7 +62,7 @@ describe("reconcile", () => {
 
   it("adds a new product only with a verified category, and never twice", () => {
     const cs = reconcile(
-      [rec({ tab: "CP", row: 2, code: "9999", category: "CP Faucets" }), rec({ tab: "CP", row: 3, code: "9999", category: "CP Faucets" }), rec({ tab: "CP", row: 4, code: "8888", category: "Faucet" })],
+      [rec({ tab: "CP", row: 2, code: "9999", name: "Mixer", category: "CP Faucets" }), rec({ tab: "CP", row: 3, code: "9999", name: "Mixer", category: "CP Faucets" }), rec({ tab: "CP", row: 4, code: "8888", name: "Tap", category: "Faucet" })],
       [],
       maps,
     );
@@ -93,7 +94,7 @@ describe("reconcile", () => {
 describe("blank categories", () => {
   const blank = (basis: LabelMapping["basis"]): LabelMapping => ({ tab: "Hardware", field: "category", label: "(blank)", basis, categoryId: 24 });
   it("uses the tab default for a new product only after approval", () => {
-    const r = rec({ tab: "Hardware", row: 2, code: "LD-1208" });
+    const r = rec({ tab: "Hardware", row: 2, code: "LD-1208", name: "Aldrop" });
     expect(reconcile([r], [], [blank("suggested")]).changes[0].action).toBe("pending");
     expect(reconcile([r], [], [blank("approved")]).changes[0]).toMatchObject({ action: "new", categoryIds: [24] });
   });
@@ -124,5 +125,106 @@ describe("sheet remarks", () => {
     expect(reconcile([newRow], [], maps).changes[0].action).toBe("review");
     const existing = reconcile([{ ...newRow, code: "6102-RG", codeKey: "6102RG" }], [p("a", "6102-RG", [170])], maps).changes[0];
     expect(existing).toMatchObject({ action: "review", product: { publicId: "a" } });
+  });
+});
+
+describe("variants", () => {
+  it("does not add a code that only differs from an existing product by a colour suffix", () => {
+    const maps = [exact("CP", "category", "CP Faucets", { categoryId: 1 })];
+    const cs = reconcile([rec({ tab: "CP", row: 2, code: "6108-RG", category: "CP Faucets" })], [p("a", "6108-G", [1])], maps);
+    expect(cs.changes[0]).toMatchObject({ action: "review", candidates: [{ publicId: "a" }] });
+    expect(reconcile([rec({ tab: "CP", row: 2, code: "7777", name: "Tap", category: "CP Faucets" })], [p("a", "6108-G", [1])], maps).changes[0].action).toBe("new");
+  });
+});
+
+describe("owner decisions (2026-10-29)", () => {
+  const maps = [exact("CP", "category", "CP Faucets", { categoryId: 1 }), exact("CP", "category", "Bathroom Accessories", { categoryId: 170 })];
+  const colour = (value: string) => ({ key: "colour", value });
+
+  it("confirms a title-code match only when a sheet detail appears in the live title", () => {
+    const live = [p("a", null, [1], [], "4001 Drenche Fully Loaded Floor Mounted WC")];
+    // Confirmed: the match is accepted (the unmapped collection label itself only waits as "pending").
+    expect(reconcile([rec({ tab: "CP", row: 2, code: "4001", collection: "Drenche" })], live, maps).changes[0]).toMatchObject({ action: "pending", match: "title-code+", product: { publicId: "a" } });
+    expect(reconcile([rec({ tab: "CP", row: 2, code: "4001", type: "Wash Basin" })], live, maps).changes[0].action).toBe("review");
+  });
+
+  it("resolves two live products with one code by the title, and flags the other", () => {
+    const live = [p("a", "130-U", [1], [], "130-U Pillar Cock"), p("b", "130-U", [1], [], "1375-U Wall Mixer")];
+    const cs = reconcile([rec({ tab: "CP", row: 2, code: "130-U", type: "Pillar Cock", category: "CP Faucets" })], live, maps);
+    expect(cs.changes.map((c) => [c.action, "product" in c ? c.product?.publicId : undefined])).toEqual([["pending", "a"], ["review", "b"]]);
+    expect(cs.changes[1]).toMatchObject({ reasons: [expect.stringContaining("live code conflict")] });
+  });
+
+  it("treats a colour code as covered when the base product already lists that colour", () => {
+    const live = [p("a", "6103-G", [1], [colour("Gold"), colour("Rose Gold")], "6103-G Pillar Cock")];
+    expect(reconcile([rec({ tab: "CP", row: 2, code: "6103-RG", category: "CP Faucets" })], live, maps).changes[0]).toMatchObject({ action: "variant" });
+    const noRose = [p("a", "6103-G", [1], [colour("Gold")], "6103-G Pillar Cock")];
+    expect(reconcile([rec({ tab: "CP", row: 2, code: "6103-RG", category: "CP Faucets" })], noRose, maps).changes[0].action).toBe("review");
+  });
+
+  it("keeps the duplicate row whose type matches the live title and skips the other", () => {
+    const live = [p("a", "BA-46", [172], [], "BA-46 Tumble Holder")];
+    const rows = [rec({ tab: "BA", row: 12, code: "BA-46", type: "Tumble Holder" }), rec({ tab: "CP", row: 369, code: "BA-46", type: "Tumbler Holder" })];
+    const cs = reconcile(rows, live, maps).changes;
+    expect(cs.map((c) => c.action)).toEqual(["pending", "skip"]);
+    expect(cs[0]).toMatchObject({ product: { publicId: "a" } });
+    const both = [rec({ tab: "CP", row: 1, code: "X-1", type: "A" }), rec({ tab: "CP", row: 2, code: "X-1", type: "B" })];
+    expect(reconcile(both, [p("a", "X-1", [1], [], "X-1 C")], maps).changes.map((c) => c.action)).toEqual(["review", "review"]);
+  });
+});
+
+describe("category conflicts", () => {
+  const maps = [exact("CP", "category", "CP Faucets", { categoryId: 1 }), exact("CP", "category", "Shower", { categoryId: 163 })];
+  const parents = new Map<number, number | null>([[1, null], [2, null], [163, 2], [170, null], [171, 170]]);
+  it("keeps the live category when the sheet puts the product somewhere else", () => {
+    const cs = reconcile([rec({ tab: "CP", row: 2, code: "1811", category: "Shower" })], [p("a", "1811", [171])], maps, parents);
+    expect(cs.changes[0]).toMatchObject({ action: "review", reasons: [expect.stringContaining("live kept")] });
+  });
+  it("still fills an empty category", () => {
+    const cs = reconcile([rec({ tab: "CP", row: 2, code: "1811", category: "Shower" })], [p("a", "1811", [])], maps, parents);
+    expect(cs.changes[0]).toMatchObject({ action: "category", set: { categoryIds: [163] } });
+  });
+});
+
+describe("recorded blank-category decisions", () => {
+  it("are honoured by draftMappings (approve -> new, skip -> review)", async () => {
+    const { draftMappings } = await import("@/lib/catalog/mapping");
+    const { taxonomy } = await import("./helpers");
+    const hw = rec({ tab: "Hardware", row: 2, code: "LD-1208", name: "Aldrop" });
+    const approved = draftMappings([hw], taxonomy, [{ tab: "Hardware", field: "category", label: "(blank)", categoryTid: 24, decision: "map" }], (t) => t);
+    expect(reconcile([hw], [], approved).changes[0]).toMatchObject({ action: "new", categoryIds: [24] });
+    const skipped = draftMappings([hw], taxonomy, [{ tab: "Hardware", field: "category", label: "(blank)", decision: "skip" }], (t) => t);
+    expect(reconcile([hw], [], skipped).changes[0].action).toBe("review");
+  });
+});
+
+describe("titled pages with another item code", () => {
+  it("never adds a code whose live page carries a different item code", () => {
+    const maps = [exact("CP", "category", "CP Faucets", { categoryId: 1 })];
+    const cs = reconcile([rec({ tab: "CP", row: 2, code: "8510", category: "CP Faucets" })], [p("a", "8509", [1], [], "8510 Angular Stop Cock")], maps);
+    expect(cs.changes[0]).toMatchObject({ action: "review", candidates: [{ publicId: "a" }] });
+  });
+});
+
+describe("final decisions (skip column, held names, typo normalisation)", () => {
+  it("ignores a skipped column without blocking the row's other fields", () => {
+    const maps: LabelMapping[] = [
+      exact("Ceramicware", "category", "Water Closet", { categoryId: 183 }),
+      { tab: "Ceramicware", field: "collection", label: "S Trap", basis: "skipped" },
+    ];
+    const cs = reconcile([rec({ tab: "Ceramicware", row: 2, code: "4001", category: "Water Closet", collection: "S Trap" })], [p("a", "4001", [])], maps);
+    expect(cs.changes[0]).toMatchObject({ action: "category", set: { categoryIds: [183] }, pending: [] });
+  });
+  it("holds a new product whose name would be its code alone", () => {
+    const maps = [{ tab: "Hardware", field: "category", label: "(blank)", basis: "approved", categoryId: 24 } as LabelMapping];
+    const cs = reconcile([rec({ tab: "Hardware", row: 2, code: "LD-1208", highlights: ["ALDROP Ø12x200 MM"] })], [], maps);
+    expect(cs.changes[0]).toMatchObject({ action: "review", reasons: [expect.stringContaining("no product name")] });
+  });
+  it("stores the corrected spelling for an approved typo mapping", async () => {
+    const { draftMappings } = await import("@/lib/catalog/mapping");
+    const { taxonomy } = await import("./helpers");
+    const r = rec({ tab: "Kitchen Sinks", row: 2, code: "1216", type: "Single Blow" });
+    const m = draftMappings([r], taxonomy, [{ tab: "Kitchen Sinks", field: "type", label: "Single Blow", attribute: { key: "type", value: "Single Bowl" }, decision: "map" }], (t) => t);
+    expect(m.find((x) => x.field === "type")).toMatchObject({ basis: "approved", attribute: { value: "Single Bowl" } });
   });
 });

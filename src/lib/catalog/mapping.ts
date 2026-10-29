@@ -20,6 +20,8 @@ export interface ApprovedLabel {
    * (label "*" accepts every label of that tab + column); skip = keep the live value, never apply.
    */
   decision: "map" | "accept" | "skip";
+  /** Why / when it was decided (for people; not used by the code). */
+  note?: string;
 }
 
 /**
@@ -72,9 +74,39 @@ export function draftMappings(
   tax: Taxonomy,
   approved: ApprovedLabel[],
   resolveTid: (tid: number) => number | undefined,
+  /** Attribute values already in the catalog, by key (used to avoid duplicate equivalent values). */
+  knownValues: Record<string, string[]> = {},
 ): LabelMapping[] {
+  // Canonical spelling for an accepted attribute label: an equivalent existing value wins, then the
+  // most frequent sheet spelling; whitespace collapsed, all-lower/all-upper labels title-cased.
+  const vocabByKey: Record<string, string[]> = {
+    series: ["series", "ptmt_"],
+    collection: ["design_collection", "ptmt_collection", "kitchen_design_collection"],
+    type: ["cp_type", "ptmt_type"],
+  };
+  const spellings = new Map<string, Map<string, number>>();
+  for (const r of records)
+    for (const f of ["series", "collection", "type"] as const) {
+      const v = r[f].replace(/\s+/g, " ").trim();
+      if (!v) continue;
+      const k = `${f}|${textKey(v)}`;
+      const m = spellings.get(k) ?? new Map<string, number>();
+      m.set(v, (m.get(v) ?? 0) + 1);
+      spellings.set(k, m);
+    }
+  const canonical = (field: Exclude<MappingField, "category">, label: string) => {
+    const key = textKey(label);
+    const existing = [...(knownValues[ATTRIBUTE_KEY[field]] ?? []), ...(vocabByKey[field] ?? []).flatMap((v) => (tax.vocabularies[v] ?? []).map((t) => t.name))];
+    const hit = existing.find((v) => textKey(v) === key);
+    if (hit) return hit;
+    const best = [...(spellings.get(`${field}|${key}`) ?? new Map([[label, 1]]))].sort((a, b) => b[1] - a[1])[0][0];
+    const words = best.replace(/\s+/g, " ").trim();
+    return words === words.toLowerCase() || words === words.toUpperCase() ? words.toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase()) : words;
+  };
   const out = new Map<string, LabelMapping>();
-  const approvedIdx = new Map(approved.map((a) => [`${a.tab}|${a.field}|${a.label === "*" ? "*" : textKey(a.label)}`, a]));
+  // "*" (whole column) and "(blank)" (empty category) are literal keys, not text to normalise.
+  const labelKey = (label: string) => (label === "*" || label === BLANK ? label : textKey(label));
+  const approvedIdx = new Map(approved.map((a) => [`${a.tab}|${a.field}|${labelKey(a.label)}`, a]));
   // Ceramicware sub-types live in their own vocabulary but are subcategories on the site.
   const vocabCategory = (tid: number) => resolveTid(tid);
 
@@ -82,16 +114,16 @@ export function draftMappings(
     const ctx = TAB_CONTEXT[rec.tab];
     if (!ctx) continue;
     // Blank category: only ever used for NEW products, and only after the tab default is approved.
-    if (!rec.category && ctx.implied !== undefined) {
+    const impliedCat = ctx.implied !== undefined ? tax.categories.find((c) => c.tid === ctx.implied) : undefined;
+    if (!rec.category && impliedCat) {
       const key = `${rec.tab}|category|${BLANK}`;
       if (!out.has(key)) {
         const a = approvedIdx.get(key);
-        const implied = tax.categories.find((c) => c.tid === ctx.implied)!;
         out.set(
           key,
           a && a.decision !== "skip"
-            ? { tab: rec.tab, field: "category", label: BLANK, basis: "approved", categoryId: resolveTid(a.categoryTid ?? ctx.implied) }
-            : { tab: rec.tab, field: "category", label: BLANK, basis: a ? "unmapped" : "suggested", categoryId: resolveTid(ctx.implied), note: a ? "admin: no default" : `new products with a blank category -> tab default: ${implied.name}` },
+            ? { tab: rec.tab, field: "category", label: BLANK, basis: "approved", categoryId: resolveTid(a.categoryTid ?? impliedCat.tid) }
+            : { tab: rec.tab, field: "category", label: BLANK, basis: a ? "unmapped" : "suggested", categoryId: resolveTid(impliedCat.tid), note: a ? "admin: no default" : `new products with a blank category -> tab default: ${impliedCat.name}` },
         );
       }
     }
@@ -106,9 +138,9 @@ export function draftMappings(
         out.set(
           key,
           a.decision === "skip"
-            ? { ...base, basis: "unmapped", note: "admin: keep live value" }
+            ? { ...base, basis: "skipped", note: a.label === "*" ? "admin: whole column skipped, live values kept" : "admin: skipped, live value kept" }
             : a.decision === "accept" && field !== "category"
-              ? { ...base, basis: "approved", attribute: { key: ATTRIBUTE_KEY[field], value: label.replace(/\s+/g, " ") }, note: "admin: accept sheet value" }
+              ? { ...base, basis: "approved", attribute: { key: ATTRIBUTE_KEY[field], value: canonical(field, label) }, note: "admin: accept sheet value (normalised)" }
               : { ...base, basis: "approved", categoryId: a.categoryTid !== undefined ? resolveTid(a.categoryTid) : undefined, attribute: a.attribute },
         );
         continue;

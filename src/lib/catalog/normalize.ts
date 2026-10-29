@@ -38,6 +38,14 @@ export function splitList(cell: string | null | undefined): string[] {
 
 /** Sheet cells use free text; treat "", "-", "NA", "N/A", "nil" as empty. */
 export function clean(cell: string | null | undefined): string {
-  const v = (cell ?? "").replace(/ /g, " ").trim();
+  const v = (cell ?? "").replace(/\u00a0/g, " ").trim();
   return /^(-+|n\/?a|nil|none)$/i.test(v) ? "" : v;
+}
+
+/**
+ * Item code without a trailing colour/finish suffix ("6108-RG" -> "6108", "146-HW" -> "146-H"), used
+ * only to flag possible variants of an existing product; never to merge products automatically.
+ */
+export function variantBaseKey(code: string | null | undefined): string {
+  return codeKey((code ?? "").trim().toUpperCase().replace(/[-\s]?(RG|G|B|BL|BK|CP|CH|W|R|N)$/, ""));
 }

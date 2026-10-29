@@ -1,1 +1,118 @@
-{"labels": []}
+{
+ "labels": [
+  {
+   "tab": "CP",
+   "field": "category",
+   "label": "Faucet",
+   "categoryTid": 1,
+   "decision": "map",
+   "note": "#1 approved 2026-10-29"
+  },
+  {
+   "tab": "CP",
+   "field": "series",
+   "label": "7000-6000",
+   "attribute": {
+    "key": "series",
+    "value": "6000-7000"
+   },
+   "decision": "map",
+   "note": "#2 reverse-named -> live name"
+  },
+  {
+   "tab": "CP",
+   "field": "series",
+   "label": "9000-8000",
+   "attribute": {
+    "key": "series",
+    "value": "8000-9000"
+   },
+   "decision": "map",
+   "note": "#2 reverse-named -> live name"
+  },
+  {
+   "tab": "CP",
+   "field": "type",
+   "label": "*",
+   "decision": "accept",
+   "note": "#3 accept CP types as filter values (normalised, no duplicate equivalents)"
+  },
+  {
+   "tab": "PTMT",
+   "field": "collection",
+   "label": "Prestige Series",
+   "decision": "accept",
+   "note": "#4 new collection"
+  },
+  {
+   "tab": "Hardware",
+   "field": "category",
+   "label": "(blank)",
+   "categoryTid": 24,
+   "decision": "map",
+   "note": "#5 Hardware tab -> Hardware; Q3: rows held until product names are verified (code-only names are never created)"
+  },
+  {
+   "tab": "Tanks",
+   "field": "category",
+   "label": "4 Layer Puff Tank",
+   "categoryTid": 23,
+   "decision": "map",
+   "note": "#5 the 7 WT-4LL rows are live Storage Tank products"
+  },
+  {
+   "tab": "PTMT",
+   "field": "category",
+   "label": "(blank)",
+   "decision": "skip",
+   "note": "#5 do not guess; review"
+  },
+  {
+   "tab": "CP",
+   "field": "category",
+   "label": "(blank)",
+   "decision": "skip",
+   "note": "#5 do not guess; review"
+  },
+  {
+   "tab": "Kitchen Sinks",
+   "field": "type",
+   "label": "Single Blow",
+   "attribute": {
+    "key": "type",
+    "value": "Single Bowl"
+   },
+   "decision": "map",
+   "note": "Q1 typo; live titles of 1216/816-D/839-D say Single Bowl"
+  },
+  {
+   "tab": "Kitchen Sinks",
+   "field": "type",
+   "label": "Single Blow with Drain Board",
+   "attribute": {
+    "key": "type",
+    "value": "Single Bowl with Drain Board"
+   },
+   "decision": "map",
+   "note": "Q1 typo; live titles of 1230D/930-D say Single Bowl with Drain Board"
+  },
+  {
+   "tab": "Kitchen Sinks",
+   "field": "type",
+   "label": "Single Bolw with Drain Board",
+   "attribute": {
+    "key": "type",
+    "value": "Single Bowl with Drain Board"
+   },
+   "decision": "map",
+   "note": "Q1 typo; live title of Q736 MB says Single Bowl with Drain Board"
+  },
+  {
+   "tab": "Ceramicware",
+   "field": "collection",
+   "label": "*",
+   "decision": "skip",
+   "note": "Q2 unreliable values (S Trap, Lab-01/02/03); live collections kept"
+  }
+ ]
+}

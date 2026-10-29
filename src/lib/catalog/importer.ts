@@ -191,7 +191,7 @@ export function recordPreview(db: Db, cs: ChangeSet, source: string, sourceHash:
           itemCode: c.rec.code || null,
           sourceRef: c.rec.ref,
           reason:
-            c.action === "review" || c.action === "skip"
+            c.action === "review" || c.action === "skip" || c.action === "variant"
               ? c.reasons.join("; ")
               : c.action === "category"
                 ? `mapping update (matched by ${c.match})`
