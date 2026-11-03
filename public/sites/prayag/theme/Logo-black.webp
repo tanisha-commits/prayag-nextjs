@@ -1,0 +1,2140 @@
+
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'html' -->
+<!-- FILE NAME SUGGESTIONS:
+   * html--front.html.twig
+   * html--node--947.html.twig
+   * html--node--%.html.twig
+   * html--node.html.twig
+   x html.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/prayag/layout/html.html.twig' -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="Prayag Polymers Limited is India’s leading Sanitaryware manufacturing brand. It offers a premium, wide range of reliable, and affordable sanitary products in India." />
+<meta name="keywords" content="home" />
+<link rel="canonical" href="https://prayagindia.com/" />
+<link rel="shortlink" href="https://prayagindia.com/" />
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/sites/default/files/p-fevicon.ico" type="image/vnd.microsoft.icon" />
+
+    <title>Prayag Polymers Limited - India&#039;s No.1 Sanitaryware Manufacturer</title>
+      <meta name="google-site-verification" content="5gSQePpFWFHN47CdB-nMPaSTisNDNt2xHIKG0YZs4o8" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+ <link rel="preload" href="https://prayagindia.com/sites/default/files/2024-08/cp-faucets.webp" as="image" fetchpriority="high" >
+ <script src="/core/assets/vendor/jquery/jquery.min.js?v=3.6.2"></script>
+
+ 
+
+
+
+
+
+
+
+    
+    
+   
+
+
+<link 
+    rel="preload" 
+    href="https://prayagindia.com/node/947" 
+    as="fetch" 
+    crossorigin="anonymous"
+    importance="high"
+>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://connect.facebook.net">
+<link rel="preconnect" href="https://www.google-analytics.com">
+
+
+
+
+
+     <link rel="stylesheet" media="all" href="/sites/default/files/css/css_vb0KPjkY0xHqHVg8t1YEicpc4Ok1xjKQljKxysSOfs4.css" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_K9fY2DEIu9xLxLgq0wIONMt9frY_Nbii-8nEr7OCm8A.css" />
+
+    
+        
+    
+<link rel="preload" href="/core/themes/olivero/fonts/metropolis/Metropolis-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/core/themes/olivero/fonts/metropolis/Metropolis-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/core/themes/olivero/fonts/metropolis/Metropolis-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/core/themes/olivero/fonts/lora/lora-v14-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <noscript><link rel="stylesheet" href="/core/themes/olivero/css/components/navigation/nav-primary-no-js.css?tnjvhg" />
+</noscript>
+     
+
+     
+     </script>
+
+        
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TP63R6PXR0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TP63R6PXR0');
+</script>
+
+<script type="application/ld+json">
+
+{
+
+  "@context": "https://schema.org",
+
+  "@type": "Organization",
+
+  "name": "Prayag India",
+
+  "alternateName": "Prayag India",
+
+  "url": "https://prayagindia.com/",
+
+  "logo": "https://prayagindia.com/wp-content/uploads/2023/09/prayag-logo-w2.png",
+
+  "sameAs": [
+
+    "https://www.facebook.com/prayaglife/",
+
+    "https://twitter.com/prayaglife",
+
+    "https://www.instagram.com/prayaglife/",
+
+    "https://www.youtube.com/channel/UCCBcJ4tcq8yvx38Vc2xfBZQ",
+
+    "https://www.linkedin.com/company/prayagindia.com/"
+
+  ]
+
+}
+
+</script>
+        <script type="application/ld+json">
+{
+
+  "@context": "https://schema.org",
+
+  "@type": "Organization",
+
+  "name": "Prayag India",
+
+  "alternateName": "Prayag India",
+
+  "url": "https://prayagindia.com/",
+
+  "logo": "https://prayagindia.com/wp-content/uploads/2023/09/prayag-logo-w2.png",
+
+  "sameAs": [
+
+    "https://www.facebook.com/prayaglife/",
+
+    "https://twitter.com/prayaglife",
+
+    "https://www.instagram.com/prayaglife/",
+
+    "https://www.youtube.com/channel/UCCBcJ4tcq8yvx38Vc2xfBZQ",
+
+    "https://www.linkedin.com/company/prayagindia.com/"
+
+  ]
+
+}
+        </script>
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Prayag India",
+  "image": "https://prayagindia.com/themes/custom/prayag/assets/images//logo.png",
+  "url": "https://prayagindia.com/",
+  "telephone": "1800 257 0304",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2483-84, Prayag Infinity House, Nalwa Street, Pahar Ganj",
+    "addressLocality": "New Delhi",
+    "postalCode": "110055",
+    "addressCountry": "IN"
+},
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "opens": "10:00",
+    "closes": "19:00"
+  },
+  "priceRange": "$$"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Prayag India: India's No.1 Sanitaryware Manufacturer",
+  "url": "https://prayagindia.com/",
+  "description": "Prayag India is a leading manufacturer and distributor of sanitary ware products and bathroom accessories, offering over 2500 products including showers, kitchen sinks, taps, faucets, and more.",
+  "inLanguage": "en"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://prayagindia.com/",
+  "name": "Prayag India",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://prayagindia.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+        <!-- Meta Pixel Code -->
+
+<script>
+
+!function(f,b,e,v,n,t,s)
+
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+
+n.queue=[];t=b.createElement(e);t.async=!0;
+
+t.src=v;s=b.getElementsByTagName(e)[0];
+
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '234053602344456');
+
+fbq('track', 'PageView');
+
+</script>
+<!-- Google Tag Manager -->
+
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+
+                                                              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+
+                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+
+                                    })(window,document,'script','dataLayer','GTM-5BMDD8KH');</script>
+
+        <!-- End Google Tag Manager -->
+        
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K7DN5NF');</script>
+<!-- End Google Tag Manager --> 
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TP63R6PXR0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TP63R6PXR0');
+</script>
+  </head>
+  <body class="path-frontpage page-node-type-homepage" >
+      <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K7DN5NF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+      <!-- Google Tag Manager (noscript) -->
+
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BMDD8KH"
+
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+        <!-- End Google Tag Manager (noscript) -->
+              
+              
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'off_canvas_page_wrapper' -->
+<!-- BEGIN OUTPUT from 'core/modules/system/templates/off-canvas-page-wrapper.html.twig' -->
+  <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    
+
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: 'page' -->
+<!-- FILE NAME SUGGESTIONS:
+   x page--homepage.html.twig
+   * page--front.html.twig
+   * page--node--947.html.twig
+   * page--node--%.html.twig
+   * page--node.html.twig
+   * page.html.twig
+-->
+<!-- BEGIN OUTPUT from 'themes/custom/prayag/templates/page--homepage.html.twig' -->
+
+
+<!-- Header -->
+<div class="navik-header header-transparent header-shadow navik-mega-menu mega-menu-fullwidth">
+
+  <div class="container-fluid">
+
+    <div class="navik-header-container">
+
+            <div class="pm-brand">
+
+                <button type="button" class="pm-hamburger" data-pm-toggle
+                aria-label="Open category menu"
+                aria-expanded="false" aria-controls="pm-category-panel">
+          <span class="pm-hamburger__line"></span>
+          <span class="pm-hamburger__line"></span>
+          <span class="pm-hamburger__line"></span>
+        </button>
+
+                <div class="logo_wrapper" data-mobile-logo="/themes/custom/prayag/assets/images/Logo-black.webp"
+          data-sticky-logo="/themes/custom/prayag/assets/images//logo.png">
+          <a href="https://prayagindia.com/">
+            <div class="white_logo">
+              <img src="/themes/custom/prayag/assets/images//logo.png" alt="logo" width="150px" height="30px" />
+            </div>
+            <div class="black_logo">
+              <img src="/themes/custom/prayag/assets/images//logo.png" alt="logo" width="150px" height="30px" />
+            </div>
+          </a>
+        </div>
+
+      </div>
+      
+      <!-- Burger menu -->
+      <div class="burger-menu">
+        <div class="line-menu line-half first-line"></div>
+        <div class="line-menu"></div>
+        <div class="line-menu line-half last-line"></div>
+      </div>
+
+      <div class="main_left_menu">
+
+
+        <nav class="navik-menu menu-caret submenu-top-border">
+          <ul>
+
+            <li class="mega-menu"><a href="#.">Products</a>
+             <ul>
+                <li>
+
+                  <div class="mega-menu-container">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6">
+                        <div class="submenu_item prdct_item">
+                          <ul>
+             				                                	<li> <a href="https://prayagindia.com/plumbing-solutions">Plumbing Solutions</a>
+                            	<p>></p>
+                							</li>
+
+                                                                                     	<li> <a href="https://prayagindia.com/faucets">CP Faucets</a>
+                            	<p>></p>
+                							</li>
+
+                                                                                     	<li> <a href="https://prayagindia.com/ptmt-taps">PTMT</a>
+                            	<p>></p>
+                							</li>
+
+                                                                                     	<li> <a href="https://prayagindia.com/ceramicware">CeramicWare</a>
+                            	<p>></p>
+                							</li>
+
+                                                                                     	<li> <a href="https://prayagindia.com/pipes-fittings">Pipes &amp; Fittings</a>
+                            	<p>></p>
+                							</li>
+
+                                                                                     	<li> <a href="https://prayagindia.com/kitchen-sinks">Kitchen Sinks</a>
+                            	<p>></p>
+                							</li>
+
+                                                                                     	<li> <a href="https://prayagindia.com/water-heaters">Water Heaters</a>
+                            	<p>></p>
+                							</li>
+
+                                                                                     	<li> <a href="https://prayagindia.com/storage-tank">Storage Tank</a>
+                            	<p>></p>
+                							</li>
+
+                                                                                     	<li> <a href="https://prayagindia.com/bathroom-accessories">Bathroom Accessories</a>
+                            	<p>></p>
+                							</li>
+
+                                                                                     	<li> <a href="https://prayagindia.com/hardware">Hardware</a>
+                            	<p>></p>
+                							</li>
+
+                                                                                  
+
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-6">
+                        <div class="mega-menu-box">
+                          <div class="mega-menu-thumbnail">
+                            <img src="https://prayagindia.com/themes/custom/prayag/assets/images/product%20drop%20down.webp" loading="lazy" width="100%" height="100%" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+            </li>
+            </ul>
+            </li>
+
+
+            <li class="mega-menu">
+              <a href="#.">Inspiration
+              </a>
+              <ul>
+                <li>
+                  <!-- Mega menu container -->
+                  <div class="mega-menu-container">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6">
+                        <div class="submenu_item">
+                          <ul>
+                            <li>
+                              <a href="https://prayagindia.com/press-coverages">Press Coverage</a>
+                              <p>></p>
+                            </li>
+                            <li>
+                              <a href="https://prayagindia.com/product-video">Product Video</a>
+                              <p>></p>
+                            </li>
+                            <li>
+                              <a href="https://prayagindia.com/video-tv-advertisement">Video / TV Advertisement</a>
+                              <p>></p>
+                            </li>
+                                                                                                                                            <li>
+                              <a href="https://prayagindia.com/sites/default/files/2024-09/Warranty_Policy.pdf" target="_blank">Warranty Policy</a>
+                              <p>></p>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-6">
+                        <div class="mega-menu-box">
+                          <div class="mega-menu-thumbnail">
+                            <img src="https://prayagindia.com/sites/default/files/2025-01/blog%20%281%29.webp" alt="thumbnail" width="100%" height="100%" loading="lazy" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </li>
+              </ul>
+            </li>
+            <li>
+            <a href="https://prayagindia.com/blog">Blog</a>
+            </li>
+            <li class="mega-menu">
+              <a href="#.">About</a>
+
+              <ul>
+                <li>
+                  <!-- Mega menu container -->
+                  <div class="mega-menu-container">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6">
+                        <div class="submenu_item">
+                          <ul>
+                            <li>
+                              <a href="https://prayagindia.com/about-prayag">About Prayag</a>
+                              <p>></p>
+                            </li>
+                            <li>
+                              <a href="https://prayagindia.com/ceo-profile">CEO Profile</a>
+                              <p>></p>
+                            </li>
+                            <li>
+                              <a href="https://prayagindia.com/sustainability">Sustainability</a>
+                              <p>></p>
+                            </li>
+                             <li>
+                              <a href="https://prayagindia.com/manufacturing-process">Manufacturing Process</a>
+                              <p>></p>
+                            </li>
+                                                                                                                
+                                                                                                                
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-6">
+                        <div class="mega-menu-box">
+                          <div class="mega-menu-thumbnail">
+                            <img src="https://prayagindia.com/sites/default/files/2025-01/about-prayag%20%281%29.webp" alt="thumbnail" loading="lazy" width="100%" height="100%" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </li>
+              </ul>
+            </li>
+            <li class="mega-menu">
+              <a href="#.">Contact</a>
+               <ul>
+                <li>
+                  <!-- Mega menu container -->
+                  <div class="mega-menu-container">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6">
+                        <div class="submenu_item">
+                          <ul>
+                            <li>
+                              <a href="https://prayagindia.com/dealership-enquiry">Dealership Enquiry</a>
+                              <p>></p>
+                            </li>
+                            <li>
+                              <a href="https://prayagindia.com/contact-us">Contact Us</a>
+                              <p>></p>
+                            </li>
+
+
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-6">
+                        <div class="mega-menu-box">
+                          <div class="mega-menu-thumbnail">
+                            <img src="https://prayagindia.com/sites/default/files/2025-01/contact-us%20%281%29.webp" alt="thumbnail" width="100%" height="100%" loading="lazy" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+                    <div class="login_icon">
+            <a href="https://prayagindia.com/search/node?keys=products" aria-label="search">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M14.129 12.9735C15.3055 11.5018 15.8737 9.63554 15.717 7.7579C15.5603 5.88026 14.6905 4.13399 13.2862 2.8777C11.8821 1.62141 10.0502 0.950558 8.16662 1.00284C6.28324 1.05511 4.49119 1.82667 3.15892 3.15889C1.82667 4.4912 1.05513 6.28301 1.00285 8.16653C0.950512 10.0499 1.62142 11.8818 2.87773 13.2861C4.13411 14.6903 5.88032 15.5601 7.75799 15.7168C9.63565 15.8735 11.502 15.3053 12.9737 14.1289L17.6155 18.7707H17.6155C17.823 18.9711 18.1208 19.0472 18.399 18.9709C18.6772 18.8946 18.8946 18.6773 18.9709 18.3991C19.0472 18.1209 18.9711 17.8231 18.7707 17.6155L14.129 12.9735ZM8.39001 14.1082C6.87337 14.1082 5.41878 13.5058 4.3463 12.4334C3.27382 11.361 2.6714 9.90642 2.6714 8.3897C2.6714 6.87298 3.2739 5.41852 4.3463 4.34604C5.4187 3.27357 6.87327 2.67117 8.39001 2.67117C9.90674 2.67117 11.3612 3.27366 12.4337 4.34604C13.5062 5.41843 14.1086 6.87298 14.1086 8.3897C14.1069 9.90582 13.5038 11.3593 12.4318 12.4314C11.3597 13.5035 9.90625 14.1066 8.39001 14.1082Z"
+                  fill="white" stroke="white" stroke-width="0.2" />
+              </svg>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+<div class="pm-backdrop" data-pm-backdrop hidden></div>
+
+<aside id="pm-category-panel" class="pm-panel" data-pm-panel
+       role="dialog" aria-modal="true" aria-label="Product category menu">
+
+  <div class="pm-bar">
+    <a class="pm-logo" href="https://prayagindia.com/" aria-label="Prayag home">
+      <img src="/themes/custom/prayag/assets/images//logo.png" alt="Prayag" width="110" height="22" />
+    </a>
+    <button type="button" class="pm-close" data-pm-close aria-label="Close category menu">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>
+    </button>
+  </div>
+
+    <div class="pm-body">
+
+          <a class="pm-latest" href="https://prayagindia.com/hdpe">
+        <span class="pm-latest__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>
+        </span>
+        <span class="pm-latest__text">
+          <span class="pm-latest__name">HDPE <span class="pm-latest__badge">New</span></span>
+          <span class="pm-latest__hint">Latest launch</span>
+        </span>
+        <span class="pm-chevron pm-chevron--right" aria-hidden="true"></span>
+      </a>
+    
+              <a class="pm-bablu" href="https://prayagindia.com/prayag-ka-bablu-plumbers-loyalty-program">
+        <span class="pm-bablu__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
+        </span>
+        <span class="pm-bablu__text">
+          <span class="pm-bablu__name">Prayag Ka Bablu App <span class="pm-bablu__badge">New</span></span>
+          <span class="pm-bablu__hint">Plumbers Loyalty Program</span>
+        </span>
+        <span class="pm-chevron pm-chevron--right pm-chevron--light" aria-hidden="true"></span>
+      </a>
+        
+    <h2 class="pm-label"><span>Product Category</span></h2>
+    <ul class="pm-list">
+      <li class="pm-item">
+                <details class="pm-details">
+          <summary class="pm-row">
+            <span class="pm-row__label">Plumbing Solutions</span>
+            <span class="pm-count" aria-label="10 categories">10</span>
+            <span class="pm-chevron pm-chevron--right" aria-hidden="true"></span>
+          </summary>
+          <ul class="pm-sub__list">
+            <li><a class="pm-sub__link pm-sub__link--all" href="https://prayagindia.com/plumbing-solutions">View all Plumbing Solutions</a></li>
+                          <li><a class="pm-sub__link" href="https://prayagindia.com/hdpe">HDPE</a></li>
+                          <li><a class="pm-sub__link" href="https://prayagindia.com/agritech">Agritec</a></li>
+                          <li><a class="pm-sub__link" href="https://prayagindia.com/swr-plumbing-solution">SWR Pipe</a></li>
+                          <li><a class="pm-sub__link" href="https://prayagindia.com/cpvc-plumbing-solution">CPVC Pipes</a></li>
+                          <li><a class="pm-sub__link" href="https://prayagindia.com/casing-pipes">Casing Pipes</a></li>
+                          <li><a class="pm-sub__link" href="https://prayagindia.com/composite-pipes">Composite Pipes</a></li>
+                          <li><a class="pm-sub__link" href="https://prayagindia.com/ugd-pipes-fittings">UGD Pipes &amp; Fittings</a></li>
+                          <li><a class="pm-sub__link" href="https://prayagindia.com/upvc-column-pipes">uPVC Column Pipes</a></li>
+                          <li><a class="pm-sub__link" href="https://prayagindia.com/ppr-pipes">PPR Pipes</a></li>
+                          <li><a class="pm-sub__link" href="https://prayagindia.com/PVC-O%20Pipes">PVC-O Pipes</a></li>
+                      </ul>
+        </details>
+      </li>
+    </ul>
+
+    <h2 class="pm-label"><span>Quick links</span></h2>
+    <ul class="pm-quick">
+                        <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/about-prayag">About Prayag</a>
+          </li>
+                                <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/ceo-profile">CEO Profile</a>
+          </li>
+                                <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/sustainability">Sustainability</a>
+          </li>
+                                <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/manufacturing-process">Manufacturing Process</a>
+          </li>
+                                <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/press-coverages">Press Coverage</a>
+          </li>
+                                <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/product-video">Product Video</a>
+          </li>
+                                <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/video-tv-advertisement">Video / TV Advertisement</a>
+          </li>
+                                <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/sites/default/files/2024-09/Warranty_Policy.pdf" target="_blank" rel="noopener noreferrer">Warranty Policy</a>
+          </li>
+                                <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/blog">Blog</a>
+          </li>
+                                <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/dealership-enquiry">Dealership Enquiry</a>
+          </li>
+                                <li>
+            <a class="pm-quick__link" href="https://prayagindia.com/contact-us">Contact Us</a>
+          </li>
+                  </ul>
+
+  </div>
+
+    <div class="pm-footer">
+    <ul class="pm-social" aria-label="Follow Prayag">
+                        <li>
+            <a href="https://www.facebook.com/prayaglife/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                              <img src="/themes/custom/prayag/assets/images/Facebook.webp" alt="" aria-hidden="true" width="24" height="24" loading="lazy">
+                          </a>
+          </li>
+                                <li>
+            <a href="https://www.youtube.com/channel/UCCBcJ4tcq8yvx38Vc2xfBZQ" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                              <img src="/themes/custom/prayag/assets/images/Youtube.webp" alt="" aria-hidden="true" width="24" height="24" loading="lazy">
+                          </a>
+          </li>
+                                <li>
+            <a href="https://www.instagram.com/prayaglife/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                              <img src="/themes/custom/prayag/assets/images/Instagram.webp" alt="" aria-hidden="true" width="24" height="24" loading="lazy">
+                          </a>
+          </li>
+                                <li>
+            <a href="https://www.linkedin.com/company/prayagindia.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                              <svg width="22" height="22" viewBox="0 0 26 26" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M3.40958 0C1.53094 0 0.0013755 1.52927 0 3.40938C0 5.2895 1.52956 6.81906 3.40958 6.81906C5.28891 6.81906 6.81768 5.2895 6.81768 3.40938C6.81768 1.52946 5.28881 0 3.40958 0Z"/>
+                  <path d="M5.96935 8.18701H0.851103C0.607639 8.18701 0.410156 8.3844 0.410156 8.62806V25.1022C0.410156 25.3457 0.607639 25.5431 0.851103 25.5431H5.96925C6.21282 25.5431 6.4103 25.3456 6.4103 25.1022V8.62806C6.4104 8.3843 6.21291 8.18701 5.96935 8.18701Z"/>
+                  <path d="M19.0535 7.99487C17.1804 7.99487 15.5344 8.56522 14.53 9.49525V8.62986C14.53 8.3862 14.3326 8.18882 14.089 8.18882H9.17933C8.93576 8.18882 8.73828 8.3862 8.73828 8.62986V25.104C8.73828 25.3475 8.93576 25.5449 9.17933 25.5449H14.2927C14.5362 25.5449 14.7337 25.3474 14.7337 25.104V16.9534C14.7337 14.6149 15.1638 13.1654 17.3105 13.1654C19.4255 13.1679 19.5837 14.7223 19.5837 17.0931V25.104C19.5837 25.3475 19.7812 25.5449 20.0249 25.5449H25.1406C25.384 25.5449 25.5815 25.3474 25.5815 25.104V16.0672C25.5814 12.3088 24.8394 7.99487 19.0535 7.99487Z"/>
+                </svg>
+                          </a>
+          </li>
+                  </ul>
+  </div>
+
+</aside>
+<style>
+.official-ipl {
+    background: #fff;
+    PADDING: 0px 0px 100px 0px;
+}
+        
+.ipl-head h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0;
+}
+        
+
+
+.prayag-btn {
+    position: relative;
+    background-color: #000;
+    color: #fff;
+    display: inline-block;
+    border-radius: 28px;
+    padding: 13px 40px 13px 35px;
+    font-weight: 500;
+    font-size: 18px;
+    transition: all 0.5s;
+}
+        
+.prayag-btn:hover svg path {
+    fill: #fff;
+}
+
+.prayag-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    color: white!important;
+    transform: translateY(-2px);
+}
+        
+.logo-slider {
+    margin-top: 40px;
+    display: flex;
+    overflow: hidden;
+}
+
+.logo-slider-container {
+    overflow: hidden;
+    position: relative;
+    padding: 30px 0 0 0;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.logo-item {
+    flex: 0 0 25%;
+    padding: 0 10px;
+}
+        
+@media (max-width: 768px) {
+    .logo-item {
+        flex: 0 0 50%;
+    }
+}
+        
+@media (max-width: 576px) {
+    .logo-item {
+        flex: 0 0 100%;
+    }
+}
+
+.logo-item p {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: 400;
+}
+
+.logo-box {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 0;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+}
+        
+.logo-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+     
+.logo-box img {
+    max-width: 100%;
+    max-height: 120px;
+    object-fit: contain;
+    filter: grayscale(0.3);
+    transition: filter 0.3s ease;
+}
+        
+.logo-box:hover img {
+    filter: grayscale(0);
+}
+        
+@media (max-width: 768px) {
+    .ipl-head h2 {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .ipl-rt-cont {
+        text-align: center;
+    }
+    
+    .official-ipl {
+        padding: 40px 0;
+    }
+    
+    .slick-prev, .slick-next {
+        display: none !important;
+    }
+}
+</style>
+
+<style>
+.navik-header {
+    position: absolute;
+}
+
+.path-frontpage .navik-header {
+    position: absolute;
+    background: transparent;
+}
+
+.black_logo img {
+    filter: brightness(10000);
+}
+
+.navik-header:hover .black_logo img {
+    filter: brightness(0) !important;
+}
+
+.navik-header nav.navik-menu.menu-caret.submenu-top-border ul li a {
+    color: #fff;
+}
+
+.navik-header.sticky .black_logo img {
+    filter: brightness(0) !important;
+}
+
+.navik-header.sticky nav.navik-menu.menu-caret.submenu-top-border ul li a {
+    color: #000;
+}
+
+.navik-header:not(.sticky) .login_icon svg path {
+    fill: #fff;
+}
+
+.navik-header.header-transparent.header-shadow.navik-mega-menu.mega-menu-fullwidth.viewport-lg.header-transparent-on {
+    background: transparent;
+}
+
+.navik-header {
+    position: absolute !important;
+}
+
+.video-showcase {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.video-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.video-slide.active {
+    opacity: 1;
+}
+
+/*
+   <picture> wrapper — fills the slide exactly like the old <img>
+   Both <source> and <img> inside it are position:absolute full-bleed.
+*/
+.video-slide picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Above video — ensures <img> inside is LCP element */
+    display: block;
+}
+
+.video-slide picture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* show face/subject on mobile crop */
+    transition: opacity 0.6s ease;
+}
+
+/* Video sits below picture by default */
+.video-slide video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+/* Once video is ready — rise above picture, picture fades out */
+.video-slide video.video-ready {
+    z-index: 3;
+    opacity: 1;
+}
+
+.video-slide video.video-ready ~ picture,
+.video-slide picture.img-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Controls */
+.video-controls {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.control-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+    outline: none;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.control-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+/* Progress Indicator */
+.progress-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+    width: 30px;
+    border-radius: 4px;
+    background: #fff;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .video-showcase {
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+
+    .video-controls {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .control-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .navik-header.header-transparent.header-shadow.navik-mega-menu.mega-menu-fullwidth.viewport-sm {
+        position: static !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .video-slide {
+        transition: opacity 0.3s ease-in-out;
+    }
+    .video-slide picture,
+    .video-slide video {
+        transition: opacity 0.2s ease;
+    }
+}
+</style>
+
+<div class="video-showcase">
+    <div class="video-wrapper">
+
+        <!-- ================================================
+             SLIDE 1 — Kung Fu / Sukoon Film
+             Desktop : kung-fu-banner.webp
+             Mobile  : thumbnail.webp  (existing mobile thumb)
+             LCP element: the <img> inside this <picture>
+        ================================================ -->
+        <div class="video-slide active">
+            <video id="video-sukoon" muted playsinline preload="none">
+                <source src="https://prayagindia.com/themes/custom/prayag/assets/images/prayag-homepage/video_banner.webm" type="video/webm">
+            </video>
+            <picture id="pic-sukoon">
+                <!-- Mobile ≤ 768px → existing mobile thumbnail -->
+                <source
+                    media="(max-width: 768px)"
+                    srcset="https://prayagindia.com/themes/custom/prayag/assets/images/mobile-banner-.webp"
+                    type="image/webp">
+                <!-- Desktop > 768px → new kung-fu banner -->
+                <source
+                    media="(min-width: 769px)"
+                    srcset="https://prayagindia.com/themes/custom/prayag/assets/images/prayag-homepage/kung-fu-banner.webp"
+                    type="image/webp">
+                <!-- Fallback <img> — also the LCP element -->
+                <img
+                    id="mob-video-sukoon"
+                    src="https://prayagindia.com/themes/custom/prayag/assets/images/prayag-homepage/kung-fu-banner.webp"
+                    alt="Prayag Sukoon"
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="sync"
+                    width="1920"
+                    height="840">
+            </picture>
+        </div>
+
+        <!-- ================================================
+             SLIDE 2 — Shader / Karate Film
+             Desktop : prayag-shader-banner.webp
+             Mobile  : pr.webp  (existing mobile thumb)
+        ================================================ -->
+        <div class="video-slide">
+            <video id="video-karate" muted playsinline preload="none">
+                <source src="https://prayagindia.com/themes/custom/prayag/assets/images/prayag-homepage/video_banner-2.webm" type="video/webm">
+            </video>
+            <picture id="pic-karate">
+                <source
+                    media="(max-width: 768px)"
+                    srcset="https://prayagindia.com/themes/custom/prayag/assets/images/prayag-mobile-banner-2.webp"
+                    type="image/webp">
+                <source
+                    media="(min-width: 769px)"
+                    srcset="https://prayagindia.com/themes/custom/prayag/assets/images/prayag-homepage/prayag-shader-banner.webp"
+                    type="image/webp">
+                <img
+                    id="mob-video-karate"
+                    src="https://prayagindia.com/themes/custom/prayag/assets/images/prayag-homepage/prayag-shader-banner.webp"
+                    alt="Prayag Karate"
+                    loading="lazy"
+                    decoding="async"
+                    width="1920"
+                    height="840">
+            </picture>
+        </div>
+
+        <!-- ================================================
+             SLIDE 3 — Malaika / Homepage Video
+             Desktop : Malaika-banner.webp
+             Mobile  : Prayag-mobile-thumbnail (existing)
+        ================================================ -->
+        <div class="video-slide">
+            <video id="video-homepage" muted playsinline preload="none">
+                <source src="https://prayagindia.com/themes/custom/prayag/assets/images/PrayagHomepageVideo.webm" type="video/webm">
+            </video>
+            <picture id="pic-homepage">
+                <source
+                    media="(max-width: 768px)"
+                    srcset="https://prayagindia.com/themes/custom/prayag/assets/images/Prayag-mobile-banner-3.webp"
+                    type="image/webp">
+                <source
+                    media="(min-width: 769px)"
+                    srcset="https://prayagindia.com/themes/custom/prayag/assets/images/prayag-homepage/Malaika-banner.webp"
+                    type="image/webp">
+                <img
+                    id="mob-video-homepage"
+                    src="https://prayagindia.com/themes/custom/prayag/assets/images/prayag-homepage/Malaika-banner.webp"
+                    alt="Prayag Malaika"
+                    loading="lazy"
+                    decoding="async"
+                    width="1920"
+                    height="840">
+            </picture>
+        </div>
+
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-dot active" data-index="0"></div>
+        <div class="progress-dot" data-index="1"></div>
+        <div class="progress-dot" data-index="2"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="video-controls">
+        <button class="control-btn" id="sound-toggle" aria-label="Toggle sound">
+            <svg id="sound-off-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+            </svg>
+            <svg id="sound-on-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none;">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+        </button>
+
+        <button class="control-btn" id="next-video" aria-label="Next video">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const videoSlides  = document.querySelectorAll('.video-slide');
+    const progressDots = document.querySelectorAll('.progress-dot');
+    const soundToggle  = document.getElementById('sound-toggle');
+    const nextVideoBtn = document.getElementById('next-video');
+    const soundOffIcon = document.getElementById('sound-off-icon');
+    const soundOnIcon  = document.getElementById('sound-on-icon');
+
+    let currentVideoIndex = 0;
+    let isMuted           = true;
+    let isLooping         = true;
+    let lcpFired          = false;
+
+    /* --------------------------------------------------
+       Track LCP — don't swap video in until it fires
+    -------------------------------------------------- */
+    if ('PerformanceObserver' in window) {
+        try {
+            const lcpObserver = new PerformanceObserver(() => {
+                lcpFired = true;
+                lcpObserver.disconnect();
+            });
+            lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+        } catch (e) {
+            lcpFired = true;
+        }
+    } else {
+        lcpFired = true;
+    }
+
+    /* --------------------------------------------------
+       Swap thumbnail <picture> → <video> after LCP fired
+    -------------------------------------------------- */
+    function trySwapToVideo(video) {
+        if (!video || video.dataset.swapped === 'true') return;
+
+        const doSwap = () => {
+            video.dataset.swapped = 'true';
+            video.classList.add('video-ready');
+
+            // Hide sibling <picture> for older browsers
+            const picture = video.parentElement.querySelector('picture');
+            if (picture) picture.classList.add('img-hidden');
+
+            video.play().catch(e => console.log('Autoplay prevented:', e));
+        };
+
+        const onCanPlay = () => {
+            video.removeEventListener('canplay', onCanPlay);
+            if (lcpFired) {
+                doSwap();
+            } else {
+                let waited = 0;
+                const poll = setInterval(() => {
+                    waited += 50;
+                    if (lcpFired || waited >= 3000) {
+                        clearInterval(poll);
+                        doSwap();
+                    }
+                }, 50);
+            }
+        };
+
+        if (video.readyState >= 3) {
+            onCanPlay();
+        } else {
+            video.addEventListener('canplay', onCanPlay);
+        }
+    }
+
+    /* --------------------------------------------------
+       Start loading a video (deferred)
+    -------------------------------------------------- */
+    function startLoadingVideo(slide) {
+        const video = slide.querySelector('video');
+        if (!video || video.dataset.loadStarted === 'true') return;
+        video.dataset.loadStarted = 'true';
+        video.preload = 'auto';
+        video.load();
+        trySwapToVideo(video);
+    }
+
+    /* --------------------------------------------------
+       Event listeners on all video elements
+    -------------------------------------------------- */
+    function setupVideoEventListeners() {
+        videoSlides.forEach((slide, index) => {
+            const video = slide.querySelector('video');
+            if (!video) return;
+            video.addEventListener('ended', () => {
+                if (isLooping) nextVideo();
+            });
+            video.addEventListener('error', (e) => {
+                console.warn('Video error on slide', index, e);
+            });
+        });
+    }
+
+    /* --------------------------------------------------
+       Switch to slide by index
+    -------------------------------------------------- */
+    function switchVideo(index) {
+        if (index < 0 || index >= videoSlides.length) return;
+
+        const currentVideo = videoSlides[currentVideoIndex].querySelector('video');
+        if (currentVideo) currentVideo.pause();
+
+        videoSlides[currentVideoIndex].classList.remove('active');
+        progressDots[currentVideoIndex].classList.remove('active');
+
+        currentVideoIndex = index;
+
+        videoSlides[currentVideoIndex].classList.add('active');
+        progressDots[currentVideoIndex].classList.add('active');
+
+        const newSlide = videoSlides[currentVideoIndex];
+        const newVideo = newSlide.querySelector('video');
+
+        if (newVideo) {
+            newVideo.muted = isMuted;
+            if (newVideo.dataset.loadStarted !== 'true') {
+                startLoadingVideo(newSlide);
+            } else if (newVideo.dataset.swapped === 'true') {
+                newVideo.currentTime = 0;
+                newVideo.play().catch(e => console.log('Autoplay prevented:', e));
+            } else {
+                trySwapToVideo(newVideo);
+            }
+        }
+    }
+
+    function nextVideo() {
+        switchVideo((currentVideoIndex + 1) % videoSlides.length);
+    }
+
+    /* --------------------------------------------------
+       Sound toggle
+    -------------------------------------------------- */
+    soundToggle.addEventListener('click', function () {
+        isMuted = !isMuted;
+        videoSlides.forEach(slide => {
+            const video = slide.querySelector('video');
+            if (video) video.muted = isMuted;
+        });
+        soundOffIcon.style.display = isMuted  ? 'block' : 'none';
+        soundOnIcon.style.display  = !isMuted ? 'block' : 'none';
+    });
+
+    /* --------------------------------------------------
+       Navigation
+    -------------------------------------------------- */
+    nextVideoBtn.addEventListener('click', nextVideo);
+
+    progressDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            if (index !== currentVideoIndex) switchVideo(index);
+        });
+    });
+
+    /* --------------------------------------------------
+       Pause / resume on tab visibility change
+    -------------------------------------------------- */
+    document.addEventListener('visibilitychange', () => {
+        const currentVideo = videoSlides[currentVideoIndex].querySelector('video');
+        if (currentVideo && currentVideo.dataset.swapped === 'true') {
+            document.hidden
+                ? currentVideo.pause()
+                : currentVideo.play().catch(() => {});
+        }
+    });
+
+    /* --------------------------------------------------
+       Init
+    -------------------------------------------------- */
+    setupVideoEventListeners();
+
+    // Defer first video load until browser is idle
+    // so LCP <img> inside <picture> paints first
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(
+            () => startLoadingVideo(videoSlides[0]),
+            { timeout: 2500 }
+        );
+    } else {
+        setTimeout(() => startLoadingVideo(videoSlides[0]), 800);
+    }
+
+    console.log('Video showcase ready —', videoSlides.length, 'slides');
+});
+</script>
+<section class="explore-products">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="main-head text-white">Explore Our Products</h1>
+            </div>
+                    
+            <div class="col-6 col-md-4">
+                <a href="https://prayagindia.com/plumbing-solutions">
+                    <div class="product-box mb-4">
+                        <div class="product-box-img">
+                                                                                                         
+
+                    <img src="/sites/default/files/2026-08/Plumbing%20%20pipe.png" alt="Plumbing pipe" width="100%" height="100%">
+                                                    
+                        </div>
+                        <span>Plumbing Solutions</span>
+                    </div>
+                </a>
+            </div>
+                                 
+            <div class="col-6 col-md-4">
+                <a href="https://prayagindia.com/faucets">
+                    <div class="product-box mb-4">
+                        <div class="product-box-img">
+                                                                                                         
+
+                    <img src="/sites/default/files/2025-07/PTMT.webp" alt="PTMT" width="100%" height="100%">
+                                                    
+                        </div>
+                        <span>CP Faucets</span>
+                    </div>
+                </a>
+            </div>
+                                 
+            <div class="col-6 col-md-4">
+                <a href="https://prayagindia.com/ptmt-taps">
+                    <div class="product-box mb-4">
+                        <div class="product-box-img">
+                                                                                                         
+
+                    <img src="/sites/default/files/2026-06/New2.webp" alt="ptmp banner" width="100%" height="100%">
+                                                    
+                        </div>
+                        <span>PTMT</span>
+                    </div>
+                </a>
+            </div>
+                                 
+            <div class="col-6 col-md-4">
+                <a href="https://prayagindia.com/ceramicware">
+                    <div class="product-box mb-4">
+                        <div class="product-box-img">
+                                                                                                         
+
+                    <img src="/sites/default/files/2025-07/Ceramicware.webp" alt="Ceramicware" width="100%" height="100%">
+                                                    
+                        </div>
+                        <span>CeramicWare</span>
+                    </div>
+                </a>
+            </div>
+                                 
+            <div class="col-6 col-md-4">
+                <a href="https://prayagindia.com/pipes-fittings">
+                    <div class="product-box mb-4">
+                        <div class="product-box-img">
+                                                                                                         
+
+                    <img src="/sites/default/files/2025-07/Pipes.webp" alt="Pipes" width="100%" height="100%">
+                                                    
+                        </div>
+                        <span>Pipes &amp; Fittings</span>
+                    </div>
+                </a>
+            </div>
+                                 
+            <div class="col-6 col-md-4">
+                <a href="https://prayagindia.com/kitchen-sinks">
+                    <div class="product-box mb-4">
+                        <div class="product-box-img">
+                                                                                                         
+
+                    <img src="/sites/default/files/2025-07/Kitchen%20sinks.webp" alt="Kitchen sinks" width="100%" height="100%">
+                                                    
+                        </div>
+                        <span>Kitchen Sinks</span>
+                    </div>
+                </a>
+            </div>
+                                 
+            <div class="col-6 col-md-4">
+                <a href="https://prayagindia.com/water-heaters">
+                    <div class="product-box mb-4">
+                        <div class="product-box-img">
+                                                                                                         
+
+                    <img src="/sites/default/files/2025-07/Waterheaters.webp" alt="Waterheaters" width="100%" height="100%">
+                                                    
+                        </div>
+                        <span>Water Heaters</span>
+                    </div>
+                </a>
+            </div>
+                                 
+            <div class="col-6 col-md-4">
+                <a href="https://prayagindia.com/storage-tank">
+                    <div class="product-box mb-4">
+                        <div class="product-box-img">
+                                                                                                         
+
+                    <img src="/sites/default/files/2025-07/water%20tanks.webp" alt="water tanks" width="100%" height="100%">
+                                                    
+                        </div>
+                        <span>Storage Tank</span>
+                    </div>
+                </a>
+            </div>
+                                 
+            <div class="col-6 col-md-4">
+                <a href="https://prayagindia.com/bathroom-accessories">
+                    <div class="product-box mb-4">
+                        <div class="product-box-img">
+                                                                                                         
+
+                    <img src="/sites/default/files/2025-07/Bathroom%20accesssories.webp" alt="Bathroom accesssories" width="100%" height="100%">
+                                                    
+                        </div>
+                        <span>Bathroom Accessories</span>
+                    </div>
+                </a>
+            </div>
+                                 
+            <div class="col-6 col-md-4">
+                <a href="https://prayagindia.com/hardware">
+                    <div class="product-box mb-4">
+                        <div class="product-box-img">
+                                                                                                         
+
+                    <img src="/sites/default/files/2025-07/Hardware.webp" alt="Hardware" width="100%" height="100%">
+                                                    
+                        </div>
+                        <span>Hardware</span>
+                    </div>
+                </a>
+            </div>
+                                                  </div>
+    </div>
+</section>
+
+
+ 			
+
+                                        
+<section class="why-prayag">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="why-prayag-left">
+                                                                              
+                                                                 <img src="/sites/default/files/2025-03/Why%20Prayag-1.webp" alt="" width="100%" height="100%" loading="lazy">
+                                                                                
+                                                                                                    
+                                
+                    <div class="why-prayag-cont">
+                    <h2 class="mb-5">Why Prayag</h2>
+                    <ul>
+                        
+                      
+                                                        <li>
+                    <div class="why-point">
+                        <div class="point-img">
+                                                            <img src="/sites/default/files/2024-09/Unparalleled%20Quality.webp" alt="" width="50px" height="50px" loading="lazy">
+                                                    </div>
+                        <div class="point-content">
+                                                      <h3>India's First PTMT Innovator</h3><p>Rust-proof bathware since 1986, delivering unmatched durability&nbsp;</p>
+                                                    </div>
+                    </div>
+                </li>
+                            <li>
+                    <div class="why-point">
+                        <div class="point-img">
+                                                            <img src="/sites/default/files/2024-09/Virtual%20Endless%20option.webp" alt="" width="50px" height="50px" loading="lazy">
+                                                    </div>
+                        <div class="point-content">
+                                                      <h3>Everything Under One Roof</h3><p>A complete bath-and-plumbing portfolio with over 4,500 SKUs across 9 categories</p>
+                                                    </div>
+                    </div>
+                </li>
+                            <li>
+                    <div class="why-point">
+                        <div class="point-img">
+                                                            <img src="/sites/default/files/2024-09/World-class%20Service%20%26%20Support.webp" alt="" width="50px" height="50px" loading="lazy">
+                                                    </div>
+                        <div class="point-content">
+                                                      <h3>Wherever You Are</h3><p>Nationwide reach &nbsp;with 400+ channel partners &amp; 15,000+ retail outlets</p>
+                                                    </div>
+                    </div>
+                </li>
+                            <li>
+                    <div class="why-point">
+                        <div class="point-img">
+                                                            <img src="/sites/default/files/2025-07/Credibility%20Built%20In.webp" alt="" width="50px" height="50px" loading="lazy">
+                                                    </div>
+                        <div class="point-content">
+                                                      <h3>Credibility Built In</h3><p>Trusted by leading clients across industries for decades</p>
+                                                    </div>
+                    </div>
+                </li>
+                            <li>
+                    <div class="why-point">
+                        <div class="point-img">
+                                                            <img src="/sites/default/files/2025-07/Eco%20Smart%20Solutions.webp" alt="" width="50px" height="50px" loading="lazy">
+                                                    </div>
+                        <div class="point-content">
+                                                      <h3>Eco Smart Solutions</h3><p>Sustainable innovation that delivers performance while keeping resources in check</p>
+                                                    </div>
+                    </div>
+                </li>
+                        
+                   
+
+                    </ul>
+
+                    <a href="https://prayagindia.com/manufacturing-process" class="prayag-btn bg-blue p-bt-c"><svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.2308 5.99866C21.2211 5.78469 21.1301 5.53538 20.9771 5.37908L15.9807 0.279282C15.6418 -0.0128267 14.993 -0.133765 14.6154 0.204859C14.2436 0.537901 14.2533 1.18352 14.6251 1.51656L18.1381 5.09813H0.937304C0.420215 5.09813 0 5.50188 0 5.99864C0 6.49542 0.420245 6.89914 0.937304 6.89914H18.1381L14.6251 10.4807C14.3055 10.7877 14.2455 11.4557 14.6154 11.7924C14.9834 12.1292 15.6573 12.0213 15.9807 11.718L20.9771 6.61819C21.1475 6.4433 21.2308 6.23868 21.2308 5.99866Z" fill="black"/>
+                        </svg>
+                        Know More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="why-prayag-img">
+                                                        
+                                                 <img src="/sites/default/files/2025-07/whyprayag_home.webp" alt="" width="100%" height="100%" loading="lazy">
+                                                                
+                                
+                                                                    </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="experience-section" style="background-color: #000;">
+    <div class="container-fluid"> 
+        <div class="row align-items-center">
+            <div class="col-md-5">
+                <div class="experience-text">
+                    <h2 style="color: #fff;">Experience Prayag</h2>
+                    <p style="color: #fff;">Every single day of your life, we at Prayag, desire to give you that feeling of contentment, satisfaction, and joy, by using our meticulously crafted products that have been designed with only you in mind.</p>
+                    <a href="https://prayagindia.com/manufacturing-process" class="prayag-btn"><svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.2308 5.99866C21.2211 5.78469 21.1301 5.53538 20.9771 5.37908L15.9807 0.279282C15.6418 -0.0128267 14.993 -0.133765 14.6154 0.204859C14.2436 0.537901 14.2533 1.18352 14.6251 1.51656L18.1381 5.09813H0.937304C0.420215 5.09813 0 5.50188 0 5.99864C0 6.49542 0.420245 6.89914 0.937304 6.89914H18.1381L14.6251 10.4807C14.3055 10.7877 14.2455 11.4557 14.6154 11.7924C14.9834 12.1292 15.6573 12.0213 15.9807 11.718L20.9771 6.61819C21.1475 6.4433 21.2308 6.23868 21.2308 5.99866Z" fill="black"></path>
+                        </svg>
+                        Explore Products</a>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-6 slider-marquee">
+                      <div class="marquee-wrapper">
+                        <div class="marquee-content">
+                          <div class="marquee-inner">
+                            
+                            <img src="https://prayagindia.com/sites/default/files/2025-04/3.webp" alt="Image 1">
+                            <img src="https://prayagindia.com/sites/default/files/styles/webp/public/2025-04/4.webp" alt="Image 2">
+                           <img src="https://prayagindia.com/sites/default/files/2025-04/5.webp" alt="Image 4">
+                           
+                          </div>
+                    
+                          <div class="marquee-inner">
+                            
+                            <img src="https://prayagindia.com/sites/default/files/2025-04/3.webp" alt="Image 1">
+                            <img src="https://prayagindia.com/sites/default/files/styles/webp/public/2025-04/4.webp" alt="Image 2">
+                           <img src="https://prayagindia.com/sites/default/files/2025-04/5.webp" alt="Image 4">
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-6 slider-marquee2">
+                        
+                    <div class="marquee-wrapper">
+                        <div class="marquee-content">
+                          <div class="marquee-inner">
+                               <img src="https://prayagindia.com/sites/default/files/styles/webp/public/2025-04/washroom.webp" alt="Image 1">
+                            <img src="https://prayagindia.com/sites/default/files/2025-04/sink.webp" alt="Image 4">
+                            <img src="https://prayagindia.com/sites/default/files/2025-04/1.webp" alt="Image 4">
+                                                     </div>
+                    
+                          <div class="marquee-inner">
+                               <img src="https://prayagindia.com/sites/default/files/styles/webp/public/2025-04/washroom.webp" alt="Image 1">
+                            <img src="https://prayagindia.com/sites/default/files/2025-04/sink.webp" alt="Image 4">
+                            <img src="https://prayagindia.com/sites/default/files/2025-04/1.webp" alt="Image 4">
+                                                      </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="customer-service">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="production_box cbh">
+                    <div class="pro_box_flex">
+                        <div class="p_b_f_img">
+                            <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M26.4976 18.3109H23.5392V13.0327C23.5392 12.7934 23.4041 12.5713 23.1852 12.4514C22.9657 12.3304 22.6955 12.3304 22.4749 12.4488L12.4517 17.8577V13.0718C12.4517 12.832 12.3166 12.6104 12.0972 12.4905C11.8783 12.3695 11.6081 12.3695 11.3875 12.4879L0.420739 18.3984C0.140613 18.5501 0 18.6784 0 18.9834V38.328C0 38.6992 0.318169 39 0.710788 39H38.2887C38.6813 39 39 38.6992 39 38.328V18.9834C39 18.6122 38.6813 18.3108 38.2887 18.3108H35.7394L34.6189 0.631882C34.5974 0.276835 34.2858 0 33.9087 0H28.3289C27.9517 0 27.6407 0.276835 27.6192 0.631882L26.4976 18.3109ZM37.5751 19.6559H22.8277C22.4351 19.6559 22.1164 19.3546 22.1164 18.9834V14.1906L12.1544 19.5673C12.0601 19.6184 11.9548 19.6476 11.8484 19.6544H11.7034C11.3278 19.6372 11.029 19.3426 11.029 18.9834V14.2297L1.42206 19.4073V37.6548H37.577C37.577 37.6548 37.577 19.6555 37.5753 19.6555L37.5751 19.6559ZM23.398 25.4201C23.398 25.0489 23.0798 24.7475 22.6872 24.7475H16.1242C15.7316 24.7475 15.4129 25.0489 15.4129 25.4201V31.8911C15.4129 32.2623 15.7316 32.5636 16.1242 32.5636H22.6872C23.0798 32.5636 23.398 32.2623 23.398 31.8911V25.4201ZM34.0007 25.4201C34.0007 25.0489 33.682 24.7475 33.2894 24.7475H26.7269C26.3343 24.7475 26.0156 25.0489 26.0156 25.4201V31.8911C26.0156 32.2623 26.3343 32.5636 26.7269 32.5636H33.2894C33.682 32.5636 34.0007 32.2623 34.0007 31.8911V25.4201ZM12.7965 25.4201C12.7965 25.0489 12.4777 24.7475 12.0851 24.7475H5.52211C5.12951 24.7475 4.81132 25.0489 4.81132 25.4201V31.8911C4.81132 32.2623 5.12949 32.5636 5.52211 32.5636H12.0851C12.4777 32.5636 12.7965 32.2623 12.7965 31.8911V25.4201ZM21.9765 26.0921V31.2186H16.8361V26.0921H21.9765ZM32.5792 26.0921V31.2186H27.4383V26.0921H32.5792ZM11.3735 26.0921V31.2186H6.23317V26.0921H11.3735ZM33.5335 5.99476H28.7047L27.9238 18.3106H34.3148L33.5335 5.99476ZM33.4485 4.65023L33.2395 1.34427H28.9991L28.7885 4.65023H33.4485Z" fill="black"/>
+                                </svg>
+                                
+                        </div>
+                        <div class="p_b_f_content">
+                            <p>Production Units</p>
+                            <h2>5</h2>
+                        </div>
+                    </div>
+
+                    <div class="pro_box_flex">
+                        <div class="p_b_f_img">
+                            <svg width="39" height="27" viewBox="0 0 39 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.74959 0V1.92844H1.94984V9.64257H0V0.000362097L9.74959 0ZM29.2499 0V1.92844H37.0496V9.64257H38.9995V0.000362097L29.2499 0ZM37.0496 25.071H29.2499V26.9995H39L38.9996 17.3572H37.0498L37.0496 25.071ZM1.95021 17.3569H0.000365418V27L9.74959 26.9996V25.0712H1.94984L1.95021 17.3569ZM17.5502 21.2141L15.6 21.2138V5.78588H17.5499L17.5502 21.2141ZM33.1503 5.78533H31.2001V21.2141H33.1499L33.1503 5.78533ZM13.65 5.78533H9.74995V21.2141L13.65 21.2138V5.78533ZM25.3498 5.78533H19.4999V21.2141H25.3498V5.78533ZM7.80011 5.78533H5.85026V21.2141L7.80011 21.2138V5.78533ZM29.25 5.78533H27.2998V21.2141H29.2497L29.25 5.78533Z" fill="black"/>
+                                </svg>
+                                
+                        </div>
+                        <div class="p_b_f_content">
+                            <p>SKUs</p>
+                            <h2>4500+</h2>
+                        </div>
+                    </div>
+
+                    <div class="pro_box_flex">
+                        <div class="p_b_f_img">
+                            <svg width="39" height="25" viewBox="0 0 39 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.4499 10.1219C21.7692 10.1219 23.6568 7.6709 23.6568 4.658C23.6568 1.82845 22.0501 0 19.563 0C17.4126 0 15.243 1.44038 15.243 4.658C15.2427 7.67127 17.1299 10.1219 19.4499 10.1219H19.4499ZM19.5628 1.26289C21.3631 1.26289 22.438 2.53191 22.438 4.658C22.438 6.97431 21.0977 8.85898 19.45 8.85898C17.8024 8.85898 16.462 6.97431 16.462 4.658C16.4617 2.15258 18.1323 1.26289 19.5628 1.26289ZM7.73484 12.7255C9.7076 12.7255 11.3125 10.6539 11.3125 8.10747C11.3125 5.70585 9.94518 4.15405 7.82874 4.15405C5.66711 4.15405 4.1575 5.77991 4.1575 8.10747C4.15785 10.6539 5.76272 12.7255 7.73484 12.7255ZM7.82874 5.41619C9.2683 5.41619 10.0937 6.39705 10.0937 8.10673C10.0937 9.95692 9.03565 11.4619 7.73483 11.4619C6.43401 11.4619 5.37598 9.95692 5.37598 8.10673C5.37668 6.12291 6.64316 5.41619 7.82874 5.41619ZM34.0711 13.2813H28.3852C28.094 13.2813 27.8043 13.3104 27.5188 13.3637C26.4471 11.9651 24.7956 11.0638 22.9419 11.0638L16.05 11.0641C14.1968 11.0641 12.546 11.9647 11.474 13.3626C11.1909 13.3107 10.9043 13.282 10.616 13.282L4.93 13.2816C2.21168 13.2816 0 15.5732 0 18.3898V24.3687C0 24.7172 0.272567 25 0.609243 25L10.8129 24.9996H38.3908C38.7271 24.9996 39 24.7172 39 24.3684V18.3894C39 15.5729 36.789 13.2813 34.0707 13.2813L34.0711 13.2813ZM1.21881 18.3895C1.21881 16.2692 2.88358 14.5442 4.92996 14.5442H10.6159C10.6643 14.5442 10.7126 14.5453 10.7606 14.5471C10.7505 14.5696 10.7438 14.5928 10.734 14.615C10.6727 14.7544 10.6177 14.8967 10.5662 15.0411C10.5452 15.101 10.522 15.1595 10.5028 15.2197C10.4579 15.3606 10.4204 15.5047 10.3851 15.6499C10.3696 15.7134 10.3514 15.7762 10.3378 15.8401C10.3062 15.9911 10.2838 16.145 10.2638 16.3C10.2558 16.3588 10.2442 16.4162 10.2379 16.4746C10.2158 16.6873 10.2036 16.9022 10.2036 17.1208V23.7367L4.73269 23.7371V19.2174C4.73269 18.8689 4.46012 18.5861 4.12344 18.5861C3.78712 18.5861 3.5142 18.8685 3.5142 19.2174V23.7371H1.21875L1.21881 18.3895ZM11.4225 17.1212C11.4225 16.9742 11.4312 16.8286 11.4435 16.6849C11.4477 16.6391 11.4533 16.5937 11.4586 16.5484C11.4701 16.4482 11.4848 16.3494 11.5027 16.2507C11.5115 16.2017 11.5195 16.1527 11.53 16.1037C11.5535 15.9912 11.5815 15.8805 11.6131 15.7712C11.6327 15.7019 11.6551 15.6332 11.6782 15.565C11.7042 15.4877 11.7301 15.4107 11.7592 15.3352C11.7872 15.2637 11.8177 15.1933 11.8492 15.1236C11.8709 15.0749 11.8933 15.027 11.9168 14.9788C11.9554 14.9 11.9942 14.8216 12.0366 14.7446C12.0492 14.7214 12.0633 14.6996 12.0766 14.6767C12.1263 14.5907 12.1768 14.5054 12.2321 14.4223C12.2353 14.4176 12.2367 14.4121 12.2395 14.4074C13.075 13.1525 14.4708 12.327 16.0505 12.327H22.942C24.522 12.327 25.9178 13.1528 26.753 14.4084C26.7561 14.4139 26.7575 14.4197 26.7614 14.4244C26.8171 14.509 26.8686 14.5954 26.9187 14.6828C26.9309 14.7039 26.9436 14.7242 26.9558 14.7456C26.9986 14.823 27.0378 14.9014 27.0763 14.9805C27.0995 15.028 27.1219 15.0756 27.1433 15.1242C27.1748 15.1947 27.2053 15.2651 27.2333 15.3362C27.2627 15.4114 27.2886 15.4883 27.3142 15.5653C27.3366 15.6317 27.3587 15.6989 27.378 15.7664C27.4099 15.8775 27.4379 15.9904 27.4617 16.1047C27.4719 16.1526 27.4799 16.2016 27.4883 16.2503C27.5055 16.349 27.5206 16.4485 27.5325 16.549C27.5377 16.594 27.5433 16.6394 27.5475 16.6848C27.5602 16.8289 27.5693 16.9741 27.5693 17.1211V23.7371H24.5291L24.5287 18.1251C24.5287 17.7766 24.2561 17.4938 23.9195 17.4938C23.5831 17.4938 23.3102 17.7762 23.3102 18.1251V23.7371H15.6813V18.1251C15.6813 17.7766 15.4087 17.4938 15.072 17.4938C14.7357 17.4938 14.4628 17.7762 14.4628 18.1251V23.7371H11.4226L11.4225 17.1212ZM37.7824 23.7372H35.4873V19.2174C35.4873 18.869 35.2147 18.5862 34.878 18.5862C34.5417 18.5862 34.2688 18.8686 34.2688 19.2174V23.7372H28.7878V17.1212C28.7878 16.9026 28.7752 16.6877 28.7534 16.475C28.7475 16.4162 28.7356 16.3589 28.7275 16.3008C28.7072 16.1458 28.6848 15.9915 28.6536 15.8405C28.6399 15.7763 28.6217 15.7138 28.6063 15.6503C28.5713 15.5051 28.5338 15.3614 28.4886 15.2205C28.469 15.1599 28.4465 15.1007 28.4248 15.0408C28.3737 14.8967 28.319 14.7555 28.258 14.6165C28.2482 14.5936 28.2412 14.57 28.2307 14.5475C28.2819 14.545 28.3334 14.5442 28.3849 14.5442H34.0708C36.1171 14.5442 37.782 16.2692 37.782 18.3895L37.7824 23.7372ZM31.1904 12.7252C33.1631 12.7252 34.7681 10.6536 34.7681 8.10719C34.7681 5.70557 33.4007 4.15377 31.2843 4.15377C29.1227 4.15377 27.613 5.77963 27.613 8.10719C27.613 10.6536 29.2176 12.7252 31.1904 12.7252ZM31.2843 5.41592C32.7238 5.41592 33.5492 6.39677 33.5492 8.10645C33.5492 9.95664 32.4912 11.4616 31.1904 11.4616C29.8896 11.4616 28.8315 9.95664 28.8315 8.10645C28.8315 6.12263 30.0987 5.41592 31.2843 5.41592Z" fill="black"/>
+                                </svg>
+                                
+                        </div>
+                        <div class="p_b_f_content">
+                            <p>Employees</p>
+                            <h2>1600+</h2>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4 cpr">
+                <div class="customer_box cbh">
+                    <h3>Customer Service</h3>
+                    <p>Prayag’s after-sales service guarantees fast responses, expert assistance, and hassle-free support for every valued customer.</p>
+                     <a href="https://prayagindia.com/contact-us" class="prayag-btn"><svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.2308 5.99866C21.2211 5.78469 21.1301 5.53538 20.9771 5.37908L15.9807 0.279282C15.6418 -0.0128267 14.993 -0.133765 14.6154 0.204859C14.2436 0.537901 14.2533 1.18352 14.6251 1.51656L18.1381 5.09813H0.937304C0.420215 5.09813 0 5.50188 0 5.99864C0 6.49542 0.420245 6.89914 0.937304 6.89914H18.1381L14.6251 10.4807C14.3055 10.7877 14.2455 11.4557 14.6154 11.7924C14.9834 12.1292 15.6573 12.0213 15.9807 11.718L20.9771 6.61819C21.1475 6.4433 21.2308 6.23868 21.2308 5.99866Z" fill="black"></path>
+                        </svg>
+                        Know More</a>
+                </div>
+            </div>
+
+            <div class="col-md-4 cpl">
+                <div class="customer_box_img cbh">
+                    <img src="https://prayagindia.com/sites/default/files/2025-01/Customer-Service.webp" alt="Customer-Service-image" width="100%" height="100%" loading="lazy">
+                </div>
+            </div>
+
+                                                                                                            
+                                                            
+                                                                                                            
+        </div>
+    </div>
+</section>
+
+    
+                     
+                                
+ 
+
+
+
+
+
+
+    
+
+    
+
+
+ <section class="official-ipl">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-md-7">
+                    <div class="ipl-head">
+                        <h2 class="mb-0">Fueling India’s Sporting Spirit</h2>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="ipl-rt-cont">
+                        <p>At Prayag, our commitment extends beyond products to celebrating Indian sports. We've proudly supported teams like Kings XI Punjab, U Mumba, and events like the Arise Asia Cup, reflecting our belief in the unifying power of sports and our dedication to nurturing talent and championing the spirit of competition.</p>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="clients-section">
+                        <div class="logo-slider-container" id="logoSlider">
+                              <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/King-XI-punjab.webp" alt="Punjab Kings" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Punjab+Kings'">
+                                </div>
+                                 <p>2012-16, 18 & 19</p>
+                            </div>
+                            <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/arise-cup.webp" alt="Punjab Kings" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Punjab+Kings'">
+                                </div>
+                                 <p>2014</p>
+                            </div>
+                             <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/Prayag_cup.webp" alt="Prayag Cup" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Prayag+Cup'">
+                                </div>
+                                 <p>2015 & 2016</p>
+                            </div>
+                            <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/Miss_diva.webp" alt="Miss Diva" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Miss+Diva'">
+                                </div>
+                                 <p>2015-16</p>
+                            </div>
+                             <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/Delhi_Dynamos.webp" alt="Punjab Kings" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Punjab+Kings'">
+                                </div>
+                                 <p>2015-17</p>
+                            </div>
+                            <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/FBB-prayag.webp" alt="Punjab Kings" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Punjab+Kings'">
+                                </div>
+                                 <p>2015-2017</p>
+                            </div>
+                            <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/Atleticode_kolkata_logo.webp" alt="Punjab Kings" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Punjab+Kings'">
+                                </div>
+                                 <p>2016</p>
+                            </div>
+                            <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/Delhi_waveriders.webp" alt="Punjab Kings" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Punjab+Kings'">
+                                    
+                                </div>
+                                 <p>2016-17</p>
+                            </div>
+                            <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/Patna_pirates.webp" alt="Patna Pirates" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Patna+Pirates'">
+                                </div>
+                                 <p>2016-18</p>
+                            </div>
+                             <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/Telgu_titans.webp" alt="Telugu Titans" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Telugu+Titans'">
+                                </div>
+                                <p>2019</p>
+                            </div>
+                            <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/U_mumba.webp" alt="U Mumba" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=U+Mumba'">
+                                   
+                                </div>
+                                 <p>2022 & 2024</p>
+                            </div>
+                            
+                            <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/Tech_mahindra.webp" alt="Tech Mahindra" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Tech+Mahindra'">
+                                </div>
+                                 <p>2023</p>
+                            </div>
+                            <div class="logo-item">
+                                <div class="logo-box">
+                                    <img src="https://prayagindia.com/themes/custom/prayag/assets/images/Lucknow_super_gainats.webp" alt="Lucknow Super Giants" onerror="this.src='https://via.placeholder.com/150x80/007bff/ffffff?text=Lucknow+Super+Giants'">
+                                </div>
+                                 <p>2023</p>
+                            </div>
+                          
+                           
+                            
+                           
+                            
+                            
+                            
+                            
+                             
+                            
+                             
+                             
+                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="insights">
+    <div class="container-fluid">
+        <div class="row align-items-start">
+            <div class="col-md-6">
+                <div class="insight_head">
+                    <h2 class="mb-5">Our Latest Insights</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="text-end">
+                    <a href="https://prayagindia.com/blog" class="prayag-btn px-0 insight_btn"><svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.2308 5.99866C21.2211 5.78469 21.1301 5.53538 20.9771 5.37908L15.9807 0.279282C15.6418 -0.0128267 14.993 -0.133765 14.6154 0.204859C14.2436 0.537901 14.2533 1.18352 14.6251 1.51656L18.1381 5.09813H0.937304C0.420215 5.09813 0 5.50188 0 5.99864C0 6.49542 0.420245 6.89914 0.937304 6.89914H18.1381L14.6251 10.4807C14.3055 10.7877 14.2455 11.4557 14.6154 11.7924C14.9834 12.1292 15.6573 12.0213 15.9807 11.718L20.9771 6.61819C21.1475 6.4433 21.2308 6.23868 21.2308 5.99866Z" fill="black"></path>
+                    </svg>View all Insights</a>
+                </div>
+            </div>
+</div>
+             <div class="row">
+         
+            
+           <div class="col-md-4">
+      <a href="/double-bowl-kitchen-sink-price">
+        <div class="insight_box">
+          <div class="insight_img">
+                                                                                                                <img src="/sites/default/files/2026-10/Double%20Bowl%20Kitchen%20Sink%20Price%20Complete%20Size%20Buying%20Guide.webp" alt="Double Bowl Kitchen Sink Price Complete Size Buying Guide." width="100%" height="100%" loading="lazy">
+                                                                      </div>
+          <h3>Double Bowl Kitchen Sink Price Complete Size Buying Guide.webp</h3>
+        </div>
+      </a>
+    </div>
+      <div class="col-md-4">
+      <a href="/kitchen-sink-with-drain-board-price">
+        <div class="insight_box">
+          <div class="insight_img">
+                                                                                                                <img src="/sites/default/files/2026-10/Kitchen%20Sink%20with%20Drain%20Board%20Price%20Complete%20Buying%20Guide.webp" alt="Kitchen Sink with Drain Board Price Complete Buying Guide" width="100%" height="100%" loading="lazy">
+                                                                      </div>
+          <h3>Kitchen Sink with Drain Board Price and Buying Guide</h3>
+        </div>
+      </a>
+    </div>
+      <div class="col-md-4">
+      <a href="/single-bowl-kitchen-sink-price">
+        <div class="insight_box">
+          <div class="insight_img">
+                                                                                                                <img src="/sites/default/files/2026-10/Single%20Bowl%20Kitchen%20Sink%20Price%20Complete%20Size%20Buying%20Guide.webp" alt="Single Bowl Kitchen Sink Price Complete Size Buying Guide" width="100%" height="100%" loading="lazy">
+                                                                      </div>
+          <h3>Single Bowl Kitchen Sink Price Complete Size Buying Guide</h3>
+        </div>
+      </a>
+    </div>
+          </div>
+    </div>
+</section>
+
+<section class="stay_touch">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="mb-5">Stay in Touch</h2>
+            </div>
+
+            <div class="col-md-4">
+                <a href="https://prayagindia.com/contact-us">
+                <div class="stay_box">
+                    <div class="stay_box_img">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M31.105 12.7705L28.8666 12.0054C28.6225 11.218 28.305 10.4551 27.9215 9.72646L28.9672 7.6034C29.2167 7.09522 29.1178 6.48422 28.716 6.08605L25.916 3.28601C25.516 2.88606 24.9068 2.78321 24.3986 3.03479L22.2756 4.08049C21.5452 3.69524 20.7819 3.37951 19.9966 3.13543L19.2297 0.895222C19.048 0.359454 18.5434 0 17.9782 0H14.0186C13.4534 0 12.9506 0.359811 12.7671 0.895222L12.0037 3.1336C11.2146 3.37766 10.4512 3.69517 9.72481 4.07865L7.60359 3.0347C7.09541 2.78347 6.48614 2.88418 6.08623 3.28413L3.28445 6.08591C2.8863 6.48586 2.78524 7.09693 3.03502 7.60327L4.07898 9.72632C3.69372 10.4567 3.37799 11.22 3.13575 12.0052L0.893433 12.7704C0.359454 12.9521 0 13.4567 0 14.02V17.9797C0 18.5449 0.359812 19.0477 0.893433 19.2312L3.13364 19.9963C3.37949 20.7855 3.69522 21.5488 4.07687 22.2752L3.03474 24.3965C2.78531 24.9046 2.88602 25.5156 3.28597 25.9138L6.086 28.7139C6.48595 29.1138 7.09519 29.2167 7.60336 28.9651L9.72641 27.9194C10.455 28.3046 11.2184 28.6204 12.0053 28.8644L12.7687 31.1028C12.9522 31.6386 13.455 31.998 14.0202 31.998H17.9798C18.545 31.998 19.0478 31.6382 19.2313 31.1028L19.9965 28.8644C20.7838 28.6204 21.5467 28.3029 22.2754 27.9194L24.3984 28.9651C24.9084 29.2145 25.5159 29.1156 25.9158 28.7139L28.7158 25.9138C29.1158 25.5139 29.2168 24.9046 28.967 24.3965L27.9213 22.2734C28.3066 21.543 28.6223 20.7797 28.8664 19.9945L31.1048 19.2294C31.6406 19.0477 32 18.5431 32 17.9779V14.0182C32 13.4566 31.6402 12.952 31.1048 12.7703L31.105 12.7705ZM29.3583 17.0348L27.3581 17.7175C26.9342 17.8623 26.6113 18.2128 26.5031 18.646C26.2461 19.6699 25.8408 20.6461 25.2974 21.5525C25.0681 21.9377 25.048 22.4129 25.2462 22.8151L26.1819 24.7123L24.7176 26.1767L22.8203 25.241C22.4186 25.0446 21.9433 25.0629 21.5577 25.2922C20.6514 25.8352 19.6751 26.2409 18.6513 26.4978C18.2165 26.6061 17.8678 26.929 17.7227 27.3529L17.0346 29.3584H14.965L14.2844 27.3582C14.1396 26.9343 13.7891 26.6114 13.3559 26.5032C12.3302 26.2444 11.3522 25.8409 10.4494 25.2994C10.0642 25.0682 9.58895 25.0499 9.18683 25.2463L7.28956 26.182L5.82523 24.7177L6.75918 22.8204C6.95737 22.4187 6.93908 21.9435 6.70794 21.5601C6.16679 20.6537 5.7593 19.6775 5.50233 18.65C5.39231 18.2153 5.0712 17.8684 4.64724 17.7215L2.6418 17.0352V14.9655L4.64366 14.2828C5.06762 14.138 5.38873 13.7875 5.49875 13.3543C5.7557 12.3322 6.16103 11.3542 6.70436 10.4461C6.93551 10.0608 6.95379 9.58741 6.75561 9.18569L5.82165 7.28842L7.28598 5.8241L9.18325 6.75979C9.58499 6.95618 10.0602 6.9397 10.4458 6.70676C11.3486 6.16561 12.3284 5.75995 13.3523 5.50298C13.787 5.39475 14.1357 5.07186 14.2808 4.6479L14.9653 2.64246H17.035L17.7177 4.64257C17.8625 5.06653 18.213 5.38943 18.6462 5.49766C19.6701 5.75462 20.6464 6.15994 21.5527 6.70327C21.9397 6.93442 22.4132 6.9509 22.8153 6.75452L24.7125 5.81882L26.1769 7.28315L25.2412 9.18042C25.043 9.58216 25.0631 10.0574 25.2924 10.443C25.8354 11.3493 26.2411 12.3256 26.498 13.3495C26.6063 13.7842 26.9292 14.1329 27.3531 14.278L29.3532 14.9607L29.355 17.0361L29.3583 17.0348Z" fill="black"/>
+                            <path d="M15.9998 7.81085C11.4843 7.81085 7.81055 11.4842 7.81055 16.0001C7.81055 20.5161 11.4839 24.1894 15.9998 24.1894C20.5171 24.1894 24.1891 20.5161 24.1891 16.0001C24.1891 11.4842 20.5157 7.81085 15.9998 7.81085ZM15.9998 21.545C12.9429 21.545 10.4529 19.0585 10.4529 15.9998C10.4529 12.9412 12.9411 10.4547 15.9998 10.4547C19.0589 10.4547 21.5449 12.9412 21.5449 15.9998C21.5449 19.0585 19.0585 21.545 15.9998 21.545Z" fill="black"/>
+                        </svg> 
+                    </div>
+                    <div class="stay_box_cont">
+                        <h3>Need Support</h3>
+                        <p>Find out what’s new in the market, research, news, and much more</p>
+                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.2308 5.99866C21.2211 5.78469 21.1301 5.53538 20.9771 5.37908L15.9807 0.279282C15.6418 -0.0128267 14.993 -0.133765 14.6154 0.204859C14.2436 0.537901 14.2533 1.18352 14.6251 1.51656L18.1381 5.09813H0.937304C0.420215 5.09813 0 5.50188 0 5.99864C0 6.49542 0.420245 6.89914 0.937304 6.89914H18.1381L14.6251 10.4807C14.3055 10.7877 14.2455 11.4557 14.6154 11.7924C14.9834 12.1292 15.6573 12.0213 15.9807 11.718L20.9771 6.61819C21.1475 6.4433 21.2308 6.23868 21.2308 5.99866Z" fill="black"/>
+                        </svg>
+                    </div>
+                </div>
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <a href="https://prayagindia.com/contact-us">
+                <div class="stay_box">
+                    <div class="stay_box_img">
+                        <svg width="34" height="36" viewBox="0 0 34 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.929 32.3998V27.055C10.9285 26.6684 10.7398 26.3051 10.422 26.0804L10.4197 26.078C7.59895 24.0707 5.76814 20.7946 5.76814 17.0994C5.76814 10.9734 10.801 5.99938 17.0002 5.99938C23.1995 5.99938 28.2327 10.9735 28.2327 17.0994C28.2327 20.7932 26.4039 24.0683 23.5921 26.0854L23.5864 26.0901C23.272 26.3134 23.0856 26.6721 23.0856 27.0535V27.0619C23.0719 28.9916 23.0719 32.3997 23.0719 32.3997C23.0719 33.3548 22.6878 34.2708 22.0047 34.9449C21.3217 35.6208 20.3953 36 19.4288 36H14.5715C13.6056 36 12.6791 35.6208 11.9956 34.9449C11.3125 34.2708 10.9289 33.3547 10.9289 32.3997L10.929 32.3998ZM20.6485 28.8C20.6509 28.1747 20.6532 27.5624 20.657 27.0536C20.657 25.898 21.2205 24.8135 22.1648 24.1436C24.3694 22.5619 25.8042 19.9953 25.8042 17.0994C25.8042 12.2984 21.8593 8.39939 17.0002 8.39939C12.1416 8.39939 8.19667 12.2983 8.19667 17.0994C8.19667 19.993 9.62968 22.5587 11.837 24.1292C12.7907 24.8047 13.3565 25.8946 13.3575 27.0536V28.8H20.6485ZM15.7861 1.19976C15.7861 0.537296 16.3303 0 17.0001 0C17.6705 0 18.2147 0.537319 18.2147 1.19976V2.4C18.2147 3.062 17.6705 3.59976 17.0001 3.59976C16.3303 3.59976 15.7861 3.06197 15.7861 2.4V1.19976ZM7.44862 4.05101C7.11345 3.4774 7.31257 2.74287 7.89301 2.41155C8.47344 2.08032 9.21671 2.2771 9.55197 2.85071L10.34 4.19982C10.6752 4.77342 10.4761 5.50748 9.89562 5.8388C9.31519 6.17002 8.57192 5.97324 8.23666 5.39963L7.44862 4.05101ZM1.67068 11.0603C1.09025 10.7291 0.891112 9.99452 1.22629 9.42087C1.56099 8.84726 2.30431 8.65047 2.88478 8.98171L4.25042 9.76048C4.83038 10.0917 5.02998 10.8263 4.6948 11.3999C4.35964 11.9735 3.61632 12.1703 3.03584 11.8391L1.67068 11.0603ZM1.21452 19.2002C0.544172 19.2002 0 18.6624 0 18C0 17.3375 0.544184 16.8002 1.21452 16.8002H2.42855C3.0989 16.8002 3.64307 17.3375 3.64307 18C3.64307 18.6624 3.09889 19.2002 2.42855 19.2002H1.21452ZM31.5714 19.2002C30.9016 19.2002 30.3574 18.6624 30.3574 18C30.3574 17.3375 30.9016 16.8002 31.5714 16.8002H32.786C33.4563 16.8002 34 17.3375 34 18C34 18.6624 33.4563 19.2002 32.786 19.2002H31.5714ZM30.2265 11.8391C29.6461 12.1703 28.9028 11.9735 28.5676 11.3999C28.2324 10.8263 28.432 10.0918 29.012 9.76047L30.3573 8.9924C30.9378 8.66117 31.6806 8.85795 32.0163 9.43156C32.351 10.0052 32.1519 10.7411 31.5715 11.071L30.2265 11.8391ZM25.7634 5.39963C25.4282 5.97324 24.6849 6.17003 24.1049 5.8388C23.5245 5.50757 23.3253 4.77346 23.66 4.19982L24.4485 2.85071C24.7837 2.2771 25.527 2.08031 26.1075 2.41155C26.6875 2.74278 26.8871 3.47735 26.5519 4.05101L25.7634 5.39963Z" fill="black"/>
+                        </svg>
+                    </div>
+                    <div class="stay_box_cont">
+                        <h3>Careers</h3>
+                        <p>Find out what’s new in the market, research, news, and much more</p>
+                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.2308 5.99866C21.2211 5.78469 21.1301 5.53538 20.9771 5.37908L15.9807 0.279282C15.6418 -0.0128267 14.993 -0.133765 14.6154 0.204859C14.2436 0.537901 14.2533 1.18352 14.6251 1.51656L18.1381 5.09813H0.937304C0.420215 5.09813 0 5.50188 0 5.99864C0 6.49542 0.420245 6.89914 0.937304 6.89914H18.1381L14.6251 10.4807C14.3055 10.7877 14.2455 11.4557 14.6154 11.7924C14.9834 12.1292 15.6573 12.0213 15.9807 11.718L20.9771 6.61819C21.1475 6.4433 21.2308 6.23868 21.2308 5.99866Z" fill="black"/>
+                        </svg>
+                    </div>
+                </div>
+                </a>
+            </div>
+
+            <div class="col-md-4">
+                <a href="https://prayagindia.com/download-cataglogue">
+                <div class="stay_box">
+                    <div class="stay_box_img">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.5415 17.8285V1.68422C17.5415 0.754118 16.7874 0 15.8573 0C14.9272 0 14.1731 0.754118 14.1731 1.68422V17.8285L8.62696 12.2828C7.96948 11.6249 6.90285 11.6249 6.24538 12.2828C5.58748 12.9403 5.58748 14.0069 6.24538 14.6644L15.8572 24.2766L25.4694 14.6644C26.1269 14.0069 26.1269 12.9403 25.4694 12.2828C24.8115 11.6249 23.7449 11.6249 23.087 12.2828L17.5415 17.8285Z" fill="black"/>
+                            <path d="M2.38343 21.8947C3.31353 21.8947 4.06765 22.6488 4.06765 23.5789V26.2739C4.06765 27.5761 5.12313 28.6316 6.42534 28.6316H25.2886C26.5908 28.6316 27.6463 27.5761 27.6463 26.2739V23.5789C27.6463 22.6488 28.4004 21.8947 29.3305 21.8947C30.2606 21.8947 31.0147 22.6488 31.0147 23.5789V26.2739C31.0147 29.4363 28.451 32 25.2886 32H6.42534C3.26291 32 0.699219 29.4363 0.699219 26.2739V23.5789C0.699219 22.6488 1.45334 21.8947 2.38343 21.8947Z" fill="black"/>
+                        </svg>
+                            
+                    </div>
+                    <div class="stay_box_cont">
+                        <h3>Download Catalogue</h3>
+                        <p>Find out what’s new in the market, research, news, and much more</p>
+                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.2308 5.99866C21.2211 5.78469 21.1301 5.53538 20.9771 5.37908L15.9807 0.279282C15.6418 -0.0128267 14.993 -0.133765 14.6154 0.204859C14.2436 0.537901 14.2533 1.18352 14.6251 1.51656L18.1381 5.09813H0.937304C0.420215 5.09813 0 5.50188 0 5.99864C0 6.49542 0.420245 6.89914 0.937304 6.89914H18.1381L14.6251 10.4807C14.3055 10.7877 14.2455 11.4557 14.6154 11.7924C14.9834 12.1292 15.6573 12.0213 15.9807 11.718L20.9771 6.61819C21.1475 6.4433 21.2308 6.23868 21.2308 5.99866Z" fill="black"/>
+                        </svg>
+                    </div>
+                </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 follow-sp-t">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3 class="text-white">Folllow Us On</h3>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="social_icons">
+                            <ul>
+                                <li><a href="https://www.facebook.com/prayaglife/" aria-label="share to facebook"><img src="/themes/custom/prayag/assets/images//Facebook.webp" alt="" width="30px" height="30px" loading="lazy"></a></li>
+                               <li>
+  <a href="https://x.com/i/flow/login?redirect_after_login=%2Fprayaglife"
+     aria-label="Share to Twitter">
+    <img src="/themes/custom/prayag/assets/images//twitter.webp"
+         alt=""
+         aria-hidden="true"
+         width="30"
+         height="30"
+         loading="lazy">
+  </a>
+</li>
+                                <li><a href="https://www.youtube.com/channel/UCCBcJ4tcq8yvx38Vc2xfBZQ" aria-label="share to youtube"><img src="/themes/custom/prayag/assets/images//Youtube.webp" alt="" width="30px" height="30px" loading="lazy"></a></li>
+                                <li><a href="https://www.instagram.com/prayaglife/" aria-label="share to instagram"><img src="/themes/custom/prayag/assets/images//Instagram.webp" alt="" width="30px" height="30px"loading="lazy"></a></li>
+                                <li><a href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQE7j_c4WOdYaQAAAZIex69AtbyzMbPp9DCQaEjqqnjuU39ynaoTEqL_B0ozV8m5mr9hFn8DDjaseELmixEZZAXZHT5mKlxMSFmtOMabPoP0AYFOG7Zk_AORrc42HZ2SGA_1jQs=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fprayagindia.com%2F" aria-label="share to linkedin"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.40958 0C1.53094 0 0.0013755 1.52927 0 3.40938C0 5.2895 1.52956 6.81906 3.40958 6.81906C5.28891 6.81906 6.81768 5.2895 6.81768 3.40938C6.81768 1.52946 5.28881 0 3.40958 0Z" fill="white"/>
+                                    <path d="M5.96935 8.18701H0.851103C0.607639 8.18701 0.410156 8.3844 0.410156 8.62806V25.1022C0.410156 25.3457 0.607639 25.5431 0.851103 25.5431H5.96925C6.21282 25.5431 6.4103 25.3456 6.4103 25.1022V8.62806C6.4104 8.3843 6.21291 8.18701 5.96935 8.18701Z" fill="white"/>
+                                    <path d="M19.0535 7.99487C17.1804 7.99487 15.5344 8.56522 14.53 9.49525V8.62986C14.53 8.3862 14.3326 8.18882 14.089 8.18882H9.17933C8.93576 8.18882 8.73828 8.3862 8.73828 8.62986V25.104C8.73828 25.3475 8.93576 25.5449 9.17933 25.5449H14.2927C14.5362 25.5449 14.7337 25.3474 14.7337 25.104V16.9534C14.7337 14.6149 15.1638 13.1654 17.3105 13.1654C19.4255 13.1679 19.5837 14.7223 19.5837 17.0931V25.104C19.5837 25.3475 19.7812 25.5449 20.0249 25.5449H25.1406C25.384 25.5449 25.5815 25.3474 25.5815 25.104V16.0672C25.5814 12.3088 24.8394 7.99487 19.0535 7.99487Z" fill="white"/>
+                                    </svg></a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="product_link">
+                    <h3>Products</h3>
+                     <ul>
+         				                                   
+                        	<li> <a href="https://prayagindia.com/plumbing-solutions">Plumbing Solutions</a>
+            							</li>		   
+                                                                                
+                        	<li> <a href="https://prayagindia.com/faucets">CP Faucets</a>
+            							</li>		   
+                                                                                
+                        	<li> <a href="https://prayagindia.com/ptmt-taps">PTMT</a>
+            							</li>		   
+                                                                                
+                        	<li> <a href="https://prayagindia.com/ceramicware">CeramicWare</a>
+            							</li>		   
+                                                                                
+                        	<li> <a href="https://prayagindia.com/pipes-fittings">Pipes &amp; Fittings</a>
+            							</li>		   
+                                                                                
+                        	<li> <a href="https://prayagindia.com/kitchen-sinks">Kitchen Sinks</a>
+            							</li>		   
+                                                                                
+                        	<li> <a href="https://prayagindia.com/water-heaters">Water Heaters</a>
+            							</li>		   
+                                                                                
+                        	<li> <a href="https://prayagindia.com/storage-tank">Storage Tank</a>
+            							</li>		   
+                                                                                
+                        	<li> <a href="https://prayagindia.com/bathroom-accessories">Bathroom Accessories</a>
+            							</li>		   
+                                                                                
+                        	<li> <a href="https://prayagindia.com/hardware">Hardware</a>
+            							</li>		   
+                                                                                                     
+
+                          </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="product_link">
+                                                                                                                                            <h3>Media</h3>
+                    <ul>
+                        <li><a href="https://prayagindia.com/press-coverages">Press Coverage</a></li>
+                                                 <li><a href="https://prayagindia.com/product-video">Product Videos</a></li>
+                        <li><a href="https://prayagindia.com/video-tv-advertisement">Video / TV Advertisement</a></li>
+                         <li><a href="https://prayagindia.com/feedback-videos">Feedback Videos</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="product_link">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="https://prayagindia.com/ceo-profile">CEO  Profile</a></li>
+                        <li><a href="https://prayagindia.com/sustainability">Sustainability</a></li>
+                        
+                                                                        <li><a href="https://prayagindia.com/blog">Blogs</a></li>
+                        <li><a href="https://prayagindia.com/download-cataglogue">Download</a></li>
+                         <li><a href="https://prayagindia.com/sites/default/files/2024-09/Warranty_Policy.pdf" target="_blank">Warranty Policy</a></li>
+                         <li><a href="https://prayagindia.com/faq">FAQ's</a></li>
+                        <li><a href="https://prayagindia.com/contact-us">Contact Us</a></li>
+                         <li><a href="https://prayagindia.com/privacy-policy" target="_blank">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="product_link get_touch">
+                    <h3>Get In Touch</h3>
+                    <ul>
+                        <li class="gaddress">2483-84, Prayag Infinity House, Nalwa Street, Behind Imperial Cinema, Paharganj, New Delhi – 110055</li>
+                        <li><a href="tel:1800 257 0304">1800 257 0304</a></li>
+                         <li><a href="tel:011 4124 6500">011 41246500</a></li>
+                        <li><a href="mailto:enquiry@prayagindia.in">enquiry@prayagindia.in</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+<div class="footer_bottom">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p class="mb-0">
+                <span>© Prayag Polymers Limited. 2026. All Rights Reserved</span>
+                <span class="developed-by">
+                    Developed by <a href="https://abacusdesk.co.in/" target="_blank" rel="noopener noreferrer">AbacusDesk</a>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+
+</footer>
+
+
+
+<!-- END OUTPUT from 'themes/custom/prayag/templates/page--homepage.html.twig' -->
+
+
+  </div>
+
+<!-- END OUTPUT from 'core/modules/system/templates/off-canvas-page-wrapper.html.twig' -->
+
+
+
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/947","currentPathIsAdmin":false,"isFront":true,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"olivero\/global-styling,prayag\/global,system\/base","theme":"prayag","theme_token":null},"ajaxTrustedUrl":[],"user":{"uid":0,"permissionsHash":"eb917baaa8f940ac8ae2d79de5a33cbe2e08eb4d52331eee3b31816cfb4c4cc7"}}</script>
+<script src="/sites/default/files/js/js_YrNqb9zAhtqdAn5IcIlcY_bqURecFdUcHnxkHl-lmI4.js"></script>
+
+  </body>
+</html>
+
+<!-- END OUTPUT from 'themes/custom/prayag/layout/html.html.twig' -->
+

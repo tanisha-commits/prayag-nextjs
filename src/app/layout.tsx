@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { SITE_URL } from "@/components/sites/prayag/seo";
 import { StoreProvider } from "./store-provider";
 import "./globals.css";
 
@@ -19,10 +20,13 @@ const graphik = localFont({
   ],
   variable: "--font-graphik",
   display: "swap",
+  // Not preloaded: preloading would fetch all ten faces (italics included) on every page and compete
+  // with the LCP image on slow connections. Each page downloads only the weights it actually uses.
+  preload: false,
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://prayagindia.com"),
+  metadataBase: new URL(SITE_URL),
   title: "Prayag Polymers Limited - India's No.1 Sanitaryware Manufacturer",
   description:
     "Prayag Polymers Limited is India’s leading Sanitaryware manufacturing brand. It offers a premium, wide range of reliable, and affordable sanitary products in India.",

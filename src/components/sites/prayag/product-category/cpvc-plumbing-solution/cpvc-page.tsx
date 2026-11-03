@@ -9,6 +9,9 @@ import { featureIcons } from "./feature-icons";
 import { SpecTabs } from "./spec-tabs";
 import { SplitRevealSection } from "../split-reveal";
 import "./cpvc-plumbing-solution.css";
+import "./cpvc-responsive.css";
+
+import { fullImg } from "@/lib/image-dimensions";
 
 const IMG = "/sites/prayag/theme/cpvc";
 
@@ -88,7 +91,7 @@ export function CpvcPage() {
             </div>
             <div className="col-12 col-md-6 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-              <img src={`${IMG}/03-cpvc-studio-five-slender-pipes-revised-copy.webp`} alt="Prayag Pipe" className="prayag-pipe-img" />
+              <img {...fullImg(`${IMG}/03-cpvc-studio-five-slender-pipes-revised-copy.webp`)} alt="Prayag Pipe" className="prayag-pipe-img" />
             </div>
           </div>
         </div>
@@ -122,7 +125,7 @@ export function CpvcPage() {
           <div className="msf-stage">
             <div className="msf-image-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-              <img className="msf-image" src={`${IMG}/cpvc-banner.webp`} alt="Modern Kitchen" />
+              <img {...fullImg(`${IMG}/cpvc-banner.webp`)} className="msf-image" alt="Modern Kitchen" />
             </div>
             <div className="msf-overlay">
               <div className="msf-content">
@@ -139,9 +142,9 @@ export function CpvcPage() {
           <div className="psr-image-col">
             <div className="psr-image-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-              <img
+              <img {...fullImg(`${IMG}/04-cpvc-material-closeup-slender-red-line-revised-copy.webp`)}
                 className="psr-image"
-                src={`${IMG}/04-cpvc-material-closeup-slender-red-line-revised-copy.webp`}
+               
                 alt="Premium Bathroom Basin"
               />
             </div>
@@ -194,7 +197,7 @@ export function CpvcPage() {
             <div className="col-12 col-lg-7">
               <div className="application_image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-                <img src={`${IMG}/img2.webp`} alt="" />
+                <img {...fullImg(`${IMG}/img2.webp`)} alt="" />
               </div>
             </div>
           </div>
@@ -213,7 +216,7 @@ export function CpvcPage() {
             </div>
             <div className="prayag-adv-image-card col-6">
               {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-              <img src={`${IMG}/06-cpvc-compatible-fittings-expanded-revised-copy.webp`} alt="The Prayag Advantage" />
+              <img {...fullImg(`${IMG}/06-cpvc-compatible-fittings-expanded-revised-copy.webp`)} alt="The Prayag Advantage" />
             </div>
           </div>
         </div>
@@ -236,7 +239,7 @@ export function CpvcPage() {
               <div key={i} className="cp-card">
                 <figure className="cp-card-figure">
                   {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-                  <img src={card.image} alt={card.alt} />
+                  <img {...fullImg(card.image)} alt={card.alt} />
                 </figure>
                 <div className="cp-card-content">
                   <h3 className="cp-card-title">{card.title}</h3>

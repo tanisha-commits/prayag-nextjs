@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { FieldError, FormMessages, Honeypot, SubmittingIndicator } from "../forms/form-feedback";
 import { useEnquiryForm, webformValidityProps } from "../forms/use-enquiry-form";
 import { ITI_BASE, type ItiInstance } from "./intl-tel-input";
+import { withBasePath } from "@/lib/base-path";
 
 /** Source `.dealership_form .form-item-*` widths (all 100% at <= 768px). */
 const THIRDS = new Set(["name", "e_mail", "phone_number", "dealership_requirements", "pincode", "company_name"]);
@@ -142,12 +143,12 @@ export function DealershipForm() {
   return (
     <div className="mx-0 w-full px-[15px] py-[10px] min-[768px]:mx-auto min-[768px]:w-[90%] min-[768px]:p-0">
       {/* React 19 hoists precedence stylesheets into <head> during SSR. */}
-      <link rel="stylesheet" href={`${ITI_BASE}/css/intlTelInput.min.css`} precedence="default" />
+      <link rel="stylesheet" href={withBasePath(`${ITI_BASE}/css/intlTelInput.min.css`)} precedence="default" />
       <Script src={`${ITI_BASE}/js/intlTelInput.min.js`} strategy="afterInteractive" onReady={() => setItiLoaded(true)} />
       <FormMessages state={state} messageRef={messageRef} />
       <form
         className="relative -mx-[15px] flex flex-wrap"
-        action="/api/enquiry/dealership"
+        action={withBasePath("/api/enquiry/dealership")}
         method="post"
         id="webform-submission-dealership-enquiry-node-67-add-form"
         acceptCharset="UTF-8"

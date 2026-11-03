@@ -820,7 +820,7 @@
   margin-top: 60px;
 }
 .pcat-casing-pipes .cta-banner {
-  background: url("/sites/prayag/theme/casing-pipes/Booklet_banner.webp") center center / cover;
+  background: url("../../../../../../public/sites/prayag/theme/casing-pipes/Booklet_banner.webp") center center / cover;
   border: 1px solid rgb(236, 236, 236);
   border-radius: 16px;
   padding: 68px 42px;
@@ -1513,4 +1513,16 @@
   height: 7px;
   background: rgb(64, 173, 227);
   border-radius: 50%;
+}
+
+/*
+ * Not from the source: below 641px the source hides the table header visually (absolute, 1px,
+ * clipped) but a later width rule keeps it 100% wide, offset to the right, so the page scrolls
+ * sideways on phones (prayagindia.com does the same). The header stays invisible; only its box
+ * gets the 1px width its own rule intends.
+ */
+@media (max-width: 640px) {
+  .pcat-casing-pipes .prayag-specs .prayag-specs__table thead {
+    width: 1px !important;
+  }
 }

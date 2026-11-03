@@ -8,9 +8,11 @@ Only pages rendered as Drupal `page-node-type-products` are kept. Nothing is inf
 missing on the page stays empty.
 
 The live template fills EMPTY Specifications / Available Sizes fields with keyword-picked sample
-rows (`demo_on = true`) and always generates the care/installation/about/FAQ text. Those are not
-product data: tables equal to the template's sample sets are dropped (specsSample/sizesSample flag)
-and the generated blocks are never read.
+rows (`demo_on = true`), fills an EMPTY body with a generated sentence ("<title> is a Prayag product
+from the <category> range." + applications / key advantages), and always generates the
+care/installation/about/FAQ text. None of that is product data: sample tables are dropped
+(specsSample/sizesSample flag), a generated description is dropped (descriptionGenerated flag) and the
+generated blocks are never read.
 """
 
 import html as htmllib
@@ -67,6 +69,14 @@ def real_table(main, key, is_sample):
     return {key + "Html": "" if sample else raw, key + "Sample": sample}
 
 
+def real_description(main):
+    raw = first(r'id="pp-panel-desc">.*?<div class="pp-rich">(.*?)</div>\s*</div>', main).strip()
+    paras = [text(p) for p in re.findall(r"<p>(.*?)</p>", raw, re.S)]
+    generated = bool(paras) and " is a Prayag product" in paras[0] and all(
+        i == 0 or p.startswith(("It is designed for ", "Key advantages:")) for i, p in enumerate(paras))
+    return {"descriptionHtml": "" if generated else raw, "descriptionGenerated": generated}
+
+
 records = []
 for name in sorted(os.listdir(os.path.join(crawl, "html"))):
     h = open(os.path.join(crawl, "html", name), encoding="utf-8", errors="replace").read()
@@ -91,7 +101,7 @@ for name in sorted(os.listdir(os.path.join(crawl, "html"))):
         "colours": [{"name": text(n), "hex": c} for c, n in re.findall(r'pp-swatch" style="background: ([^"]+)"[^>]*></span>(.*?)</li>', main, re.S)],
         "highlights": [{"text": text(t), "icon": i} for i, t in re.findall(r'pp-hl__icon">\s*<img src="([^"]+)".*?</span>\s*<span>(.*?)</span>', main, re.S)],
         "features": [text(li) for li in re.findall(r"<li>(.*?)</li>", first(r'<ul class="pp-checks[^"]*">(.*?)</ul>', main))],
-        "descriptionHtml": first(r'id="pp-panel-desc">.*?<div class="pp-rich">(.*?)</div>\s*</div>', main).strip(),
+        **real_description(main),
         **real_table(main, "specs", is_sample_specs),
         **real_table(main, "sizes", is_sample_sizes),
         "images": [{"src": s, "alt": htmllib.unescape(a)} for s, a in re.findall(r'data-pp-thumb data-src="([^"]+)" data-alt="([^"]*)"', main)],

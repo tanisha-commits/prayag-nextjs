@@ -5,6 +5,8 @@ import { CeoFact } from "./ceo-fact";
 import { CeoStory } from "./ceo-story";
 import { ceoBanner, ceoFacts, ceoPortrait, ceoStory, ceoVisibleItems } from "./data";
 
+import { fullImg } from "@/lib/image-dimensions";
+
 /** Body of /ceo-profile (source `.ceo-profile-page`; styles ported 1:1 into ceo.css). */
 export function CeoPage() {
   return (
@@ -16,8 +18,8 @@ export function CeoPage() {
             <aside className="ceo-aside">
               <figure className="ceo-portrait">
                 {/* eslint-disable-next-line @next/next/no-img-element -- natural-ratio portrait, as the source */}
-                <img
-                  src={ceoPortrait.src}
+                <img {...fullImg(ceoPortrait.src)}
+                 
                   alt={ceoPortrait.alt}
                   width={ceoPortrait.width}
                   height={ceoPortrait.height}

@@ -161,3 +161,6 @@
   #pf-blog-detail-2026 .pf-bd-content ul,
   #pf-blog-detail-2026 .pf-bd-content ol { font-size: 16px; }
 }
+/* Long unbroken strings (pasted URLs) overflowed the 320px viewport on the source; break them only
+   when they would overflow, so ordinary text wraps exactly as before. */
+#pf-blog-detail-2026 .pf-bd-content { overflow-wrap: break-word; }

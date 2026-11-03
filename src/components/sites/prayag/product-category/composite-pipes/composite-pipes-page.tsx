@@ -12,6 +12,8 @@ import {
 import { PcatTabs } from "../ppr-pipes/pcat-tabs";
 import { applications, faqs, features, fittingPanes, flowCards, specPanes } from "./data";
 import "./composite-pipes.css";
+import { withBasePath } from "@/lib/base-path";
+import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
 
 const IMG = "/sites/prayag/theme/composite_pipes";
 
@@ -40,8 +42,8 @@ export function CompositePipesPage() {
             <div className="col-md-6">
               {/* eslint-disable-next-line @next/next/no-img-element -- source responsive banner (Drupal image styles) */}
               <img
-                src="/sites/prayag/files/styles/medium/public/2026-07/Composite_pipe_main_banner.webp"
-                srcSet="/sites/prayag/files/styles/thumbnail/public/2026-07/Composite_pipe_main_banner.webp 300w, /sites/prayag/files/styles/thumbnail/public/2026-07/Composite_pipe_main_banner.webp 600w, /sites/prayag/files/styles/large/public/2026-07/Composite_pipe_main_banner.webp 1200w, /sites/prayag/files/styles/wide/public/2026-07/Composite_pipe_main_banner.webp 2000w"
+                src={transcodedUrl("/sites/prayag/files/styles/medium/public/2026-07/Composite_pipe_main_banner.webp")}
+                srcSet={transcodedSrcSet("/sites/prayag/files/styles/thumbnail/public/2026-07/Composite_pipe_main_banner.webp 300w, /sites/prayag/files/styles/thumbnail/public/2026-07/Composite_pipe_main_banner.webp 600w, /sites/prayag/files/styles/large/public/2026-07/Composite_pipe_main_banner.webp 1200w, /sites/prayag/files/styles/wide/public/2026-07/Composite_pipe_main_banner.webp 2000w")}
                 sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px"
                 alt="Composite Pipes"
                 width={800}
@@ -75,7 +77,7 @@ export function CompositePipesPage() {
             </div>
             <div className="col-12 col-md-6 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- source image, intrinsic size kept */}
-              <img src={`${IMG}/unmatched_strength.webp`} alt="Prayag Composite Pipe" className="prayag-pipe-img" />
+              <img {...fullImg(`${IMG}/unmatched_strength.webp`)} alt="Prayag Composite Pipe" className="prayag-pipe-img" />
             </div>
           </div>
         </div>
@@ -101,11 +103,11 @@ export function CompositePipesPage() {
                 {/* The source <source> tags carry `src` (not srcset), so browsers ignore them and always
                     show the <img>; kept as published. */}
                 <picture>
-                  <source media="(max-width: 767px)" src={`${IMG}/800_mobile_banner_composite.webp`} type="image/webp" />
-                  <source media="(min-width: 768px)" src={`${IMG}/800_mobile_banner_composite.webp`} type="image/webp" />
-                  <img
+                  <source media="(max-width: 767px)" src={withBasePath(`${IMG}/800_mobile_banner_composite.webp`)} type="image/webp" />
+                  <source media="(min-width: 768px)" src={withBasePath(`${IMG}/800_mobile_banner_composite.webp`)} type="image/webp" />
+                  <img {...fullImg(`${IMG}/3_filling_main_banner_composite_pipes.webp`)}
                     className="msf-image"
-                    src={`${IMG}/3_filling_main_banner_composite_pipes.webp`}
+                   
                     alt="Composite Pipes by Prayag"
                   />
                 </picture>
@@ -137,7 +139,7 @@ export function CompositePipesPage() {
               <div key={card.flow} className="cp-card" data-flow={card.flow}>
                 <div className="cp-card-image">
                   {/* eslint-disable-next-line @next/next/no-img-element -- source image, intrinsic size kept */}
-                  <img src={card.src} alt={card.alt} />
+                  <img {...fullImg(card.src)} alt={card.alt} />
                 </div>
                 <div className="cp-card-content">
                   <span className="cp-flow-tag">
@@ -176,8 +178,8 @@ export function CompositePipesPage() {
             <div className="col-lg-6 col-md-12 p-0">
               <div className="visual-wrapper">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source image, intrinsic size kept */}
-                <img
-                  src={`${IMG}/composite-pipes-application.webp`}
+                <img {...fullImg(`${IMG}/composite-pipes-application.webp`)}
+                 
                   alt="Prayag Composite Pipe engineering advantage"
                   className="img-fluid main-img"
                 />
@@ -282,7 +284,7 @@ export function CompositePipesPage() {
                     expansion
                   </p>
                   {/* Local copy of the source booklet; target="blank" (a named window) as on the source. */}
-                  <a href="/sites/prayag/theme/Composite-Pipes-Booklet---Edition-1.pdf" className="cta-link" target="blank">
+                  <a href={withBasePath("/sites/prayag/theme/Composite-Pipes-Booklet---Edition-1.pdf")} className="cta-link" target="blank">
                     Download Booklet
                   </a>
                 </div>

@@ -28,6 +28,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/images/image-dimensions.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

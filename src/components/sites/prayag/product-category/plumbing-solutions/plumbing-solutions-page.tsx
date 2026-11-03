@@ -2,6 +2,8 @@ import Link from "next/link";
 import { PcatPage } from "../pcat-page";
 import "./plumbing-solutions.css";
 
+import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+
 const BANNER = "/sites/prayag/files/styles";
 
 // Source order, labels and (copy-pasted) alt texts verbatim from https://prayagindia.com/plumbing-solutions.
@@ -60,8 +62,8 @@ export function PlumbingSolutionsPage() {
               <div className="breadcrumb_image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source srcset/sizes kept 1:1 */}
                 <img
-                  src={`${BANNER}/medium/public/2026-08/Plumbing-pipe.png`}
-                  srcSet={`${BANNER}/thumbnail/public/2026-08/Plumbing-pipe.png 300w, ${BANNER}/thumbnail/public/2026-08/Plumbing-pipe.png 600w, ${BANNER}/large/public/2026-08/Plumbing-pipe.png 1200w, ${BANNER}/wide/public/2026-08/Plumbing-pipe.png 2000w`}
+                  src={transcodedUrl(`${BANNER}/medium/public/2026-08/Plumbing-pipe.png`)}
+                  srcSet={transcodedSrcSet(`${BANNER}/thumbnail/public/2026-08/Plumbing-pipe.png 300w, ${BANNER}/thumbnail/public/2026-08/Plumbing-pipe.png 600w, ${BANNER}/large/public/2026-08/Plumbing-pipe.png 1200w, ${BANNER}/wide/public/2026-08/Plumbing-pipe.png 2000w`)}
                   sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px"
                   alt="Plumbing Solutions"
                   width={800}
@@ -92,7 +94,7 @@ export function PlumbingSolutionsPage() {
                         <div className="product_p_box">
                           <div className="pro_p_img">
                             {/* eslint-disable-next-line @next/next/no-img-element -- source intrinsic sizing kept 1:1 */}
-                            <img src={item.image} alt={item.alt} />
+                            <img {...fullImg(item.image)} alt={item.alt} />
                           </div>
                           <h6>{item.label}</h6>
                         </div>

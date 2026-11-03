@@ -3,9 +3,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { PressItem } from "@/content/prayag/press/items";
+import type { ResponsiveImgProps } from "@/lib/optimized-image";
+
+/** A press item with optimizer candidates computed on the server (see the press-coverages page). */
+export type PressGalleryItem = PressItem & { card: ResponsiveImgProps; thumb: ResponsiveImgProps; full: ResponsiveImgProps };
 
 import { PressLightbox } from "./press-lightbox";
 import "./press.css";
+import { withBasePath } from "@/lib/base-path";
 
 const HASH = /^#gallery0-(\d+)$/; // Fancybox's Hash plugin format on the source: #gallery0-<1-based index>
 
@@ -15,7 +20,7 @@ const HASH = /^#gallery0-(\d+)$/; // Fancybox's Hash plugin format on the source
  * empty or the broken `internal:#.` value open this item in the lightbox instead of a dead link.
  * Links are real `href`s to the image so they still work without JavaScript.
  */
-export function PressGallery({ items }: { items: PressItem[] }) {
+export function PressGallery({ items }: { items: PressGalleryItem[] }) {
   const [open, setOpen] = useState<number | null>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
 
@@ -56,22 +61,22 @@ export function PressGallery({ items }: { items: PressItem[] }) {
               <div className="press-col" key={item.image}>
                 <div className="press_item">
                   <a
-                    href={item.image}
+                    href={withBasePath(item.image)}
                     className="press-img-link"
                     onClick={opener(i)}
                     aria-label={`View image: ${label}`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element -- source sizing (fixed 199/180px cover crop) on 96 CMS scans */}
-                    <img src={item.image} alt={item.title} loading={i < 8 ? "eager" : "lazy"} decoding="async" />
+                    <img {...item.card} alt={item.title} loading={i < 8 ? "eager" : "lazy"} decoding="async" />
                   </a>
                   {item.title ? <h3 className="press_title">{item.title}</h3> : <div className="press_title" />}
                   <p className="press_details">{item.details}</p>
                   {item.href ? (
-                    <a href={item.href} target="_blank" rel="noopener noreferrer" className="press-more">
+                    <a href={withBasePath(item.href)} target="_blank" rel="noopener noreferrer" className="press-more">
                       Know More<span className="sr-only">: {label} (opens in a new tab)</span>
                     </a>
                   ) : (
-                    <a href={item.image} onClick={opener(i)} className="press-more">
+                    <a href={withBasePath(item.image)} onClick={opener(i)} className="press-more">
                       Know More<span className="sr-only">: view image of {label}</span>
                     </a>
                   )}
@@ -83,7 +88,7 @@ export function PressGallery({ items }: { items: PressItem[] }) {
       </div>
       {open !== null ? (
         <PressLightbox
-          slides={items.map((it) => ({ src: it.image, alt: it.title }))}
+          slides={items.map((it) => ({ src: it.image, alt: it.title, full: it.full, thumb: it.thumb }))}
           index={open}
           onIndexChange={show}
           onClose={close}

@@ -1154,3 +1154,15 @@
     padding-left: 42% !important;
   }
 }
+
+/*
+ * Not from the source: below 641px the source hides the table header visually (absolute, 1px,
+ * clipped) but a later width rule keeps it 100% wide, offset to the right, so the page scrolls
+ * sideways on phones (prayagindia.com does the same). The header stays invisible; only its box
+ * gets the 1px width its own rule intends.
+ */
+@media (max-width: 640px) {
+  .pcat-cpvc-plumbing-solution .prayag-specs .prayag-specs__table thead {
+    width: 1px !important;
+  }
+}

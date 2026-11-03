@@ -6,6 +6,8 @@ import { FittingTiles, type Fitting } from "./fitting-tiles";
 import { SplitRevealSection } from "../split-reveal";
 import "./casing-pipes.css";
 
+import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+
 const IMG = "/sites/prayag/theme/casing-pipes";
 const BANNER = "/sites/prayag/files/styles";
 
@@ -136,7 +138,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
         <>
           Casing pipes are used to support and protect borewells and tube wells from surrounding soil pressure and
           harsh underground conditions. Prayag Casing Pipes are designed for applications such as domestic and urban
-          tube wells, deep borewell systems, <a href="https://prayagindia.com/agri-pipe">agricultural irrigation</a>,
+          tube wells, deep borewell systems, <Link href="/agri-pipe">agricultural irrigation</Link>,
           industrial and mining projects, and wastewater disposal systems.
         </>
       ),
@@ -146,7 +148,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       a: (
         <>
           Prayag Casing Pipes are manufactured using high-quality{" "}
-          <a href="https://prayagindia.com/upvc-pipes">uPVC compounds</a>. The material is designed to resist
+          <Link href="/upvc-pipes">uPVC compounds</Link>. The material is designed to resist
           underground pressure, corrosion, chemical exposure, and demanding terrain conditions, making the pipes
           suitable for long-term borewell installations.
         </>
@@ -202,7 +204,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       a: (
         <>
           The product specifications listed by Prayag include{" "}
-          <a href="https://prayagindia.com/pipes-fittings">casing pipe sizes</a> ranging from 40 mm to 200 mm.
+          <Link href="/pipes-fittings">casing pipe sizes</Link> ranging from 40 mm to 200 mm.
           Available sizes include 40 mm, 50 mm, 80 mm, 100 mm, 115 mm, 125 mm, 150 mm, 175 mm, and 200 mm.
         </>
       ),
@@ -255,13 +257,13 @@ export function CasingPipesPage() {
             <div className="col-md-6">
               {/* eslint-disable-next-line @next/next/no-img-element -- source responsive banner (srcset/sizes), kept 1:1 */}
               <img
-                src={`${BANNER}/medium/public/2026-08/Casing-pipe-banner.webp`}
-                srcSet={[
+                src={transcodedUrl(`${BANNER}/medium/public/2026-08/Casing-pipe-banner.webp`)}
+                srcSet={transcodedSrcSet([
                   `${BANNER}/thumbnail/public/2026-08/Casing-pipe-banner.webp 300w`,
                   `${BANNER}/thumbnail/public/2026-08/Casing-pipe-banner.webp 600w`,
                   `${BANNER}/large/public/2026-08/Casing-pipe-banner.webp 1200w`,
                   `${BANNER}/wide/public/2026-08/Casing-pipe-banner.webp 2000w`,
-                ].join(", ")}
+                ].join(", "))}
                 sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px"
                 alt="Casing Pipes"
                 width={800}
@@ -296,7 +298,7 @@ export function CasingPipesPage() {
             </div>
             <div className="col-12 col-md-6 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing as on the source */}
-              <img src={`${IMG}/The_Ultimate_Shield_for_Your_borewells.webp`} alt="Prayag Pipe" className="prayag-pipe-img" />
+              <img {...fullImg(`${IMG}/The_Ultimate_Shield_for_Your_borewells.webp`)} alt="Prayag Pipe" className="prayag-pipe-img" />
             </div>
           </div>
         </div>
@@ -330,7 +332,7 @@ export function CasingPipesPage() {
             <div className="msf-slide-wrap">
               <div className="msf-image-wrap">
                 {/* eslint-disable-next-line @next/next/no-img-element -- full-bleed image, intrinsic height as on the source */}
-                <img className="msf-image" src={`${IMG}/Big_banner_casing.webp`} alt="casing Pipes" />
+                <img {...fullImg(`${IMG}/Big_banner_casing.webp`)} className="msf-image" alt="casing Pipes" />
               </div>
             </div>
           </div>
@@ -342,7 +344,7 @@ export function CasingPipesPage() {
           <div className="psr-image-col">
             <div className="psr-image-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing as on the source */}
-              <img className="psr-image" src={`${IMG}/Lead-Free-uPVC-Casing-Pipes.webp`} alt="Premium Bathroom Basin" />
+              <img {...fullImg(`${IMG}/Lead-Free-uPVC-Casing-Pipes.webp`)} className="psr-image" alt="Premium Bathroom Basin" />
             </div>
           </div>
           <div className="psr-content-col">
@@ -385,7 +387,7 @@ export function CasingPipesPage() {
               <div key={a.title} className="ka-card">
                 <div className="ka-image">
                   {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing as on the source */}
-                  <img src={`${IMG}/${a.image}`} alt={a.alt} />
+                  <img {...fullImg(`${IMG}/${a.image}`)} alt={a.alt} />
                 </div>
                 <div className="ka-card-body">
                   <h3>{a.title}</h3>
@@ -402,8 +404,8 @@ export function CasingPipesPage() {
             <div className="col-lg-6 col-md-12 p-0">
               <div className="visual-wrapper">
                 {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing as on the source */}
-                <img
-                  src={`${IMG}/The-Prayag-Advantage.webp`}
+                <img {...fullImg(`${IMG}/The-Prayag-Advantage.webp`)}
+                 
                   alt="Prayag Composite Pipe engineering advantage"
                   className="img-fluid main-img"
                 />

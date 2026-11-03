@@ -14,21 +14,23 @@ export interface MegaMenu {
   label: string;
   links: NavLink[];
   image: string;
+  /** Natural size of `image` (reserves its box; the file is resized by the image optimizer). */
+  imageSize: { width: number; height: number };
   /** Products lists in two columns; the other menus in one. */
   columns: 1 | 2;
 }
 
 export const productCategories: NavLink[] = [
   { label: "Plumbing Solutions", href: "/plumbing-solutions" },
-  { label: "CP Faucets", href: `${SOURCE}/faucets` },
-  { label: "PTMT", href: `${SOURCE}/ptmt-taps` },
-  { label: "CeramicWare", href: `${SOURCE}/ceramicware` },
-  { label: "Pipes & Fittings", href: `${SOURCE}/pipes-fittings` },
-  { label: "Kitchen Sinks", href: `${SOURCE}/kitchen-sinks` },
-  { label: "Water Heaters", href: `${SOURCE}/water-heaters` },
-  { label: "Storage Tank", href: `${SOURCE}/storage-tank` },
-  { label: "Bathroom Accessories", href: `${SOURCE}/bathroom-accessories` },
-  { label: "Hardware", href: `${SOURCE}/hardware` },
+  { label: "CP Faucets", href: "/faucets" },
+  { label: "PTMT", href: "/ptmt-taps" },
+  { label: "CeramicWare", href: "/ceramicware" },
+  { label: "Pipes & Fittings", href: "/pipes-fittings" },
+  { label: "Kitchen Sinks", href: "/kitchen-sinks" },
+  { label: "Water Heaters", href: "/water-heaters" },
+  { label: "Storage Tank", href: "/storage-tank" },
+  { label: "Bathroom Accessories", href: "/bathroom-accessories" },
+  { label: "Hardware", href: "/hardware" },
 ];
 
 // The live site hides "Pipes & Fittings" in the mega menu, product grid and footer via CSS.
@@ -47,6 +49,7 @@ export const megaMenus: (MegaMenu | NavLink)[] = [
     label: "Products",
     links: visibleProductCategories,
     image: `${ASSET}/theme/product-drop-down.webp`,
+    imageSize: { width: 850, height: 450 },
     columns: 2,
   },
   {
@@ -58,6 +61,7 @@ export const megaMenus: (MegaMenu | NavLink)[] = [
       warrantyPolicy,
     ],
     image: `${ASSET}/files/2025-01/blog-1-.webp`,
+    imageSize: { width: 1000, height: 600 },
     columns: 1,
   },
   { label: "Blog", href: "/blog" },
@@ -70,6 +74,7 @@ export const megaMenus: (MegaMenu | NavLink)[] = [
       { label: "Manufacturing Process", href: "/manufacturing-process" },
     ],
     image: `${ASSET}/files/2025-01/about-prayag-1-.webp`,
+    imageSize: { width: 1000, height: 600 },
     columns: 1,
   },
   {
@@ -79,11 +84,13 @@ export const megaMenus: (MegaMenu | NavLink)[] = [
       { label: "Contact Us", href: "/contact-us" },
     ],
     image: `${ASSET}/files/2025-01/contact-us-1-.webp`,
+    imageSize: { width: 1000, height: 600 },
     columns: 1,
   },
 ];
 
-export const searchHref = `${SOURCE}/search/node?keys=products`;
+// Same target as the source header search icon.
+export const searchHref = "/search/node?keys=products";
 
 export const plumbingSubcategories: NavLink[] = [
   { label: "HDPE", href: "/hdpe" },
@@ -113,24 +120,31 @@ export const panelQuickLinks: NavLink[] = [
   { label: "Contact Us", href: "/contact-us" },
 ];
 
+/** Hero banners: srcsets use the pre-resized copies from scripts/images/hero-banners.mjs; the original is the widest candidate. */
 export const heroSlides = [
   {
     alt: "Prayag Sukoon",
-    video: `${ASSET}/theme/prayag-homepage/video_banner.webm`,
+    video: `${ASSET}/theme/prayag-homepage/video_banner-opt.webm`,
     desktop: `${ASSET}/theme/prayag-homepage/kung-fu-banner.webp`,
     mobile: `${ASSET}/theme/mobile-banner-.webp`,
+    desktopSrcSet: `${ASSET}/theme/hero/kung-fu-banner-1080w.webp 1080w, ${ASSET}/theme/hero/kung-fu-banner-1440w.webp 1440w, ${ASSET}/theme/prayag-homepage/kung-fu-banner.webp 1920w`,
+    mobileSrcSet: `${ASSET}/theme/hero/mobile-banner--480w.webp 480w, ${ASSET}/theme/hero/mobile-banner--640w.webp 640w, ${ASSET}/theme/mobile-banner-.webp 800w`,
   },
   {
     alt: "Prayag Karate",
-    video: `${ASSET}/theme/prayag-homepage/video_banner-2.webm`,
+    video: `${ASSET}/theme/prayag-homepage/video_banner-2-opt.webm`,
     desktop: `${ASSET}/theme/prayag-homepage/prayag-shader-banner.webp`,
     mobile: `${ASSET}/theme/prayag-mobile-banner-2.webp`,
+    desktopSrcSet: `${ASSET}/theme/hero/prayag-shader-banner-1080w.webp 1080w, ${ASSET}/theme/hero/prayag-shader-banner-1440w.webp 1440w, ${ASSET}/theme/prayag-homepage/prayag-shader-banner.webp 1920w`,
+    mobileSrcSet: `${ASSET}/theme/hero/prayag-mobile-banner-2-480w.webp 480w, ${ASSET}/theme/hero/prayag-mobile-banner-2-640w.webp 640w, ${ASSET}/theme/hero/prayag-mobile-banner-2-800w.webp 800w`,
   },
   {
     alt: "Prayag Malaika",
-    video: `${ASSET}/theme/PrayagHomepageVideo.webm`,
+    video: `${ASSET}/theme/PrayagHomepageVideo-opt.webm`,
     desktop: `${ASSET}/theme/prayag-homepage/Malaika-banner.webp`,
     mobile: `${ASSET}/theme/Prayag-mobile-banner-3.webp`,
+    desktopSrcSet: `${ASSET}/theme/hero/Malaika-banner-1080w.webp 1080w, ${ASSET}/theme/hero/Malaika-banner-1440w.webp 1440w, ${ASSET}/theme/prayag-homepage/Malaika-banner.webp 1920w`,
+    mobileSrcSet: `${ASSET}/theme/hero/Prayag-mobile-banner-3-480w.webp 480w, ${ASSET}/theme/hero/Prayag-mobile-banner-3-640w.webp 640w, ${ASSET}/theme/Prayag-mobile-banner-3.webp 800w`,
   },
 ];
 

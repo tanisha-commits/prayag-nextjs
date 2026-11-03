@@ -13,6 +13,8 @@ import {
 } from "./feature-icons";
 import { ReadMoreButton, ReadMoreDialog, ReadMoreModalProvider } from "./read-more-modal";
 import "./swr-plumbing-solution.css";
+import { withBasePath } from "@/lib/base-path";
+import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
 
 const IMG = "/sites/prayag/theme/swr";
 
@@ -90,8 +92,8 @@ export function SwrPlumbingSolutionPage() {
             <div className="col-md-6">
               {/* eslint-disable-next-line @next/next/no-img-element -- source responsive banner (Drupal image styles) */}
               <img
-                src="/sites/prayag/files/styles/medium/public/2026-09/section1.webp"
-                srcSet="/sites/prayag/files/styles/thumbnail/public/2026-09/section1.webp 300w, /sites/prayag/files/styles/thumbnail/public/2026-09/section1.webp 600w, /sites/prayag/files/styles/large/public/2026-09/section1.webp 1200w, /sites/prayag/files/styles/wide/public/2026-09/section1.webp 2000w"
+                src={transcodedUrl("/sites/prayag/files/styles/medium/public/2026-09/section1.webp")}
+                srcSet={transcodedSrcSet("/sites/prayag/files/styles/thumbnail/public/2026-09/section1.webp 300w, /sites/prayag/files/styles/thumbnail/public/2026-09/section1.webp 600w, /sites/prayag/files/styles/large/public/2026-09/section1.webp 1200w, /sites/prayag/files/styles/wide/public/2026-09/section1.webp 2000w")}
                 sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px"
                 alt="SWR"
                 width={800}
@@ -127,7 +129,7 @@ export function SwrPlumbingSolutionPage() {
             </div>
             <div className="col-12 col-md-6 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- source image, intrinsic size kept */}
-              <img src={`${IMG}/2nd-section.webp`} alt="Prayag Pipe" className="prayag-pipe-img" />
+              <img {...fullImg(`${IMG}/2nd-section.webp`)} alt="Prayag Pipe" className="prayag-pipe-img" />
             </div>
           </div>
         </div>
@@ -163,17 +165,17 @@ export function SwrPlumbingSolutionPage() {
                 <picture>
                   <source
                     media="(max-width: 767px)"
-                    src="/sites/prayag/theme/composite_pipes/800_mobile_banner_composite.webp"
+                    src={withBasePath("/sites/prayag/theme/composite_pipes/800_mobile_banner_composite.webp")}
                     type="image/webp"
                   />
                   <source
                     media="(min-width: 768px)"
-                    src="/sites/prayag/theme/composite_pipes/800_mobile_banner_composite.webp"
+                    src={withBasePath("/sites/prayag/theme/composite_pipes/800_mobile_banner_composite.webp")}
                     type="image/webp"
                   />
-                  <img
+                  <img {...fullImg(`${IMG}/banner.webp`)}
                     className="msf-image"
-                    src={`${IMG}/banner.webp`}
+                   
                     alt="From Every Outlet to the Main Drain — One Complete SWR Solution. Prayag SWR Pipes and Fittings — Designed to create organised and efficient drainage networks."
                   />
                 </picture>
@@ -207,7 +209,7 @@ export function SwrPlumbingSolutionPage() {
             </div>
             <div className="col-12 col-md-6 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- source image, intrinsic size kept */}
-              <img src={`${IMG}/3.webp`} alt="Prayag SWR Pipe" className="prayag-pipe-img img-fluid" />
+              <img {...fullImg(`${IMG}/3.webp`)} alt="Prayag SWR Pipe" className="prayag-pipe-img img-fluid" />
             </div>
           </div>
         </div>
@@ -235,7 +237,7 @@ export function SwrPlumbingSolutionPage() {
               <div className="col-lg-6 col-md-12 p-0">
                 <div className="visual-wrapper">
                   {/* eslint-disable-next-line @next/next/no-img-element -- source image, intrinsic size kept */}
-                  <img src={`${IMG}/4.webp`} alt="Prayag SWR Pipe engineering advantage" className="img-fluid main-img" />
+                  <img {...fullImg(`${IMG}/4.webp`)} alt="Prayag SWR Pipe engineering advantage" className="img-fluid main-img" />
                 </div>
               </div>
               <div className="col-lg-6 col-md-12 p-0">

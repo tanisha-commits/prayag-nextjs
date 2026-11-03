@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { ArticleShare } from "@/components/sites/prayag/blog/article-share";
 import "@/components/sites/prayag/blog/article.css";
 import { CatalogRoute, catalogMetadata } from "@/components/sites/prayag/catalog/catalog-route";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { blogIndex, getBlogArticle } from "@/lib/blog";
+import { withBasePath } from "@/lib/base-path";
+import { storedHtml } from "@/lib/stored-html";
+import { imageDims, responsiveImagesHtml } from "@/lib/image-dimensions";
 
 // Blog articles live at the site root on the source (e.g. /double-bowl-kitchen-sink-price) and are
-// generated statically. Products (/6102-rg-pillar-cock) and category landings (/faucets) also live
-// at the root; they come from the catalog database and render on demand. Anything else is a 404.
+// generated statically. Products (/6102-rg-pillar-cock) also live at the root; they come from the
+// catalog database and render on demand. Category landings with filters have their own route
+// folders (/faucets). Anything else is a 404.
 export const dynamicParams = true;
 
 export function generateStaticParams() {
@@ -29,12 +34,19 @@ export async function generateMetadata({ params }: PageProps<"/[slug]">): Promis
   return { ...meta, openGraph: { ...meta.openGraph, type: "article" } };
 }
 
-export default async function BlogArticlePage({ params, searchParams }: PageProps<"/[slug]">) {
+export default async function BlogArticlePage({ params }: PageProps<"/[slug]">) {
   const { slug } = await params;
   const article = await getBlogArticle(slug);
-  if (!article) return <CatalogRoute path={slug} searchParams={searchParams} />;
+  // This route is statically generated, where reading searchParams fails in production. Category
+  // landings that use filters/pagination have their own route folders (e.g. ../faucets); any other
+  // category reached here (such as one added later in the admin) shows its first, unfiltered page.
+  if (!article) return <CatalogRoute path={slug} searchParams={Promise.resolve({})} />;
 
   const url = `https://prayagindia.com/${article.slug}`;
+  // From 1200px the source banner is the image at its natural aspect ratio (height: auto), so the
+  // row height follows each banner (most are 1920x1000, some 3:2 or 16:9).
+  const banner = imageDims(article.bannerImage);
+  const bannerRatio = banner ? `${banner.width} / ${banner.height}` : "48 / 25";
 
   return (
     <>
@@ -48,9 +60,12 @@ export default async function BlogArticlePage({ params, searchParams }: PageProp
       {/* Source `.breadcrumb_main.single_blog` */}
       <div className="overflow-hidden">
         <div className="-mx-3 flex flex-wrap">
-          <div className="relative h-[230px] w-full md:h-[500px] md:w-1/2 xl:h-auto xl:min-h-[488px]">
+          <div
+            className="relative h-[230px] w-full md:h-[500px] md:w-1/2 xl:aspect-(--banner-ratio) xl:h-auto"
+            style={{ "--banner-ratio": bannerRatio } as CSSProperties}
+          >
             <Image
-              src={article.bannerImage}
+              src={withBasePath(article.bannerImage)}
               alt={article.bannerAlt}
               fill
               preload
@@ -79,7 +94,7 @@ export default async function BlogArticlePage({ params, searchParams }: PageProp
                 column may shrink (min-w-0) so wide tables scroll inside their box on mobile
                 instead of stretching the whole page past the viewport. */}
             <article className="w-[90%] min-w-0">
-              <div className="pf-bd-content" dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
+              <div className="pf-bd-content" dangerouslySetInnerHTML={{ __html: storedHtml(responsiveImagesHtml(article.bodyHtml)) }} />
             </article>
             <aside className="min-w-0 lg:sticky lg:top-[120px]">
               <h2 className="mb-6 border-b border-[#e5e7eb] pb-3 text-[28px] leading-[1.2] font-semibold text-[#00aeef]">
@@ -90,7 +105,7 @@ export default async function BlogArticlePage({ params, searchParams }: PageProp
                   const card = (
                     <>
                       <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#fafafa]">
-                        <Image src={post.image} alt={post.imageAlt} fill sizes="(min-width: 991px) 300px, 50vw" className="object-cover" />
+                        <Image src={withBasePath(post.image)} alt={post.imageAlt} fill sizes="(min-width: 991px) 300px, 50vw" className="object-cover" />
                       </div>
                       <div className="px-4 pt-3.5 pb-4">
                         <h3 className="mb-2 text-[15px] leading-[1.4] font-semibold text-[#1a1a1a]">{post.title}</h3>
@@ -105,7 +120,7 @@ export default async function BlogArticlePage({ params, searchParams }: PageProp
                       {card}
                     </Link>
                   ) : (
-                    <a key={post.href} href={post.href} className={cls}>
+                    <a key={post.href} href={withBasePath(post.href)} className={cls}>
                       {card}
                     </a>
                   );

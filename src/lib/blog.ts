@@ -47,8 +47,19 @@ export function isBlogSlug(slug: string) {
   return slugs.has(slug);
 }
 
+// Article bodies link to other pages with absolute source URLs; well-formed ones become local paths.
+// Malformed or retired source URLs (e.g. "https://prayagindia.com//prayagindia.com/faucets)") are
+// left untouched, exactly as the source shows them.
+const LIVE_LINK = /href="https:\/\/(?:www\.)?prayagindia\.com(\/[a-z0-9-]*)"/g;
+const localLinks = (html: string) => html.replace(LIVE_LINK, (_, p: string) => `href="${p}"`);
+
 export async function getBlogArticle(slug: string): Promise<BlogArticle | null> {
   if (!isBlogSlug(slug)) return null;
   const file = path.join(process.cwd(), "src/content/prayag/blog/articles", `${slug}.json`);
-  return JSON.parse(await readFile(file, "utf8")) as BlogArticle;
+  const article = JSON.parse(await readFile(file, "utf8")) as BlogArticle;
+  return {
+    ...article,
+    bodyHtml: localLinks(article.bodyHtml),
+    related: article.related.map((r) => ({ ...r, href: r.href.replace(/^https:\/\/(?:www\.)?prayagindia\.com(?=\/[a-z0-9-]*$)/, "") })),
+  };
 }

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { modalEmbedUrl, type VideoCard } from "./data";
+import { withBasePath } from "@/lib/base-path";
 
 const FADE_MS = 300; // Bootstrap .modal.fade dialog transition
 
@@ -95,7 +96,7 @@ export function TvVideoGrid({ cards }: { cards: VideoCard[] }) {
                 <PlayIcon />
               </span>
               {/* eslint-disable-next-line @next/next/no-img-element -- natural-ratio thumbnail (250px cover-crop below 768px), as the source */}
-              <img src={card.thumb} alt="" width={600} height={400} loading="lazy" />
+              <img {...(card.thumbImg ?? { src: withBasePath(card.thumb) })} alt="" width={600} height={400} loading="lazy" />
             </button>
             <h3>{card.title}</h3>
           </div>
@@ -128,7 +129,7 @@ export function TvVideoGrid({ cards }: { cards: VideoCard[] }) {
                   <div className="vd-body">
                     {playing ? (
                       <iframe
-                        src={modalEmbedUrl(active.id)}
+                        src={withBasePath(modalEmbedUrl(active.id))}
                         title={active.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         referrerPolicy="strict-origin-when-cross-origin"

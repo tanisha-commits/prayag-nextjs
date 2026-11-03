@@ -7,7 +7,9 @@ export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   if (pathname === "/admin/login") return NextResponse.next();
   if (!getSessionCookie(request)) {
-    const url = new URL("/admin/login", request.url);
+    const url = request.nextUrl.clone();
+    url.pathname = "/admin/login";
+    url.search = "";
     url.searchParams.set("next", pathname + search); // keep filters such as ?status=draft
     return NextResponse.redirect(url);
   }

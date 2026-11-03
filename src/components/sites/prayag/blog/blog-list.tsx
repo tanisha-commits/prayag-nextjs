@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 import type { BlogListItem } from "@/lib/blog";
+import { withBasePath } from "@/lib/base-path";
 
 const PER_PAGE = 15; // source: PER_PAGE in the /blog inline script
 
@@ -11,8 +12,9 @@ type SortKey = "date_desc" | "date_asc" | "title_asc" | "title_desc";
 
 // Source selects combine Olivero's base `select` (54px tall, chevron, 18/54px padding) with
 // Bootstrap's `.form-control` border, radius and focus ring.
+const selectStyle = { backgroundImage: `url(${withBasePath("/sites/prayag/icons/chevron-down.svg")})` };
 const selectClass =
-  "block h-[54px] w-full max-w-full cursor-pointer appearance-none rounded-[0.25rem] border border-[#ced4da] bg-white bg-[url(/sites/prayag/icons/chevron-down.svg)] bg-[position:right_18px_center] bg-no-repeat py-1.5 pr-[54px] pl-[18px] text-[16px] leading-6 text-[#212529] transition-[border-color,box-shadow] duration-150 focus:border-[#86b7fe] focus:shadow-[0_0_0_0.25rem_rgba(13,110,253,0.25)] focus:outline-0";
+  "block h-[54px] w-full max-w-full cursor-pointer appearance-none rounded-[0.25rem] border border-[#ced4da] bg-white bg-[position:right_18px_center] bg-no-repeat py-1.5 pr-[54px] pl-[18px] text-[16px] leading-6 text-[#212529] transition-[border-color,box-shadow] duration-150 focus:border-[#86b7fe] focus:shadow-[0_0_0_0.25rem_rgba(13,110,253,0.25)] focus:outline-0";
 
 /** Source `section.blog`: Year + Sort filters, cards revealed 15 at a time ("Read More"/"Read Less"). */
 export function BlogList({ posts }: { posts: BlogListItem[] }) {
@@ -71,6 +73,7 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
                 setVisible(PER_PAGE);
               }}
               className={selectClass}
+              style={selectStyle}
             >
               <option value="all">All Years</option>
               {years.map((y) => (
@@ -92,6 +95,7 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
                 setVisible(PER_PAGE);
               }}
               className={selectClass}
+              style={selectStyle}
             >
               <option value="date_desc">Newest First</option>
               <option value="date_asc">Oldest First</option>
@@ -109,7 +113,7 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
                 <div className="mb-[18px] h-[180px] overflow-hidden lg:h-[300px]">
                   <Link href={`/${post.slug}`} tabIndex={-1} aria-hidden="true" className="relative block h-[300px]">
                     <Image
-                      src={post.image}
+                      src={withBasePath(post.image)}
                       alt={post.imageAlt}
                       fill
                       sizes="(min-width: 769px) 33vw, 100vw"

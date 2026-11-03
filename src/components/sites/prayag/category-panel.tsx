@@ -15,6 +15,7 @@ import {
   socialLinks,
 } from "./data";
 import { CloseIcon, LinkedInIcon, PhoneIcon, SparkleIcon } from "./icons";
+import { withBasePath } from "@/lib/base-path";
 
 const chevron = "inline-block size-2 border-r-2 border-b-2 border-solid transition-transform duration-300";
 
@@ -64,7 +65,7 @@ export function CategoryPanel() {
         <div className="flex min-h-[72px] flex-none items-center justify-between border-b border-[#ececec] px-5">
           <Link href="/" aria-label="Prayag home" className="inline-block leading-none">
             {/* eslint-disable-next-line @next/next/no-img-element -- fixed-size source logo */}
-            <img src={logo} alt="Prayag" width={110} height={22} className="block h-auto w-[110px] max-w-full" />
+            <img src={withBasePath(logo)} alt="Prayag" width={110} height={22} className="block h-auto w-[110px] max-w-full" />
           </Link>
           <button
             ref={closeRef}
@@ -79,7 +80,7 @@ export function CategoryPanel() {
 
         <div className="min-h-0 flex-auto overflow-y-auto overscroll-contain px-5 pt-4 pb-6 [scrollbar-color:#c9c9c9_transparent] [scrollbar-width:thin]">
           <a
-            href={pageLinks.hdpe}
+            href={withBasePath(pageLinks.hdpe)}
             className="flex items-center gap-[14px] rounded-[14px] border border-[#ececec] bg-[#f6f6f6] p-[14px] text-black transition-colors duration-200 hover:border-[#111]"
           >
             <span className="flex size-10 flex-none items-center justify-center rounded-[10px] bg-[#111] text-white">
@@ -98,7 +99,7 @@ export function CategoryPanel() {
           </a>
 
           <a
-            href={pageLinks.bablu}
+            href={withBasePath(pageLinks.bablu)}
             className="mt-2.5 flex items-center gap-[14px] rounded-[14px] bg-gradient-to-br from-[#007ac3] to-[#00aeef] p-[14px] text-white shadow-[0_6px_16px_rgba(0,122,195,0.28)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_8px_20px_rgba(0,122,195,0.38)]"
           >
             <span className="flex size-10 flex-none items-center justify-center rounded-[10px] bg-white/20 text-white">
@@ -134,13 +135,13 @@ export function CategoryPanel() {
                 </summary>
                 <ul className="mt-1 mb-2 ml-[14px] animate-[prayag-drop_0.25s_ease] border-l-2 border-[#e5e5e5] pl-2.5">
                   <li>
-                    <a href={productCategories[0].href} className="block rounded-lg px-3 py-[9px] text-[15px] font-semibold text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]">
+                    <a href={withBasePath(productCategories[0].href)} className="block rounded-lg px-3 py-[9px] text-[15px] font-semibold text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]">
                       View all {productCategories[0].label}
                     </a>
                   </li>
                   {plumbingSubcategories.map((link) => (
                     <li key={link.label}>
-                      <a href={link.href} className="block rounded-lg px-3 py-[9px] text-[15px] text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]">
+                      <a href={withBasePath(link.href)} className="block rounded-lg px-3 py-[9px] text-[15px] text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]">
                         {link.label}
                       </a>
                     </li>
@@ -155,7 +156,7 @@ export function CategoryPanel() {
             {panelQuickLinks.map((link) => (
               <li key={link.label}>
                 <a
-                  href={link.href}
+                  href={withBasePath(link.href)}
                   {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="block rounded-lg p-2.5 text-[15px] text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]"
                 >
@@ -171,20 +172,20 @@ export function CategoryPanel() {
             {(["facebook", "youtube", "instagram"] as const).map((key) => (
               <li key={key}>
                 <a
-                  href={socialLinks[key]}
+                  href={withBasePath(socialLinks[key])}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={key === "youtube" ? "YouTube" : key[0].toUpperCase() + key.slice(1)}
                   className="flex size-10 items-center justify-center rounded-lg text-[#111] transition-colors duration-200 hover:bg-[#f1f1f1]"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element -- 24px source icon */}
-                  <img src={socialIcons[key]} alt="" aria-hidden="true" width={24} height={24} loading="lazy" className="block size-6 brightness-0" />
+                  <img src={withBasePath(socialIcons[key])} alt="" aria-hidden="true" width={24} height={24} loading="lazy" className="block size-6 brightness-0" />
                 </a>
               </li>
             ))}
             <li>
               <a
-                href={socialLinks.linkedin}
+                href={withBasePath(socialLinks.linkedin)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"

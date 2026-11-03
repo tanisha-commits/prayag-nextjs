@@ -1,3 +1,5 @@
+import type { ResponsiveImgProps } from "@/lib/optimized-image";
+
 // Content for /manufacturing-process (source: prayagindia.com/manufacturing-process).
 
 export const mfBanner = {
@@ -8,6 +10,8 @@ export const mfBanner = {
 export type MfVideo = {
   id: string;
   poster: string;
+  /** Optimizer candidates for `poster`, added on the server (mf-page.tsx). */
+  posterImg?: ResponsiveImgProps;
   /** aria-label of the poster link */
   label: string;
   /** iframe title */

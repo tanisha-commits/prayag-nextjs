@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { SlickCarousel, type SlickSettings } from "../slick-carousel";
 import type { FaqItem, Feature, FittingCard, FittingPane, ImageCard, RichText, SpecTableData } from "./types";
+import { withBasePath } from "@/lib/base-path";
+import { fullImg } from "@/lib/image-dimensions";
 
 // Section markup shared by the PPR, SWR and Composite pipe pages. Class names, nesting and the
 // source's inline styles are kept 1:1 because the ported page CSS targets them.
@@ -33,7 +35,7 @@ export function RichTextView({ text }: { text: RichText }) {
         {part.text}
       </Link>
     ) : (
-      <a key={i} href={part.href}>
+      <a key={i} href={withBasePath(part.href)}>
         {part.text}
       </a>
     ),
@@ -74,7 +76,7 @@ function fittingCard(card: FittingCard, width: number, height: number, key?: num
     <article key={key} className="cfs-card">
       <figure className="cfs-card__figure">
         {/* eslint-disable-next-line @next/next/no-img-element -- source card image, intrinsic size kept */}
-        <img src={card.src} alt={card.alt} loading="lazy" width={width} height={height} className="cfs-card__img" />
+        <img {...fullImg(card.src)} alt={card.alt} loading="lazy" width={width} height={height} className="cfs-card__img" />
       </figure>
       <div className="cfs-card__body">
         <h3 className="cfs-card__title">{card.title}</h3>
@@ -188,7 +190,7 @@ export function KaCards({ items }: { items: ImageCard[] }) {
     <div key={item.title} className="ka-card">
       <div className="ka-image">
         {/* eslint-disable-next-line @next/next/no-img-element -- source application image, intrinsic size kept */}
-        <img src={item.src} alt={item.alt} />
+        <img {...fullImg(item.src)} alt={item.alt} />
       </div>
       <div className="ka-card-body">
         <h3>{item.title}</h3>
@@ -207,7 +209,7 @@ export function featureItems(items: Feature[], Label: "h3" | "span") {
     <div key={item.label} className="ngp-feature-item">
       <div className="ngp-icon-circle">
         {/* eslint-disable-next-line @next/next/no-img-element -- source icon, intrinsic size kept */}
-        <img src={item.src} alt={item.alt} />
+        <img {...fullImg(item.src)} alt={item.alt} />
       </div>
       <Label className="ngp-feature-label">{item.label}</Label>
       <p className="ngp_para">{item.text}</p>

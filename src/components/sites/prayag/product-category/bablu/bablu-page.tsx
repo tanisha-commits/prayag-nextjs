@@ -1,5 +1,7 @@
 import { PcatPage } from "../pcat-page";
 import { BabluReveal } from "./bablu-reveal";
+import { withBasePath } from "@/lib/base-path";
+import { fullImg } from "@/lib/image-dimensions";
 
 const FILES = "/sites/prayag/files/2026-10";
 
@@ -44,7 +46,7 @@ export function BabluPage() {
             <div className="col-md-6">
               <div className="breadcrumb_image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- banner keeps the source's natural ratio */}
-                <img src={`${FILES}/Prayag-Bablu-banner.webp`} alt="" fetchPriority="high" />
+                <img {...fullImg(`${FILES}/Prayag-Bablu-banner.webp`)} alt="" fetchPriority="high" />
               </div>
             </div>
             <div className="col-md-6">
@@ -107,7 +109,7 @@ export function BabluPage() {
                   <div className="phone-stage">
                     <span className="orbit" />
                     {/* eslint-disable-next-line @next/next/no-img-element -- source intrinsic sizing kept 1:1 */}
-                    <img src={f.image} alt={f.alt} loading="lazy" />
+                    <img src={withBasePath(f.image)} alt={f.alt} loading="lazy" />
                   </div>
                   <div className="feature-copy">
                     {/* Decorative glyph; the heading carries the meaning. */}
@@ -140,7 +142,7 @@ export function BabluPage() {
                   {guides.map((g) => (
                     <a
                       key={g.label}
-                      href={g.href}
+                      href={withBasePath(g.href)}
                       className={g.primary ? "guide-card primary" : "guide-card"}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -165,8 +167,8 @@ export function BabluPage() {
             <div className="bablu-visual reveal">
               <span className="visual-disc" />
               {/* eslint-disable-next-line @next/next/no-img-element -- source intrinsic sizing kept 1:1 */}
-              <img
-                src={`${FILES}/partnership.webp`}
+              <img {...fullImg(`${FILES}/partnership.webp`)}
+               
                 alt="PRAYAG Ka Bablu partnership between a plumber and support representative"
                 loading="lazy"
               />

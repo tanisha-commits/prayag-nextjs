@@ -1,5 +1,6 @@
 import { privacyPolicyHtml } from "@/content/prayag/privacy/policy";
 
+import { storedHtml } from "@/lib/stored-html";
 import "./privacy.css";
 
 /** Source `section.privacy_policy`: the CMS body rendered verbatim (static, trusted source HTML). */
@@ -8,7 +9,7 @@ export function PrivacyBody() {
     <section className="privacy_policy">
       {/* Source `.container-fluid { overflow: hidden }` clips overflowing card text. */}
       <div className="prayag-container overflow-hidden">
-        <div className="privacy-body" dangerouslySetInnerHTML={{ __html: privacyPolicyHtml }} />
+        <div className="privacy-body" dangerouslySetInnerHTML={{ __html: storedHtml(privacyPolicyHtml) }} />
       </div>
     </section>
   );

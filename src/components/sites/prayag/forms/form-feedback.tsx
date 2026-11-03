@@ -1,6 +1,7 @@
 import { HONEYPOT_FIELD } from "@/lib/enquiry/forms";
 import { cn } from "@/lib/utils";
 import type { EnquiryState } from "./use-enquiry-form";
+import { withBasePath } from "@/lib/base-path";
 
 /** Olivero (the source's base theme) status icons — core/themes/olivero/images/{error,status}.svg. */
 function ErrorIcon() {
@@ -76,7 +77,8 @@ export function FieldError({ id, message }: { id: string; message?: string }) {
   return (
     <strong
       id={id}
-      className="my-[9px] block bg-[url(/sites/prayag/icons/form-error.svg)] bg-[length:18px_18px] bg-left-top bg-no-repeat pl-[27px] font-bold text-[#e33f1e]"
+      className="my-[9px] block bg-[length:18px_18px] bg-left-top bg-no-repeat pl-[27px] font-bold text-[#e33f1e]"
+      style={{ backgroundImage: `url(${withBasePath("/sites/prayag/icons/form-error.svg")})` }}
     >
       {message}
     </strong>

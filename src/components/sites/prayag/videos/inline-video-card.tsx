@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { inlineEmbedUrl, type VideoCard } from "./data";
+import { withBasePath } from "@/lib/base-path";
 
 /**
  * Source `.video_item` with `.video-thumbnail-wrapper[data-video]`: clicking the thumbnail
@@ -24,7 +25,7 @@ export function InlineVideoCard({ card }: { card: VideoCard }) {
           <iframe
             ref={frameRef}
             className="vd-frame"
-            src={inlineEmbedUrl(card.id)}
+            src={withBasePath(inlineEmbedUrl(card.id))}
             title={card.title}
             allow="autoplay; encrypted-media"
             referrerPolicy="strict-origin-when-cross-origin"
@@ -33,7 +34,7 @@ export function InlineVideoCard({ card }: { card: VideoCard }) {
         ) : (
           <button type="button" className="vd-thumb" aria-label={`Play video: ${card.title}`} onClick={() => setPlaying(true)}>
             {/* eslint-disable-next-line @next/next/no-img-element -- cover-cropped 250px thumbnail, as the source background-image */}
-            <img src={card.thumb} alt="" loading="lazy" />
+            <img {...(card.thumbImg ?? { src: withBasePath(card.thumb) })} alt="" loading="lazy" />
             <span className="vd-play" aria-hidden="true" />
           </button>
         )}

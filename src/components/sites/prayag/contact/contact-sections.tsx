@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 import styles from "./contact.module.css";
+import { withBasePath } from "@/lib/base-path";
+import { fullImg } from "@/lib/image-dimensions";
 
 /** Factory icon used for every manufacturing unit on the source (inline SVG, 32x32). */
 function FactoryIcon() {
@@ -62,7 +64,7 @@ export function ContactInfoSection() {
                         <h5 className="m-0 text-[18px] leading-[25.2px] font-medium text-black">{n.label}</h5>
                         <ul className="m-0 list-none p-0">
                           <li className="m-0 text-[16px] leading-[28.8px] text-black">
-                            <a href={n.href} className="p-0 text-black underline transition-colors duration-300 hover:text-[#2980b9]">
+                            <a href={withBasePath(n.href)} className="p-0 text-black underline transition-colors duration-300 hover:text-[#2980b9]">
                               {n.text}
                             </a>
                           </li>
@@ -96,7 +98,7 @@ export function ContactInfoSection() {
 }
 
 const BOXES = [
-  { title: "Our Product", image: "/sites/prayag/files/2024-10/products-1-.webp", href: "https://prayagindia.com/products" },
+  { title: "Our Product", image: "/sites/prayag/files/2024-10/products-1-.webp", href: "/products" },
   { title: "Become a Dealer", image: "/sites/prayag/files/2024-09/Banner_0.webp", href: "/dealership-enquiry" },
   { title: "FAQ", image: "/sites/prayag/files/2024-08/FAQS.webp", href: "/faq" /* source: /latest-faqs, which 301-redirects to the homepage on the live site */ },
 ];
@@ -110,10 +112,10 @@ export function ContactLinkBoxes() {
           {BOXES.map((box) => (
             <div key={box.title} className="w-1/3 px-3">
               <div className="group">
-                <a href={box.href} className="grid">
+                <a href={withBasePath(box.href)} className="grid">
                   <div className="overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element -- fixed 230px cover crop like the source */}
-                    <img src={box.image} alt={box.title} loading="lazy" className="h-[230px] w-full object-cover" />
+                    <img {...fullImg(box.image)} alt={box.title} loading="lazy" className="h-[230px] w-full object-cover" />
                   </div>
                   <div className="relative flex items-center gap-x-4 border-b border-[#dbdbdb] py-5 before:absolute before:bottom-0 before:block before:h-[2px] before:w-0 before:bg-black before:transition-all before:duration-300 before:content-[''] group-hover:before:w-full">
                     <h4 className="m-0 text-[23px] leading-[32.2px] font-semibold text-black">{box.title}</h4>

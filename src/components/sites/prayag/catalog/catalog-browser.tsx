@@ -14,8 +14,11 @@ const LABELS: Record<string, string> = {
   capacity: "Capacity", "plumbing type": "Plumbing type", "accessory range": "Range",
 };
 
-/** Filterable product grid for one category. Server-rendered first; later changes go through Redux. */
-export function CatalogBrowser({ category, initialQuery, initialResult }: { category: string; initialQuery: PublicQuery; initialResult: PublicListResult }) {
+/**
+ * Filterable product grid for one category, or for every category when `category` is omitted (site-wide
+ * search, which needs a search term). Server-rendered first; later changes go through Redux.
+ */
+export function CatalogBrowser({ category, initialQuery, initialResult }: { category?: string; initialQuery: PublicQuery; initialResult: PublicListResult }) {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const pathname = usePathname();
@@ -34,8 +37,11 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
     const q = { ...next, category };
     const qs = paramsFromQuery(q).toString();
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-    dispatch(loadCatalog(q));
+    // Site-wide search without a term: nothing to list (the API needs a category or a term).
+    if (!category && !q.q) dispatch(hydrateCatalog({ query: q, result: { items: [], total: 0, facets: [], page: 1, pageSize: result.pageSize } }));
+    else dispatch(loadCatalog(q));
   };
+  const awaitingTerm = !category && !query.q;
 
   const toggle = (key: string, slug: string) => {
     const current = query.filters?.[key] ?? [];
@@ -101,6 +107,7 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
             <input
               type="search"
               value={search}
+              autoFocus={!category}
               placeholder="Search by name or item code"
               onChange={(e) => {
                 const v = e.target.value;
@@ -140,7 +147,9 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
 
         {state.status === "failed" && <p role="alert" className="mb-4 rounded-[8px] bg-[#fdecea] px-4 py-3 text-[14px] text-[#a12622]">{state.error} — please try again.</p>}
 
-        {result.items.length === 0 ? (
+        {awaitingTerm ? (
+          <p className="rounded-[10px] bg-[#f7f9fa] px-5 py-10 text-center text-[15px] text-[#5b5f66]">Type a product name or item code to search all products.</p>
+        ) : result.items.length === 0 ? (
           <p className="rounded-[10px] bg-[#f7f9fa] px-5 py-10 text-center text-[15px] text-[#5b5f66]">No products match these filters.</p>
         ) : (
           <ul className={cn("m-0 grid list-none grid-cols-2 gap-4 p-0 md:grid-cols-3 xl:grid-cols-4", loading && "opacity-60")}>

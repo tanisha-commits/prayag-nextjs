@@ -5,6 +5,8 @@ import { SplitRevealSection } from "../split-reveal";
 import { TabGroup } from "./tab-group";
 import "./hdpe.css";
 
+import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+
 // Slick settings verbatim from the page's inline script (it initialises before the theme's
 // Drupal behavior for .ngp-features-slider, so the inline settings are the ones in effect).
 const NGP_SLICK: SlickSettings = {
@@ -45,7 +47,7 @@ export function HdpePage() {
           <div className="row">
             <div className="col-md-6">
               {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-              <img src="/sites/prayag/files/styles/medium/public/2026-10/main-banner-hdpe.webp" srcSet="/sites/prayag/files/styles/thumbnail/public/2026-10/main-banner-hdpe.webp 300w, /sites/prayag/files/styles/thumbnail/public/2026-10/main-banner-hdpe.webp 600w, /sites/prayag/files/styles/large/public/2026-10/main-banner-hdpe.webp 1200w, /sites/prayag/files/styles/wide/public/2026-10/main-banner-hdpe.webp 2000w" sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px" alt="HDPE" width="800" height="450" className="img-fluid" decoding="async" fetchPriority="high" />
+              <img src={transcodedUrl("/sites/prayag/files/styles/medium/public/2026-10/main-banner-hdpe.webp")} srcSet={transcodedSrcSet("/sites/prayag/files/styles/thumbnail/public/2026-10/main-banner-hdpe.webp 300w, /sites/prayag/files/styles/thumbnail/public/2026-10/main-banner-hdpe.webp 600w, /sites/prayag/files/styles/large/public/2026-10/main-banner-hdpe.webp 1200w, /sites/prayag/files/styles/wide/public/2026-10/main-banner-hdpe.webp 2000w")} sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px" alt="HDPE" width="800" height="450" className="img-fluid" decoding="async" fetchPriority="high" />
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
@@ -69,7 +71,7 @@ export function HdpePage() {
             </div>
             <div className="col-12 col-md-6 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-              <img src="/sites/prayag/theme/HDPE/IMAGE-2.webp" alt="Prayag HDPE Pipes and Coils" className="prayag-pipe-img" />
+              <img {...fullImg("/sites/prayag/theme/HDPE/IMAGE-2.webp")} alt="Prayag HDPE Pipes and Coils" className="prayag-pipe-img" />
             </div>
           </div>
         </div>
@@ -81,7 +83,7 @@ export function HdpePage() {
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/icon%20webp/Excellent-Chemical-Resistance.webp" alt="" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Excellent-Chemical-Resistance.webp")} alt="" />
               </div>
               <h3 className="ngp-feature-label">Excellent Chemical Resistance</h3>
               <p className="ngp_para">Resists a wide range of chemicals for demanding fluid transportation applications.</p>
@@ -89,7 +91,7 @@ export function HdpePage() {
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/icon%20webp/Corrosion-Resistant.webp" alt="" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Corrosion-Resistant.webp")} alt="" />
               </div>
               <h3 className="ngp-feature-label">Corrosion Resistant</h3>
               <p className="ngp_para">Withstands internal and external corrosion for long-lasting performance.</p>
@@ -97,7 +99,7 @@ export function HdpePage() {
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/icon%20webp/Lightweight-Easy-to-Handle.webp" alt="" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Lightweight-Easy-to-Handle.webp")} alt="" />
               </div>
               <h3 className="ngp-feature-label">Lightweight &amp; Easy to Handle</h3>
               <p className="ngp_para">Lighter than steel, making transportation, handling and installation easier.</p>
@@ -105,7 +107,7 @@ export function HdpePage() {
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/icon%20webp/Faster-Installation.webp" alt="" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Faster-Installation.webp")} alt="" />
               </div>
               <h3 className="ngp-feature-label">Faster Installation</h3>
               <p className="ngp_para">Welded joints enable faster installation with less excavation and backfilling.</p>
@@ -113,7 +115,7 @@ export function HdpePage() {
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/icon%20webp/Smooth-Internal-Bore.webp" alt="" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Smooth-Internal-Bore.webp")} alt="" />
               </div>
               <h3 className="ngp-feature-label">Smooth Internal Bore</h3>
               <p className="ngp_para">Provides lower flow resistance and reduced head loss for efficient fluid flow.</p>
@@ -121,7 +123,7 @@ export function HdpePage() {
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/icon%20webp/Low-Maintenance.webp" alt="" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Low-Maintenance.webp")} alt="" />
               </div>
               <h3 className="ngp-feature-label">Low Maintenance</h3>
               <p className="ngp_para">Durable and corrosion-resistant construction helps minimize maintenance needs.</p>
@@ -135,7 +137,7 @@ export function HdpePage() {
             <div className="msf-slide-wrap">
               <div className="msf-image-wrap">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img className="msf-image" src="/sites/prayag/theme/HDPE/IMAGE-3-BANNER-.webp" alt="Prayag HDPE pipes for water supply and underground infrastructure" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/IMAGE-3-BANNER-.webp")} className="msf-image" alt="Prayag HDPE pipes for water supply and underground infrastructure" />
               </div>
             </div>
           </div>
@@ -146,7 +148,7 @@ export function HdpePage() {
           <div className="psr-image-col">
             <div className="psr-image-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-              <img className="psr-image" src="/sites/prayag/theme/HDPE/IMAGE-4.webp" alt="What are HDPE Pipes" />
+              <img {...fullImg("/sites/prayag/theme/HDPE/IMAGE-4.webp")} className="psr-image" alt="What are HDPE Pipes" />
             </div>
           </div>
           <div className="psr-content-col">
@@ -176,7 +178,7 @@ export function HdpePage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/Applications/WATER-SUPPY-Application-.webp" alt="Water supply" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/Applications/WATER-SUPPY-Application-.webp")} alt="Water supply" />
               </div>
               <div className="ka-card-body">
                 <h3>Water Supply</h3>
@@ -186,7 +188,7 @@ export function HdpePage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/Applications/Drainage-Sewerage-Application-.webp" alt="Underground drainage and sewerage" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/Applications/Drainage-Sewerage-Application-.webp")} alt="Underground drainage and sewerage" />
               </div>
               <div className="ka-card-body">
                 <h3>Underground Drainage &amp; Sewerage</h3>
@@ -196,7 +198,7 @@ export function HdpePage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/Applications/Effluent-Wastewater-Disposal-Application-.webp" alt="Effluent and wastewater disposal" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/Applications/Effluent-Wastewater-Disposal-Application-.webp")} alt="Effluent and wastewater disposal" />
               </div>
               <div className="ka-card-body">
                 <h3>Effluent &amp; Wastewater Disposal</h3>
@@ -206,7 +208,7 @@ export function HdpePage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/Applications/Gas-Distribution-Application.webp" alt="Domestic gas distribution" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/Applications/Gas-Distribution-Application.webp")} alt="Domestic gas distribution" />
               </div>
               <div className="ka-card-body">
                 <h3>Domestic Gas Distribution</h3>
@@ -216,7 +218,7 @@ export function HdpePage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/Applications/Submarine-Pipelines-Application-.webp" alt="Submarine pipelines" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/Applications/Submarine-Pipelines-Application-.webp")} alt="Submarine pipelines" />
               </div>
               <div className="ka-card-body">
                 <h3>Submarine Pipelines</h3>
@@ -226,7 +228,7 @@ export function HdpePage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/Applications/Infrastructure-Utility-Networks.webp" alt="Infrastructure and utility networks" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/Applications/Infrastructure-Utility-Networks.webp")} alt="Infrastructure and utility networks" />
               </div>
               <div className="ka-card-body">
                 <h3>Infrastructure &amp; Utility Networks</h3>
@@ -242,7 +244,7 @@ export function HdpePage() {
             <div className="col-lg-6 col-md-12 p-0">
               <div className="visual-wrapper">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/HDPE/IMAGE-4.webp" alt="Prayag HDPE Pipes advantage" className="img-fluid main-img" />
+                <img {...fullImg("/sites/prayag/theme/HDPE/IMAGE-4.webp")} alt="Prayag HDPE Pipes advantage" className="img-fluid main-img" />
               </div>
             </div>
             <div className="col-lg-6 col-md-12 p-0">
@@ -326,7 +328,7 @@ export function HdpePage() {
                 <article className="cfs-card">
                   <figure className="cfs-card__figure">
                     {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                    <img src="/sites/prayag/theme/HDPE/HDPE%20Pipe%20Grades/PE-63.webp" alt="PE-63 HDPE pipe grade" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                    <img {...fullImg("/sites/prayag/theme/HDPE/HDPE%20Pipe%20Grades/PE-63.webp")} alt="PE-63 HDPE pipe grade" loading="lazy" width="600" height="400" className="cfs-card__img" />
                   </figure>
                   <div className="cfs-card__body">
                     <h3 className="cfs-card__title">PE-63</h3>
@@ -343,7 +345,7 @@ export function HdpePage() {
                 <article className="cfs-card">
                   <figure className="cfs-card__figure">
                     {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                    <img src="/sites/prayag/theme/HDPE/HDPE%20Pipe%20Grades/PE--80.webp" alt="PE-80 HDPE pipe grade" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                    <img {...fullImg("/sites/prayag/theme/HDPE/HDPE%20Pipe%20Grades/PE--80.webp")} alt="PE-80 HDPE pipe grade" loading="lazy" width="600" height="400" className="cfs-card__img" />
                   </figure>
                   <div className="cfs-card__body">
                     <h3 className="cfs-card__title">PE-80</h3>
@@ -360,7 +362,7 @@ export function HdpePage() {
                 <article className="cfs-card">
                   <figure className="cfs-card__figure">
                     {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                    <img src="/sites/prayag/theme/HDPE/HDPE%20Pipe%20Grades/PE--100.webp" alt="PE-100 HDPE pipe grade" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                    <img {...fullImg("/sites/prayag/theme/HDPE/HDPE%20Pipe%20Grades/PE--100.webp")} alt="PE-100 HDPE pipe grade" loading="lazy" width="600" height="400" className="cfs-card__img" />
                   </figure>
                   <div className="cfs-card__body">
                     <h3 className="cfs-card__title">PE-100</h3>

@@ -9,6 +9,8 @@ import { SlickCarousel, type SlickSettings } from "../slick-carousel";
 import { applications, benefits, faqs, features, fittingSpecs, pipeSpecs, type SpecTable } from "./data";
 import "./ugd-pipes-fittings.css";
 
+import { fullImg } from "@/lib/image-dimensions";
+
 // This page has no inline slider script, so the theme's `ngpFeatureSlider` Drupal behaviour
 // (script.js) initialises `.ngp-features-slider` with these settings.
 const featureSlider: SlickSettings = {
@@ -98,8 +100,8 @@ export function UgdPage() {
             </div>
             <div className="col-12 col-md-5 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-              <img
-                src="/sites/prayag/theme/ugd_pipes_fittings/UGD_section_about.webp"
+              <img {...fullImg("/sites/prayag/theme/ugd_pipes_fittings/UGD_section_about.webp")}
+               
                 alt="Prayag Pipe"
                 className="prayag-pipe-img"
               />
@@ -120,7 +122,7 @@ export function UgdPage() {
                 <div className="ngp-icon-circle">
                   {/* Several source icons have no alt attribute; kept as-is. */}
                   {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-                  <img src={feature.icon} alt={feature.iconAlt} />
+                  <img {...fullImg(feature.icon)} alt={feature.iconAlt} />
                 </div>
                 <h3 className="ngp-feature-label">{feature.title}</h3>
                 <p className="ngp_para">{feature.text}</p>
@@ -136,7 +138,7 @@ export function UgdPage() {
             <div className="msf-slide-wrap">
               <div className="msf-image-wrap">
                 {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-                <img className="msf-image" src="/sites/prayag/files/2026-07/image3.webp" alt="UPVC Column Pipes" />
+                <img {...fullImg("/sites/prayag/files/2026-07/image3.webp")} className="msf-image" alt="UPVC Column Pipes" />
               </div>
               <div className="msf-overlay">
                 {/* The source comments out this block's subtitle and title. */}
@@ -152,7 +154,7 @@ export function UgdPage() {
           <div className="psr-image-col">
             <div className="psr-image-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-              <img className="psr-image" src="/sites/prayag/files/2026-07/image4.2.webp" alt="Premium Bathroom Basin" />
+              <img {...fullImg("/sites/prayag/files/2026-07/image4.2.webp")} className="psr-image" alt="Premium Bathroom Basin" />
             </div>
           </div>
           <div className="psr-content-col">
@@ -195,7 +197,7 @@ export function UgdPage() {
             <div className="col-lg-7 col-md-5 p-0">
               <div className="application_image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-                <img src="/sites/prayag/files/2026-07/image5.webp" alt="" />
+                <img {...fullImg("/sites/prayag/files/2026-07/image5.webp")} alt="" />
               </div>
             </div>
           </div>
@@ -224,7 +226,7 @@ export function UgdPage() {
             <div className="col-lg-6 col-md-12">
               <div className="visual-wrapper">
                 {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
-                <img src="/sites/prayag/files/2026-07/image6.2.webp" alt="Features & Benefits" className="img-fluid main-img" />
+                <img {...fullImg("/sites/prayag/files/2026-07/image6.2.webp")} alt="Features & Benefits" className="img-fluid main-img" />
               </div>
             </div>
             <div className="col-lg-6 col-md-12">

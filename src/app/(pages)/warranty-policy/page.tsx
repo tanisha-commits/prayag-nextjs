@@ -1,4 +1,5 @@
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
+import { withBasePath } from "@/lib/base-path";
 
 // The live site has no Warranty Policy page; it links straight to this PDF
 // (https://prayagindia.com/sites/default/files/2024-09/Warranty_Policy.pdf). The local copy
@@ -38,7 +39,7 @@ export default function WarrantyPolicyPage() {
 
           <div className="mb-10 flex flex-wrap gap-4">
             <a
-              href={PDF}
+              href={withBasePath(PDF)}
               target="_blank"
               rel="noopener noreferrer"
               className={`${actionBase} bg-black !text-white hover:bg-[linear-gradient(135deg,#0056b3,#004085)]`}
@@ -47,7 +48,7 @@ export default function WarrantyPolicyPage() {
               <span className="sr-only"> (PDF, opens in a new tab)</span>
             </a>
             <a
-              href={PDF}
+              href={withBasePath(PDF)}
               download={DOWNLOAD_NAME}
               className={`${actionBase} border border-black text-black hover:bg-black hover:!text-white`}
             >
@@ -58,7 +59,7 @@ export default function WarrantyPolicyPage() {
 
           {/* Inline preview where browsers render PDFs reliably; phones get the buttons above. */}
           <div className="hidden overflow-hidden rounded-[10px] border border-[#e5e7eb] md:block">
-            <iframe src={`${PDF}#view=FitH`} title="Prayag Warranty Policy (PDF)" className="block h-[80vh] min-h-[600px] w-full" />
+            <iframe src={withBasePath(`${PDF}#view=FitH`)} title="Prayag Warranty Policy (PDF)" className="block h-[80vh] min-h-[600px] w-full" />
           </div>
         </div>
       </section>

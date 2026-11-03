@@ -7,6 +7,8 @@ import { PcatTabs } from "./pcat-tabs";
 import { SplitReveal } from "./split-reveal";
 import "./ppr-pipes.css";
 
+import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+
 const IMG = "/sites/prayag/theme/ppr-pipes";
 
 // SLICK_OPTS of the page's inline script (fittings sliders).
@@ -74,8 +76,8 @@ export function PprPipesPage() {
             <div className="col-md-6">
               {/* eslint-disable-next-line @next/next/no-img-element -- source responsive banner (Drupal image styles) */}
               <img
-                src="/sites/prayag/files/styles/medium/public/2026-08/PPR-main-banner.webp"
-                srcSet="/sites/prayag/files/styles/thumbnail/public/2026-08/PPR-main-banner.webp 300w, /sites/prayag/files/styles/thumbnail/public/2026-08/PPR-main-banner.webp 600w, /sites/prayag/files/styles/large/public/2026-08/PPR-main-banner.webp 1200w, /sites/prayag/files/styles/wide/public/2026-08/PPR-main-banner.webp 2000w"
+                src={transcodedUrl("/sites/prayag/files/styles/medium/public/2026-08/PPR-main-banner.webp")}
+                srcSet={transcodedSrcSet("/sites/prayag/files/styles/thumbnail/public/2026-08/PPR-main-banner.webp 300w, /sites/prayag/files/styles/thumbnail/public/2026-08/PPR-main-banner.webp 600w, /sites/prayag/files/styles/large/public/2026-08/PPR-main-banner.webp 1200w, /sites/prayag/files/styles/wide/public/2026-08/PPR-main-banner.webp 2000w")}
                 sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px"
                 alt="PPR Pipes"
                 width={800}
@@ -113,7 +115,7 @@ export function PprPipesPage() {
             </div>
             <div className="col-12 col-md-6 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- source image, intrinsic size kept */}
-              <img src="/sites/prayag/theme/unmatched-new-image.webp" alt="Prayag Pipe" className="prayag-pipe-img" />
+              <img {...fullImg("/sites/prayag/theme/unmatched-new-image.webp")} alt="Prayag Pipe" className="prayag-pipe-img" />
             </div>
           </div>
         </div>
@@ -137,7 +139,7 @@ export function PprPipesPage() {
             <div className="msf-slide-wrap">
               <div className="msf-image-wrap">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source banner (media/1533), intrinsic size kept */}
-                <img className="msf-image" src="/sites/prayag/files/2026-08/3-iMAGE-.webp" alt="UPVC Column Pipes" />
+                <img {...fullImg("/sites/prayag/files/2026-08/3-iMAGE-.webp")} className="msf-image" alt="UPVC Column Pipes" />
               </div>
             </div>
           </div>
@@ -147,7 +149,7 @@ export function PprPipesPage() {
       <SplitReveal
         image={
           // eslint-disable-next-line @next/next/no-img-element -- source image, intrinsic size kept
-          <img className="psr-image" src={`${IMG}/image-4.webp`} alt="Premium Bathroom Basin" />
+          <img {...fullImg(`${IMG}/image-4.webp`)} className="psr-image" alt="Premium Bathroom Basin" />
         }
         content={
           <>
@@ -211,7 +213,7 @@ export function PprPipesPage() {
             <div className="col-12 col-lg-7">
               <div className="application_image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source image (empty alt on the source), intrinsic size kept */}
-                <img src={`${IMG}/image-5.webp`} alt="" />
+                <img {...fullImg(`${IMG}/image-5.webp`)} alt="" />
               </div>
             </div>
           </div>
@@ -224,8 +226,8 @@ export function PprPipesPage() {
             <div className="col-lg-6 col-md-12">
               <div className="visual-wrapper">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source image, intrinsic size kept */}
-                <img
-                  src={`${IMG}/prayag-advantage-new.webp`}
+                <img {...fullImg(`${IMG}/prayag-advantage-new.webp`)}
+                 
                   alt="Prayag Composite Pipe engineering advantage"
                   className="img-fluid main-img"
                 />

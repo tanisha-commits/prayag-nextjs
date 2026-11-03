@@ -1,3 +1,5 @@
+import { transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+
 /** Local copies of the Drupal image-style derivatives the source banner <img> references. */
 export type BannerImage = { medium: string; thumbnail: string; large: string; wide: string };
 
@@ -14,8 +16,8 @@ export function CategoryBanner({ image, alt, title }: { image: BannerImage; alt:
           <div className="col-md-6">
             {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> with its intrinsic size/srcset */}
             <img
-              src={image.medium}
-              srcSet={`${image.thumbnail} 300w, ${image.thumbnail} 600w, ${image.large} 1200w, ${image.wide} 2000w`}
+              src={transcodedUrl(image.medium)}
+              srcSet={transcodedSrcSet(`${image.thumbnail} 300w, ${image.thumbnail} 600w, ${image.large} 1200w, ${image.wide} 2000w`)}
               sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px"
               alt={alt}
               width={800}

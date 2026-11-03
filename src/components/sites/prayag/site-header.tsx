@@ -11,6 +11,8 @@ import {
 } from "@/lib/features/ui-slice";
 import { logo, megaMenus, searchHref, type MegaMenu, type NavLink } from "./data";
 import { SearchIcon } from "./icons";
+import { withBasePath } from "@/lib/base-path";
+import { responsiveImg } from "@/lib/optimized-image";
 
 const STICKY_OFFSET = 90; // source: header height; `.sticky` once scrollTop exceeds it
 // header.js only adds `.sticky` in its `viewport-lg` mode (window >= 1200px).
@@ -25,10 +27,11 @@ function linkProps(link: NavLink) {
 }
 
 /**
- * Desktop (>= 991px): `overlay` (homepage) sits transparent over the hero with white
+ * Desktop (>= 1040px, where the nav links fit on one line): `overlay` (homepage) sits transparent over the hero with white
  * text and turns white on hover; `solid` (inner pages) is an in-flow white bar with the
  * original-colour logo. Both become fixed + white after scrolling past 90px (on inner
- * pages the content jumps up by the header height, as on the source). Below 991px:
+ * pages the content jumps up by the header height, as on the source). Below 1040px (phones and
+ * tablets; the source broke between 769 and 1035px):
  * static white bar with a burger that slides the menu open.
  */
 export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "solid" }) {
@@ -38,6 +41,10 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
   const mobileOpen = useAppSelector((s) => s.ui.mobileNavOpen);
   const [sticky, setSticky] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
+  // Mega-menu thumbnails sit in hidden (opacity 0) panels, which lazy loading does not skip, so they
+  // are only rendered once the pointer or keyboard focus first reaches the header.
+  const [menuImages, setMenuImages] = useState(false);
+  const showMenuImages = () => setMenuImages(true);
 
   useEffect(() => {
     const onScroll = () =>
@@ -52,7 +59,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
   }, []);
 
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 991px)");
+    const desktop = window.matchMedia("(min-width: 1040px)");
     const onChange = () => desktop.matches && dispatch(closeMobileNav());
     desktop.addEventListener("change", onChange);
     return () => desktop.removeEventListener("change", onChange);
@@ -60,53 +67,57 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
 
   return (
     <header
+      onPointerEnter={menuImages ? undefined : showMenuImages}
+      onFocusCapture={menuImages ? undefined : showMenuImages}
       data-sticky={sticky}
       data-dark={solid || sticky}
       data-solid={solid}
       className={cn(
-        "group/header relative z-[99] w-full bg-white py-[15px] text-[16px] leading-[1.42857] text-[#212529] md:py-0",
+        "group/header relative z-[99] w-full bg-white py-[15px] text-[16px] leading-[1.42857] text-[#212529] nav:py-0",
         solid
-          ? "md:bg-white"
-          : "md:absolute md:inset-x-0 md:top-0 md:bg-transparent md:transition-[background-color] md:duration-500 md:ease-in-out md:hover:bg-white",
+          ? "nav:bg-white"
+          : "nav:absolute nav:inset-x-0 nav:top-0 nav:bg-transparent nav:transition-[background-color] nav:duration-500 nav:ease-in-out nav:hover:bg-white",
         sticky && "fixed inset-x-0 top-0 bg-white animate-[prayag-sticky-in_0.5s_both]",
       )}
     >
-      <div className="w-full px-6 py-3 md:px-[60px] md:py-0 2xl:px-[90px]">
+      <div className="w-full px-6 py-3 nav:px-[60px] nav:py-0 2xl:px-[90px]">
         <div
           className={cn(
-            "relative flex flex-col items-center gap-x-[30px] sm:gap-x-0 sm:flex-row sm:flex-wrap sm:justify-between md:flex-nowrap lg:static",
-            "lg:h-[90px] lg:flex-nowrap lg:group-data-[sticky=true]/header:h-[70px]",
+            "relative flex flex-col items-center gap-x-[30px] sm:gap-x-0 sm:flex-row sm:flex-wrap sm:justify-between nav:static",
+            "nav:h-[90px] nav:flex-nowrap nav:group-data-[sticky=true]/header:h-[70px]",
           )}
         >
-          {/* Brand: category-panel hamburger + logo */}
-          <div className="flex items-center gap-2 md:gap-[14px]">
+          {/* Brand: category-panel hamburger + logo. Below the nav breakpoint the logo is centred and the
+              hamburger is pinned to the left edge, mirroring the drawer burger on the right. */}
+          <div className="relative flex min-h-9 w-full items-center justify-center nav:static nav:min-h-0 nav:w-auto nav:justify-start nav:gap-[14px]">
             <button
               type="button"
               aria-label="Open category menu"
               aria-expanded={panelOpen}
               aria-controls="pm-category-panel"
               onClick={() => dispatch(openCategoryPanel())}
-              className="flex size-9 shrink-0 cursor-pointer flex-col justify-center gap-[5px] p-[7px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#111] md:size-10 md:p-[9px]"
+              className="absolute top-1/2 left-[25px] flex size-9 shrink-0 -translate-y-1/2 cursor-pointer flex-col justify-center gap-[5px] p-[7px] nav:static nav:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#111] nav:size-10 nav:p-[9px]"
             >
               {[0, 1, 2].map((i) => (
                 <span
                   key={i}
-                  className="block h-0.5 w-[22px] bg-white transition-[background-color] duration-500 ease-in-out group-hover/header:bg-[#111] group-data-[dark=true]/header:bg-[#111]"
+                  // Dark on the white mobile/tablet bar (the source drew it white there, i.e. invisible).
+                  className="block h-0.5 w-[22px] bg-[#111] transition-[background-color] duration-500 ease-in-out nav:bg-white nav:group-hover/header:bg-[#111] nav:group-data-[dark=true]/header:bg-[#111]"
                 />
               ))}
             </button>
             <Link href="/" className="inline-block w-[133px] sm:w-[200px]">
               {/* eslint-disable-next-line @next/next/no-img-element -- logo is a fixed-size source asset */}
               <img
-                src={logo}
+                src={withBasePath(logo)}
                 alt="logo"
-                width={150}
-                height={30}
+                width={200}
+                height={42}
                 className={cn(
-                  "h-auto w-[133px] object-cover brightness-0 sm:w-[85%]",
+                  "mx-auto block h-auto w-[133px] object-cover brightness-0 sm:w-[85%] nav:mx-0 nav:inline",
                   solid
-                    ? "md:brightness-100 md:group-data-[sticky=true]/header:brightness-0"
-                    : "md:brightness-[10000] md:group-hover/header:brightness-0 md:group-data-[sticky=true]/header:brightness-0",
+                    ? "nav:brightness-100 nav:group-data-[sticky=true]/header:brightness-0"
+                    : "nav:brightness-[10000] nav:group-hover/header:brightness-0 nav:group-data-[sticky=true]/header:brightness-0",
                 )}
               />
             </Link>
@@ -119,8 +130,8 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
             aria-expanded={mobileOpen}
             onClick={() => dispatch(toggleMobileNav())}
             className={cn(
-              // Source base rule is top 35px / right 14px; mobile overrides move it to 10px/32px (and 5px <= 575px).
-              "absolute top-[5px] right-8 flex h-[17px] w-5 cursor-pointer flex-col justify-between transition-transform duration-[330ms] ease-out sm:top-[10px] md:top-[35px] md:right-[14px] lg:hidden",
+              // Source mobile rule: top 10px / right 32px (source used 5px <= 575px; 10px keeps it level with the category icon). Hidden from the nav breakpoint.
+              "absolute top-[10px] right-8 flex h-[17px] w-5 cursor-pointer flex-col justify-between transition-transform duration-[330ms] ease-out nav:hidden",
               mobileOpen && "-rotate-45",
             )}
           >
@@ -139,9 +150,9 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
             />
           </button>
 
-          {/* Desktop navigation (links from 991px; the search icon already shows from 769px) */}
-          <div className="hidden items-center md:flex">
-            <nav aria-label="Main" className="hidden items-center lg:flex">
+          {/* Desktop navigation + search (from 1040px, where the links fit on one line) */}
+          <div className="hidden items-center nav:flex">
+            <nav aria-label="Main" className="hidden items-center nav:flex">
               <ul className="flex flex-wrap items-center justify-start">
                 {megaMenus.map((item, idx) => {
                   const last = idx === megaMenus.length - 1;
@@ -153,7 +164,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
                   if (!isMega(item)) {
                     return (
                       <li key={item.label}>
-                        <a href={item.href} className={topLink}>
+                        <a href={withBasePath(item.href)} className={topLink}>
                           {item.label}
                         </a>
                       </li>
@@ -172,20 +183,20 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
                           )}
                         />
                       </button>
-                      <MegaPanel menu={item} />
+                      <MegaPanel menu={item} showImage={menuImages} />
                     </li>
                   );
                 })}
               </ul>
             </nav>
-            <a href={searchHref} aria-label="search" className="ml-[50px] block text-white group-hover/header:text-black group-data-[dark=true]/header:text-black">
+            <a href={withBasePath(searchHref)} aria-label="search" className="ml-[50px] block text-white group-hover/header:text-black group-data-[dark=true]/header:text-black">
               <SearchIcon />
             </a>
           </div>
 
           {/* Mobile navigation */}
           {mobileOpen && (
-            <nav aria-label="Main" className="w-full lg:hidden">
+            <nav aria-label="Main" className="w-full nav:hidden">
               <ul className="w-full pt-8 pb-5">
                 {megaMenus.map((item) => (
                   <li key={item.label} className="relative">
@@ -207,7 +218,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
                           <ul className="grid gap-[14px] px-[15px] pt-[15px] pb-[15px]">
                             {item.links.map((link) => (
                               <li key={link.label}>
-                                <a href={link.href} {...linkProps(link)} className="text-[17px] text-black hover:text-[#007ac3]">
+                                <a href={withBasePath(link.href)} {...linkProps(link)} className="text-[17px] text-black hover:text-[#007ac3]">
                                   {link.label}
                                 </a>
                               </li>
@@ -216,7 +227,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
                         )}
                       </>
                     ) : (
-                      <a href={item.href} className="block px-[15px] py-[14px] text-[17px] font-medium text-black">
+                      <a href={withBasePath(item.href)} className="block px-[15px] py-[14px] text-[17px] font-medium text-black">
                         {item.label}
                       </a>
                     )}
@@ -231,7 +242,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
   );
 }
 
-function MegaPanel({ menu }: { menu: MegaMenu }) {
+function MegaPanel({ menu, showImage }: { menu: MegaMenu; showImage: boolean }) {
   return (
     <div
       className={cn(
@@ -245,7 +256,7 @@ function MegaPanel({ menu }: { menu: MegaMenu }) {
             {menu.links.map((link) => (
               <li key={link.label}>
                 <a
-                  href={link.href}
+                  href={withBasePath(link.href)}
                   {...linkProps(link)}
                   className="text-[17px] leading-[1.42857] font-normal !text-black transition-colors duration-500 hover:!text-[#007ac3]"
                 >
@@ -255,8 +266,14 @@ function MegaPanel({ menu }: { menu: MegaMenu }) {
             ))}
           </ul>
           <div className="mb-[30px]">
-            {/* eslint-disable-next-line @next/next/no-img-element -- decorative menu thumbnail, natural aspect */}
-            <img src={menu.image} alt="thumbnail" loading="lazy" className="h-auto w-full" />
+            {showImage && (
+              // eslint-disable-next-line @next/next/no-img-element -- decorative menu thumbnail, natural aspect
+              <img
+                {...responsiveImg(menu.image, menu.imageSize, "(min-width: 1040px) 42vw, 100vw")}
+                alt="thumbnail"
+                className="h-auto w-full"
+              />
+            )}
           </div>
         </div>
       </div>

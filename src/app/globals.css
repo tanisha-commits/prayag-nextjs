@@ -6,13 +6,16 @@
 
 /* Breakpoints follow the Prayag source CSS (Bootstrap + navik header):
    sm 576, md 769 (source mobile rules are max-width: 768px),
-   lg 991 (desktop nav), xl 1200, 2xl 1321 (container gutter jumps to 90px). */
+   lg 991, xl 1200, nav 1040 (header desktop layout), 2xl 1400 (container gutter jumps to 90px: the
+   source's `max-width: 1399px` 60px rule wins over its older `> 1320px` 90px one). */
 @theme {
   --breakpoint-sm: 576px;
   --breakpoint-md: 769px;
   --breakpoint-lg: 991px;
   --breakpoint-xl: 1200px;
-  --breakpoint-2xl: 1321px;
+  --breakpoint-2xl: 1400px;
+  /* Header only: desktop nav from where its links fit on one line (they wrap below ~1036px). */
+  --breakpoint-nav: 1040px;
 }
 
 @theme inline {
@@ -144,7 +147,7 @@
 }
 /* ---------- Prayag clone ---------- */
 
-/* Source `.container-fluid`: 12px (<=768), 60px (769-1320), 90px (>1320). */
+/* Source `.container-fluid`: 12px (<=768), 60px (769-1399), 90px (>=1400). */
 @utility prayag-container {
   width: 100%;
   margin-inline: auto;
@@ -152,7 +155,7 @@
   @media (width >= 769px) {
     padding-inline: 60px;
   }
-  @media (width >= 1321px) {
+  @media (width >= 1400px) {
     padding-inline: 90px;
   }
 }

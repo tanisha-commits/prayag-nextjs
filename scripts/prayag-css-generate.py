@@ -1,8 +1,9 @@
 """Write scoped CSS for the Prayag product-category pages from scripts/prayag-css-capture.mjs output.
 
 Usage:
-  python3 -I scripts/prayag-css-generate.py base <capture-dir> <out.css>
-      Union of the theme rules used by every captured page -> pcat-base.css, scoped under .pcat.
+  python3 -I scripts/prayag-css-generate.py base <capture-dir> <out.css> [<root-class>]
+      Union of the theme rules used by every captured page -> pcat-base.css, scoped under .pcat
+      (or under <root-class>, e.g. .pcat-catalog for a separately captured page family).
   python3 -I scripts/prayag-css-generate.py page <capture-dir> <slug> <out.css>
       The page's own inline <style> rules -> <slug>.css, scoped under .pcat-<slug>.
 
@@ -109,7 +110,7 @@ def emit(rules, root, rename=lambda t: t):
     return css
 
 
-def base(capture, dst):
+def base(capture, dst, root=".pcat"):
     union = {}
     for f in sorted(glob.glob(os.path.join(capture, "*.used.json"))):
         for r in json.load(open(f))["out"]:
@@ -162,7 +163,9 @@ def base(capture, dst):
   max-width: revert;
 }
 """
-    open(dst, "w").write(header + emit(keep, ".pcat"))
+    if root != ".pcat":
+        header = header.replace(".pcat", root)
+    open(dst, "w").write(header + emit(keep, root))
     print(dst, len(keep), "rules")
 
 
@@ -197,6 +200,6 @@ def page(capture, slug, dst):
 
 if __name__ == "__main__":
     if sys.argv[1] == "base":
-        base(*sys.argv[2:4])
+        base(*sys.argv[2:5])
     else:
         page(*sys.argv[2:5])

@@ -4,6 +4,8 @@ import { PcatPage } from "../pcat-page";
 import { SlickCarousel, type SlickSettings } from "../slick-carousel";
 import { SpecsTabs, type SpecsTab } from "./specs-tabs";
 import "./upvc-column-pipes.css";
+import { withBasePath } from "@/lib/base-path";
+import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
 
 const THEME = "/sites/prayag/theme";
 // Source folder names contain spaces ("UPVC Column Pipes/Why choose icon"); the copies keep them.
@@ -262,7 +264,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       a: (
         <>
           They are manufactured from premium-grade, lead-free{" "}
-          <a href="https://prayagindia.com/upvc-pipes">uPVC compound</a>. The material combines low weight with high
+          <Link href="/upvc-pipes">uPVC compound</Link>. The material combines low weight with high
           mechanical and tensile strength and is designed for continuous use in demanding borewell environments.
         </>
       ),
@@ -272,7 +274,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       a: (
         <>
           The listed applications include residential water supply,{" "}
-          <a href="https://prayagindia.com/agri-pipe">agricultural irrigation</a>, commercial buildings, and
+          <Link href="/agri-pipe">agricultural irrigation</Link>, commercial buildings, and
           industrial water-transfer systems. The appropriate configuration depends on borewell depth, pump load,
           operating pressure, discharge requirement, and site conditions.
         </>
@@ -367,7 +369,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
           Their lightweight design can reduce handling effort and installation time. Coupler Type pipes allow
           individual sections to be maintained or replaced, while Belling Type pipes reduce the component count.
           Installation should still be completed by trained professionals using{" "}
-          <a href="https://prayagindia.com/pipes-fittings">compatible pipes</a>, threads, and accessories.
+          <Link href="/pipes-fittings">compatible pipes</Link>, threads, and accessories.
         </>
       ),
     },
@@ -388,13 +390,13 @@ export function UpvcColumnPipesPage() {
             <div className="col-md-6">
               {/* eslint-disable-next-line @next/next/no-img-element -- source responsive banner (srcset/sizes), kept 1:1 */}
               <img
-                src={`${BANNER}/medium/public/2026-05/banner-main.webp`}
-                srcSet={[
+                src={transcodedUrl(`${BANNER}/medium/public/2026-05/banner-main.webp`)}
+                srcSet={transcodedSrcSet([
                   `${BANNER}/thumbnail/public/2026-05/banner-main.webp 300w`,
                   `${BANNER}/thumbnail/public/2026-05/banner-main.webp 600w`,
                   `${BANNER}/large/public/2026-05/banner-main.webp 1200w`,
                   `${BANNER}/wide/public/2026-05/banner-main.webp 2000w`,
-                ].join(", ")}
+                ].join(", "))}
                 sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px"
                 alt="uPVC Column Pipes"
                 width={800}
@@ -429,7 +431,7 @@ export function UpvcColumnPipesPage() {
             </div>
             <div className="col-12 col-md-6 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing as on the source */}
-              <img src={`${CAT}/boretec_pipe_main_image.webp`} alt="Prayag Pipe" className="prayag-pipe-img" />
+              <img {...fullImg(`${CAT}/boretec_pipe_main_image.webp`)} alt="Prayag Pipe" className="prayag-pipe-img" />
             </div>
           </div>
         </div>
@@ -450,7 +452,7 @@ export function UpvcColumnPipesPage() {
               <div key={f.label} className="ngp-feature-item">
                 <div className="ngp-icon-circle">
                   {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing as on the source */}
-                  <img src={f.icon} alt={f.alt} />
+                  <img {...fullImg(f.icon)} alt={f.alt} />
                 </div>
                 <h3 className="ngp-feature-label">{f.label}</h3>
                 <p className="ngp_para">{f.text}</p>
@@ -466,7 +468,7 @@ export function UpvcColumnPipesPage() {
             <div className="msf-slide-wrap">
               <div className="msf-image-wrap">
                 {/* eslint-disable-next-line @next/next/no-img-element -- full-bleed image, intrinsic height as on the source */}
-                <img className="msf-image" src={`${CAT}/image.webp`} alt="UPVC Column Pipes" />
+                <img {...fullImg(`${CAT}/image.webp`)} className="msf-image" alt="UPVC Column Pipes" />
               </div>
               <div className="msf-overlay">
                 <div className="msf-content">
@@ -484,7 +486,7 @@ export function UpvcColumnPipesPage() {
           <div className="psr-image-col">
             <div className="psr-image-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing as on the source */}
-              <img className="psr-image" src={`${IMG}/Lead-Free-UPVC-Column-Pipes.webp`} alt="Premium Bathroom Basin" />
+              <img {...fullImg(`${IMG}/Lead-Free-UPVC-Column-Pipes.webp`)} className="psr-image" alt="Premium Bathroom Basin" />
             </div>
           </div>
           <div className="psr-content-col">
@@ -542,7 +544,7 @@ export function UpvcColumnPipesPage() {
             <div className="col-12 col-lg-7">
               <div className="application_image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing as on the source */}
-                <img src={`${IMG}/applicationupvc-column.webp`} alt="" />
+                <img {...fullImg(`${IMG}/applicationupvc-column.webp`)} alt="" />
               </div>
             </div>
           </div>
@@ -555,8 +557,8 @@ export function UpvcColumnPipesPage() {
             <div className="col-lg-6 col-md-12">
               <div className="visual-wrapper">
                 {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing as on the source */}
-                <img
-                  src={`${IMG}/How-Prayag-Column-Pipes-Work_praya.webp`}
+                <img {...fullImg(`${IMG}/How-Prayag-Column-Pipes-Work_praya.webp`)}
+                 
                   alt="How Prayag Pipes Work"
                   className="img-fluid main-img"
                 />
@@ -673,7 +675,7 @@ export function UpvcColumnPipesPage() {
                     pumping setup, our experts can help you choose the correct size, pressure class, and pipe type.
                   </p>
                   {/* Source links the theme PDF; served from the local copy (identical to the backup file). */}
-                  <a href={`${IMG}/Column-PIPE-Booklet---Edition-1.pdf`} className="cta-link">
+                  <a href={withBasePath(`${IMG}/Column-PIPE-Booklet---Edition-1.pdf`)} className="cta-link">
                     Download Booklet
                   </a>
                 </div>

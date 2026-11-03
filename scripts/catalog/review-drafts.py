@@ -345,14 +345,19 @@ def propose(code, hl):
             words.append(re.sub(r"MM", "mm", w, flags=re.I))
         elif re.search(r"\d", w) or u in ("SS", "PVC", "CP") or u.startswith("SS-"):
             words.append(w)
+        elif re.fullmatch(r"[A-Z]{2}", w):
+            words.append(w); fixes.append(f'unexplained abbreviation "{w}" kept as written')
         else:
             words.append(w.capitalize())
     name = " ".join(words)
     truncated = name.count("(") != name.count(")")
     if truncated:
         return f"{code} {name}", "low", "highlight looks cut off in the sheet (unclosed bracket)" + (f"; {fixes[0]}" if fixes else "")
+    number = re.sub(r"\D", "", code)
+    if number and re.search(rf"\b{number}\b", hl):
+        fixes.append(f"the name repeats the code number {number}")
     if fixes:
-        return f"{code} {name}", "medium", fixes[0] + "; otherwise the highlight text as given"
+        return f"{code} {name}", "medium", "; ".join(fixes) + "; otherwise the highlight text as given"
     return f"{code} {name}", "high", "highlight text as given, normalised capitalisation" + ("; trailing 202/304 kept as in the sheet (likely steel grade)" if re.search(r"\b(202|304)$", hl) else "")
 
 

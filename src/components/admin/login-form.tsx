@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { authClient } from "@/lib/auth/client";
+import { withBasePath } from "@/lib/base-path";
 
 export function LoginForm({ next }: { next: string }) {
   const [error, setError] = useState<string | null>(null);
@@ -19,7 +20,7 @@ export function LoginForm({ next }: { next: string }) {
         setPending(false);
         // One message for every failure: never reveal whether the account exists.
         if (error) setError(error.status === 429 ? "Too many attempts. Please wait a few minutes." : "Sign-in failed. Check your email and password.");
-        else window.location.assign(next);
+        else window.location.assign(withBasePath(next));
       }}
     >
       <label className="flex flex-col gap-1.5 text-[14px] font-medium">

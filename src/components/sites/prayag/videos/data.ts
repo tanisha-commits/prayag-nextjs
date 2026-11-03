@@ -2,6 +2,8 @@
 // (source: prayagindia.com, node/1075, node/62, node/1076). Every YouTube id was checked
 // against YouTube oEmbed — see docs/research/prayag/video-verification.md.
 
+import type { ResponsiveImgProps } from "@/lib/optimized-image";
+
 export type VideoCard = {
   /** YouTube id that is played. */
   id: string;
@@ -9,6 +11,8 @@ export type VideoCard = {
   title: string;
   /** Local copy of the source thumbnail. */
   thumb: string;
+  /** Optimizer candidates for `thumb`, added on the server (video-sections.tsx). */
+  thumbImg?: ResponsiveImgProps;
 };
 
 export type VideoPage = {

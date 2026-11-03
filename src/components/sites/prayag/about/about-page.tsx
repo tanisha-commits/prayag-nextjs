@@ -11,6 +11,8 @@ import {
 import { HistCounter } from "./hist-counter";
 import { HistTimeline } from "./hist-timeline";
 
+import { fullImg } from "@/lib/image-dimensions";
+
 /** Body of /about-prayag (source `.hist-page`; styles ported 1:1 into about.css). */
 export function AboutPage() {
   return (
@@ -28,7 +30,7 @@ export function AboutPage() {
             <div className="hist-figure">
               <figure className="hist-figure__frame">
                 {/* eslint-disable-next-line @next/next/no-img-element -- natural-ratio editorial image, as the source */}
-                <img src={aboutStory.image} alt="" loading="lazy" />
+                <img {...fullImg(aboutStory.image)} alt="" loading="lazy" />
               </figure>
             </div>
             <div className="hist-desc">

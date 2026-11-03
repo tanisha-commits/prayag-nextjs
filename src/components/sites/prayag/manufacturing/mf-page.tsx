@@ -5,6 +5,8 @@ import { mfDetail, mfFilm, mfIntro, mfOpvc, mfPlant } from "./data";
 import { MfRoot } from "./mf-root";
 import { MfVideo } from "./mf-video";
 
+import { fullImg } from "@/lib/image-dimensions";
+
 const pad = (n: number) => (n < 10 ? `0${n}` : String(n));
 
 function Marker({ n }: { n: number }) {
@@ -38,7 +40,7 @@ export function MfPage() {
               <figure className="mf-media mf-mask">
                 <div className="mf-media__frame">
                   {/* eslint-disable-next-line @next/next/no-img-element -- natural-ratio photo, as the source */}
-                  <img src={mfIntro.image} alt="" loading="lazy" />
+                  <img {...fullImg(mfIntro.image)} alt="" loading="lazy" />
                   <span className="mf-corners" aria-hidden="true" />
                 </div>
               </figure>
@@ -49,7 +51,7 @@ export function MfPage() {
       <section className="mf-film mf-dark">
         <div className="mf-wrap">
           <Marker n={2} />
-          <MfVideo video={mfFilm} cinema />
+          <MfVideo video={{ ...mfFilm, posterImg: fullImg(mfFilm.poster) }} cinema />
         </div>
       </section>
       <section className="mf-plant">
@@ -77,7 +79,7 @@ export function MfPage() {
               </ol>
             </div>
             <div className="mf-plant__side">
-              <MfVideo video={mfPlant.video} />
+              <MfVideo video={{ ...mfPlant.video, posterImg: fullImg(mfPlant.video.poster) }} />
             </div>
           </div>
         </div>
@@ -89,7 +91,7 @@ export function MfPage() {
             <h2 className="mf-opvc__title" data-rv="">
               {mfOpvc.title}
             </h2>
-            <MfVideo video={mfOpvc.video} />
+            <MfVideo video={{ ...mfOpvc.video, posterImg: fullImg(mfOpvc.video.poster) }} />
           </div>
         </div>
       </section>
@@ -100,7 +102,7 @@ export function MfPage() {
               <figure className="mf-media mf-mask">
                 <div className="mf-media__frame">
                   {/* eslint-disable-next-line @next/next/no-img-element -- natural-ratio photo, as the source */}
-                  <img src={mfDetail.image} alt={mfDetail.imageAlt} loading="lazy" />
+                  <img {...fullImg(mfDetail.image)} alt={mfDetail.imageAlt} loading="lazy" />
                   <span className="mf-corners" aria-hidden="true" />
                 </div>
               </figure>

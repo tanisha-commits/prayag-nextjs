@@ -71,7 +71,7 @@ export const faqs: FaqItem[] = [
     question: "1. What are Prayag PPR Pipes?",
     answer: [
       "Prayag PPR Pipes are made from Polypropylene Random Copolymer, a lightweight material designed for ",
-      { href: "https://prayagindia.com/pipes-fittings", text: "plumbing and industrial fluid-transport systems" },
+      { href: "/pipes-fittings", text: "plumbing and industrial fluid-transport systems" },
       ". The pipes combine pressure strength, temperature resistance, corrosion resistance, and long-term durability.",
     ],
   },
@@ -149,7 +149,7 @@ export const faqs: FaqItem[] = [
     question: "11. Which fittings are available for Prayag PPR Pipes?",
     answer: [
       "The range includes couplers, 90-degree elbows, reducer couplings, equal tees, unions, reducer tees, female and male threaded couplers, female and male threaded tees, and female and male threaded elbows. Use ",
-      { href: "https://prayagindia.com/pipes-fittings", text: "fittings" },
+      { href: "/pipes-fittings", text: "fittings" },
       " that match the pipe size, rating, and fusion system.",
     ],
   },

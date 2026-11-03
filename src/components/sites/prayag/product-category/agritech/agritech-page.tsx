@@ -4,6 +4,8 @@ import { SplitRevealSection } from "../split-reveal";
 import { TabGroup } from "../hdpe/tab-group";
 import "./agritech.css";
 
+import { fullImg, fullSource, transcodedUrl } from "@/lib/image-dimensions";
+
 // Slick settings verbatim from the page's inline scripts. The first script initialises every
 // .js-cfs-slider (FITTINGS_SLICK) and .ngp-features-slider (NGP_SLICK, ahead of the theme's Drupal
 // behavior); the second then re-initialises only the visible #pane-nylon slider with its own
@@ -58,7 +60,7 @@ export function AgritechPage() {
           <div className="row">
             <div className="col-md-6">
               {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-              <img src="/sites/prayag/files/2026-09/hero-section.webp" sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px" alt="Agritech" width="800" height="450" className="img-fluid" decoding="async" fetchPriority="high" />
+              <img src={transcodedUrl("/sites/prayag/files/2026-09/hero-section.webp")} sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px" alt="Agritech" width="800" height="450" className="img-fluid" decoding="async" fetchPriority="high" />
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
@@ -82,7 +84,7 @@ export function AgritechPage() {
             </div>
             <div className="col-12 col-md-5 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-              <img src="/sites/prayag/files/2026-09/2nd-section.webp" alt="" />
+              <img {...fullImg("/sites/prayag/files/2026-09/2nd-section.webp")} alt="" />
             </div>
           </div>
         </div>
@@ -170,9 +172,9 @@ export function AgritechPage() {
             <div className="msf-slide-wrap">
               <div className="msf-image-wrap">
                 <picture>
-                  <source media="(max-width: 767px)" srcSet="/sites/prayag/theme/agritec/mobile-banner-agri.webp" type="image/webp" />
-                  <source media="(min-width: 768px)" srcSet="/sites/prayag/files/2026-09/agritech-banner.webp" type="image/webp" />
-                  <img className="msf-image" src="/sites/prayag/files/2026-09/agritech-banner.webp" alt="Smarter Water Distribution. Stronger Agricultural Systems." />
+                  <source media="(max-width: 767px)" {...fullSource("/sites/prayag/theme/agritec/mobile-banner-agri.webp")} type="image/webp" />
+                  <source media="(min-width: 768px)" {...fullSource("/sites/prayag/files/2026-09/agritech-banner.webp")} type="image/webp" />
+                  <img {...fullImg("/sites/prayag/files/2026-09/agritech-banner.webp")} className="msf-image" alt="Smarter Water Distribution. Stronger Agricultural Systems." />
                 </picture>
               </div>
             </div>
@@ -193,7 +195,7 @@ export function AgritechPage() {
           <div className="psr-image-col">
             <div className="psr-image-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-              <img className="psr-image" src="/sites/prayag/files/2026-09/What-is-Prayag-Agritec-Pipe.webp" alt="What is Prayag Agritec Pipe" />
+              <img {...fullImg("/sites/prayag/files/2026-09/What-is-Prayag-Agritec-Pipe.webp")} className="psr-image" alt="What is Prayag Agritec Pipe" />
             </div>
           </div>
           <div className="psr-content-col">
@@ -224,7 +226,7 @@ export function AgritechPage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/files/2026-09/Agricultural-Irrigation.webp" alt="" />
+                <img {...fullImg("/sites/prayag/files/2026-09/Agricultural-Irrigation.webp")} alt="" />
               </div>
               <div className="ka-card-body">
                 <h3>Agricultural Irrigation</h3>
@@ -233,7 +235,7 @@ export function AgritechPage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/files/2026-09/Farm-Water-Distribution.webp" alt="Farm Water Distribution" />
+                <img {...fullImg("/sites/prayag/files/2026-09/Farm-Water-Distribution.webp")} alt="Farm Water Distribution" />
               </div>
               <div className="ka-card-body">
                 <h3>Farm Water Distribution</h3>
@@ -242,7 +244,7 @@ export function AgritechPage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/files/2026-09/Agricultural-Water-Supply-Networks.webp" alt="" />
+                <img {...fullImg("/sites/prayag/files/2026-09/Agricultural-Water-Supply-Networks.webp")} alt="" />
               </div>
               <div className="ka-card-body">
                 <h3>Agricultural Water Supply Networks</h3>
@@ -251,7 +253,7 @@ export function AgritechPage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/files/2026-09/field-water-distribution.webp" alt="" />
+                <img {...fullImg("/sites/prayag/files/2026-09/field-water-distribution.webp")} alt="" />
               </div>
               <div className="ka-card-body">
                 <h3>Field Water Distribution</h3>
@@ -260,7 +262,7 @@ export function AgritechPage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/files/2026-09/Irrigation-Pipeline-Systems.webp" alt="" />
+                <img {...fullImg("/sites/prayag/files/2026-09/Irrigation-Pipeline-Systems.webp")} alt="" />
               </div>
               <div className="ka-card-body">
                 <h3>Irrigation Pipeline Systems</h3>
@@ -275,7 +277,7 @@ export function AgritechPage() {
             <div className="col-lg-6 col-md-12 p-0">
               <div className="visual-wrapper">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/files/2026-09/Features-Benefits.webp" alt="Prayag Agritec Pipe features and benefits" className="img-fluid main-img" />
+                <img {...fullImg("/sites/prayag/files/2026-09/Features-Benefits.webp")} alt="Prayag Agritec Pipe features and benefits" className="img-fluid main-img" />
               </div>
             </div>
             <div className="col-lg-6 col-md-12 p-0">
@@ -424,7 +426,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/Agri---PIPE-Photoroom.webp" alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/Agri---PIPE-Photoroom.webp")} alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Pipe</h3>
@@ -438,7 +440,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/Agri---REDUCER-COUPLER.webp" alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/Agri---REDUCER-COUPLER.webp")} alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Coupler</h3>
@@ -452,7 +454,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/Agri---EQUAL-TEE.webp" alt="White Female Threaded Elbow 90°" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/Agri---EQUAL-TEE.webp")} alt="White Female Threaded Elbow 90°" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Equal Tee</h3>
@@ -466,7 +468,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/Agri---ELBOW.webp" alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/Agri---ELBOW.webp")} alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Elbow</h3>
@@ -480,7 +482,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/COUPLER-1-.webp" alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/COUPLER-1-.webp")} alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Elbow 90°</h3>
@@ -494,7 +496,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/Agri---END-CAP.webp" alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/Agri---END-CAP.webp")} alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">End Cap</h3>
@@ -517,7 +519,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/3-meters.webp" alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/3-meters.webp")} alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Pipe 3 Metre</h3>
@@ -531,7 +533,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/5-meters.webp" alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/5-meters.webp")} alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Pipe 5 Metre</h3>
@@ -545,7 +547,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/6-meters.webp" alt="White Female Threaded Elbow 90°" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/6-meters.webp")} alt="White Female Threaded Elbow 90°" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Pipe 6 Metre</h3>
@@ -559,7 +561,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/COUPLER-1-.webp" alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/COUPLER-1-.webp")} alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Coupler</h3>
@@ -573,7 +575,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/EQUAL-TEE-1-.webp" alt="Blue Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/EQUAL-TEE-1-.webp")} alt="Blue Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Equal Tee</h3>
@@ -587,7 +589,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/ELBOW-1-.webp" alt="Blue Elbow" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/ELBOW-1-.webp")} alt="Blue Elbow" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Elbow</h3>
@@ -601,7 +603,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/ELBOW-1-.webp" alt="Blue Pipe" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/ELBOW-1-.webp")} alt="Blue Pipe" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Elbow 45°</h3>
@@ -615,7 +617,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/ELBOW-1-.webp" alt="Blue Elbow 90°" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/ELBOW-1-.webp")} alt="Blue Elbow 90°" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Elbow 90°</h3>
@@ -629,7 +631,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/END-CAP.webp" alt="Blue End Cap" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/END-CAP.webp")} alt="Blue End Cap" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">End Cap</h3>
@@ -643,7 +645,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/Agri---REDUCER-COUPLER.webp" alt="Blue End Cap" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/Agri---REDUCER-COUPLER.webp")} alt="Blue End Cap" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Reducer Coupler</h3>
@@ -657,7 +659,7 @@ export function AgritechPage() {
                       <article className="cfs-card">
                         <figure className="cfs-card__figure">
                           {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                          <img src="/sites/prayag/theme/agritec/REDUCER-TEE.webp" alt="Blue End Cap" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                          <img {...fullImg("/sites/prayag/theme/agritec/REDUCER-TEE.webp")} alt="Blue End Cap" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
                           <h3 className="cfs-card__title">Reducer Tee</h3>

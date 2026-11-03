@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import type { EnquiryResult, FieldDef, FieldErrors, FormId } from "@/lib/enquiry/forms";
 
+import { withBasePath } from "@/lib/base-path";
 export type EnquiryPhase = "idle" | "submitting" | "success" | "invalid" | "pending" | "error";
 
 export interface EnquiryState {
@@ -71,7 +72,7 @@ export function useEnquiryForm(formId: FormId) {
 
       let next: EnquiryState;
       try {
-        const res = await fetch(`/api/enquiry/${formId}`, {
+        const res = await fetch(withBasePath(`/api/enquiry/${formId}`), {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify(payload),

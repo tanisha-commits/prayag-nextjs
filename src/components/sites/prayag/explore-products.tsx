@@ -1,4 +1,6 @@
 import { productTiles } from "./data";
+import { withBasePath } from "@/lib/base-path";
+import { img } from "@/lib/image-dimensions";
 
 export function ExploreProducts() {
   return (
@@ -10,13 +12,14 @@ export function ExploreProducts() {
         <div className="-mx-3 flex flex-wrap justify-center md:justify-start">
           {productTiles.map((tile) => (
             <div key={tile.label} className="w-1/2 px-3 md:w-1/3">
-              <a href={tile.href} className="group block">
+              <a href={withBasePath(tile.href)} className="group block">
                 <div className="relative z-[9] mb-6 overflow-hidden before:absolute before:bottom-0 before:z-[1] before:h-full before:w-full before:bg-[linear-gradient(359deg,rgba(24,24,24,0.51),rgba(0,0,0,0))] before:content-['']">
                   <div className="relative h-[132px] w-full md:h-auto">
                     {/* eslint-disable-next-line @next/next/no-img-element -- tile keeps the source image's natural ratio on desktop */}
                     <img
-                      src={tile.src}
-                      alt={tile.alt}
+                      {...img(tile.src, "auto, (min-width: 769px) 33vw, 50vw")}
+                      alt=""
+                      loading="lazy"
                       className="block size-full object-cover transition-transform duration-500 group-hover:scale-[1.2] md:h-auto"
                     />
                   </div>

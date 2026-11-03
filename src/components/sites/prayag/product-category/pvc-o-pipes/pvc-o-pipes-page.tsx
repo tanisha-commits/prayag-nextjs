@@ -4,6 +4,8 @@ import { SplitRevealSection } from "../split-reveal";
 import { BsModal, BsModalTrigger } from "./bs-modal";
 import "./pvc-o-pipes.css";
 
+import { fullImg, fullSource, transcodedUrl } from "@/lib/image-dimensions";
+
 // Slick settings verbatim from the page's inline script (it initialises before the theme's
 // Drupal behavior for .ngp-features-slider, so the inline settings are the ones in effect).
 const NGP_SLICK: SlickSettings = {
@@ -44,7 +46,7 @@ export function PvcOPipesPage() {
           <div className="row">
             <div className="col-md-6">
               {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-              <img src="/sites/prayag/files/2026-09/cpvcO.webp" sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px" alt="PVC-O Pipes" width="800" height="450" className="img-fluid" decoding="async" fetchPriority="high" />
+              <img src={transcodedUrl("/sites/prayag/files/2026-09/cpvcO.webp")} sizes="(max-width: 300px) 300px, (max-width: 600px) 600px, (max-width: 1200px) 1200px, 2000px" alt="PVC-O Pipes" width="800" height="450" className="img-fluid" decoding="async" fetchPriority="high" />
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
@@ -78,7 +80,7 @@ export function PvcOPipesPage() {
             </div>
             <div className="col-12 col-md-6 p-0">
               {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-              <img src="/sites/prayag/theme/opvc/what--section.png" alt="Prayag PVC-O Pipe" className="prayag-pipe-img" />
+              <img {...fullImg("/sites/prayag/theme/opvc/what--section.png")} alt="Prayag PVC-O Pipe" className="prayag-pipe-img" />
             </div>
           </div>
         </div>
@@ -231,9 +233,9 @@ export function PvcOPipesPage() {
             <div className="msf-slide-wrap">
               <div className="msf-image-wrap">
                 <picture>
-                  <source media="(max-width: 767px)" srcSet="/sites/prayag/theme/opvc/mobile-OPVC.webp" type="image/webp" />
-                  <source media="(min-width: 768px)" srcSet="/sites/prayag/theme/opvc/big_banner.png" />
-                  <img className="msf-image" src="/sites/prayag/theme/opvc/big_banner.png" alt="Prayag PVC-O Pipes — Stronger Pipes, Faster Flow, Longer Life. Engineered Beyond Conventional Piping." width="1920" height="600" loading="lazy" decoding="async" />
+                  <source media="(max-width: 767px)" {...fullSource("/sites/prayag/theme/opvc/mobile-OPVC.webp")} type="image/webp" />
+                  <source media="(min-width: 768px)" {...fullSource("/sites/prayag/theme/opvc/big_banner.png")} />
+                  <img {...fullImg("/sites/prayag/theme/opvc/big_banner.png")} className="msf-image" alt="Prayag PVC-O Pipes — Stronger Pipes, Faster Flow, Longer Life. Engineered Beyond Conventional Piping." width="1920" height="600" loading="lazy" decoding="async" />
                 </picture>
               </div>
             </div>
@@ -245,7 +247,7 @@ export function PvcOPipesPage() {
           <div className="psr-image-col">
             <div className="psr-image-wrap">
               {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-              <img className="psr-image" src="/sites/prayag/theme/opvc/Advanced-Plumbing-Solutions.png" alt="Prayag PVC-O Pipes for Modern Infrastructure" />
+              <img {...fullImg("/sites/prayag/theme/opvc/Advanced-Plumbing-Solutions.png")} className="psr-image" alt="Prayag PVC-O Pipes for Modern Infrastructure" />
             </div>
           </div>
           <div className="psr-content-col">
@@ -278,7 +280,7 @@ export function PvcOPipesPage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/opvc/applications/application-reference-drinking-water-500x500.png" alt="Municipal and Drinking Water Supply" />
+                <img {...fullImg("/sites/prayag/theme/opvc/applications/application-reference-drinking-water-500x500.png")} alt="Municipal and Drinking Water Supply" />
               </div>
               <div className="ka-card-body">
                 <h3>Municipal &amp; Drinking Water Supply</h3>
@@ -287,7 +289,7 @@ export function PvcOPipesPage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/opvc/applications/application-reference-irrigation-500x500.png" alt="Agricultural Irrigation" />
+                <img {...fullImg("/sites/prayag/theme/opvc/applications/application-reference-irrigation-500x500.png")} alt="Agricultural Irrigation" />
               </div>
               <div className="ka-card-body">
                 <h3>Agricultural Irrigation</h3>
@@ -296,7 +298,7 @@ export function PvcOPipesPage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/opvc/applications/application-fire-network-all-red-500x500.png" alt="Fire Hydrant Networks" />
+                <img {...fullImg("/sites/prayag/theme/opvc/applications/application-fire-network-all-red-500x500.png")} alt="Fire Hydrant Networks" />
               </div>
               <div className="ka-card-body">
                 <h3>Fire Hydrant Networks</h3>
@@ -305,7 +307,7 @@ export function PvcOPipesPage() {
             <div className="ka-card">
               <div className="ka-image">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/opvc/applications/application-reference-building-supply-500x500.png" alt="Reservoir and Tank Water Transfer" />
+                <img {...fullImg("/sites/prayag/theme/opvc/applications/application-reference-building-supply-500x500.png")} alt="Reservoir and Tank Water Transfer" />
               </div>
               <div className="ka-card-body">
                 <h3>Reservoir &amp; Tank Water Transfer</h3>
@@ -320,7 +322,7 @@ export function PvcOPipesPage() {
             <div className="col-lg-6 col-md-12">
               <div className="visual-wrapper">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                <img src="/sites/prayag/theme/opvc/advantgae.webp" alt="Prayag PVC-O Pipe engineering advantage" className="img-fluid main-img" />
+                <img {...fullImg("/sites/prayag/theme/opvc/advantgae.webp")} alt="Prayag PVC-O Pipe engineering advantage" className="img-fluid main-img" />
               </div>
             </div>
             <div className="col-lg-6 col-md-12">
@@ -360,7 +362,7 @@ export function PvcOPipesPage() {
                 <article className="cfs-card">
                   <figure className="cfs-card__figure">
                     {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                    <img src="/sites/prayag/theme/opvc/OPVC_fittings/1.webp" alt="PVC-O Coupler 110 mm" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                    <img {...fullImg("/sites/prayag/theme/opvc/OPVC_fittings/1.webp")} alt="PVC-O Coupler 110 mm" loading="lazy" width="600" height="400" className="cfs-card__img" />
                   </figure>
                   <div className="cfs-card__body">
                     <h3 className="cfs-card__title">Coupler</h3>
@@ -372,7 +374,7 @@ export function PvcOPipesPage() {
                 <article className="cfs-card">
                   <figure className="cfs-card__figure">
                     {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                    <img src="/sites/prayag/theme/opvc/OPVC_fittings/2.webp" alt="PVC-O Single Tee 110 mm" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                    <img {...fullImg("/sites/prayag/theme/opvc/OPVC_fittings/2.webp")} alt="PVC-O Single Tee 110 mm" loading="lazy" width="600" height="400" className="cfs-card__img" />
                   </figure>
                   <div className="cfs-card__body">
                     <h3 className="cfs-card__title">Single Tee</h3>
@@ -384,7 +386,7 @@ export function PvcOPipesPage() {
                 <article className="cfs-card">
                   <figure className="cfs-card__figure">
                     {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                    <img src="/sites/prayag/theme/opvc/OPVC_fittings/3.webp" alt="PVC-O 90 Degree Elbow 110 mm" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                    <img {...fullImg("/sites/prayag/theme/opvc/OPVC_fittings/3.webp")} alt="PVC-O 90 Degree Elbow 110 mm" loading="lazy" width="600" height="400" className="cfs-card__img" />
                   </figure>
                   <div className="cfs-card__body">
                     <h3 className="cfs-card__title">90° Elbow</h3>
@@ -396,7 +398,7 @@ export function PvcOPipesPage() {
                 <article className="cfs-card">
                   <figure className="cfs-card__figure">
                     {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
-                    <img src="/sites/prayag/theme/opvc/OPVC_fittings/4.webp" alt="PVC-O 45 Degree Elbow 110 mm" loading="lazy" width="600" height="400" className="cfs-card__img" />
+                    <img {...fullImg("/sites/prayag/theme/opvc/OPVC_fittings/4.webp")} alt="PVC-O 45 Degree Elbow 110 mm" loading="lazy" width="600" height="400" className="cfs-card__img" />
                   </figure>
                   <div className="cfs-card__body">
                     <h3 className="cfs-card__title">45° Elbow</h3>

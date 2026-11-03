@@ -1,5 +1,6 @@
 import { contact, footerColumns, pageLinks, socialIcons, socialLinks } from "./data";
 import { LinkedInIcon } from "./icons";
+import { withBasePath } from "@/lib/base-path";
 
 const linkClass =
   "mb-1.5 inline-block text-[15px] leading-[25px] font-light text-white transition-all duration-200 hover:ml-[7px] md:mb-2.5 md:text-[17px] md:leading-[28.8px]";
@@ -20,14 +21,14 @@ export function SiteFooter() {
                 <ul className="flex gap-5 md:justify-between md:gap-0">
                   {(["facebook", "twitter", "youtube", "instagram"] as const).map((key) => (
                     <li key={key}>
-                      <a href={socialLinks[key]} aria-label={`share to ${key}`}>
+                      <a href={withBasePath(socialLinks[key])} aria-label={`share to ${key}`}>
                         {/* eslint-disable-next-line @next/next/no-img-element -- 30px source icon */}
-                        <img src={socialIcons[key]} alt="" width={30} height={30} loading="lazy" className="w-[30px]" />
+                        <img src={withBasePath(socialIcons[key])} alt="" width={30} height={30} loading="lazy" className="w-[30px]" />
                       </a>
                     </li>
                   ))}
                   <li>
-                    <a href={socialLinks.linkedin} aria-label="share to linkedin" className="text-white">
+                    <a href={withBasePath(socialLinks.linkedin)} aria-label="share to linkedin" className="text-white">
                       <LinkedInIcon />
                     </a>
                   </li>
@@ -43,7 +44,7 @@ export function SiteFooter() {
                 {column.links.map((link) => (
                   <li key={link.label}>
                     <a
-                      href={link.href}
+                      href={withBasePath(link.href)}
                       {...(link.external ? { target: "_blank" } : {})}
                       className={linkClass}
                     >
@@ -63,16 +64,19 @@ export function SiteFooter() {
               </li>
               {contact.phones.map((phone) => (
                 <li key={phone.label}>
-                  <a href={phone.href} className={linkClass}>
+                  <a href={withBasePath(phone.href)} className={linkClass}>
                     {phone.label}
                   </a>
                 </li>
               ))}
-              <li>
-                <a href={`mailto:${contact.email}`} className={linkClass}>
-                  {contact.email}
-                </a>
-              </li>
+              {/* email_off keeps Cloudflare's Email Obfuscation from rewriting this link and injecting its
+                  render-blocking email-decode.min.js (React cannot emit HTML comments, hence innerHTML).
+                  The values are static constants from data.ts. */}
+              <li
+                dangerouslySetInnerHTML={{
+                  __html: `<!--email_off--><a href="mailto:${contact.email}" class="${linkClass}">${contact.email}</a><!--/email_off-->`,
+                }}
+              />
             </ul>
           </div>
         </div>
@@ -85,7 +89,7 @@ export function SiteFooter() {
             <span>
               Developed by{" "}
               <a
-                href={pageLinks.developer}
+                href={withBasePath(pageLinks.developer)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white no-underline hover:underline"

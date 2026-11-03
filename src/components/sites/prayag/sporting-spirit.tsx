@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { sponsors } from "./data";
+import { responsiveImg } from "@/lib/optimized-image";
 
 const AUTOPLAY_MS = 2000;
 const SPEED_MS = 500;
@@ -54,12 +55,12 @@ export function SportingSpirit() {
       <div className="prayag-container">
         <div className="-mx-3 mb-2 flex flex-wrap">
           <div className="w-full px-3 md:w-7/12">
-            <h2 className="mb-0 text-center text-[32px] leading-8 font-bold text-[#333] md:text-left md:text-[40px] md:leading-[62px]">
+            <h2 className="mb-0 text-center text-[32px] leading-8 font-bold text-[#333] md:text-left min-[768px]:leading-[46px] md:text-[40px] min-[1400px]:leading-[62px]">
               Fueling India’s Sporting Spirit
             </h2>
           </div>
           <div className="w-full px-3 md:w-5/12">
-            <p className="mb-[25px] text-center text-[18px] leading-7 text-black md:mb-6 md:text-left">
+            <p className="mb-[25px] text-center text-[18px] leading-7 text-black md:mb-6 md:text-left min-[768px]:text-[16px] min-[768px]:leading-6 min-[1400px]:text-[18px] min-[1400px]:leading-7">
               At Prayag, our commitment extends beyond products to celebrating Indian sports. We&apos;ve proudly
               supported teams like Kings XI Punjab, U Mumba, and events like the Arise Asia Cup, reflecting our
               belief in the unifying power of sports and our dedication to nurturing talent and championing the
@@ -91,8 +92,9 @@ export function SportingSpirit() {
                 <div className="group flex min-h-[100px] items-center justify-center rounded-[15px] border border-[#eee] bg-white p-5 transition-all duration-300 ease-[ease] hover:-translate-y-[5px] hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)]">
                   {/* eslint-disable-next-line @next/next/no-img-element -- contained logo, natural ratio */}
                   <img
-                    src={sponsor.src}
+                    {...responsiveImg(sponsor.src, { width: 500, height: 300 }, "auto, (min-width: 768px) 22vw, (min-width: 576px) 30vw, 45vw")}
                     alt={sponsor.alt}
+                    loading="lazy"
                     className="block max-h-[120px] max-w-full object-contain grayscale-[0.3] transition-[filter] duration-300 group-hover:grayscale-0"
                   />
                 </div>

@@ -2,10 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { withBasePath } from "@/lib/base-path";
+import type { ResponsiveImgProps } from "@/lib/optimized-image";
 
 export interface LightboxSlide {
   src: string;
   alt: string;
+  /** Optimizer candidates for the slide image and its thumbnail (fall back to the original file). */
+  full?: ResponsiveImgProps;
+  thumb?: ResponsiveImgProps;
 }
 
 const SLIDESHOW_MS = 3000; // Fancybox v4 default `Slideshow.delay`
@@ -175,7 +180,7 @@ export function PressLightbox({
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element -- full-size press scan, natural size capped to the viewport like Fancybox */}
-        <img key={slide.src} src={slide.src} alt={slide.alt} className="press-lb__image" draggable={false} />
+        <img key={slide.src} {...(slide.full ?? { src: withBasePath(slide.src) })} alt={slide.alt} className="press-lb__image" draggable={false} />
         {/* Arrows are centred on the slide area (above the thumbnails), like Fancybox. */}
         <button type="button" className="press-lb__btn press-lb__nav press-lb__nav--prev" title="Previous" onClick={() => go(-1)}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -203,7 +208,7 @@ export function PressLightbox({
               onClick={() => onIndexChange(i)}
             >
               {/* eslint-disable-next-line @next/next/no-img-element -- 96x64 thumbnail of the same file, lazy-loaded in the scrolling strip */}
-              <img src={s.src} alt="" loading="lazy" decoding="async" />
+              <img {...(s.thumb ?? { src: withBasePath(s.src) })} alt="" loading="lazy" decoding="async" />
             </button>
           ))}
         </div>

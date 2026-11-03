@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { SusProject } from "./data";
+import { withBasePath } from "@/lib/base-path";
 
 const pad = (n: number) => (n < 10 ? `0${n}` : String(n));
 
@@ -101,7 +102,7 @@ export function SusProjects({ title, projects }: { title: string; projects: SusP
               <div className="sus-slide__grid">
                 <div className="sus-slide__media">
                   {/* eslint-disable-next-line @next/next/no-img-element -- cover-cropped slide photo, as the source */}
-                  <img src={p.image} alt={p.imageAlt} loading="lazy" />
+                  <img {...(p.imageImg ?? { src: withBasePath(p.image) })} alt={p.imageAlt} loading="lazy" />
                 </div>
                 <div className="sus-slide__body">
                   <div className="sus-slide__text">

@@ -124,7 +124,7 @@ section.faq {
   width: 20px;
   height: 20px;
   margin-left: auto;
-  background-image: url("/sites/prayag/icons/faq-accordion-chevron.svg");
+  background-image: url("../../../../../public/sites/prayag/icons/faq-accordion-chevron.svg");
   background-repeat: no-repeat;
   background-size: 20px;
   transition: transform 0.2s ease-in-out;

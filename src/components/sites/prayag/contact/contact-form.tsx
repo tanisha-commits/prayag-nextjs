@@ -4,12 +4,13 @@ import { CONTACT_FIELDS, type FieldDef } from "@/lib/enquiry/forms";
 import { cn } from "@/lib/utils";
 import { FieldError, FormMessages, Honeypot, SubmittingIndicator } from "../forms/form-feedback";
 import { useEnquiryForm, webformValidityProps } from "../forms/use-enquiry-form";
+import { withBasePath } from "@/lib/base-path";
 
 /** Fields rendered in `col-md-12` on the source; the rest are `col-md-6`. */
 const FULL_WIDTH = new Set(["company_name", "address", "message"]);
 
 // Bootstrap `.form-select` chevron, as served by the source theme.
-const SELECT_ARROW = "bg-[url(/sites/prayag/icons/form-select-chevron.svg)]";
+const SELECT_ARROW = { backgroundImage: `url(${withBasePath("/sites/prayag/icons/form-select-chevron.svg")})` };
 
 const FIELD_BASE = "w-full rounded-[3px] border border-[#ccc] bg-white px-[18px] leading-[28.8px] placeholder:text-[#7e96a7]";
 const FIELD_FOCUS = "focus:outline-[6px] focus:outline-double focus:outline-[#2494db] focus:-outline-offset-1";
@@ -53,9 +54,9 @@ export function ContactForm() {
         <select
           {...common}
           defaultValue=""
+          style={SELECT_ARROW}
           className={cn(
             "block h-[54px] w-full appearance-none rounded-[4px] border border-[#ced4da] bg-white py-[6px] pr-[54px] pl-[18px] text-[16px] leading-6 text-[#212529]",
-            SELECT_ARROW,
             "bg-[length:16px_12px] bg-[position:right_12px_center] bg-no-repeat",
             "transition-[border-color,box-shadow] duration-150 ease-in-out focus:border-[#86b7fe] focus:shadow-[0_0_0_4px_rgba(13,110,253,0.25)] focus:outline-none",
             err && ERROR,
@@ -110,7 +111,7 @@ export function ContactForm() {
       <div className="mb-[18px] min-[577px]:mb-9 min-[992px]:mb-[54px]">
         <form
           className="relative flex w-full flex-wrap min-[577px]:-mx-3"
-          action="/api/enquiry/contact"
+          action={withBasePath("/api/enquiry/contact")}
           method="post"
           id="webform-submission-contact-node-4-add-form"
           acceptCharset="UTF-8"

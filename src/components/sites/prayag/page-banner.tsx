@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { responsiveImg } from "./responsive-image";
 
 /**
  * Inner-page banner (source `.breadcrumb_main`): image left, black title panel right;
@@ -25,7 +26,7 @@ export function PageBanner({
         <div className="w-full md:w-1/2">
           {/* eslint-disable-next-line @next/next/no-img-element -- banner keeps the source's natural ratio at >= 1200px */}
           <img
-            src={image}
+            {...responsiveImg(image, 1920, "(min-width: 769px) 50vw, 100vw")}
             alt={imageAlt}
             fetchPriority="high"
             className="h-[220px] w-full object-cover md:h-[280px] xl:h-auto"

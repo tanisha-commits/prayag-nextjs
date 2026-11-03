@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import type { FaqItem, FaqTab } from "@/content/prayag/faq/faq";
 
+import { storedHtml } from "@/lib/stored-html";
 import "./faq.css";
 
 const ARROW =
@@ -147,7 +148,7 @@ function AccordionItem({ id, item, open, onToggle }: { id: string; item: FaqItem
       </h2>
       <div ref={panel} id={`${id}-a`} className="accordion-collapse" role="region" aria-labelledby={`${id}-q`} hidden>
         {/* Answer HTML is copied verbatim from the source page (trusted, static content). */}
-        <div className="accordion-body" dangerouslySetInnerHTML={{ __html: item.answerHtml }} />
+        <div className="accordion-body" dangerouslySetInnerHTML={{ __html: storedHtml(item.answerHtml) }} />
       </div>
     </div>
   );

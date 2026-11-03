@@ -1,3 +1,5 @@
+import type { ResponsiveImgProps } from "@/lib/optimized-image";
+
 // Content for /sustainability (source: prayagindia.com/sustainability).
 
 export const susBanner = {
@@ -28,6 +30,8 @@ export type SusProject = {
   title: string;
   image: string;
   imageAlt: string;
+  /** Optimizer candidates for `image`, added on the server (sus-page.tsx). */
+  imageImg?: ResponsiveImgProps;
   /** Rendered as a bulleted list when `points` is set, otherwise as one paragraph. */
   points?: string[];
   text?: string;

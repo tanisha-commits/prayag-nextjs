@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import type { MfVideo as MfVideoData } from "./data";
+import { withBasePath } from "@/lib/base-path";
 
 /**
  * Click-to-play YouTube video (source `.mf-video`): the poster is a real link to the video
@@ -53,7 +54,7 @@ export function MfVideo({ video, cinema = false }: { video: MfVideoData; cinema?
     <div ref={boxRef} className={cn("mf-video", cinema && "mf-video--cinema")} data-video-id={video.id} data-rv="">
       <a
         className="mf-video__poster"
-        href={watchUrl}
+        href={withBasePath(watchUrl)}
         aria-label={video.label}
         onClick={play}
         onKeyDown={(e) => {
@@ -61,7 +62,7 @@ export function MfVideo({ video, cinema = false }: { video: MfVideoData; cinema?
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element -- cover-cropped video poster, as the source */}
-        <img src={video.poster} alt="" loading="lazy" />
+        <img {...(video.posterImg ?? { src: withBasePath(video.poster) })} alt="" loading="lazy" />
         <span className="mf-video__play" aria-hidden="true" />
         <span className="mf-corners" aria-hidden="true" />
       </a>
@@ -70,7 +71,7 @@ export function MfVideo({ video, cinema = false }: { video: MfVideoData; cinema?
         {status === "slow" && (
           <span>
             Still loading. If the video doesn{"’"}t start,{" "}
-            <a href={watchUrl} target="_blank" rel="noopener">
+            <a href={withBasePath(watchUrl)} target="_blank" rel="noopener">
               watch it on YouTube
             </a>
             .

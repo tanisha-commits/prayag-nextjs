@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { withBasePath } from "@/lib/base-path";
 
 /** FAQ answer: plain text runs and inline links (local route or absolute live URL). */
 export type FaqPart = string | { text: string; href: string };
@@ -35,7 +36,7 @@ export function FaqSection({ faqs, split = 8 }: { faqs: Faq[]; split?: number })
                                   {part.text}
                                 </Link>
                               ) : (
-                                <a key={i} href={part.href}>
+                                <a key={i} href={withBasePath(part.href)}>
                                   {part.text}
                                 </a>
                               ),

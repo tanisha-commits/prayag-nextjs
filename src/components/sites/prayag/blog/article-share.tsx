@@ -1,4 +1,5 @@
 import { socialLinks } from "../data";
+import { withBasePath } from "@/lib/base-path";
 
 const ICON = "/sites/prayag/theme";
 
@@ -21,9 +22,9 @@ export function ArticleShare({ url, title }: { url: string; title: string }) {
     <ul className="flex justify-center">
       {links.map((link) => (
         <li key={link.label} className="md:mr-[15px] md:last:mr-0 max-md:mx-[11px]">
-          <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
+          <a href={withBasePath(link.href)} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
             {/* eslint-disable-next-line @next/next/no-img-element -- 35px source icon on a brand-blue disc */}
-            <img src={link.icon} alt="" width={35} height={35} className="size-[35px] rounded-full bg-[#00aeef] p-2 md:p-[5px]" />
+            <img src={withBasePath(link.icon)} alt="" width={35} height={35} className="size-[35px] rounded-full bg-[#00aeef] p-2 md:p-[5px]" />
           </a>
         </li>
       ))}

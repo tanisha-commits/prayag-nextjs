@@ -4,11 +4,19 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { heroSlides } from "./data";
 import { ChevronRightIcon, SoundOffIcon, SoundOnIcon } from "./icons";
+import { withBasePath, withBasePathSrcSet } from "@/lib/base-path";
 
 /**
  * Source `.video-showcase`: each slide shows a poster <picture> until its webm can play,
  * then cross-fades to the video. A slide advances when its video ends; the next button
  * and dots switch manually. Videos load lazily (first one when the browser is idle).
+ *
+ * The video sits under the poster picture (always opaque) and the picture fades out once the
+ * video can play. The video deliberately has no `poster`: a poster is one fixed URL for every
+ * viewport, so phones would fetch the desktop banner as well and the <video> (not the banner
+ * <img>) became the mobile "largest contentful paint", tied to the multi-MB video download.
+ * Banners use static pre-resized srcsets (scripts/images/hero-banners.mjs) rather than the image
+ * optimizer, whose q75 output was larger than these already-compact originals.
  */
 export function HeroVideoSlider() {
   const [current, setCurrent] = useState(0);
@@ -86,13 +94,10 @@ export function HeroVideoSlider() {
             muted
             playsInline
             preload={loaded[i] ? "auto" : "none"}
-            src={loaded[i] ? slide.video : undefined}
+            src={withBasePath(loaded[i] ? slide.video : undefined)}
             onCanPlay={() => setReady((prev) => (prev[i] ? prev : prev.map((v, j) => (j === i ? true : v))))}
             onEnded={goNext}
-            className={cn(
-              "absolute inset-0 size-full object-cover transition-opacity duration-[600ms] ease-in-out",
-              ready[i] ? "z-[3] opacity-100" : "z-[1] opacity-0",
-            )}
+            className="absolute inset-0 z-[1] size-full object-cover"
           />
           <picture
             className={cn(
@@ -100,10 +105,10 @@ export function HeroVideoSlider() {
               ready[i] && "pointer-events-none opacity-0",
             )}
           >
-            <source media="(max-width: 768px)" srcSet={slide.mobile} type="image/webp" />
-            <source media="(min-width: 769px)" srcSet={slide.desktop} type="image/webp" />
+            <source media="(max-width: 768px)" srcSet={withBasePathSrcSet(slide.mobileSrcSet)} sizes="100vw" type="image/webp" />
+            <source media="(min-width: 769px)" srcSet={withBasePathSrcSet(slide.desktopSrcSet)} sizes="100vw" type="image/webp" />
             <img
-              src={slide.desktop}
+              src={withBasePath(slide.desktop)}
               alt={slide.alt}
               width={1920}
               height={840}
@@ -116,7 +121,9 @@ export function HeroVideoSlider() {
         </div>
       ))}
 
-      <div className="absolute bottom-[30px] left-1/2 z-10 flex -translate-x-1/2 gap-2.5">
+      {/* Each dot is drawn by a span inside a transparent 24px-tall button (WCAG 2.5.8 target size);
+          the buttons abut, so the dots sit 16px apart and keep their size, colour and bottom offset. */}
+      <div className="absolute bottom-[22px] left-1/2 z-10 flex -translate-x-1/2">
         {heroSlides.map((slide, i) => (
           <button
             key={slide.alt}
@@ -124,11 +131,16 @@ export function HeroVideoSlider() {
             aria-label={`Show slide ${i + 1}`}
             aria-current={i === current}
             onClick={() => goTo(i)}
-            className={cn(
-              "h-2 cursor-pointer rounded-full transition-all duration-300 ease-in-out",
-              i === current ? "w-[30px] rounded-[4px] bg-white" : "w-2 bg-white/30",
-            )}
-          />
+            className="flex h-6 min-w-6 cursor-pointer items-center justify-center px-2 outline-none focus-visible:outline-2 focus-visible:outline-white"
+          >
+            <span
+              aria-hidden="true"
+              className={cn(
+                "block h-2 rounded-full transition-all duration-300 ease-in-out",
+                i === current ? "w-[30px] rounded-[4px] bg-white" : "w-2 bg-white/30",
+              )}
+            />
+          </button>
         ))}
       </div>
 

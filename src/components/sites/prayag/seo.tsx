@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 
-const SITE = "https://prayagindia.com";
+import { BASE_PATH } from "@/lib/base-path";
+/**
+ * Production origin used for canonicals, Open Graph URLs, structured data and the sitemap. Never the
+ * dev server: local pages still declare the production URLs. Override with NEXT_PUBLIC_SITE_URL only
+ * when the site moves to another domain.
+ */
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://prayagindia.com").replace(/\/+$/, "") + BASE_PATH;
 
 /** Page metadata with the source title/description and a canonical matching the source URL. */
 export function pageMetadata({
@@ -42,7 +48,7 @@ export function BreadcrumbJsonLd({ items }: { items: { name: string; path: strin
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: `${SITE}${item.path}`,
+      item: `${SITE_URL}${item.path}`,
     })),
   };
   return (

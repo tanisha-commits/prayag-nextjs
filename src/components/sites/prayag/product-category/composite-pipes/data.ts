@@ -55,7 +55,7 @@ export const faqs: FaqItem[] = [
     question: "1. What are Prayag Composite Pipes?",
     answer: [
       "Prayag Composite Pipes are a ",
-      { href: "https://prayagindia.com/pipes-fittings", text: "pressure-pipe solution" },
+      { href: "/pipes-fittings", text: "pressure-pipe solution" },
       " built with a five-layer PE-AL-PE structure. The design combines polyethylene layers with a form-stable aluminium core to provide durability, thermal compatibility, corrosion resistance, tensile strength, and reliable fluid flow across several applications.",
     ],
   },
@@ -99,7 +99,7 @@ export const faqs: FaqItem[] = [
     question: "7. Are Prayag Composite Pipes suitable for potable water?",
     answer: [
       "Prayag states that the pipes are manufactured from food-grade material for hygienic flow. EVER flow, identified by its white colour, is listed for ",
-      { href: "https://prayagindia.com/cpvc-pipes", text: "potable and residential water supply systems" },
+      { href: "/cpvc-pipes", text: "potable and residential water supply systems" },
       ", while LIFE flow, identified by black, is intended for standard water supply and ISI-compliant applications.",
     ],
   },
@@ -151,7 +151,7 @@ export const faqs: FaqItem[] = [
     question: "15. Which fittings are available and how should the system be selected?",
     answer: [
       "The range includes ",
-      { href: "https://prayagindia.com/pipes-fittings", text: "nylon and brass fittings" },
+      { href: "/pipes-fittings", text: "nylon and brass fittings" },
       " such as union couplers, equal and unequal elbows, tees, threaded adaptors, and reducer connections. Select the pipe variant, diameter, fittings, and joining tools for the intended fluid, temperature, pressure, route, and applicable code. A ",
       { href: "/plumbers-guide-choosing-right-pipe-different-plumbing-points", text: "qualified plumbing professional" },
       " should confirm the final system design and installation method.",
