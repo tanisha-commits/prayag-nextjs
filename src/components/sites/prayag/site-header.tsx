@@ -3,12 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import {
-  closeMobileNav,
-  openCategoryPanel,
-  toggleMobileNav,
-} from "@/lib/features/ui-slice";
+import { closeMobileNav, openCategoryPanel, toggleMobileNav, useUi } from "@/lib/ui-store";
 import { logo, megaMenus, searchHref, type MegaMenu, type NavLink } from "./data";
 import { SearchIcon } from "./icons";
 import { PanelSections, PanelSocial } from "./category-panel";
@@ -37,9 +32,8 @@ function linkProps(link: NavLink) {
  */
 export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "solid" }) {
   const solid = variant === "solid";
-  const dispatch = useAppDispatch();
-  const panelOpen = useAppSelector((s) => s.ui.categoryPanelOpen);
-  const mobileOpen = useAppSelector((s) => s.ui.mobileNavOpen);
+  const panelOpen = useUi((s) => s.categoryPanelOpen);
+  const mobileOpen = useUi((s) => s.mobileNavOpen);
   const [sticky, setSticky] = useState(false);
   const [openSub, setOpenSub] = useState<string | null>(null);
   // Mega-menu thumbnails sit in hidden (opacity 0) panels, which lazy loading does not skip, so they
@@ -61,10 +55,10 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 1040px)");
-    const onChange = () => desktop.matches && dispatch(closeMobileNav());
+    const onChange = () => desktop.matches && closeMobileNav();
     desktop.addEventListener("change", onChange);
     return () => desktop.removeEventListener("change", onChange);
-  }, [dispatch]);
+  }, []);
 
   return (
     <header
@@ -96,7 +90,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
               aria-label="Open category menu"
               aria-expanded={panelOpen}
               aria-controls="pm-category-panel"
-              onClick={() => dispatch(openCategoryPanel())}
+              onClick={openCategoryPanel}
               className="hidden size-9 shrink-0 cursor-pointer flex-col justify-center gap-[5px] p-[7px] nav:flex focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#111] nav:size-10 nav:p-[9px]"
             >
               {[0, 1, 2].map((i) => (
@@ -130,7 +124,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
             type="button"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            onClick={() => dispatch(toggleMobileNav())}
+            onClick={toggleMobileNav}
             className={cn(
               // Source mobile rule: top 10px / right 32px (source used 5px <= 575px; 10px keeps it level with the category icon). Hidden from the nav breakpoint.
               "absolute top-[10px] right-8 flex h-[17px] w-5 cursor-pointer flex-col justify-between transition-transform duration-[330ms] ease-out nav:hidden",

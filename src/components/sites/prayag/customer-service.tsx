@@ -35,8 +35,8 @@ export function CustomerService() {
                 Prayag’s after-sales service guarantees fast responses, expert assistance, and hassle-free support
                 for every valued customer.
               </p>
-              <PrayagButton href={pageLinks.contact} className="bg-[rgba(161,152,152,0.41)] px-6 py-2.5">
-                Know More<span className="sr-only"> about customer service</span>
+              <PrayagButton href={pageLinks.contact} className="bg-[rgba(161,152,152,0.41)] px-6 py-2.5" label="Know More about customer service">
+                Know More
               </PrayagButton>
             </div>
           </div>

@@ -83,9 +83,9 @@ export function CpvcPage() {
                   thermal stability, superior pressure handling, corrosion resistance, and excellent durability compared to
                   conventional piping materials.
                 </p>
-                <a href="#advanced_plumbling" className="prayag-btn">
+                <a href="#advanced_plumbling" className="prayag-btn" aria-label="Know More about advanced plumbing">
                   <ArrowIcon />
-                  Know More<span className="sr-only"> about advanced plumbing</span>
+                  Know More
                 </a>
               </div>
             </div>
@@ -169,9 +169,9 @@ export function CpvcPage() {
                 efficiency, and peace of mind. Whether for new construction or renovation projects, Prayag CPVC Pipes are
                 built to deliver dependable performance for years to come.
               </p>
-              <a href="#prayag-advantage" className="prayag-btn">
+              <a href="#prayag-advantage" className="prayag-btn" aria-label="Know More about the Prayag advantage">
                 <ArrowIcon />
-                Know More<span className="sr-only"> about the Prayag advantage</span>
+                Know More
               </a>
             </div>
           </div>

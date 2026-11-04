@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { closeCategoryPanel } from "@/lib/features/ui-slice";
+import { closeCategoryPanel, useUi } from "@/lib/ui-store";
 import {
   logo,
   pageLinks,
@@ -21,14 +20,17 @@ const chevron = "inline-block size-2 border-r-2 border-b-2 border-solid transiti
 
 /** Off-canvas "Product category" drawer opened by the header hamburger (source `.pm-panel`). */
 export function CategoryPanel() {
-  const dispatch = useAppDispatch();
-  const open = useAppSelector((s) => s.ui.categoryPanelOpen);
+  const open = useUi((s) => s.categoryPanelOpen);
   const closeRef = useRef<HTMLButtonElement>(null);
+  // The drawer body (cards, links, social icons) renders on first open: while closed it is invisible,
+  // and rendering it up front only fetched its icons and added DOM to hydrate on every page.
+  const [opened, setOpened] = useState(false);
+  if (open && !opened) setOpened(true);
 
   useEffect(() => {
     if (!open) return;
     closeRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && dispatch(closeCategoryPanel());
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeCategoryPanel();
     document.addEventListener("keydown", onKey);
     // Source locks page scroll only at <= 991px.
     const lock = window.matchMedia("(max-width: 991px)").matches;
@@ -37,9 +39,9 @@ export function CategoryPanel() {
       document.removeEventListener("keydown", onKey);
       if (lock) document.documentElement.style.overflow = "";
     };
-  }, [open, dispatch]);
+  }, [open]);
 
-  const close = () => dispatch(closeCategoryPanel());
+  const close = closeCategoryPanel;
 
   return (
     <>
@@ -79,11 +81,11 @@ export function CategoryPanel() {
         </div>
 
         <div className="min-h-0 flex-auto overflow-y-auto overscroll-contain px-5 pt-4 pb-6 [scrollbar-color:#c9c9c9_transparent] [scrollbar-width:thin]">
-          <PanelSections />
+          {opened && <PanelSections />}
         </div>
 
         <div className="flex-none border-t border-[#ececec] bg-white px-5 pt-2.5 pb-[calc(10px+env(safe-area-inset-bottom,0px))]">
-          <PanelSocial />
+          {opened && <PanelSocial />}
         </div>
       </div>
     </>

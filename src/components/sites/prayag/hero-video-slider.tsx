@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { preload } from "react-dom";
 import { cn } from "@/lib/utils";
 import { heroSlides } from "./data";
 import { ChevronRightIcon, SoundOffIcon, SoundOnIcon } from "./icons";
@@ -18,7 +19,27 @@ import { withBasePath, withBasePathSrcSet } from "@/lib/base-path";
  * Banners use static pre-resized srcsets (scripts/images/hero-banners.mjs) rather than the image
  * optimizer, whose q75 output was larger than these already-compact originals.
  */
+/** Pause after the window `load` event before the first video starts downloading. */
+const VIDEO_START_DELAY_MS = 3000;
+
 export function HeroVideoSlider() {
+  // The first banner is the page's largest paint. It sits in a <picture> (which React does not
+  // preload on its own) after ~70 KB of inline CSS, so hint both variants at the top of <head>.
+  const first = heroSlides[0];
+  preload(withBasePath(first.mobileSrcSet.split(" ")[0]), {
+    as: "image",
+    imageSrcSet: withBasePathSrcSet(first.mobileSrcSet),
+    imageSizes: "100vw",
+    fetchPriority: "high",
+    media: "(max-width: 768px)",
+  });
+  preload(withBasePath(first.desktop), {
+    as: "image",
+    imageSrcSet: withBasePathSrcSet(first.desktopSrcSet),
+    imageSizes: "100vw",
+    fetchPriority: "high",
+    media: "(min-width: 769px)",
+  });
   const [current, setCurrent] = useState(0);
   const [muted, setMuted] = useState(true);
   const [loaded, setLoaded] = useState<boolean[]>(() => heroSlides.map(() => false));
@@ -29,13 +50,27 @@ export function HeroVideoSlider() {
     setLoaded((prev) => (prev[index] ? prev : prev.map((v, i) => (i === index ? true : v))));
   }, []);
 
+  // The first video (2–3.5 MB) starts downloading only after the page has finished loading and a
+  // short pause, so it never competes with the banner, fonts and scripts of the first paint (on a
+  // slow phone connection it used to delay the fonts by seconds). Data-saver mode keeps the banner.
   useEffect(() => {
-    if ("requestIdleCallback" in window) {
-      const id = window.requestIdleCallback(() => startLoading(0), { timeout: 2500 });
-      return () => window.cancelIdleCallback(id);
-    }
-    const id = setTimeout(() => startLoading(0), 800);
-    return () => clearTimeout(id);
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (connection?.saveData) return;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let idle: number | undefined;
+    const schedule = () => {
+      timer = setTimeout(() => {
+        if ("requestIdleCallback" in window) idle = window.requestIdleCallback(() => startLoading(0), { timeout: 2000 });
+        else startLoading(0);
+      }, VIDEO_START_DELAY_MS);
+    };
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+    return () => {
+      window.removeEventListener("load", schedule);
+      clearTimeout(timer);
+      if (idle !== undefined) window.cancelIdleCallback(idle);
+    };
   }, [startLoading]);
 
   // Play the active slide's video (from the start) once it is ready; pause the others.
@@ -99,25 +134,27 @@ export function HeroVideoSlider() {
             onEnded={goNext}
             className="absolute inset-0 z-[1] size-full object-cover"
           />
-          <picture
-            className={cn(
-              "absolute inset-0 z-[2] block size-full transition-opacity duration-[600ms] ease-in-out",
-              ready[i] && "pointer-events-none opacity-0",
-            )}
-          >
-            <source media="(max-width: 768px)" srcSet={withBasePathSrcSet(slide.mobileSrcSet)} sizes="100vw" type="image/webp" />
-            <source media="(min-width: 769px)" srcSet={withBasePathSrcSet(slide.desktopSrcSet)} sizes="100vw" type="image/webp" />
-            <img
-              src={withBasePath(slide.desktop)}
-              alt={slide.alt}
-              width={1920}
-              height={840}
-              loading={i === 0 ? "eager" : "lazy"}
-              fetchPriority={i === 0 ? "high" : "auto"}
-              decoding={i === 0 ? "sync" : "async"}
-              className="absolute inset-0 size-full object-cover object-[center_top]"
-            />
-          </picture>
+          {(i === 0 || i === current || loaded[0]) && (
+            <picture
+              className={cn(
+                "absolute inset-0 z-[2] block size-full transition-opacity duration-[600ms] ease-in-out",
+                ready[i] && "pointer-events-none opacity-0",
+              )}
+            >
+              <source media="(max-width: 768px)" srcSet={withBasePathSrcSet(slide.mobileSrcSet)} sizes="100vw" type="image/webp" />
+              <source media="(min-width: 769px)" srcSet={withBasePathSrcSet(slide.desktopSrcSet)} sizes="100vw" type="image/webp" />
+              <img
+                src={withBasePath(slide.desktop)}
+                alt={slide.alt}
+                width={1920}
+                height={840}
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchPriority={i === 0 ? "high" : "auto"}
+                decoding={i === 0 ? "sync" : "async"}
+                className="absolute inset-0 size-full object-cover object-[center_top]"
+              />
+            </picture>
+          )}
         </div>
       ))}
 

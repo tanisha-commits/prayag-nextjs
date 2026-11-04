@@ -7,14 +7,18 @@ export function PrayagButton({
   href,
   children,
   className,
+  label,
 }: {
   href: string;
   children: React.ReactNode;
   className?: string;
+  /** Accessible name when the visible text alone is ambiguous (must start with the visible text). */
+  label?: string;
 }) {
   return (
     <a
       href={withBasePath(href)}
+      aria-label={label}
       className={cn(
         "relative mt-5 inline-block max-w-full rounded-[28px] bg-black py-[13px] pr-10 pl-[35px] text-[18px] leading-6 font-medium text-white transition-all duration-500 xl:mt-8",
         "hover:-translate-y-0.5 hover:bg-[linear-gradient(135deg,#0056b3,#004085)] hover:!text-white",

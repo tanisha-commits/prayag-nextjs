@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { publicCategory, PublicListResult } from "@/lib/catalog/public";
 import type { PublicQuery } from "@/lib/catalog/url";
+import { StoreProvider } from "@/app/store-provider";
 import { CatalogBrowser } from "./catalog-browser";
 
 type Category = NonNullable<ReturnType<typeof publicCategory>>;
@@ -34,7 +35,10 @@ export function CategoryView({ category, query, result }: { category: Category; 
             </ul>
           </nav>
         )}
-        <CatalogBrowser category={category.slug} initialQuery={query} initialResult={result} />
+        {/* Redux is only needed by the filterable grid, so its provider wraps just this part. */}
+        <StoreProvider>
+          <CatalogBrowser category={category.slug} initialQuery={query} initialResult={result} />
+        </StoreProvider>
       </div>
     </>
   );
