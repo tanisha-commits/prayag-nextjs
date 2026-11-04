@@ -39,6 +39,7 @@
     "db:migrate": "tsx scripts/db/migrate.ts",
     "admin:create": "tsx --env-file-if-exists=.env.local scripts/admin/create-admin.mts",
     "admin:bundle": "tsx scripts/admin/bundle-admin.mts",
+    "deploy:package": "bash scripts/deploy/package.sh",
     "catalog:extract-live": "python3 -I scripts/catalog/extract-live.py",
     "catalog:import": "tsx --env-file-if-exists=.env.local scripts/catalog/import.mts"
   },
