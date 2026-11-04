@@ -11,6 +11,7 @@ import {
 } from "@/lib/features/ui-slice";
 import { logo, megaMenus, searchHref, type MegaMenu, type NavLink } from "./data";
 import { SearchIcon } from "./icons";
+import { PanelSections, PanelSocial } from "./category-panel";
 import { withBasePath } from "@/lib/base-path";
 import { responsiveImg } from "@/lib/optimized-image";
 
@@ -88,7 +89,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
           )}
         >
           {/* Brand: category-panel hamburger + logo. Below the nav breakpoint the logo is centred and the
-              hamburger is pinned to the left edge, mirroring the drawer burger on the right. */}
+              category hamburger is hidden: its contents live in the single right-hand burger menu. */}
           <div className="relative flex min-h-9 w-full items-center justify-center nav:static nav:min-h-0 nav:w-auto nav:justify-start nav:gap-[14px]">
             <button
               type="button"
@@ -96,7 +97,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
               aria-expanded={panelOpen}
               aria-controls="pm-category-panel"
               onClick={() => dispatch(openCategoryPanel())}
-              className="absolute top-1/2 left-[25px] flex size-9 shrink-0 -translate-y-1/2 cursor-pointer flex-col justify-center gap-[5px] p-[7px] nav:static nav:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#111] nav:size-10 nav:p-[9px]"
+              className="hidden size-9 shrink-0 cursor-pointer flex-col justify-center gap-[5px] p-[7px] nav:flex focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#111] nav:size-10 nav:p-[9px]"
             >
               {[0, 1, 2].map((i) => (
                 <span
@@ -123,7 +124,8 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
             </Link>
           </div>
 
-          {/* Mobile burger (source `.burger-menu`) */}
+          {/* Mobile burger (source `.burger-menu`): the only menu button below 1040px. It holds the main
+              links plus everything from the category drawer. */}
           <button
             type="button"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -234,6 +236,12 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
                   </li>
                 ))}
               </ul>
+              <div className="px-[15px] pb-5">
+                <PanelSections />
+                <div className="mt-6 border-t border-[#ececec] pt-2.5">
+                  <PanelSocial />
+                </div>
+              </div>
             </nav>
           )}
         </div>

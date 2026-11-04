@@ -79,125 +79,144 @@ export function CategoryPanel() {
         </div>
 
         <div className="min-h-0 flex-auto overflow-y-auto overscroll-contain px-5 pt-4 pb-6 [scrollbar-color:#c9c9c9_transparent] [scrollbar-width:thin]">
-          <a
-            href={withBasePath(pageLinks.hdpe)}
-            className="flex items-center gap-[14px] rounded-[14px] border border-[#ececec] bg-[#f6f6f6] p-[14px] text-black transition-colors duration-200 hover:border-[#111]"
-          >
-            <span className="flex size-10 flex-none items-center justify-center rounded-[10px] bg-[#111] text-white">
-              <SparkleIcon />
-            </span>
-            <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-              <span className="text-[16px] leading-[1.3] font-semibold">
-                HDPE{" "}
-                <span className="ml-1.5 inline-block rounded-[10px] bg-[#111] px-[7px] py-px align-[2px] text-[11px] font-semibold text-white">
-                  New
-                </span>
-              </span>
-              <span className="text-[13px] text-[#777]">Latest launch</span>
-            </span>
-            <span aria-hidden="true" className={cn(chevron, "-rotate-45 border-[#007ac3]")} />
-          </a>
-
-          <a
-            href={withBasePath(pageLinks.bablu)}
-            className="mt-2.5 flex items-center gap-[14px] rounded-[14px] bg-gradient-to-br from-[#007ac3] to-[#00aeef] p-[14px] text-white shadow-[0_6px_16px_rgba(0,122,195,0.28)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_8px_20px_rgba(0,122,195,0.38)]"
-          >
-            <span className="flex size-10 flex-none items-center justify-center rounded-[10px] bg-white/20 text-white">
-              <PhoneIcon />
-            </span>
-            <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-              <span className="text-[16px] leading-[1.3] font-semibold">
-                Prayag Ka Bablu App{" "}
-                <span className="ml-1.5 inline-block rounded-[10px] bg-white px-[7px] py-px align-[2px] text-[11px] font-bold text-[#007ac3]">
-                  New
-                </span>
-              </span>
-              <span className="text-[13px] text-white/90">Plumbers Loyalty Program</span>
-            </span>
-            <span aria-hidden="true" className={cn(chevron, "-rotate-45 border-white")} />
-          </a>
-
-          <PanelLabel>Product Category</PanelLabel>
-          <ul>
-            <li>
-              <details className="group/details">
-                <summary className="group/row flex cursor-pointer list-none items-center gap-2 rounded-[10px] px-2.5 py-3 transition-colors duration-200 hover:bg-[#f6f6f6] [&::-webkit-details-marker]:hidden">
-                  <span className="flex-1 text-[16px] text-black transition-colors duration-200 group-hover/row:text-[#007ac3]">
-                    {productCategories[0].label}
-                  </span>
-                  <span
-                    aria-label={`${plumbingSubcategories.length} categories`}
-                    className="min-w-6 flex-none rounded-xl bg-[#ececec] px-2 py-0.5 text-center text-[12px] leading-[1.5] font-semibold text-[#333]"
-                  >
-                    {plumbingSubcategories.length}
-                  </span>
-                  <span aria-hidden="true" className={cn(chevron, "-rotate-45 border-[#007ac3] group-open/details:rotate-45")} />
-                </summary>
-                <ul className="mt-1 mb-2 ml-[14px] animate-[prayag-drop_0.25s_ease] border-l-2 border-[#e5e5e5] pl-2.5">
-                  <li>
-                    <a href={withBasePath(productCategories[0].href)} className="block rounded-lg px-3 py-[9px] text-[15px] font-semibold text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]">
-                      View all {productCategories[0].label}
-                    </a>
-                  </li>
-                  {plumbingSubcategories.map((link) => (
-                    <li key={link.label}>
-                      <a href={withBasePath(link.href)} className="block rounded-lg px-3 py-[9px] text-[15px] text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]">
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            </li>
-          </ul>
-
-          <PanelLabel>Quick links</PanelLabel>
-          <ul>
-            {panelQuickLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={withBasePath(link.href)}
-                  {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="block rounded-lg p-2.5 text-[15px] text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <PanelSections />
         </div>
 
         <div className="flex-none border-t border-[#ececec] bg-white px-5 pt-2.5 pb-[calc(10px+env(safe-area-inset-bottom,0px))]">
-          <ul aria-label="Follow Prayag" className="flex justify-around gap-1">
-            {(["facebook", "youtube", "instagram"] as const).map((key) => (
-              <li key={key}>
-                <a
-                  href={withBasePath(socialLinks[key])}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={key === "youtube" ? "YouTube" : key[0].toUpperCase() + key.slice(1)}
-                  className="flex size-10 items-center justify-center rounded-lg text-[#111] transition-colors duration-200 hover:bg-[#f1f1f1]"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element -- 24px source icon */}
-                  <img src={withBasePath(socialIcons[key])} alt="" aria-hidden="true" width={24} height={24} loading="lazy" className="block size-6 brightness-0" />
-                </a>
-              </li>
-            ))}
-            <li>
-              <a
-                href={withBasePath(socialLinks.linkedin)}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="flex size-10 items-center justify-center rounded-lg text-[#111] transition-colors duration-200 hover:bg-[#f1f1f1]"
-              >
-                <LinkedInIcon width={22} height={22} />
-              </a>
-            </li>
-          </ul>
+          <PanelSocial />
         </div>
       </div>
     </>
+  );
+}
+
+/**
+ * Featured cards, product categories and quick links of the drawer. Also rendered at the end of the
+ * mobile menu (below 1040px), which replaces the drawer there.
+ */
+export function PanelSections() {
+  return (
+    <>
+      <a
+        href={withBasePath(pageLinks.hdpe)}
+        className="flex items-center gap-[14px] rounded-[14px] border border-[#ececec] bg-[#f6f6f6] p-[14px] text-black transition-colors duration-200 hover:border-[#111]"
+      >
+        <span className="flex size-10 flex-none items-center justify-center rounded-[10px] bg-[#111] text-white">
+          <SparkleIcon />
+        </span>
+        <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+          <span className="text-[16px] leading-[1.3] font-semibold">
+            HDPE{" "}
+            <span className="ml-1.5 inline-block rounded-[10px] bg-[#111] px-[7px] py-px align-[2px] text-[11px] font-semibold text-white">
+              New
+            </span>
+          </span>
+          <span className="text-[13px] text-[#777]">Latest launch</span>
+        </span>
+        <span aria-hidden="true" className={cn(chevron, "-rotate-45 border-[#007ac3]")} />
+      </a>
+
+      <a
+        href={withBasePath(pageLinks.bablu)}
+        className="mt-2.5 flex items-center gap-[14px] rounded-[14px] bg-gradient-to-br from-[#007ac3] to-[#00aeef] p-[14px] text-white shadow-[0_6px_16px_rgba(0,122,195,0.28)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_8px_20px_rgba(0,122,195,0.38)]"
+      >
+        <span className="flex size-10 flex-none items-center justify-center rounded-[10px] bg-white/20 text-white">
+          <PhoneIcon />
+        </span>
+        <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+          <span className="text-[16px] leading-[1.3] font-semibold">
+            Prayag Ka Bablu App{" "}
+            <span className="ml-1.5 inline-block rounded-[10px] bg-white px-[7px] py-px align-[2px] text-[11px] font-bold text-[#007ac3]">
+              New
+            </span>
+          </span>
+          <span className="text-[13px] text-white/90">Plumbers Loyalty Program</span>
+        </span>
+        <span aria-hidden="true" className={cn(chevron, "-rotate-45 border-white")} />
+      </a>
+
+      <PanelLabel>Product Category</PanelLabel>
+      <ul>
+        <li>
+          <details className="group/details">
+            <summary className="group/row flex cursor-pointer list-none items-center gap-2 rounded-[10px] px-2.5 py-3 transition-colors duration-200 hover:bg-[#f6f6f6] [&::-webkit-details-marker]:hidden">
+              <span className="flex-1 text-[16px] text-black transition-colors duration-200 group-hover/row:text-[#007ac3]">
+                {productCategories[0].label}
+              </span>
+              <span
+                aria-label={`${plumbingSubcategories.length} categories`}
+                className="min-w-6 flex-none rounded-xl bg-[#ececec] px-2 py-0.5 text-center text-[12px] leading-[1.5] font-semibold text-[#333]"
+              >
+                {plumbingSubcategories.length}
+              </span>
+              <span aria-hidden="true" className={cn(chevron, "-rotate-45 border-[#007ac3] group-open/details:rotate-45")} />
+            </summary>
+            <ul className="mt-1 mb-2 ml-[14px] animate-[prayag-drop_0.25s_ease] border-l-2 border-[#e5e5e5] pl-2.5">
+              <li>
+                <a href={withBasePath(productCategories[0].href)} className="block rounded-lg px-3 py-[9px] text-[15px] font-semibold text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]">
+                  View all {productCategories[0].label}
+                </a>
+              </li>
+              {plumbingSubcategories.map((link) => (
+                <li key={link.label}>
+                  <a href={withBasePath(link.href)} className="block rounded-lg px-3 py-[9px] text-[15px] text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </li>
+      </ul>
+
+      <PanelLabel>Quick links</PanelLabel>
+      <ul>
+        {panelQuickLinks.map((link) => (
+          <li key={link.label}>
+            <a
+              href={withBasePath(link.href)}
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="block rounded-lg p-2.5 text-[15px] text-black transition-colors duration-200 hover:bg-[#f6f6f6] hover:text-[#007ac3]"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+/** Social icon row of the drawer footer (also used by the mobile menu). */
+export function PanelSocial() {
+  return (
+    <ul aria-label="Follow Prayag" className="flex justify-around gap-1">
+      {(["facebook", "youtube", "instagram"] as const).map((key) => (
+        <li key={key}>
+          <a
+            href={withBasePath(socialLinks[key])}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={key === "youtube" ? "YouTube" : key[0].toUpperCase() + key.slice(1)}
+            className="flex size-10 items-center justify-center rounded-lg text-[#111] transition-colors duration-200 hover:bg-[#f1f1f1]"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- 24px source icon */}
+            <img src={withBasePath(socialIcons[key])} alt="" aria-hidden="true" width={24} height={24} loading="lazy" className="block size-6 brightness-0" />
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href={withBasePath(socialLinks.linkedin)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          className="flex size-10 items-center justify-center rounded-lg text-[#111] transition-colors duration-200 hover:bg-[#f1f1f1]"
+        >
+          <LinkedInIcon width={22} height={22} />
+        </a>
+      </li>
+    </ul>
   );
 }
 
