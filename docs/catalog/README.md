@@ -28,6 +28,18 @@ npm run dev                              # http://localhost:3000 — admin at /a
 never appears in code, files or shell history. Running it for an existing email only grants the admin
 role. There is no public sign-up and no default account.
 
+**Admin on a server without a terminal** (upload-only deploys). Run `npm run admin:bundle` locally. It asks
+for an email, a name and a password (hidden), then writes `admin-bootstrap.json` (git-ignored). The file
+holds a scrypt password **hash**, never the password. Put it next to `server.js` in the deploy folder
+before zipping. When the server starts (`src/instrumentation.ts` → `src/lib/admin/bootstrap.ts`), it:
+
+- creates the user as admin if the email is new;
+- otherwise makes the existing user admin. It changes the password only when the file was made with
+  `npm run admin:bundle -- --reset-password`.
+
+The server then deletes the file and logs one `[admin-bootstrap]` line. An invalid file is logged and
+kept, and the site still starts. The file sits outside `public/`, so it is never served over HTTP.
+
 ## Security model
 
 - Better Auth (email + password, admin plugin): HttpOnly session cookies, scrypt password hashing,
