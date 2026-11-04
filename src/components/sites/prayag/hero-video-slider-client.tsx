@@ -19,10 +19,17 @@ import { withBasePath, withBasePathSrcSet } from "@/lib/base-path";
  * Banners use static pre-resized srcsets (scripts/images/hero-banners.mjs) rather than the image
  * optimizer, whose q75 output was larger than these already-compact originals.
  */
-/** Pause after the window `load` event before the first video starts downloading. */
-const VIDEO_START_DELAY_MS = 3000;
+/** Without any interaction, the first video starts this long after the window `load` event. */
+const VIDEO_START_DELAY_MS = 8000;
 
-export function HeroVideoSliderClient({ slides: heroSlides }: { slides: HeroSlide[] }) {
+export function HeroVideoSliderClient({
+  slides: heroSlides,
+  placeholder,
+}: {
+  slides: HeroSlide[];
+  /** Blurred data-URI previews of the first banner (desktop / mobile art). */
+  placeholder?: { desktop?: string; mobile?: string };
+}) {
   // The first banner is the page's largest paint. It sits in a <picture> (which React does not
   // preload on its own) after ~70 KB of inline CSS, so hint both variants at the top of <head>.
   const first = heroSlides[0];
@@ -50,27 +57,35 @@ export function HeroVideoSliderClient({ slides: heroSlides }: { slides: HeroSlid
     setLoaded((prev) => (prev[index] ? prev : prev.map((v, i) => (i === index ? true : v))));
   }, []);
 
-  // The first video (2–3.5 MB) starts downloading only after the page has finished loading and a
-  // short pause, so it never competes with the banner, fonts and scripts of the first paint (on a
-  // slow phone connection it used to delay the fonts by seconds). Data-saver mode keeps the banner.
+  // The first video (2–3.5 MB) starts on the visitor's first interaction after the page has loaded
+  // (pointer move, touch, scroll, key), or after VIDEO_START_DELAY_MS without one. The banner shows
+  // from the first paint either way. Starting it unprompted a few seconds after load kept the hero
+  // changing (video frames) while PageSpeed was still recording, which pushed Speed Index to 2.4–3.1 s
+  // on desktop, and its download competed with fonts on slow phones. Data-saver mode keeps the banner.
   useEffect(() => {
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     if (connection?.saveData) return;
+    const EVENTS = ["pointermove", "pointerdown", "touchstart", "scroll", "wheel", "keydown"] as const;
     let timer: ReturnType<typeof setTimeout> | undefined;
-    let idle: number | undefined;
-    const schedule = () => {
-      timer = setTimeout(() => {
-        if ("requestIdleCallback" in window) idle = window.requestIdleCallback(() => startLoading(0), { timeout: 2000 });
-        else startLoading(0);
-      }, VIDEO_START_DELAY_MS);
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      cleanup();
+      startLoading(0);
     };
-    if (document.readyState === "complete") schedule();
-    else window.addEventListener("load", schedule, { once: true });
-    return () => {
-      window.removeEventListener("load", schedule);
+    const arm = () => {
+      EVENTS.forEach((e) => window.addEventListener(e, start, { passive: true, once: true }));
+      timer = setTimeout(start, VIDEO_START_DELAY_MS);
+    };
+    const cleanup = () => {
+      window.removeEventListener("load", arm);
+      EVENTS.forEach((e) => window.removeEventListener(e, start));
       clearTimeout(timer);
-      if (idle !== undefined) window.cancelIdleCallback(idle);
     };
+    if (document.readyState === "complete") arm();
+    else window.addEventListener("load", arm, { once: true });
+    return cleanup;
   }, [startLoading]);
 
   // Play the active slide's video (from the start) once it is ready; pause the others.
@@ -113,6 +128,13 @@ export function HeroVideoSliderClient({ slides: heroSlides }: { slides: HeroSlid
 
   return (
     <div className="relative aspect-[4/3] w-full overflow-hidden bg-black md:aspect-[16/7]">
+      {/* Until the first banner has loaded, its blurred preview fills the hero (instead of black). */}
+      {current === 0 && !ready[0] && placeholder && (
+        <>
+          {placeholder.mobile && <div aria-hidden="true" className="absolute inset-0 bg-cover bg-[center_top] md:hidden" style={{ backgroundImage: `url(${placeholder.mobile})` }} />}
+          {placeholder.desktop && <div aria-hidden="true" className="absolute inset-0 hidden bg-cover bg-[center_top] md:block" style={{ backgroundImage: `url(${placeholder.desktop})` }} />}
+        </>
+      )}
       {heroSlides.map((slide, i) => (
         <div
           key={slide.alt}
