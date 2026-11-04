@@ -6,6 +6,7 @@ import { MfRoot } from "./mf-root";
 import { MfVideo } from "./mf-video";
 
 import { fullImg } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 const pad = (n: number) => (n < 10 ? `0${n}` : String(n));
 
@@ -28,11 +29,11 @@ export function MfPage() {
           <div className="mf-intro__grid">
             <div className="mf-intro__main">
               <div className="mf-text">
-                <p>{mfIntro.lead}</p>
+                <p><Tx>{mfIntro.lead}</Tx></p>
               </div>
               <div className="mf-text">
                 {mfIntro.paragraphs.map((p) => (
-                  <p key={p}>{p}</p>
+                  <p key={p}><Tx>{p}</Tx></p>
                 ))}
               </div>
             </div>
@@ -61,19 +62,19 @@ export function MfPage() {
             <div className="mf-plant__main">
               <div className="mf-text">
                 <h2>
-                  {mfPlant.headingLines[0]}
+                  <Tx>{mfPlant.headingLines[0]}</Tx>
                   <br />
-                  {mfPlant.headingLines[1]}
+                  <Tx>{mfPlant.headingLines[1]}</Tx>
                 </h2>
                 {mfPlant.paragraphs.map((p) => (
-                  <p key={p}>{p}</p>
+                  <p key={p}><Tx>{p}</Tx></p>
                 ))}
               </div>
               <ol className="mf-index" aria-hidden="true">
                 {mfPlant.index.map((item, i) => (
                   <li key={item}>
                     <b>{pad(i + 1)}</b>
-                    <span>{item}</span>
+                    <span><Tx>{item}</Tx></span>
                   </li>
                 ))}
               </ol>
@@ -89,7 +90,7 @@ export function MfPage() {
           <Marker n={4} />
           <div className="mf-opvc__grid">
             <h2 className="mf-opvc__title" data-rv="">
-              {mfOpvc.title}
+              <Tx>{mfOpvc.title}</Tx>
             </h2>
             <MfVideo video={{ ...mfOpvc.video, posterImg: fullImg(mfOpvc.video.poster) }} />
           </div>
@@ -113,7 +114,7 @@ export function MfPage() {
                   <span className="mf-steps__n" aria-hidden="true">
                     {pad(i + 1)}
                   </span>
-                  <p>{step}</p>
+                  <p><Tx>{step}</Tx></p>
                 </li>
               ))}
             </ol>

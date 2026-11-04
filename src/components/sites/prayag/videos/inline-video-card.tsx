@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { inlineEmbedUrl, type VideoCard } from "./data";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 /**
  * Source `.video_item` with `.video-thumbnail-wrapper[data-video]`: clicking the thumbnail
@@ -39,7 +40,7 @@ export function InlineVideoCard({ card }: { card: VideoCard }) {
           </button>
         )}
       </div>
-      <h3>{card.title}</h3>
+      <h3><Tx>{card.title}</Tx></h3>
     </div>
   );
 }

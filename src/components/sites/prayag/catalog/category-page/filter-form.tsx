@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { paramsFromQuery, type PublicQuery } from "@/lib/catalog/url";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export interface FormOption {
   label: string;
@@ -48,7 +49,7 @@ export function FilterForm({ id, groups, sort }: { id?: string; groups: FormGrou
           className="form-checkbox form-boolean form-boolean--type-checkbox"
         />
         <label htmlFor={id} className="form-item__label option">
-          {o.label}
+          <Tx>{o.label}</Tx>
         </label>
       </div>
     );
@@ -70,7 +71,7 @@ export function FilterForm({ id, groups, sort }: { id?: string; groups: FormGrou
       {groups.map((g) => (
         <fieldset key={g.key} className="fieldgroup form-composite fieldset fieldset--group js-form-item form-item js-form-wrapper form-wrapper">
           <legend className="fieldset__legend fieldset__legend--composite fieldset__legend--visible">
-            <span className="fieldset__label fieldset__label--group">{g.label}</span>
+            <span className="fieldset__label fieldset__label--group"><Tx>{g.label}</Tx></span>
           </legend>
           <div className="fieldset__wrapper fieldset__wrapper--group">
             <div className="form-boolean-group form-checkboxes">
@@ -84,7 +85,7 @@ export function FilterForm({ id, groups, sort }: { id?: string; groups: FormGrou
         </fieldset>
       ))}
       {/* Source auto-submit form keeps its (script-hidden) Apply button. The source's whitespace before it
-          matters where the form is not a grid (Kitchen Sinks): the inline-block sits on its own line box. */}{" "}
+          matters where the form is not a grid (Kitchen Sinks): the inline-block sits on its own line box. */}<Tx>{" "}</Tx>
       <div className="form-actions js-form-wrapper form-wrapper">
         <input className="js-hide button js-form-submit form-submit" type="submit" value="Apply" />
       </div>

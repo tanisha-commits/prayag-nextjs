@@ -2,6 +2,7 @@
 
 import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export interface TabGroupItem {
   /** Source tab id, if it has one (otherwise `tab-<paneId>`). */
@@ -79,7 +80,7 @@ export function TabGroup({
               onClick={() => setSelected(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
             >
-              {item.label}
+              <Tx>{item.label}</Tx>
             </button>
           </li>
         ))}
@@ -94,7 +95,7 @@ export function TabGroup({
             aria-labelledby={tabIdOf(item)}
             tabIndex={paneTabIndex}
           >
-            {item.panel}
+            <Tx>{item.panel}</Tx>
           </div>
         ))}
       </div>

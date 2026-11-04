@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export interface ProductCardData {
   publicId: string;
@@ -42,21 +43,21 @@ export function ProductCard({ product }: { product: ProductCardData }) {
           // eslint-disable-next-line @next/next/no-img-element -- source product images vary in size; shown as delivered
           <img src={withBasePath(product.image)} alt="" loading="lazy" className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]" />
         ) : (
-          <span className="text-[13px] text-[#9aa0a6]">Image coming soon</span>
+          <span className="text-[13px] text-[#9aa0a6]"><Tx>{"Image coming soon"}</Tx></span>
         )}
       </div>
       <div className="flex flex-1 flex-col gap-1 px-4 pt-3 pb-4">
         {product.status && product.status !== "published" && (
-          <span className="self-start rounded-full bg-[#fff4e5] px-2 py-0.5 text-[11px] font-semibold text-[#b45309] uppercase">Draft — local preview</span>
+          <span className="self-start rounded-full bg-[#fff4e5] px-2 py-0.5 text-[11px] font-semibold text-[#b45309] uppercase"><Tx>{"Draft — local preview"}</Tx></span>
         )}
-        {product.itemCode && <span className="text-[12px] font-semibold tracking-wide text-[#007ac3] uppercase">{product.itemCode}</span>}
-        <h3 className="m-0 text-[15px] leading-[1.4] font-medium text-[#1a1a1a]">{product.title}</h3>
+        {product.itemCode && <span className="text-[12px] font-semibold tracking-wide text-[#007ac3] uppercase"><Tx>{product.itemCode}</Tx></span>}
+        <h3 className="m-0 text-[15px] leading-[1.4] font-medium text-[#1a1a1a]"><Tx>{product.title}</Tx></h3>
         {details.length > 0 && (
           <dl className="m-0 mt-1 flex flex-col gap-0.5 text-[13px] leading-[1.45] text-[#5b5f66]">
             {details.map((d) => (
               <div key={d.key} className="flex min-w-0 gap-1">
-                <dt className="shrink-0 text-[#9aa0a6]">{d.label}</dt>
-                <dd className="m-0 min-w-0 truncate" title={d.text}>{d.text}</dd>
+                <dt className="shrink-0 text-[#9aa0a6]"><Tx>{d.label}</Tx></dt>
+                <dd className="m-0 min-w-0 truncate" title={d.text}><Tx>{d.text}</Tx></dd>
               </div>
             ))}
           </dl>
@@ -68,7 +69,7 @@ export function ProductCard({ product }: { product: ProductCardData }) {
                 {colours.map((c) => (c.hex ? <span key={c.value} title={c.value} className="size-[18px] rounded-full border border-black/20" style={{ background: c.hex }} /> : null))}
               </div>
             )}
-            <span className="text-[13px] leading-[1.45] text-[#5b5f66]">{colourNames}</span>
+            <span className="text-[13px] leading-[1.45] text-[#5b5f66]"><Tx>{colourNames}</Tx></span>
           </div>
         )}
       </div>

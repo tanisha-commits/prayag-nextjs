@@ -3,7 +3,14 @@
     "prayag-content": {
       "type": "stdio",
       "command": "npx",
-      "args": ["tsx", "--env-file-if-exists=.env.local", "scripts/mcp/prayag-content.mts"]
+      "args": [
+        "tsx",
+        "--env-file-if-exists=.env.local",
+        "scripts/mcp/prayag-content.mts"
+      ],
+      "env": {
+        "PRAYAG_PREVIEW_URL": "http://localhost:3000"
+      }
     }
   }
 }

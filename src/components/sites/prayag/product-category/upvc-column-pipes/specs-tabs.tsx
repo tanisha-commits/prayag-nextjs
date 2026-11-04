@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { cn } from "@/lib/utils";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export interface SpecsTab {
   /** Source ids: the button is `tab-<id>`, its pane `pane-<id>`. */
@@ -74,7 +75,7 @@ export function SpecsTabs({ tabs }: { tabs: SpecsTab[] }) {
               onClick={() => select(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
             >
-              {t.label}
+              <Tx>{t.label}</Tx>
             </button>
           </li>
         ))}
@@ -89,7 +90,7 @@ export function SpecsTabs({ tabs }: { tabs: SpecsTab[] }) {
             aria-labelledby={`tab-${t.id}`}
             tabIndex={0}
           >
-            {t.pane}
+            <Tx>{t.pane}</Tx>
           </div>
         ))}
       </div>

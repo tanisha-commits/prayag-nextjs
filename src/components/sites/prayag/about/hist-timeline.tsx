@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 /**
  * "Key Milestones" timeline (source inline script on /about-prayag):
@@ -108,8 +109,8 @@ export function HistTimeline({ items }: { items: { year: string; text: string }[
           <li className="hist-item" key={i}>
             <span className="hist-node" aria-hidden="true" />
             <div className="hist-card">
-              <span className="hist-year">{item.year}</span>
-              <h3 className="hist-text">{item.text}</h3>
+              <span className="hist-year"><Tx>{item.year}</Tx></span>
+              <h3 className="hist-text"><Tx>{item.text}</Tx></h3>
             </div>
           </li>
         ))}

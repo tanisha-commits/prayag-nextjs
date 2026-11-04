@@ -4,10 +4,13 @@ import { notFound } from "next/navigation";
 import { ActionForm } from "@/components/admin/action-form";
 import { ContentEditor } from "@/components/admin/content-editor";
 import { MarkdownImporter } from "@/components/admin/markdown-importer";
+import { PageTextEditor } from "@/components/admin/page-text-editor";
 import { deleteContent, saveContent } from "@/lib/admin/content-actions";
 import { describe } from "@/lib/content/fields";
 import { LISTS, SINGLETONS, isList, isSingleton, type BlogPost } from "@/lib/content/schemas";
+import { fetchOwnPage } from "@/lib/content/page-html";
 import { sitePage } from "@/lib/content/page-registry";
+import { pageTexts } from "@/lib/content/page-texts";
 import { readListEntry, readSingleton } from "@/lib/content/store";
 import { withBasePath } from "@/lib/base-path";
 
@@ -61,33 +64,56 @@ export default async function AdminContentEntry({ params, searchParams }: PagePr
   const savedBanner = saved && <p role="status" className="mb-4 rounded-[8px] bg-[#e7f6ec] px-3 py-2 text-[14px] text-[#1e7d3a]">Saved. The site shows the change now.</p>;
   const field = describe(LISTS[collection].schema);
 
-  // Markdown sections + SEO of an existing page: the key is the page slug; nothing to create.
+  // An existing page: its texts (design unchanged), SEO, marketing points and Markdown sections.
   if (collection === "page-content") {
     const page = sitePage(key);
     if (!page) notFound();
     const entry = readListEntry("page-content", key);
+    const tab = (await searchParams).tab === "more" ? "more" : "texts";
+    const html = tab === "texts" ? await fetchOwnPage(page.path) : undefined;
+    const texts = tab === "texts" ? pageTexts(page.slug, entry?.data, html) : [];
+    const tabCls = (on: boolean) =>
+      `rounded-[8px] px-4 py-2 text-[14px] font-medium ${on ? "bg-[#007ac3] text-white shadow-[0_2px_8px_rgba(0,122,195,0.25)]" : "bg-white text-[#30343a] border border-[#dfe3e8] hover:bg-[#f1f4f8]"}`;
     return (
       <>
         {back}
-        <h1 className="mb-1 text-[26px] font-semibold">{page.title}</h1>
-        <p className="mt-0 mb-4 max-w-[820px] text-[14px] text-[#5b5f66]">
-          <a href={withBasePath(page.path)} target="_blank" rel="noopener noreferrer" className="text-[#007ac3]">{page.path} ↗</a> · The page keeps its design. Sections
-          added here appear at the top (under the header) or the bottom (above the footer); write them in Markdown or load a .md file.
-        </p>
-        {savedBanner}
-        <div className={card}>
-          <ContentEditor key={`${key}-${entry?.updatedAt ?? 0}`} id={collection} entryKey={key} field={field} initial={entry?.data ?? { sections: [] }} action={saveContent} />
+        <div className="mb-4 flex flex-wrap items-end gap-3">
+          <div className="min-w-0 flex-1">
+            <h1 className="m-0 text-[26px] font-semibold">{page.title}</h1>
+            <p className="mt-1 mb-0 text-[14px] text-[#5b5f66]">
+              <a href={withBasePath(page.path)} target="_blank" rel="noopener noreferrer" className="text-[#007ac3]">{page.path} ↗</a> · The design never changes; only the words, SEO and added sections do.
+            </p>
+          </div>
         </div>
-        {entry && (
-          <details className={`${card} mt-6`}>
-            <summary className="cursor-pointer text-[14px] font-medium text-[#a12622]">Remove all sections and SEO changes</summary>
-            <div className="mt-3">
-              <ActionForm action={deleteContent} submitLabel="Remove" confirmText="Yes, restore this page to its original content">
-                <input type="hidden" name="id" value={collection} />
-                <input type="hidden" name="key" value={key} />
-              </ActionForm>
+        <nav className="mb-4 flex flex-wrap gap-2" aria-label="Page editor">
+          <Link href={`/admin/content/page-content/${key}`} className={tabCls(tab === "texts")} aria-current={tab === "texts" ? "page" : undefined}>Texts{entry?.data.texts.length ? ` (${entry.data.texts.length} edited)` : ""}</Link>
+          <Link href={`/admin/content/page-content/${key}?tab=more`} className={tabCls(tab === "more")} aria-current={tab === "more" ? "page" : undefined}>SEO, marketing &amp; sections</Link>
+        </nav>
+        {savedBanner}
+        {tab === "texts" ? (
+          <div className={card}>
+            <p className="mt-0 mb-4 text-[14px] text-[#5b5f66]">
+              Every text on this page. Change it here, or <b>Download .md</b> (all texts plus SEO and marketing points in one file), edit it, and <b>Upload .md</b>. Claude can edit the same texts.
+            </p>
+            <PageTextEditor key={entry?.updatedAt ?? 0} slug={page.slug} texts={texts} complete={!!html} />
+          </div>
+        ) : (
+          <>
+            <div className={card}>
+              <ContentEditor key={`${key}-${entry?.updatedAt ?? 0}`} id={collection} entryKey={key} field={field} initial={entry?.data ?? { sections: [] }} action={saveContent} />
             </div>
-          </details>
+            {entry && (
+              <details className={`${card} mt-6`}>
+                <summary className="cursor-pointer text-[14px] font-medium text-[#a12622]">Remove all edits of this page (texts, SEO, marketing, sections)</summary>
+                <div className="mt-3">
+                  <ActionForm action={deleteContent} submitLabel="Remove" confirmText="Yes, restore this page to its original content">
+                    <input type="hidden" name="id" value={collection} />
+                    <input type="hidden" name="key" value={key} />
+                  </ActionForm>
+                </div>
+              </details>
+            )}
+          </>
         )}
       </>
     );

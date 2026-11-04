@@ -12,6 +12,7 @@ import { HistCounter } from "./hist-counter";
 import { HistTimeline } from "./hist-timeline";
 
 import { fullImg } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 /** Body of /about-prayag (source `.hist-page`; styles ported 1:1 into about.css). */
 export function AboutPage() {
@@ -20,7 +21,7 @@ export function AboutPage() {
       <section className="hist-intro">
         <div className="hist-wrap">
           <div className="hist-lead">
-            <p>{aboutIntro}</p>
+            <p><Tx>{aboutIntro}</Tx></p>
           </div>
         </div>
       </section>
@@ -35,7 +36,7 @@ export function AboutPage() {
             </div>
             <div className="hist-desc">
               {aboutStory.paragraphs.map((p) => (
-                <p key={p}>{p}</p>
+                <p key={p}><Tx>{p}</Tx></p>
               ))}
             </div>
           </div>
@@ -54,7 +55,7 @@ export function AboutPage() {
       </section>
       <section className="hist-miles">
         <div className="hist-wrap">
-          <h2 className="hist-miles__title">{aboutMilestonesTitle}</h2>
+          <h2 className="hist-miles__title"><Tx>{aboutMilestonesTitle}</Tx></h2>
           <HistTimeline items={aboutMilestones} />
         </div>
       </section>

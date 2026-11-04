@@ -6,6 +6,7 @@ import type { FaqItem, FaqTab } from "@/content/prayag/faq/faq";
 
 import { storedHtml } from "@/lib/stored-html";
 import "./faq.css";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const ARROW =
   "m795.05 563.36-328.05-393.54c-13.57-16.309-37.848-18.516-54.145-4.8945-16.332 13.645-18.539 37.824-4.9453 54.145l307.55 368.93-307.55 368.9c-13.57 16.355-11.363 40.547 4.9453 54.168 16.285 13.621 40.57 11.41 54.145-4.8945l328.05-393.52c5.9766-7.1523 8.9531-15.914 8.9531-24.66 0-8.7617-2.9766-17.508-8.9531-24.637z";
@@ -69,7 +70,7 @@ export function FaqTabs({ tabs }: { tabs: FaqTab[] }) {
                   onClick={() => select(i)}
                   onKeyDown={(e) => onTabKeyDown(e, i)}
                 >
-                  {tab.label}
+                  <Tx>{tab.label}</Tx>
                   <svg viewBox="0 0 1200 1200" aria-hidden="true" focusable="false">
                     <path d={ARROW} />
                   </svg>
@@ -143,7 +144,7 @@ function AccordionItem({ id, item, open, onToggle }: { id: string; item: FaqItem
           aria-controls={`${id}-a`}
           onClick={onToggle}
         >
-          {item.question}
+          <Tx>{item.question}</Tx>
         </button>
       </h2>
       <div ref={panel} id={`${id}-a`} className="accordion-collapse" role="region" aria-labelledby={`${id}-q`} hidden>

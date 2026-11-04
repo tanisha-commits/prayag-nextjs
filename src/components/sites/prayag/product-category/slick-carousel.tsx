@@ -15,6 +15,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "@/lib/utils";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 /** The subset of slick 1.8 options the product-category pages use. */
 export interface SlickOptions {
@@ -281,7 +282,7 @@ export function SlickCarousel({
           aria-disabled={atStart || undefined}
           onClick={prev}
         >
-          Previous
+          <Tx>{"Previous"}</Tx>
         </button>
       )}
       <div
@@ -314,7 +315,7 @@ export function SlickCarousel({
             transition: animate && !drag ? `transform ${o.speed}ms ease` : undefined,
           }}
         >
-          {track}
+          <Tx>{track}</Tx>
         </div>
       </div>
       {showArrows && (
@@ -325,7 +326,7 @@ export function SlickCarousel({
           aria-disabled={atEnd || undefined}
           onClick={next}
         >
-          Next
+          <Tx>{"Next"}</Tx>
         </button>
       )}
       {showDots && (

@@ -2,6 +2,7 @@ import { HONEYPOT_FIELD } from "@/lib/enquiry/forms";
 import { cn } from "@/lib/utils";
 import type { EnquiryState } from "./use-enquiry-form";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 /** Olivero (the source's base theme) status icons — core/themes/olivero/images/{error,status}.svg. */
 function ErrorIcon() {
@@ -56,7 +57,7 @@ export function FormMessages({
                 <ul className="m-0 list-none p-0">
                   {items.map((item) => (
                     <li key={item} className="[&+li]:mt-[9px]">
-                      {item}
+                      <Tx>{item}</Tx>
                     </li>
                   ))}
                 </ul>
@@ -80,7 +81,7 @@ export function FieldError({ id, message }: { id: string; message?: string }) {
       className="my-[9px] block bg-[length:18px_18px] bg-left-top bg-no-repeat pl-[27px] font-bold text-[#e33f1e]"
       style={{ backgroundImage: `url(${withBasePath("/sites/prayag/icons/form-error.svg")})` }}
     >
-      {message}
+      <Tx>{message}</Tx>
     </strong>
   );
 }
@@ -89,7 +90,7 @@ export function FieldError({ id, message }: { id: string; message?: string }) {
 export function Honeypot() {
   return (
     <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-      <label htmlFor={`edit-${HONEYPOT_FIELD}`}>Leave this field blank</label>
+      <label htmlFor={`edit-${HONEYPOT_FIELD}`}><Tx>{"Leave this field blank"}</Tx></label>
       <input id={`edit-${HONEYPOT_FIELD}`} type="text" name={HONEYPOT_FIELD} tabIndex={-1} autoComplete="off" defaultValue="" />
     </div>
   );
@@ -101,7 +102,7 @@ export function SubmittingIndicator({ active, className }: { active: boolean; cl
   return (
     <span role="status" className={cn("inline-flex items-center gap-2 self-center text-[16px]", className)}>
       <span aria-hidden="true" className="inline-block size-5 animate-spin rounded-full border-2 border-current border-r-transparent" />
-      <span className="sr-only">Submitting…</span>
+      <span className="sr-only"><Tx>{"Submitting…"}</Tx></span>
     </span>
   );
 }

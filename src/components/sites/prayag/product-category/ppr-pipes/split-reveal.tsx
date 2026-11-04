@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -71,12 +72,12 @@ export function SplitReveal({ image, content }: { image: ReactNode; content: Rea
       <div className="psr-container">
         <div className="psr-image-col">
           <div ref={imageRef} className="psr-image-wrap">
-            {image}
+            <Tx>{image}</Tx>
           </div>
         </div>
         <div className="psr-content-col">
           <div ref={contentRef} className="psr-content">
-            {content}
+            <Tx>{content}</Tx>
           </div>
         </div>
       </div>

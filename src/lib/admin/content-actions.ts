@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import type { ActionState } from "@/lib/admin/actions";
 import { AuthError, requireAdmin } from "@/lib/auth/server";
-import { ContentError, deleteEntry, saveEntry } from "@/lib/content/store";
+import { ContentError, deleteEntry, readListEntry, saveEntry } from "@/lib/content/store";
 import { isList } from "@/lib/content/schemas";
 
 async function actor(): Promise<string | NonNullable<ActionState>> {
@@ -36,6 +36,10 @@ export async function saveContent(_prev: ActionState, form: FormData): Promise<A
   } catch {
     return { ok: false, message: "The form data could not be read." };
   }
+  // Page text edits have their own editor; keep them when the page form (which omits them) is saved.
+  if (id === "page-content" && key && data && typeof data === "object" && !("texts" in data)) {
+    (data as Record<string, unknown>).texts = readListEntry("page-content", key)?.data.texts ?? [];
+  }
   try {
     saveEntry({ id, key }, data, who);
   } catch (e) {
@@ -44,7 +48,7 @@ export async function saveContent(_prev: ActionState, form: FormData): Promise<A
   // Header, footer and drawer content appears on every page.
   revalidatePath("/", "layout");
   // Post/redirect/get: the editor reloads with the saved value and the page confirms the save.
-  redirect(`/admin/content/${id}${isList(id) ? `/${key}` : ""}?saved=${Date.now()}`);
+  redirect(`/admin/content/${id}${isList(id) ? `/${key}` : ""}?${id === "page-content" ? "tab=more&" : ""}saved=${Date.now()}`);
 }
 
 /** Reset a single-document entry to its built-in content, or remove a blog post. */

@@ -6,6 +6,7 @@ import { TabGroup } from "./tab-group";
 import "./hdpe.css";
 
 import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 // Slick settings verbatim from the page's inline script (it initialises before the theme's
 // Drupal behavior for .ngp-features-slider, so the inline settings are the ones in effect).
@@ -51,7 +52,7 @@ export function HdpePage() {
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
-                <h1 className="black_title">HDPE Pipes</h1>
+                <h1 className="black_title"><Tx>{"HDPE Pipes"}</Tx></h1>
               </div>
             </div>
           </div>
@@ -62,10 +63,10 @@ export function HdpePage() {
           <div className="row align-items-center">
             <div className="col-12 col-md-6">
               <div className="prayag-content-box">
-                <h2>Strong Built</h2>
-                <p className="prayag-subtitle">For Reliable Fluid Transportation</p>
+                <h2><Tx>{"Strong Built"}</Tx></h2>
+                <p className="prayag-subtitle"><Tx>{"For Reliable Fluid Transportation"}</Tx></p>
                 <p>
-                  Prayag HDPE Pipes &amp; Coils are designed for dependable performance across water supply, drainage, sewerage and other demanding piping applications. Manufactured from High Density Polyethylene, these pipes offer excellent resistance to corrosion and chemicals while providing a smooth internal surface for efficient flow.
+                  <Tx>{"Prayag HDPE Pipes & Coils are designed for dependable performance across water supply, drainage, sewerage and other demanding piping applications. Manufactured from High Density Polyethylene, these pipes offer excellent resistance to corrosion and chemicals while providing a smooth internal surface for efficient flow."}</Tx>
                 </p>
               </div>
             </div>
@@ -78,55 +79,55 @@ export function HdpePage() {
       </section>
       <section className="ngp-section" style={{ background: "#1a1a1a", padding: "60px 0" }}>
         <div className="container-fluid">
-          <h2 className="text-center" style={{ color: "#fff" }}>Why Choose <strong>Prayag HDPE</strong> Pipes</h2>
+          <h2 className="text-center" style={{ color: "#fff" }}><Tx>{"Why Choose "}</Tx><strong><Tx>{"Prayag HDPE"}</Tx></strong><Tx>{" Pipes"}</Tx></h2>
           <SlickCarousel className="ngp-features-slider" style={{ color: "#fff" }} settings={NGP_SLICK} aria-label="Why Choose Prayag HDPE Pipes">
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
                 <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Excellent-Chemical-Resistance.webp")} alt="" />
               </div>
-              <h3 className="ngp-feature-label">Excellent Chemical Resistance</h3>
-              <p className="ngp_para">Resists a wide range of chemicals for demanding fluid transportation applications.</p>
+              <h3 className="ngp-feature-label"><Tx>{"Excellent Chemical Resistance"}</Tx></h3>
+              <p className="ngp_para"><Tx>{"Resists a wide range of chemicals for demanding fluid transportation applications."}</Tx></p>
             </div>
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
                 <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Corrosion-Resistant.webp")} alt="" />
               </div>
-              <h3 className="ngp-feature-label">Corrosion Resistant</h3>
-              <p className="ngp_para">Withstands internal and external corrosion for long-lasting performance.</p>
+              <h3 className="ngp-feature-label"><Tx>{"Corrosion Resistant"}</Tx></h3>
+              <p className="ngp_para"><Tx>{"Withstands internal and external corrosion for long-lasting performance."}</Tx></p>
             </div>
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
                 <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Lightweight-Easy-to-Handle.webp")} alt="" />
               </div>
-              <h3 className="ngp-feature-label">Lightweight &amp; Easy to Handle</h3>
-              <p className="ngp_para">Lighter than steel, making transportation, handling and installation easier.</p>
+              <h3 className="ngp-feature-label"><Tx>{"Lightweight & Easy to Handle"}</Tx></h3>
+              <p className="ngp_para"><Tx>{"Lighter than steel, making transportation, handling and installation easier."}</Tx></p>
             </div>
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
                 <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Faster-Installation.webp")} alt="" />
               </div>
-              <h3 className="ngp-feature-label">Faster Installation</h3>
-              <p className="ngp_para">Welded joints enable faster installation with less excavation and backfilling.</p>
+              <h3 className="ngp-feature-label"><Tx>{"Faster Installation"}</Tx></h3>
+              <p className="ngp_para"><Tx>{"Welded joints enable faster installation with less excavation and backfilling."}</Tx></p>
             </div>
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
                 <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Smooth-Internal-Bore.webp")} alt="" />
               </div>
-              <h3 className="ngp-feature-label">Smooth Internal Bore</h3>
-              <p className="ngp_para">Provides lower flow resistance and reduced head loss for efficient fluid flow.</p>
+              <h3 className="ngp-feature-label"><Tx>{"Smooth Internal Bore"}</Tx></h3>
+              <p className="ngp_para"><Tx>{"Provides lower flow resistance and reduced head loss for efficient fluid flow."}</Tx></p>
             </div>
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
                 {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 (intrinsic sizing) */}
                 <img {...fullImg("/sites/prayag/theme/HDPE/icon%20webp/Low-Maintenance.webp")} alt="" />
               </div>
-              <h3 className="ngp-feature-label">Low Maintenance</h3>
-              <p className="ngp_para">Durable and corrosion-resistant construction helps minimize maintenance needs.</p>
+              <h3 className="ngp-feature-label"><Tx>{"Low Maintenance"}</Tx></h3>
+              <p className="ngp_para"><Tx>{"Durable and corrosion-resistant construction helps minimize maintenance needs."}</Tx></p>
             </div>
           </SlickCarousel>
         </div>
@@ -153,19 +154,19 @@ export function HdpePage() {
           </div>
           <div className="psr-content-col">
             <div className="psr-content">
-              <h2>What are HDPE Pipes?</h2>
+              <h2><Tx>{"What are HDPE Pipes?"}</Tx></h2>
               <p className="psr-description">
-                HDPE stands for High Density Polyethylene, a durable thermoplastic material widely used for piping applications. Prayag HDPE Pipes are manufactured using polyethylene grades including PE-63, PE-80 and PE-100. Prayag HDPE pipes range offers products as per IS 4984:2016, with the range covering multiple nominal outside diameters and pressure classes.
+                <Tx>{"HDPE stands for High Density Polyethylene, a durable thermoplastic material widely used for piping applications. Prayag HDPE Pipes are manufactured using polyethylene grades including PE-63, PE-80 and PE-100. Prayag HDPE pipes range offers products as per IS 4984:2016, with the range covering multiple nominal outside diameters and pressure classes."}</Tx>
               </p>
               <p className="psr-description">
-                The pipes are designed to combine strength, flexibility, chemical resistance and ease of installation, making them suitable for a wide range of infrastructure and utility applications.
+                <Tx>{"The pipes are designed to combine strength, flexibility, chemical resistance and ease of installation, making them suitable for a wide range of infrastructure and utility applications."}</Tx>
               </p>
               <a href="#hdpe-grades" className="prayag-btn">
                 <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M21.2308 5.99866C21.2211 5.78469 21.1301 5.53538 20.9771 5.37908L15.9807 0.279282C15.6418 -0.0128267 14.993 -0.133765 14.6154 0.204859C14.2436 0.537901 14.2533 1.18352 14.6251 1.51656L18.1381 5.09813H0.937304C0.420215 5.09813 0 5.50188 0 5.99864C0 6.49542 0.420245 6.89914 0.937304 6.89914H18.1381L14.6251 10.4807C14.3055 10.7877 14.2455 11.4557 14.6154 11.7924C14.9834 12.1292 15.6573 12.0213 15.9807 11.718L20.9771 6.61819C21.1475 6.4433 21.2308 6.23868 21.2308 5.99866Z" fill="black" />
                 </svg>
-                {" "}
-                Know More
+                <Tx>{" "}</Tx>
+                <Tx>{"Know More"}</Tx>
               </a>
             </div>
           </div>
@@ -173,7 +174,7 @@ export function HdpePage() {
       </SplitRevealSection>
       <section className="ka-applications pt-0">
         <div className="container-fluid">
-          <h2 className="ka-title">Application</h2>
+          <h2 className="ka-title"><Tx>{"Application"}</Tx></h2>
           <div className="ka-grid">
             <div className="ka-card">
               <div className="ka-image">
@@ -181,8 +182,8 @@ export function HdpePage() {
                 <img {...fullImg("/sites/prayag/theme/HDPE/Applications/WATER-SUPPY-Application-.webp")} alt="Water supply" />
               </div>
               <div className="ka-card-body">
-                <h3>Water Supply</h3>
-                <p>Suitable for durable and reliable water transportation and distribution systems.</p>
+                <h3><Tx>{"Water Supply"}</Tx></h3>
+                <p><Tx>{"Suitable for durable and reliable water transportation and distribution systems."}</Tx></p>
               </div>
             </div>
             <div className="ka-card">
@@ -191,8 +192,8 @@ export function HdpePage() {
                 <img {...fullImg("/sites/prayag/theme/HDPE/Applications/Drainage-Sewerage-Application-.webp")} alt="Underground drainage and sewerage" />
               </div>
               <div className="ka-card-body">
-                <h3>Underground Drainage &amp; Sewerage</h3>
-                <p>Used for drainage and sewerage systems, including undulating terrains.</p>
+                <h3><Tx>{"Underground Drainage & Sewerage"}</Tx></h3>
+                <p><Tx>{"Used for drainage and sewerage systems, including undulating terrains."}</Tx></p>
               </div>
             </div>
             <div className="ka-card">
@@ -201,8 +202,8 @@ export function HdpePage() {
                 <img {...fullImg("/sites/prayag/theme/HDPE/Applications/Effluent-Wastewater-Disposal-Application-.webp")} alt="Effluent and wastewater disposal" />
               </div>
               <div className="ka-card-body">
-                <h3>Effluent &amp; Wastewater Disposal</h3>
-                <p>Suitable for transporting wastewater and chemically varied effluents.</p>
+                <h3><Tx>{"Effluent & Wastewater Disposal"}</Tx></h3>
+                <p><Tx>{"Suitable for transporting wastewater and chemically varied effluents."}</Tx></p>
               </div>
             </div>
             <div className="ka-card">
@@ -211,8 +212,8 @@ export function HdpePage() {
                 <img {...fullImg("/sites/prayag/theme/HDPE/Applications/Gas-Distribution-Application.webp")} alt="Domestic gas distribution" />
               </div>
               <div className="ka-card-body">
-                <h3>Domestic Gas Distribution</h3>
-                <p>Suitable for underground gas distribution systems.</p>
+                <h3><Tx>{"Domestic Gas Distribution"}</Tx></h3>
+                <p><Tx>{"Suitable for underground gas distribution systems."}</Tx></p>
               </div>
             </div>
             <div className="ka-card">
@@ -221,8 +222,8 @@ export function HdpePage() {
                 <img {...fullImg("/sites/prayag/theme/HDPE/Applications/Submarine-Pipelines-Application-.webp")} alt="Submarine pipelines" />
               </div>
               <div className="ka-card-body">
-                <h3>Submarine Pipelines</h3>
-                <p>Used for underwater applications, including river crossings and marine outfalls.</p>
+                <h3><Tx>{"Submarine Pipelines"}</Tx></h3>
+                <p><Tx>{"Used for underwater applications, including river crossings and marine outfalls."}</Tx></p>
               </div>
             </div>
             <div className="ka-card">
@@ -231,8 +232,8 @@ export function HdpePage() {
                 <img {...fullImg("/sites/prayag/theme/HDPE/Applications/Infrastructure-Utility-Networks.webp")} alt="Infrastructure and utility networks" />
               </div>
               <div className="ka-card-body">
-                <h3>Infrastructure &amp; Utility Networks</h3>
-                <p>Suitable for underground utility networks requiring durability and corrosion resistance.</p>
+                <h3><Tx>{"Infrastructure & Utility Networks"}</Tx></h3>
+                <p><Tx>{"Suitable for underground utility networks requiring durability and corrosion resistance."}</Tx></p>
               </div>
             </div>
           </div>
@@ -249,66 +250,66 @@ export function HdpePage() {
             </div>
             <div className="col-lg-6 col-md-12 p-0">
               <div className="prayag_work_content">
-                <h2>The Prayag Advantage</h2>
+                <h2><Tx>{"The Prayag Advantage"}</Tx></h2>
                 <ul className="advantages_list">
                   <li>
                     <div>
-                      <strong>Excellent Chemical Resistance</strong>
-                      <span>Resists a wide range of chemicals for reliable fluid transportation.</span>
+                      <strong><Tx>{"Excellent Chemical Resistance"}</Tx></strong>
+                      <span><Tx>{"Resists a wide range of chemicals for reliable fluid transportation."}</Tx></span>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Superior Corrosion Resistance</strong>
-                      <span>Provides lasting protection against internal and external corrosion.</span>
+                      <strong><Tx>{"Superior Corrosion Resistance"}</Tx></strong>
+                      <span><Tx>{"Provides lasting protection against internal and external corrosion."}</Tx></span>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Lightweight &amp; Easy to Handle</strong>
-                      <span>Makes transportation, handling and installation more convenient.</span>
+                      <strong><Tx>{"Lightweight & Easy to Handle"}</Tx></strong>
+                      <span><Tx>{"Makes transportation, handling and installation more convenient."}</Tx></span>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Flexible &amp; Durable</strong>
-                      <span>Offers flexibility and strength for varied installation conditions.</span>
+                      <strong><Tx>{"Flexible & Durable"}</Tx></strong>
+                      <span><Tx>{"Offers flexibility and strength for varied installation conditions."}</Tx></span>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Efficient Water Flow</strong>
-                      <span>Smooth internal surface supports efficient fluid movement.</span>
+                      <strong><Tx>{"Efficient Water Flow"}</Tx></strong>
+                      <span><Tx>{"Smooth internal surface supports efficient fluid movement."}</Tx></span>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Leak-Resistant Jointing</strong>
-                      <span>Click ring supported or welded joints provide strong and secure connections.</span>
+                      <strong><Tx>{"Leak-Resistant Jointing"}</Tx></strong>
+                      <span><Tx>{"Click ring supported or welded joints provide strong and secure connections."}</Tx></span>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Faster Installation</strong>
-                      <span>Lightweight construction and welded jointing help simplify installation.</span>
+                      <strong><Tx>{"Faster Installation"}</Tx></strong>
+                      <span><Tx>{"Lightweight construction and welded jointing help simplify installation."}</Tx></span>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Low Maintenance</strong>
-                      <span>Durable construction helps reduce long-term maintenance requirements.</span>
+                      <strong><Tx>{"Low Maintenance"}</Tx></strong>
+                      <span><Tx>{"Durable construction helps reduce long-term maintenance requirements."}</Tx></span>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Versatile Applications</strong>
-                      <span>Suitable for water supply, drainage, sewerage and utility networks.</span>
+                      <strong><Tx>{"Versatile Applications"}</Tx></strong>
+                      <span><Tx>{"Suitable for water supply, drainage, sewerage and utility networks."}</Tx></span>
                     </div>
                   </li>
                   <li>
                     <div>
-                      <strong>Long Service Life</strong>
-                      <span>Designed for dependable performance over an extended service life.</span>
+                      <strong><Tx>{"Long Service Life"}</Tx></strong>
+                      <span><Tx>{"Designed for dependable performance over an extended service life."}</Tx></span>
                     </div>
                   </li>
                 </ul>
@@ -320,7 +321,7 @@ export function HdpePage() {
       <section className="prayag-fitting-specs" id="hdpe-grades" aria-labelledby="hdpe-grades-heading">
         <div className="container-fluid">
           <header className="prayag-fitting-specs__header">
-            <h2 id="hdpe-grades-heading">HDPE Pipe Grades</h2>
+            <h2 id="hdpe-grades-heading"><Tx>{"HDPE Pipe Grades"}</Tx></h2>
           </header>
           <div className="tab-content prayag-fitting-specs__content">
             <div className="tab-pane fade show active" id="pane-hdpe-grades" role="tabpanel" tabIndex={0}>
@@ -331,14 +332,14 @@ export function HdpePage() {
                     <img {...fullImg("/sites/prayag/theme/HDPE/HDPE%20Pipe%20Grades/PE-63.webp")} alt="PE-63 HDPE pipe grade" loading="lazy" width="600" height="400" className="cfs-card__img" />
                   </figure>
                   <div className="cfs-card__body">
-                    <h3 className="cfs-card__title">PE-63</h3>
-                    <p className="cfs-card__desc">Polyethylene grade used in the specified HDPE pipe range.</p>
-                    <p className="cfs-card__usage-label">Usage</p>
+                    <h3 className="cfs-card__title"><Tx>{"PE-63"}</Tx></h3>
+                    <p className="cfs-card__desc"><Tx>{"Polyethylene grade used in the specified HDPE pipe range."}</Tx></p>
+                    <p className="cfs-card__usage-label"><Tx>{"Usage"}</Tx></p>
                     <ul className="cfs-card__usage">
-                      <li>Agricultural irrigation and sprinkler systems</li>
-                      <li>Drinking water supply in rural and urban areas</li>
-                      <li>Industrial wastewater and chemical transportation</li>
-                      <li>Protection of underground cables and drainage systems</li>
+                      <li><Tx>{"Agricultural irrigation and sprinkler systems"}</Tx></li>
+                      <li><Tx>{"Drinking water supply in rural and urban areas"}</Tx></li>
+                      <li><Tx>{"Industrial wastewater and chemical transportation"}</Tx></li>
+                      <li><Tx>{"Protection of underground cables and drainage systems"}</Tx></li>
                     </ul>
                   </div>
                 </article>
@@ -348,14 +349,14 @@ export function HdpePage() {
                     <img {...fullImg("/sites/prayag/theme/HDPE/HDPE%20Pipe%20Grades/PE--80.webp")} alt="PE-80 HDPE pipe grade" loading="lazy" width="600" height="400" className="cfs-card__img" />
                   </figure>
                   <div className="cfs-card__body">
-                    <h3 className="cfs-card__title">PE-80</h3>
-                    <p className="cfs-card__desc">Polyethylene grade available for water supply and sewerage applications.</p>
-                    <p className="cfs-card__usage-label">Usage</p>
+                    <h3 className="cfs-card__title"><Tx>{"PE-80"}</Tx></h3>
+                    <p className="cfs-card__desc"><Tx>{"Polyethylene grade available for water supply and sewerage applications."}</Tx></p>
+                    <p className="cfs-card__usage-label"><Tx>{"Usage"}</Tx></p>
                     <ul className="cfs-card__usage">
-                      <li>Drinking water supply systems</li>
-                      <li>Agricultural sprinkler and drip irrigation systems</li>
-                      <li>Sewage and wastewater pipelines</li>
-                      <li>Low-pressure gas distribution systems</li>
+                      <li><Tx>{"Drinking water supply systems"}</Tx></li>
+                      <li><Tx>{"Agricultural sprinkler and drip irrigation systems"}</Tx></li>
+                      <li><Tx>{"Sewage and wastewater pipelines"}</Tx></li>
+                      <li><Tx>{"Low-pressure gas distribution systems"}</Tx></li>
                     </ul>
                   </div>
                 </article>
@@ -365,14 +366,14 @@ export function HdpePage() {
                     <img {...fullImg("/sites/prayag/theme/HDPE/HDPE%20Pipe%20Grades/PE--100.webp")} alt="PE-100 HDPE pipe grade" loading="lazy" width="600" height="400" className="cfs-card__img" />
                   </figure>
                   <div className="cfs-card__body">
-                    <h3 className="cfs-card__title">PE-100</h3>
-                    <p className="cfs-card__desc">Higher-performance polyethylene grade available across specified pressure classes.</p>
-                    <p className="cfs-card__usage-label">Usage</p>
+                    <h3 className="cfs-card__title"><Tx>{"PE-100"}</Tx></h3>
+                    <p className="cfs-card__desc"><Tx>{"Higher-performance polyethylene grade available across specified pressure classes."}</Tx></p>
+                    <p className="cfs-card__usage-label"><Tx>{"Usage"}</Tx></p>
                     <ul className="cfs-card__usage">
-                      <li>Municipal drinking water supply and borewell systems</li>
-                      <li>Agricultural drip and sprinkler irrigation systems</li>
-                      <li>Industrial fluid, chemical, and slurry transportation</li>
-                      <li>Sewage, drainage, and underground pipeline installations</li>
+                      <li><Tx>{"Municipal drinking water supply and borewell systems"}</Tx></li>
+                      <li><Tx>{"Agricultural drip and sprinkler irrigation systems"}</Tx></li>
+                      <li><Tx>{"Industrial fluid, chemical, and slurry transportation"}</Tx></li>
+                      <li><Tx>{"Sewage, drainage, and underground pipeline installations"}</Tx></li>
                     </ul>
                   </div>
                 </article>
@@ -384,7 +385,7 @@ export function HdpePage() {
       <section className="prayag-specs" id="specification">
         <div className="container-fluid">
           <div className="prayag-specs__header">
-            <h2 className="prayag-specs__title">Specification</h2>
+            <h2 className="prayag-specs__title"><Tx>{"Specification"}</Tx></h2>
           </div>
           <TabGroup
             listClassName="nav prayag-specs__tabs"
@@ -401,34 +402,34 @@ export function HdpePage() {
                     <table className="prayag-specs__table">
                       <thead>
                         <tr>
-                          <th>Specification</th>
-                          <th>Details</th>
+                          <th><Tx>{"Specification"}</Tx></th>
+                          <th><Tx>{"Details"}</Tx></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td data-label="Specification">Product</td>
-                          <td data-label="Details">HDPE Pipes</td>
+                          <td data-label="Specification"><Tx>{"Product"}</Tx></td>
+                          <td data-label="Details"><Tx>{"HDPE Pipes"}</Tx></td>
                         </tr>
                         <tr>
-                          <td data-label="Specification">Material</td>
-                          <td data-label="Details">High Density Polyethylene</td>
+                          <td data-label="Specification"><Tx>{"Material"}</Tx></td>
+                          <td data-label="Details"><Tx>{"High Density Polyethylene"}</Tx></td>
                         </tr>
                         <tr>
-                          <td data-label="Specification">Grades</td>
-                          <td data-label="Details">PE-63 &amp; PE-80</td>
+                          <td data-label="Specification"><Tx>{"Grades"}</Tx></td>
+                          <td data-label="Details"><Tx>{"PE-63 & PE-80"}</Tx></td>
                         </tr>
                         <tr>
-                          <td data-label="Specification">Nominal Pressure</td>
-                          <td data-label="Details">2.5 to 16</td>
+                          <td data-label="Specification"><Tx>{"Nominal Pressure"}</Tx></td>
+                          <td data-label="Details"><Tx>{"2.5 to 16"}</Tx></td>
                         </tr>
                         <tr>
-                          <td data-label="Specification">Nominal Diameter</td>
-                          <td data-label="Details">63 mm to 400 mm</td>
+                          <td data-label="Specification"><Tx>{"Nominal Diameter"}</Tx></td>
+                          <td data-label="Details"><Tx>{"63 mm to 400 mm"}</Tx></td>
                         </tr>
                         <tr>
-                          <td data-label="Specification">Jointing</td>
-                          <td data-label="Details">Welded jointing / click-ring type fittings</td>
+                          <td data-label="Specification"><Tx>{"Jointing"}</Tx></td>
+                          <td data-label="Details"><Tx>{"Welded jointing / click-ring type fittings"}</Tx></td>
                         </tr>
                       </tbody>
                     </table>
@@ -443,34 +444,34 @@ export function HdpePage() {
                     <table className="prayag-specs__table">
                       <thead>
                         <tr>
-                          <th>Specification</th>
-                          <th>Details</th>
+                          <th><Tx>{"Specification"}</Tx></th>
+                          <th><Tx>{"Details"}</Tx></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td data-label="Specification">Product</td>
-                          <td data-label="Details">HDPE Pipes</td>
+                          <td data-label="Specification"><Tx>{"Product"}</Tx></td>
+                          <td data-label="Details"><Tx>{"HDPE Pipes"}</Tx></td>
                         </tr>
                         <tr>
-                          <td data-label="Specification">Material</td>
-                          <td data-label="Details">High Density Polyethylene</td>
+                          <td data-label="Specification"><Tx>{"Material"}</Tx></td>
+                          <td data-label="Details"><Tx>{"High Density Polyethylene"}</Tx></td>
                         </tr>
                         <tr>
-                          <td data-label="Specification">Grades</td>
-                          <td data-label="Details">PE-100</td>
+                          <td data-label="Specification"><Tx>{"Grades"}</Tx></td>
+                          <td data-label="Details"><Tx>{"PE-100"}</Tx></td>
                         </tr>
                         <tr>
-                          <td data-label="Specification">Nominal Pressure</td>
-                          <td data-label="Details">6 to 16</td>
+                          <td data-label="Specification"><Tx>{"Nominal Pressure"}</Tx></td>
+                          <td data-label="Details"><Tx>{"6 to 16"}</Tx></td>
                         </tr>
                         <tr>
-                          <td data-label="Specification">Nominal Diameter</td>
-                          <td data-label="Details">63 mm to 400 mm</td>
+                          <td data-label="Specification"><Tx>{"Nominal Diameter"}</Tx></td>
+                          <td data-label="Details"><Tx>{"63 mm to 400 mm"}</Tx></td>
                         </tr>
                         <tr>
-                          <td data-label="Specification">Jointing</td>
-                          <td data-label="Details">Welded jointing / click-ring type fittings</td>
+                          <td data-label="Specification"><Tx>{"Jointing"}</Tx></td>
+                          <td data-label="Details"><Tx>{"Welded jointing / click-ring type fittings"}</Tx></td>
                         </tr>
                       </tbody>
                     </table>
@@ -484,10 +485,10 @@ export function HdpePage() {
       <section className="pt-fittings pe-section pe-section--grey" id="plb-ducts">
         <div className="container-fluid">
           <div className="pt-inner">
-            <p className="pt-eyebrow">PLB HDPE Ducts</p>
-            <h2 className="pt-title">Permanently Lubricated (PLB) HDPE Ducts</h2>
+            <p className="pt-eyebrow"><Tx>{"PLB HDPE Ducts"}</Tx></p>
+            <h2 className="pt-title"><Tx>{"Permanently Lubricated (PLB) HDPE Ducts"}</Tx></h2>
             <p className="pt-lede">
-              Prayag Permanently Lubricated (PLB) HDPE Ducts are manufactured using the Co-extrusion technique and are designed for laying Optic Fiber Cables in underground ducting and conduits. These ducts are available in multiple sizes ranging from 20 mm to 110 mm.
+              <Tx>{"Prayag Permanently Lubricated (PLB) HDPE Ducts are manufactured using the Co-extrusion technique and are designed for laying Optic Fiber Cables in underground ducting and conduits. These ducts are available in multiple sizes ranging from 20 mm to 110 mm."}</Tx>
             </p>
             <div className="pt-tile-grid">
               <PtTile target="pt-dlg-plb-app">
@@ -500,18 +501,18 @@ export function HdpePage() {
                   </svg>
                 </span>
                 <div>
-                  <p className="pt-tile-name">Applications</p>
-                  <p className="pt-tile-sub">Telecom, railways, highways, broadband and more</p>
+                  <p className="pt-tile-name"><Tx>{"Applications"}</Tx></p>
+                  <p className="pt-tile-sub"><Tx>{"Telecom, railways, highways, broadband and more"}</Tx></p>
                 </div>
                 <span className="pt-tile-hint">
-                  View details
-                  {" "}
+                  <Tx>{"View details"}</Tx>
+                  <Tx>{" "}</Tx>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
                 </span>
               </PtTile>
-              {" "}
+              <Tx>{" "}</Tx>
               <PtTile target="pt-dlg-plb-adv">
                 <span className="pt-tile-mark" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor">
@@ -520,12 +521,12 @@ export function HdpePage() {
                   </svg>
                 </span>
                 <div>
-                  <p className="pt-tile-name">Key Advantages</p>
-                  <p className="pt-tile-sub">Easier, safer and more cost-efficient cable installation</p>
+                  <p className="pt-tile-name"><Tx>{"Key Advantages"}</Tx></p>
+                  <p className="pt-tile-sub"><Tx>{"Easier, safer and more cost-efficient cable installation"}</Tx></p>
                 </div>
                 <span className="pt-tile-hint">
-                  View details
-                  {" "}
+                  <Tx>{"View details"}</Tx>
+                  <Tx>{" "}</Tx>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
@@ -536,38 +537,38 @@ export function HdpePage() {
         </div>
       </section>
       <PtDialog id="pt-dlg-plb-app" title="Applications" subtitle="PLB HDPE Ducts">
-        <p>PLB HDPE Ducts are suitable for a wide range of applications, including:</p>
+        <p><Tx>{"PLB HDPE Ducts are suitable for a wide range of applications, including:"}</Tx></p>
         <ul className="pt-dialog-list">
-          <li>Telecommunication</li>
-          <li>Computer Networks</li>
-          <li>Automatic Signalling</li>
-          <li>Railways Information Network</li>
-          <li>Highways</li>
-          <li>Cable Service Cabling</li>
-          <li>Broadband Networks</li>
-          <li>Electric Cable Installations</li>
+          <li><Tx>{"Telecommunication"}</Tx></li>
+          <li><Tx>{"Computer Networks"}</Tx></li>
+          <li><Tx>{"Automatic Signalling"}</Tx></li>
+          <li><Tx>{"Railways Information Network"}</Tx></li>
+          <li><Tx>{"Highways"}</Tx></li>
+          <li><Tx>{"Cable Service Cabling"}</Tx></li>
+          <li><Tx>{"Broadband Networks"}</Tx></li>
+          <li><Tx>{"Electric Cable Installations"}</Tx></li>
         </ul>
       </PtDialog>
       <PtDialog id="pt-dlg-plb-adv" title="Key Advantages" subtitle="PLB HDPE Ducts">
         <ul className="pt-dialog-list">
-          <li><strong>Reduced Cable Stress:</strong> Helps reduce stress on the cable during installation.</li>
-          <li><strong>Longer Installation Lengths:</strong> Makes installation of longer lengths more feasible.</li>
-          <li><strong>Safe Handling:</strong> Safe to handle with no toxic and dermatic hazards.</li>
-          <li><strong>Fewer Joints:</strong> Reduces the number of joints and minimizes the number of splices.</li>
-          <li><strong>Easy Installation:</strong> Enables faster and easier cable installation with lesser manpower.</li>
-          <li><strong>Long-Term Performance:</strong> Retains its properties throughout its lifespan.</li>
-          <li><strong>Cable Deployment:</strong> Existing cables can be deployed after de-blowing from the duct.</li>
-          <li><strong>Easy Cable Movement:</strong> Makes cable movement through bends and deflections easier.</li>
-          <li><strong>Cost Efficiency:</strong> Helps reduce the overall cost of installation, maintenance and future upgrades.</li>
+          <li><strong><Tx>{"Reduced Cable Stress:"}</Tx></strong><Tx>{" Helps reduce stress on the cable during installation."}</Tx></li>
+          <li><strong><Tx>{"Longer Installation Lengths:"}</Tx></strong><Tx>{" Makes installation of longer lengths more feasible."}</Tx></li>
+          <li><strong><Tx>{"Safe Handling:"}</Tx></strong><Tx>{" Safe to handle with no toxic and dermatic hazards."}</Tx></li>
+          <li><strong><Tx>{"Fewer Joints:"}</Tx></strong><Tx>{" Reduces the number of joints and minimizes the number of splices."}</Tx></li>
+          <li><strong><Tx>{"Easy Installation:"}</Tx></strong><Tx>{" Enables faster and easier cable installation with lesser manpower."}</Tx></li>
+          <li><strong><Tx>{"Long-Term Performance:"}</Tx></strong><Tx>{" Retains its properties throughout its lifespan."}</Tx></li>
+          <li><strong><Tx>{"Cable Deployment:"}</Tx></strong><Tx>{" Existing cables can be deployed after de-blowing from the duct."}</Tx></li>
+          <li><strong><Tx>{"Easy Cable Movement:"}</Tx></strong><Tx>{" Makes cable movement through bends and deflections easier."}</Tx></li>
+          <li><strong><Tx>{"Cost Efficiency:"}</Tx></strong><Tx>{" Helps reduce the overall cost of installation, maintenance and future upgrades."}</Tx></li>
         </ul>
       </PtDialog>
       <section className="mdpe-section" id="mdpe">
         <div className="container-fluid">
           <div className="mdpe-wrap">
             <div className="mdpe-left">
-              <h2>Medium Density Polyethylene (MDPE) Pipes</h2>
+              <h2><Tx>{"Medium Density Polyethylene (MDPE) Pipes"}</Tx></h2>
               <p>
-                Prayag MDPE Pipes offer a durable, tough, resilient and cost-effective piping solution. The range is an ISO / BIS certified product, made from quality raw materials and highly recommended for potable water supplies.
+                <Tx>{"Prayag MDPE Pipes offer a durable, tough, resilient and cost-effective piping solution. The range is an ISO / BIS certified product, made from quality raw materials and highly recommended for potable water supplies."}</Tx>
               </p>
               <div className="mdpe-certs">
                 <span className="mdpe-cert">
@@ -575,17 +576,17 @@ export function HdpePage() {
                     <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />
                     <path d="M8.5 12l2.5 2.5 4.5-5" />
                   </svg>
-                  {" "}
-                  ISO Certified
+                  <Tx>{" "}</Tx>
+                  <Tx>{"ISO Certified"}</Tx>
                 </span>
-                {" "}
+                <Tx>{" "}</Tx>
                 <span className="mdpe-cert">
                   <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />
                     <path d="M8.5 12l2.5 2.5 4.5-5" />
                   </svg>
-                  {" "}
-                  BIS Certified
+                  <Tx>{" "}</Tx>
+                  <Tx>{"BIS Certified"}</Tx>
                 </span>
               </div>
             </div>
@@ -597,18 +598,18 @@ export function HdpePage() {
                   </svg>
                 </span>
                 <div>
-                  <p className="pt-tile-name">Features</p>
-                  <p className="pt-tile-sub">Drinking water compatible, gas transport and eco-friendly</p>
+                  <p className="pt-tile-name"><Tx>{"Features"}</Tx></p>
+                  <p className="pt-tile-sub"><Tx>{"Drinking water compatible, gas transport and eco-friendly"}</Tx></p>
                 </div>
                 <span className="pt-tile-hint">
-                  View more
-                  {" "}
+                  <Tx>{"View more"}</Tx>
+                  <Tx>{" "}</Tx>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
                 </span>
               </PtTile>
-              {" "}
+              <Tx>{" "}</Tx>
               <PtTile target="pt-dlg-mdpe-adv">
                 <span className="pt-tile-mark" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" stroke="currentColor">
@@ -617,12 +618,12 @@ export function HdpePage() {
                   </svg>
                 </span>
                 <div>
-                  <p className="pt-tile-name">Advantages of MDPE Pipes</p>
-                  <p className="pt-tile-sub">Long life, UV resistance, leak-proof jointing and more</p>
+                  <p className="pt-tile-name"><Tx>{"Advantages of MDPE Pipes"}</Tx></p>
+                  <p className="pt-tile-sub"><Tx>{"Long life, UV resistance, leak-proof jointing and more"}</Tx></p>
                 </div>
                 <span className="pt-tile-hint">
-                  View more
-                  {" "}
+                  <Tx>{"View more"}</Tx>
+                  <Tx>{" "}</Tx>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
@@ -634,25 +635,25 @@ export function HdpePage() {
       </section>
       <PtDialog id="pt-dlg-mdpe-features" title="Features" subtitle="Medium Density Polyethylene (MDPE) Pipes">
         <ul className="pt-dialog-list">
-          <li>Drinking water compatible</li>
-          <li>Can easily transport GAS</li>
-          <li>Eco-friendly</li>
+          <li><Tx>{"Drinking water compatible"}</Tx></li>
+          <li><Tx>{"Can easily transport GAS"}</Tx></li>
+          <li><Tx>{"Eco-friendly"}</Tx></li>
         </ul>
       </PtDialog>
       <PtDialog id="pt-dlg-mdpe-adv" title="Advantages of MDPE Pipes" subtitle="Medium Density Polyethylene (MDPE) Pipes">
         <ul className="pt-dialog-list">
-          <li><strong>Smooth Inner Wall:</strong> C-Value 150 offers minimum resistance to flow, helping reduce operating cost.</li>
-          <li><strong>Longer Life:</strong> Life expectancy of more than 50 years.</li>
-          <li><strong>High Impact Strength:</strong> Provides reliable performance under demanding conditions.</li>
-          <li><strong>Lightweight:</strong> Helps reduce transportation and installation cost.</li>
-          <li><strong>Food Grade Material:</strong> Highly recommended for potable water.</li>
-          <li><strong>Bacteria &amp; Algae Resistance:</strong> Resists the growth of bacteria or algae.</li>
-          <li><strong>Temperature Resistance:</strong> Suitable for temperatures from -40 to 60°C.</li>
-          <li><strong>UV Resistance:</strong> Offers resistance to UV rays.</li>
-          <li><strong>Water Hammer / Surge:</strong> Provides excellent water hammer / surge characteristics.</li>
-          <li><strong>Versatile Applications:</strong> Preferred material for horizontal drilling, pipe bursting etc.</li>
-          <li><strong>Leak-Proof Jointing:</strong> Provides leak-proof joints; butt fusion jointing is recommended.</li>
-          <li><strong>Flexible Supply:</strong> Flexible pipe is available in coils up to 110 mm diameter.</li>
+          <li><strong><Tx>{"Smooth Inner Wall:"}</Tx></strong><Tx>{" C-Value 150 offers minimum resistance to flow, helping reduce operating cost."}</Tx></li>
+          <li><strong><Tx>{"Longer Life:"}</Tx></strong><Tx>{" Life expectancy of more than 50 years."}</Tx></li>
+          <li><strong><Tx>{"High Impact Strength:"}</Tx></strong><Tx>{" Provides reliable performance under demanding conditions."}</Tx></li>
+          <li><strong><Tx>{"Lightweight:"}</Tx></strong><Tx>{" Helps reduce transportation and installation cost."}</Tx></li>
+          <li><strong><Tx>{"Food Grade Material:"}</Tx></strong><Tx>{" Highly recommended for potable water."}</Tx></li>
+          <li><strong><Tx>{"Bacteria & Algae Resistance:"}</Tx></strong><Tx>{" Resists the growth of bacteria or algae."}</Tx></li>
+          <li><strong><Tx>{"Temperature Resistance:"}</Tx></strong><Tx>{" Suitable for temperatures from -40 to 60°C."}</Tx></li>
+          <li><strong><Tx>{"UV Resistance:"}</Tx></strong><Tx>{" Offers resistance to UV rays."}</Tx></li>
+          <li><strong><Tx>{"Water Hammer / Surge:"}</Tx></strong><Tx>{" Provides excellent water hammer / surge characteristics."}</Tx></li>
+          <li><strong><Tx>{"Versatile Applications:"}</Tx></strong><Tx>{" Preferred material for horizontal drilling, pipe bursting etc."}</Tx></li>
+          <li><strong><Tx>{"Leak-Proof Jointing:"}</Tx></strong><Tx>{" Provides leak-proof joints; butt fusion jointing is recommended."}</Tx></li>
+          <li><strong><Tx>{"Flexible Supply:"}</Tx></strong><Tx>{" Flexible pipe is available in coils up to 110 mm diameter."}</Tx></li>
         </ul>
       </PtDialog>
     </PcatPage>

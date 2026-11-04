@@ -8,6 +8,7 @@ import { FieldError, FormMessages, Honeypot, SubmittingIndicator } from "../form
 import { useEnquiryForm, webformValidityProps } from "../forms/use-enquiry-form";
 import { ITI_BASE, type ItiInstance } from "./intl-tel-input";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 /** Source `.dealership_form .form-item-*` widths (all 100% at <= 768px). */
 const THIRDS = new Set(["name", "e_mail", "phone_number", "dealership_requirements", "pincode", "company_name"]);
@@ -133,7 +134,7 @@ export function DealershipForm() {
     if (field.name === "phone_number") {
       return (
         <div className="[&_.iti]:w-full">
-          {input}
+          <Tx>{input}</Tx>
         </div>
       );
     }
@@ -164,7 +165,7 @@ export function DealershipForm() {
             )}
           >
             <label htmlFor={field.id} className="sr-only">
-              {field.label}
+              <Tx>{field.label}</Tx>
             </label>
             {renderControl(field)}
             <FieldError id={`${field.id}-error`} message={state.errors[field.name]} />

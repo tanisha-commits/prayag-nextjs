@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 import type { BlogListItem } from "@/lib/blog";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const PER_PAGE = 15; // source: PER_PAGE in the /blog inline script
 
@@ -63,7 +64,7 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="w-1/2 px-3 md:w-1/4">
             <label htmlFor="filterYear" className="mb-1.5 block font-semibold">
-              Year
+              <Tx>{"Year"}</Tx>
             </label>
             <select
               id="filterYear"
@@ -85,7 +86,7 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
           </div>
           <div className="w-1/2 px-3 md:w-1/4">
             <label htmlFor="sortBy" className="mb-1.5 block font-semibold">
-              Sort By
+              <Tx>{"Sort By"}</Tx>
             </label>
             <select
               id="sortBy"
@@ -122,10 +123,10 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
                   </Link>
                 </div>
                 <div className="relative border-b border-[#c5bfbf] pl-[9px] before:absolute before:bottom-0 before:left-0 before:h-px before:w-0 before:bg-[#716f6f] before:transition-[width] before:duration-[800ms] before:content-[''] group-hover:before:w-full md:pl-[18px]">
-                  <p className="mb-3.5 text-[18px] leading-[1.2] font-normal text-[#212529] md:text-[16px]">{post.date}</p>
+                  <p className="mb-3.5 text-[18px] leading-[1.2] font-normal text-[#212529] md:text-[16px]"><Tx>{post.date}</Tx></p>
                   <h2 className="mb-6 line-clamp-2 w-full text-[17px] leading-[27px] font-medium md:text-[22px] md:leading-8 min-[1400px]:w-[90%] min-[1400px]:text-[20px] min-[1400px]:leading-[30px]">
                     <Link href={`/${post.slug}`} className="text-black">
-                      {post.title}
+                      <Tx>{post.title}</Tx>
                     </Link>
                   </h2>
                 </div>
@@ -134,7 +135,7 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
           ))}
         </div>
 
-        {matched.length === 0 && <p className="text-center">No blogs found for this year.</p>}
+        {matched.length === 0 && <p className="text-center"><Tx>{"No blogs found for this year."}</Tx></p>}
 
         {matched.length > PER_PAGE && (
           <div className="my-6 text-center">

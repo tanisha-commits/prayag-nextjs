@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { SusProject } from "./data";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const pad = (n: number) => (n < 10 ? `0${n}` : String(n));
 
@@ -71,7 +72,7 @@ export function SusProjects({ title, projects }: { title: string; projects: SusP
     <section className="sus-projects">
       <div className="sus-wrap">
         <h2 className="sus-projects__title" id="sus-projects-title" data-rv="">
-          {title}
+          <Tx>{title}</Tx>
         </h2>
         <div
           className="sus-track"
@@ -106,15 +107,15 @@ export function SusProjects({ title, projects }: { title: string; projects: SusP
                 </div>
                 <div className="sus-slide__body">
                   <div className="sus-slide__text">
-                    <h3>{p.title}</h3>
+                    <h3><Tx>{p.title}</Tx></h3>
                     {p.points ? (
                       <ul>
                         {p.points.map((t) => (
-                          <li key={t}>{t}</li>
+                          <li key={t}><Tx>{t}</Tx></li>
                         ))}
                       </ul>
                     ) : (
-                      <p>{p.text}</p>
+                      <p><Tx>{p.text}</Tx></p>
                     )}
                   </div>
                 </div>

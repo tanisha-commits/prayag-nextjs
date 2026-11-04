@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { MfVideo as MfVideoData } from "./data";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 /**
  * Click-to-play YouTube video (source `.mf-video`): the poster is a real link to the video
@@ -70,9 +71,9 @@ export function MfVideo({ video, cinema = false }: { video: MfVideoData; cinema?
         {status === "loading" && "Loading video…"}
         {status === "slow" && (
           <span>
-            Still loading. If the video doesn{"’"}t start,{" "}
+            <Tx>{"Still loading. If the video doesn"}</Tx><Tx>{"’"}</Tx><Tx>{"t start,"}</Tx><Tx>{" "}</Tx>
             <a href={withBasePath(watchUrl)} target="_blank" rel="noopener">
-              watch it on YouTube
+              <Tx>{"watch it on YouTube"}</Tx>
             </a>
             .
           </span>

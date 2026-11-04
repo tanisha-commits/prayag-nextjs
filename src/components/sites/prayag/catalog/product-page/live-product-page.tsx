@@ -8,6 +8,7 @@ import "./product-fixes.css";
 import { withBasePath } from "@/lib/base-path";
 import { storedHtml } from "@/lib/stored-html";
 import { img as dimImg, responsiveImagesHtml } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 type Product = NonNullable<ReturnType<typeof publicProduct>>;
 
@@ -120,15 +121,15 @@ export function LiveProductPage({ product }: { product: Product }) {
             <nav className="pp-breadcrumb" aria-label="Breadcrumb">
               <ol>
                 <li>
-                  <Link href="/">Home</Link>
+                  <Link href="/"><Tx>{"Home"}</Tx></Link>
                 </li>
                 {category && (
                   <li>
-                    <span>{category.name}</span>
+                    <span><Tx>{category.name}</Tx></span>
                   </li>
                 )}
                 <li aria-current="page">
-                  <span>{product.title}</span>
+                  <span><Tx>{product.title}</Tx></span>
                 </li>
               </ol>
             </nav>
@@ -177,24 +178,24 @@ export function LiveProductPage({ product }: { product: Product }) {
               <div className="col-lg-6">
                 <div className="pp-info">
                   <div className="pp-tags">
-                    {product.status !== "published" && <span className="pp-tag">DRAFT — LOCAL PREVIEW</span>}
-                    {category && <span className="pp-tag">{category.name}</span>}
+                    {product.status !== "published" && <span className="pp-tag"><Tx>{"DRAFT — LOCAL PREVIEW"}</Tx></span>}
+                    {category && <span className="pp-tag"><Tx>{category.name}</Tx></span>}
                     {product.itemCode && (
                       <span className="pp-tag pp-tag--code">
-                        Item Code <b>{product.itemCode}</b>
+                        <Tx>{"Item Code "}</Tx><b><Tx>{product.itemCode}</Tx></b>
                       </span>
                     )}
                   </div>
-                  <h1 className="pp-title">{product.title}</h1>
-                  {product.shortDescription && <p className="pp-short">{product.shortDescription}</p>}
+                  <h1 className="pp-title"><Tx>{product.title}</Tx></h1>
+                  {product.shortDescription && <p className="pp-short"><Tx>{product.shortDescription}</Tx></p>}
                   {colours.length > 0 && (
                     <div className="pp-colors">
-                      <h2 className="pp-h3">Colours</h2>
+                      <h2 className="pp-h3"><Tx>{"Colours"}</Tx></h2>
                       <ul className="pp-swatches">
                         {colours.map((c) => (
                           <li key={c.value} className={c.hex ? "has-sw" : undefined}>
                             {c.hex && <span className="pp-swatch" style={{ background: c.hex }} aria-hidden="true" />}
-                            {c.value}
+                            <Tx>{c.value}</Tx>
                           </li>
                         ))}
                       </ul>
@@ -202,12 +203,12 @@ export function LiveProductPage({ product }: { product: Product }) {
                   )}
                   {product.highlights.length > 0 && (
                     <div className="pp-block">
-                      <h2 className="pp-h3">Product Highlights</h2>
+                      <h2 className="pp-h3"><Tx>{"Product Highlights"}</Tx></h2>
                       <ul className="pp-hl">
                         {product.highlights.map((h) => (
                           <li key={h.text} className="pp-hl__item">
                             <span className="pp-hl__icon">{h.icon && <img src={withBasePath(h.icon)} alt="" width={40} height={40} loading="lazy" />}</span>
-                            <span>{h.text}</span>
+                            <span><Tx>{h.text}</Tx></span>
                           </li>
                         ))}
                       </ul>
@@ -215,22 +216,22 @@ export function LiveProductPage({ product }: { product: Product }) {
                   )}
                   {product.features.length > 0 && (
                     <div className="pp-block">
-                      <h2 className="pp-h3">Key Features</h2>
+                      <h2 className="pp-h3"><Tx>{"Key Features"}</Tx></h2>
                       <ul className="pp-checks pp-checks--cols">
                         {product.features.map((f, i) => (
-                          <li key={i}>{f}</li>
+                          <li key={i}><Tx>{f}</Tx></li>
                         ))}
                       </ul>
                     </div>
                   )}
                   <div className="pp-actions">
                     <a className="pp-btn pp-btn--lg" href={withBasePath(enquire)}>
-                      Enquire Now
+                      <Tx>{"Enquire Now"}</Tx>
                       <Arrow size={18} />
                     </a>
                   </div>
                   <div className="pp-share">
-                    <span className="pp-share__label">Share</span>
+                    <span className="pp-share__label"><Tx>{"Share"}</Tx></span>
                     <ul>
                       <li>
                         <a href={withBasePath(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`)} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
@@ -282,13 +283,13 @@ export function LiveProductPage({ product }: { product: Product }) {
                   aria-selected={i === 0 ? "true" : "false"}
                   tabIndex={i === 0 ? 0 : -1}
                 >
-                  {t.label}
+                  <Tx>{t.label}</Tx>
                 </button>
               ))}
             </div>
             {tabs.map((t, i) => (
               <div key={t.id} className="pp-panel" role="tabpanel" aria-labelledby={`pp-tab-${t.id}`} id={`pp-panel-${t.id}`} hidden={i > 0}>
-                <h2 className="pp-panel__title">{t.title}</h2>
+                <h2 className="pp-panel__title"><Tx>{t.title}</Tx></h2>
                 {t.id === "desc" && <div className="pp-rich" dangerouslySetInnerHTML={{ __html: storedHtml(responsiveImagesHtml(product.descriptionHtml ?? "")) }} />}
                 {t.id === "specs" &&
                   (hasSpecs ? (
@@ -307,8 +308,8 @@ export function LiveProductPage({ product }: { product: Product }) {
                             .filter(([, v]) => v)
                             .map(([k, v]) => (
                               <tr key={k}>
-                                <td>{k}</td>
-                                <td>{v}</td>
+                                <td><Tx>{k}</Tx></td>
+                                <td><Tx>{v}</Tx></td>
                               </tr>
                             ))}
                         </tbody>
@@ -324,7 +325,7 @@ export function LiveProductPage({ product }: { product: Product }) {
         {apps.length > 0 && (
           <section className="pp-section pp-apps-section" id="applications">
             <div className="container-fluid">
-              <h2 className="pp-h2">Applications</h2>
+              <h2 className="pp-h2"><Tx>{"Applications"}</Tx></h2>
               <ul className="pp-apps">
                 {apps.map((a) => (
                   <li key={a} className="pp-app">
@@ -334,7 +335,7 @@ export function LiveProductPage({ product }: { product: Product }) {
                         <path d="M8 12l3 3 5-6" />
                       </svg>
                     </span>
-                    <span className="pp-app__label">{a}</span>
+                    <span className="pp-app__label"><Tx>{a}</Tx></span>
                   </li>
                 ))}
               </ul>
@@ -344,7 +345,7 @@ export function LiveProductPage({ product }: { product: Product }) {
 
         <section className="pp-section pp-support">
           <div className="container-fluid">
-            <h2 className="pp-h2">Downloads &amp; Support</h2>
+            <h2 className="pp-h2"><Tx>{"Downloads & Support"}</Tx></h2>
             <ul className="pp-support__grid">
               <li>
                 <a className="pp-support__card" href={withBasePath(WARRANTY_PDF)} target="_blank" rel="noopener">
@@ -354,8 +355,8 @@ export function LiveProductPage({ product }: { product: Product }) {
                       <path d="M9 12l2 2 4-4" />
                     </>,
                   )}
-                  <span className="pp-support__title">Warranty Policy</span>
-                  <span className="pp-support__text">Read the terms</span>
+                  <span className="pp-support__title"><Tx>{"Warranty Policy"}</Tx></span>
+                  <span className="pp-support__text"><Tx>{"Read the terms"}</Tx></span>
                 </a>
               </li>
               <li>
@@ -366,15 +367,15 @@ export function LiveProductPage({ product }: { product: Product }) {
                       <path d="M10 9.5v5l4.5-2.5z" />
                     </>,
                   )}
-                  <span className="pp-support__title">Product Videos</span>
-                  <span className="pp-support__text">Watch and learn</span>
+                  <span className="pp-support__title"><Tx>{"Product Videos"}</Tx></span>
+                  <span className="pp-support__text"><Tx>{"Watch and learn"}</Tx></span>
                 </Link>
               </li>
               <li>
                 <a className="pp-support__card" href={withBasePath(enquire)}>
                   {supportIcon(<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z" />)}
-                  <span className="pp-support__title">Need Help?</span>
-                  <span className="pp-support__text">Contact our team</span>
+                  <span className="pp-support__title"><Tx>{"Need Help?"}</Tx></span>
+                  <span className="pp-support__text"><Tx>{"Contact our team"}</Tx></span>
                 </a>
               </li>
             </ul>
@@ -385,41 +386,41 @@ export function LiveProductPage({ product }: { product: Product }) {
           <div className="container-fluid">
             <div className="pp-about__grid">
               <div className="pp-about__text">
-                <h2 className="pp-h2">About {product.title}</h2>
+                <h2 className="pp-h2"><Tx>{"About "}</Tx><Tx>{product.title}</Tx></h2>
                 <p className="pp-lead">
                   {category ? `${product.title} belongs to the ${category.name} range from Prayag` : `${product.title} is a Prayag product`}
                   {apps.length ? ` and is designed for ${apps.join(", ").toLowerCase()} use.` : "."}
                 </p>
-                {colours.length > 0 && <p>It is available in {colourList}.</p>}
-                {highlights.length > 0 && <p>Highlights: {highlights.join(", ")}.</p>}
-                <p>Interested in {product.title}? Send an enquiry and the Prayag team will share the details you need.</p>
+                {colours.length > 0 && <p><Tx>{"It is available in "}</Tx><Tx>{colourList}</Tx>.</p>}
+                {highlights.length > 0 && <p><Tx>{"Highlights: "}</Tx>{highlights.join(", ")}.</p>}
+                <p><Tx>{"Interested in "}</Tx><Tx>{product.title}</Tx><Tx>{"? Send an enquiry and the Prayag team will share the details you need."}</Tx></p>
                 <a className="pp-btn" href={withBasePath(enquire)}>
-                  Send an Enquiry
+                  <Tx>{"Send an Enquiry"}</Tx>
                 </a>
               </div>
               <div className="pp-guide">
-                <h3 className="pp-h3">Product guide</h3>
+                <h3 className="pp-h3"><Tx>{"Product guide"}</Tx></h3>
                 <details className="pp-acc" open>
-                  <summary>Care and cleaning</summary>
+                  <summary><Tx>{"Care and cleaning"}</Tx></summary>
                   <div className="pp-acc__body">
-                    <p>{guide.care}</p>
+                    <p><Tx>{guide.care}</Tx></p>
                   </div>
                 </details>
                 <details className="pp-acc">
-                  <summary>Installation tips</summary>
+                  <summary><Tx>{"Installation tips"}</Tx></summary>
                   <div className="pp-acc__body">
-                    <p>{guide.install}</p>
+                    <p><Tx>{guide.install}</Tx></p>
                   </div>
                 </details>
                 <details className="pp-acc">
-                  <summary>Warranty and support</summary>
+                  <summary><Tx>{"Warranty and support"}</Tx></summary>
                   <div className="pp-acc__body">
                     <p>
-                      Read the{" "}
+                      <Tx>{"Read the"}</Tx><Tx>{" "}</Tx>
                       <a href={withBasePath(WARRANTY_PDF)} target="_blank" rel="noopener">
-                        Prayag Warranty Policy
-                      </a>{" "}
-                      for terms and coverage. For help with this product, use the <a href={withBasePath(enquire)}>Contact Us</a> page.
+                        <Tx>{"Prayag Warranty Policy"}</Tx>
+                      </a><Tx>{" "}</Tx>
+                      <Tx>{"for terms and coverage. For help with this product, use the "}</Tx><a href={withBasePath(enquire)}><Tx>{"Contact Us"}</Tx></a><Tx>{" page."}</Tx>
                     </p>
                   </div>
                 </details>
@@ -432,17 +433,17 @@ export function LiveProductPage({ product }: { product: Product }) {
           <div className="container-fluid">
             <div className="pp-faq__grid">
               <div className="pp-faq__intro">
-                <h2 className="pp-h2">Frequently asked questions</h2>
-                <p>Quick answers about {product.title}. Cannot find what you need? Our team is happy to help.</p>
+                <h2 className="pp-h2"><Tx>{"Frequently asked questions"}</Tx></h2>
+                <p><Tx>{"Quick answers about "}</Tx><Tx>{product.title}</Tx><Tx>{". Cannot find what you need? Our team is happy to help."}</Tx></p>
                 <a className="pp-btn pp-btn--ghost" href={withBasePath(enquire)}>
-                  Ask a question
+                  <Tx>{"Ask a question"}</Tx>
                 </a>
               </div>
               <div className="pp-faq__list">
                 {faqs.map(([q, a], i) => (
                   <details key={q} open={i === 0}>
-                    <summary>{q}</summary>
-                    <div className="pp-faq__a">{a}</div>
+                    <summary><Tx>{q}</Tx></summary>
+                    <div className="pp-faq__a"><Tx>{a}</Tx></div>
                   </details>
                 ))}
               </div>
@@ -455,8 +456,8 @@ export function LiveProductPage({ product }: { product: Product }) {
             <div className="container-fluid">
               <div className="pp-related__head">
                 <div>
-                  <h2 className="pp-h2">Related Products</h2>
-                  <p>More from the same range</p>
+                  <h2 className="pp-h2"><Tx>{"Related Products"}</Tx></h2>
+                  <p><Tx>{"More from the same range"}</Tx></p>
                 </div>
                 <div className="pp-related__nav">
                   <button type="button" className="pp-related__btn" data-pp-rel-prev="" aria-label="Previous products" disabled>
@@ -471,9 +472,9 @@ export function LiveProductPage({ product }: { product: Product }) {
                 {product.related.map((r) => (
                   <a key={r.slug} className="pp-rel" href={withBasePath(`/${r.slug}`)}>
                     <span className="pp-rel__img">{r.image && <img {...dimImg(r.image, "auto, (min-width: 992px) 25vw, 50vw")} alt={r.title} width={320} height={320} loading="lazy" />}</span>
-                    <span className="pp-rel__name">{r.title}</span>
+                    <span className="pp-rel__name"><Tx>{r.title}</Tx></span>
                     <span className="pp-rel__cta">
-                      View details <Arrow size={16} />
+                      <Tx>{"View details "}</Tx><Arrow size={16} />
                     </span>
                   </a>
                 ))}
@@ -484,7 +485,7 @@ export function LiveProductPage({ product }: { product: Product }) {
 
         <div className="pp-sticky" aria-label="Quick actions">
           <a className="pp-btn" href={withBasePath(enquire)}>
-            Enquire Now
+            <Tx>{"Enquire Now"}</Tx>
           </a>
         </div>
       </div>

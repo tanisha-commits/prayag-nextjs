@@ -17,6 +17,7 @@ import "./catalog-fixes.css";
 import { withBasePath } from "@/lib/base-path";
 import { storedHtml } from "@/lib/stored-html";
 import { img, responsiveImagesHtml } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 export interface LiveCategoryData {
   /** The source page's <title> and meta description. */
@@ -47,7 +48,7 @@ const DRAFT_STYLE: CSSProperties = {
   fontSize: 11,
   fontWeight: 600,
 };
-const draft = (p: Item) => p.status !== "published" && <span style={DRAFT_STYLE}>DRAFT — LOCAL PREVIEW</span>;
+const draft = (p: Item) => p.status !== "published" && <span style={DRAFT_STYLE}><Tx>{"DRAFT — LOCAL PREVIEW"}</Tx></span>;
 
 const css = (s: string): CSSProperties =>
   Object.fromEntries(
@@ -79,11 +80,11 @@ function Card({ p, swatches }: { p: Item; swatches: LiveCategoryConfig["swatches
               <div className="field-content">
                 <div className="paragraph paragraph--type--products-data-wrapper paragraph--view-mode--default">
                   <div className="field field--name-field-product-image field--type-entity-reference field--label-above">
-                    <div className="field__label">Product Image</div>
+                    <div className="field__label"><Tx>{"Product Image"}</Tx></div>
                     <div className="field__item">
                       <div className="media media--type-image media--view-mode-default">
                         <div className="field field--name-field-media-image field--type-image field--label-visually_hidden">
-                          <div className="field__label visually-hidden">Image</div>
+                          <div className="field__label visually-hidden"><Tx>{"Image"}</Tx></div>
                           <div className="field__item">
                             {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 */}
                             {p.image && <img loading="lazy" {...img(p.image, CARD_SIZES)} width={800} height={800} alt={p.title} />}
@@ -100,7 +101,7 @@ function Card({ p, swatches }: { p: Item; swatches: LiveCategoryConfig["swatches
             </div>
           </div>
           {draft(p)}
-          <h6>{p.title}</h6>
+          <h6><Tx>{p.title}</Tx></h6>
           {swatches === "dots" && (
             <div className="color-options">
               {colours.map((c) => (
@@ -137,7 +138,7 @@ function PlainCard({ p }: { p: Item }) {
             {p.image && <img {...img(p.image, CARD_SIZES)} alt={p.title} />}
           </div>
           {draft(p)}
-          <h6>{p.title}</h6>
+          <h6><Tx>{p.title}</Tx></h6>
         </div>
       </a>
     </div>
@@ -174,7 +175,7 @@ function Pager({ query, total }: { query: PublicQuery; total: number }) {
   const control = (cls: string, i: number, title: string, label: string, icon: ReactNode, w: string, rel?: string) => (
     <li className={`pager__item pager__item--control pager__item--${cls}`}>
       <a href={withBasePath(href(i))} className="pager__link" title={title} rel={rel}>
-        <span className="visually-hidden">{label}</span>
+        <span className="visually-hidden"><Tx>{label}</Tx></span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={w}
@@ -189,32 +190,32 @@ function Pager({ query, total }: { query: PublicQuery; total: number }) {
   return (
     <nav className="pager layout--content-medium" role="navigation" aria-labelledby="pagination-heading">
       <h4 id="pagination-heading" className="visually-hidden">
-        Pagination
+        <Tx>{"Pagination"}</Tx>
       </h4>
       <ul className="pager__items js-pager__items">
         {current > 0 && control("first", 0, "Go to first page", "First page", FIRST, "15px")}
         {current > 0 && control("previous", current - 1, "Go to previous page", "Previous page", PREV, "11", "prev")}
         {first > 1 && (
           <li className="pager__item pager__item--ellipsis" role="presentation">
-            &hellip;
+            <Tx>{"&hellip;"}</Tx>
           </li>
         )}
         {numbers.map((n) =>
           n === current + 1 ? (
             <li key={n} className="pager__item pager__item--active pager__item--number">
-              <span className="visually-hidden">Current page</span> {n}
+              <span className="visually-hidden"><Tx>{"Current page"}</Tx></span> <Tx>{n}</Tx>
             </li>
           ) : (
             <li key={n} className="pager__item pager__item--number">
               <a href={withBasePath(href(n - 1))} className="pager__link" title={`Go to page ${n}`}>
-                <span className="visually-hidden">Page</span> {n}
+                <span className="visually-hidden"><Tx>{"Page"}</Tx></span> <Tx>{n}</Tx>
               </a>
             </li>
           ),
         )}
         {last < pages && (
           <li className="pager__item pager__item--ellipsis" role="presentation">
-            &hellip;
+            <Tx>{"&hellip;"}</Tx>
           </li>
         )}
         {current < pages - 1 && control("next", current + 1, "Go to next page", "Next page", PREV, "11", "next")}

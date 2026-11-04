@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { modalEmbedUrl, type VideoCard } from "./data";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const FADE_MS = 300; // Bootstrap .modal.fade dialog transition
 
@@ -98,7 +99,7 @@ export function TvVideoGrid({ cards }: { cards: VideoCard[] }) {
               {/* eslint-disable-next-line @next/next/no-img-element -- natural-ratio thumbnail (250px cover-crop below 768px), as the source */}
               <img {...(card.thumbImg ?? { src: withBasePath(card.thumb) })} alt="" width={600} height={400} loading="lazy" />
             </button>
-            <h3>{card.title}</h3>
+            <h3><Tx>{card.title}</Tx></h3>
           </div>
         </div>
       ))}

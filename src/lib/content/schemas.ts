@@ -200,8 +200,18 @@ export type BlogPost = z.infer<typeof blogPost>;
 
 /** Markdown sections and SEO overrides added to an existing page (key = page slug, "home" = /). */
 export const pageContent = z.object({
+  /** Edits to the page's own text, keyed by the original (edited in the page's Texts tab). */
+  texts: z
+    .array(z.object({ original: z.string().min(1).max(20_000), text: z.string().max(20_000) }))
+    .max(3000)
+    .default([])
+    .meta({ title: "Text edits", hidden: true }),
   seoTitle: text("SEO title", "Replaces the page's title in search results and browser tabs. Leave empty to keep the original.").optional(),
   seoDescription: longText("SEO description", "Replaces the page's search-result description. Leave empty to keep the original.").optional(),
+  seoKeywords: list(text("Keyword"), "SEO keywords", "Search phrases this page targets (also written to the page's keywords meta tag).").default([]),
+  marketingPoints: list(longText("Point"), "Marketing points", "Selling points for this page (benefits, USPs). Shown on the page when 'Show marketing points' is on.").default([]),
+  marketingHeading: text("Marketing points heading", "Default: Why choose Prayag").optional(),
+  showMarketing: z.boolean().optional().meta({ title: "Show marketing points on the page (above the footer)" }),
   sections: list(
     z
       .object({

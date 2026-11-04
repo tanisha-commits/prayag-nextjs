@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { FieldError, FormMessages, Honeypot, SubmittingIndicator } from "../forms/form-feedback";
 import { useEnquiryForm, webformValidityProps } from "../forms/use-enquiry-form";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 /** Fields rendered in `col-md-12` on the source; the rest are `col-md-6`. */
 const FULL_WIDTH = new Set(["company_name", "address", "message"]);
@@ -124,7 +125,7 @@ export function ContactForm() {
               className={cn("mb-[18px] w-full px-[10px] min-[577px]:px-3", !FULL_WIDTH.has(field.name) && "min-[768px]:w-1/2")}
             >
               <label htmlFor={field.id} className="sr-only">
-                {field.label}
+                <Tx>{field.label}</Tx>
               </label>
               {renderControl(field)}
               <FieldError id={`${field.id}-error`} message={state.errors[field.name]} />

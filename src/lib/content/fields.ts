@@ -11,7 +11,7 @@ export type Field =
   | { kind: "object"; name: string; title: string; description?: string; optional: boolean; fields: Field[] }
   | { kind: "list"; name: string; title: string; description?: string; optional: boolean; item: Field };
 
-type Meta = { title?: string; description?: string; widget?: Widget };
+type Meta = { title?: string; description?: string; widget?: Widget; hidden?: boolean };
 type Def = { type: string; innerType?: z.ZodType; shape?: Record<string, z.ZodType>; element?: z.ZodType; options?: z.ZodType[]; values?: unknown[]; checks?: { _zod: { def: { check: string; format?: string } } }[] };
 
 const def = (s: z.ZodType) => (s as unknown as { _zod: { def: Def } })._zod.def;
@@ -49,7 +49,8 @@ export function describe(schema: z.ZodType, name = ""): Field {
     case "union":
       return { kind: "choice", ...base, options: (d.options ?? []).flatMap((o) => (def(o).values ?? []) as (string | number)[]) };
     case "object":
-      return { kind: "object", ...base, fields: Object.entries(d.shape ?? {}).map(([k, v]) => describe(v, k)) };
+      // Fields marked hidden have their own editor (e.g. page text edits).
+      return { kind: "object", ...base, fields: Object.entries(d.shape ?? {}).filter(([, v]) => !unwrap(v).m.hidden).map(([k, v]) => describe(v, k)) };
     case "array":
       return { kind: "list", ...base, item: describe(d.element!, "") };
     default:

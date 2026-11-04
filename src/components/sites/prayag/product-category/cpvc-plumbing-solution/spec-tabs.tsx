@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export type SpecTab = {
   /** Source id suffix: the button is `#tab-<id>`, the pane `#pane-<id>`. */
@@ -92,7 +93,7 @@ export function SpecTabs({ tabs, fade = false }: { tabs: SpecTab[]; fade?: boole
               onClick={() => select(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
             >
-              {tab.label}
+              <Tx>{tab.label}</Tx>
             </button>
           </li>
         ))}
@@ -107,7 +108,7 @@ export function SpecTabs({ tabs, fade = false }: { tabs: SpecTab[]; fade?: boole
             aria-labelledby={`tab-${tab.id}`}
             tabIndex={0}
           >
-            {tab.content}
+            <Tx>{tab.content}</Tx>
           </div>
         ))}
       </div>

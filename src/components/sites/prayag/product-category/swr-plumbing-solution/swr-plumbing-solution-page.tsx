@@ -15,6 +15,7 @@ import { ReadMoreButton, ReadMoreDialog, ReadMoreModalProvider } from "./read-mo
 import "./swr-plumbing-solution.css";
 import { withBasePath } from "@/lib/base-path";
 import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 const IMG = "/sites/prayag/theme/swr";
 
@@ -104,7 +105,7 @@ export function SwrPlumbingSolutionPage() {
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
-                <h1 className="black_title">SWR</h1>
+                <h1 className="black_title"><Tx>{"SWR"}</Tx></h1>
               </div>
             </div>
           </div>
@@ -116,14 +117,11 @@ export function SwrPlumbingSolutionPage() {
           <div className="row align-items-center">
             <div className="col-12 col-md-6">
               <div className="prayag-content-box">
-                <h2>Unmatched Strength</h2>
-                <p className="prayag-subtitle">For Seamless Water Flow </p>
+                <h2><Tx>{"Unmatched Strength"}</Tx></h2>
+                <p className="prayag-subtitle"><Tx>{"For Seamless Water Flow "}</Tx></p>
                 {/* Source copy (it describes UPVC Column Pipes on the SWR page). */}
                 <p>
-                  At Prayag, we bring you a range of UPVC Column Pipes engineered for high durability, excellent
-                  load-bearing capacity, and long service life. Designed to handle extreme conditions, these pipes
-                  ensure hassle-free borewell and submersible pump installations with zero corrosion and high tensile
-                  strength.
+                  <Tx>{"At Prayag, we bring you a range of UPVC Column Pipes engineered for high durability, excellent load-bearing capacity, and long service life. Designed to handle extreme conditions, these pipes ensure hassle-free borewell and submersible pump installations with zero corrosion and high tensile strength."}</Tx>
                 </p>
               </div>
             </div>
@@ -138,7 +136,7 @@ export function SwrPlumbingSolutionPage() {
       <NgpSection
         heading={
           <>
-            Why Choose <strong>Prayag SWR</strong> Pipes?
+            <Tx>{"Why Choose "}</Tx><strong><Tx>{"Prayag SWR"}</Tx></strong><Tx>{" Pipes?"}</Tx>
           </>
         }
         label="Why choose Prayag SWR pipes"
@@ -149,8 +147,8 @@ export function SwrPlumbingSolutionPage() {
             <div className="ngp-icon-circle">
               <Icon />
             </div>
-            <span className="ngp-feature-label">{label}</span>
-            <p className="ngp_para">{text}</p>
+            <span className="ngp-feature-label"><Tx>{label}</Tx></span>
+            <p className="ngp_para"><Tx>{text}</Tx></p>
           </div>
         ))}
       </NgpSection>
@@ -190,20 +188,15 @@ export function SwrPlumbingSolutionPage() {
           <div className="row align-items-center">
             <div className="col-12 col-md-6">
               <div className="prayag-content-box">
-                <h2>What are Prayag SWR Pipes?</h2>
+                <h2><Tx>{"What are Prayag SWR Pipes?"}</Tx></h2>
                 <p>
-                  SWR stands for Soil, Waste and Rainwater. SWR piping systems are used to carry wastewater, soil
-                  discharge and rainwater through drainage networks.
+                  <Tx>{"SWR stands for Soil, Waste and Rainwater. SWR piping systems are used to carry wastewater, soil discharge and rainwater through drainage networks."}</Tx>
                 </p>
                 <p>
-                  Prayag SWR Pipes provide a coordinated piping and fitting solution for building drainage
-                  requirements. The range is available in Type A and Type B configurations, with pipe sizes ranging
-                  from 75 mm to 160 mm.
+                  <Tx>{"Prayag SWR Pipes provide a coordinated piping and fitting solution for building drainage requirements. The range is available in Type A and Type B configurations, with pipe sizes ranging from 75 mm to 160 mm."}</Tx>
                 </p>
                 <p>
-                  The system is complemented by a wide selection of fittings, including couplers, bends, tees, Y
-                  fittings, traps, floor traps, cleaning pipes, vent cowls, back-flow valves and socket plugs, helping
-                  address different requirements within a drainage installation.
+                  <Tx>{"The system is complemented by a wide selection of fittings, including couplers, bends, tees, Y fittings, traps, floor traps, cleaning pipes, vent cowls, back-flow valves and socket plugs, helping address different requirements within a drainage installation."}</Tx>
                 </p>
               </div>
             </div>
@@ -218,11 +211,10 @@ export function SwrPlumbingSolutionPage() {
       {/* Inline padding as on the source. */}
       <section className="ka-applications" style={{ padding: "80px 0 80px" }}>
         <div className="container-fluid">
-          <p className="ka-eyebrow">Where our pipes work</p>
-          <h2 className="ka-title">Application</h2>
+          <p className="ka-eyebrow"><Tx>{"Where our pipes work"}</Tx></p>
+          <h2 className="ka-title"><Tx>{"Application"}</Tx></h2>
           <p className="ka-intro">
-            Prayag SWR Pipes are built for organised soil, waste and rainwater drainage across these key
-            applications.
+            <Tx>{"Prayag SWR Pipes are built for organised soil, waste and rainwater drainage across these key applications."}</Tx>
           </p>
           <div className="ka-grid ka-grid--single-row">
             <KaCards items={applications} />
@@ -242,15 +234,11 @@ export function SwrPlumbingSolutionPage() {
               </div>
               <div className="col-lg-6 col-md-12 p-0">
                 <div className="prayag_work_content">
-                  <h2 id="swr-advantage-details">Advantage</h2>
+                  <h2 id="swr-advantage-details"><Tx>{"Advantage"}</Tx></h2>
                   <p>
-                    Prayag SWR Pipes deliver extensive fitting compatibility, with a product range that includes
-                    couplers, tees, bends, Y fittings, repair couplers and specialised drainage fittings. The range also
-                    includes cleaning pipes, fittings with doors, traps and other components designed for different
-                    drainage system requirements, alongside the SWR Pipe Self Fit range covering Type A and Type B
-                    pipes and corresponding fittings — all carrying a Lead Free marking.
+                    <Tx>{"Prayag SWR Pipes deliver extensive fitting compatibility, with a product range that includes couplers, tees, bends, Y fittings, repair couplers and specialised drainage fittings. The range also includes cleaning pipes, fittings with doors, traps and other components designed for different drainage system requirements, alongside the SWR Pipe Self Fit range covering Type A and Type B pipes and corresponding fittings — all carrying a Lead Free marking."}</Tx>
                   </p>
-                  <ReadMoreButton>Read More</ReadMoreButton>
+                  <ReadMoreButton><Tx>{"Read More"}</Tx></ReadMoreButton>
                 </div>
               </div>
             </div>
@@ -258,19 +246,16 @@ export function SwrPlumbingSolutionPage() {
         </section>
         <ReadMoreDialog title="The Prayag Advantage">
           <p>
-            <strong>Extensive Fitting Compatibility:</strong> The product range includes couplers, tees, bends, Y
-            fittings, repair couplers and specialised drainage fittings.
+            <strong><Tx>{"Extensive Fitting Compatibility:"}</Tx></strong><Tx>{" The product range includes couplers, tees, bends, Y fittings, repair couplers and specialised drainage fittings."}</Tx>
           </p>
           <p>
-            <strong>Drainage Access &amp; Maintenance Components:</strong> The range includes cleaning pipes, fittings
-            with doors, traps and other components designed for different drainage system requirements.
+            <strong><Tx>{"Drainage Access & Maintenance Components:"}</Tx></strong><Tx>{" The range includes cleaning pipes, fittings with doors, traps and other components designed for different drainage system requirements."}</Tx>
           </p>
           <p>
-            <strong>Self-Fit Series Available:</strong> The range also offers the SWR Pipe Self Fit range, including
-            Type A and Type B pipes and corresponding fittings.
+            <strong><Tx>{"Self-Fit Series Available:"}</Tx></strong><Tx>{" The range also offers the SWR Pipe Self Fit range, including Type A and Type B pipes and corresponding fittings."}</Tx>
           </p>
           <p>
-            <strong>Lead-Free Marking:</strong> The catalogue carries a Lead Free marking for the product range.
+            <strong><Tx>{"Lead-Free Marking:"}</Tx></strong><Tx>{" The catalogue carries a Lead Free marking for the product range."}</Tx>
           </p>
         </ReadMoreDialog>
       </ReadMoreModalProvider>
@@ -279,7 +264,7 @@ export function SwrPlumbingSolutionPage() {
         <div className="container-fluid">
           {/* Inline style as on the source. */}
           <div className="prayag-specs__header" style={{ flexDirection: "column" }}>
-            <h2>Specification</h2>
+            <h2><Tx>{"Specification"}</Tx></h2>
           </div>
           {/* A single always-visible pane; the source's role="tabpanel" / aria-labelledby point at a
               tab that does not exist, so they are left out. */}
@@ -294,10 +279,9 @@ export function SwrPlumbingSolutionPage() {
       <section className="prayag-fitting-specs" aria-labelledby="swr-fitting-ecosystem-heading">
         <div className="container-fluid">
           <header className="prayag-fitting-specs__header">
-            <h2 id="swr-fitting-ecosystem-heading">SWR Fittings for Every Connection</h2>
+            <h2 id="swr-fitting-ecosystem-heading"><Tx>{"SWR Fittings for Every Connection"}</Tx></h2>
             <p>
-              Browse the full SWR Pipe fitting range and the SELFIT Series fittings, with available sizes from the
-              reference table.
+              <Tx>{"Browse the full SWR Pipe fitting range and the SELFIT Series fittings, with available sizes from the reference table."}</Tx>
             </p>
           </header>
           <PcatTabs

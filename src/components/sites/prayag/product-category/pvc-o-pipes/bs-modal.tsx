@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import "./bs-modal.css";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const OPEN_EVENT = "pcat:modal-open";
 const TRANSITION_MS = 300; // .modal.fade .modal-dialog transform transition
@@ -122,14 +123,14 @@ export function BsModal({
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id={labelId}>
-                {title}
+                <Tx>{title}</Tx>
               </h5>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={hide} />
             </div>
             <div className="modal-body">{children}</div>
             <div className="modal-footer">
               <button type="button" className="btn prayag-modal-close-btn" data-bs-dismiss="modal" onClick={hide}>
-                Close
+                <Tx>{"Close"}</Tx>
               </button>
             </div>
           </div>

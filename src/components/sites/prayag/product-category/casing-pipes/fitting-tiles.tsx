@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export interface Fitting {
   line: string;
@@ -25,14 +26,10 @@ export function FittingTiles({ fittings }: { fittings: Fitting[] }) {
       <section className="pt-fittings" id="advantge">
         <div className="container-fluid">
           <div className="pt-inner">
-            <p className="pt-eyebrow">ADVANTAGE</p>
-            <h2 className="pt-title">How Prayag Casing Pipes Work</h2>
+            <p className="pt-eyebrow"><Tx>{"ADVANTAGE"}</Tx></p>
+            <h2 className="pt-title"><Tx>{"How Prayag Casing Pipes Work"}</Tx></h2>
             <p className="pt-lede">
-              Prayag Casing Pipes are installed along the borewell wall to create a strong and stable lining that
-              prevents the surrounding soil from collapsing into the borehole. The casing protects the borewell from
-              sand, silt, and external contaminants while providing a secure passage for the installation of column
-              pipes and pumping systems. In water-bearing zones, well screen pipes with precision slots allow
-              groundwater to enter while filtering out unwanted particles, ensuring a clean and efficient water supply.
+              <Tx>{"Prayag Casing Pipes are installed along the borewell wall to create a strong and stable lining that prevents the surrounding soil from collapsing into the borehole. The casing protects the borewell from sand, silt, and external contaminants while providing a secure passage for the installation of column pipes and pumping systems. In water-bearing zones, well screen pipes with precision slots allow groundwater to enter while filtering out unwanted particles, ensuring a clean and efficient water supply."}</Tx>
             </p>
 
             <div className="pt-tile-grid">
@@ -51,14 +48,14 @@ export function FittingTiles({ fittings }: { fittings: Fitting[] }) {
                   onClick={() => dialogs.current.get(f.line)?.showModal()}
                 >
                   <span className="pt-tile-mark" aria-hidden="true">
-                    {f.mark}
+                    <Tx>{f.mark}</Tx>
                   </span>
                   <div>
-                    <p className="pt-tile-name">{f.name}</p>
-                    <p className="pt-tile-sub">{f.sub}</p>
+                    <p className="pt-tile-name"><Tx>{f.name}</Tx></p>
+                    <p className="pt-tile-sub"><Tx>{f.sub}</Tx></p>
                   </div>
                   <span className="pt-tile-hint">
-                    View details
+                    <Tx>{"View details"}</Tx>
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -94,8 +91,8 @@ export function FittingTiles({ fittings }: { fittings: Fitting[] }) {
         >
           <div className="pt-dialog-head">
             <div>
-              <h3 id={`pt-dlg-${f.line}-title`}>{f.name}</h3>
-              <p>{f.sub}</p>
+              <h3 id={`pt-dlg-${f.line}-title`}><Tx>{f.name}</Tx></h3>
+              <p><Tx>{f.sub}</Tx></p>
             </div>
             <button
               type="button"
@@ -118,10 +115,10 @@ export function FittingTiles({ fittings }: { fittings: Fitting[] }) {
             </button>
           </div>
           <div className="pt-dialog-body">
-            <p>{f.intro}</p>
+            <p><Tx>{f.intro}</Tx></p>
             <ul className="pt-dialog-list">
               {f.points.map((point) => (
-                <li key={point}>{point}</li>
+                <li key={point}><Tx>{point}</Tx></li>
               ))}
             </ul>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import type { MouseEvent, ReactNode } from "react";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 /**
  * Source `.pt-tile` button: `showModal()`s the `<dialog>` named by its data-target. Focus returns
@@ -48,8 +49,8 @@ export function PtDialog({
     >
       <div className="pt-dialog-head">
         <div>
-          <h3 id={labelId}>{title}</h3>
-          <p>{subtitle}</p>
+          <h3 id={labelId}><Tx>{title}</Tx></h3>
+          <p><Tx>{subtitle}</Tx></p>
         </div>
         <button
           type="button"

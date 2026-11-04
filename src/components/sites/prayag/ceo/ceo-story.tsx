@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 /**
  * Biography list. The source script folds everything after the first `visible` items and
@@ -24,7 +25,7 @@ export function CeoStory({ items, visible, title }: { items: string[]; visible: 
     <ul>
       {items.map((text, i) => (
         <li key={i} className={fold && i >= visible ? "is-folded" : undefined}>
-          {text}
+          <Tx>{text}</Tx>
         </li>
       ))}
     </ul>
@@ -36,7 +37,7 @@ export function CeoStory({ items, visible, title }: { items: string[]; visible: 
         {list(foldable)}
         {foldable && (
           <button ref={btnRef} type="button" className="ceo-more" aria-haspopup="dialog" onClick={open}>
-            Read the full profile
+            <Tx>{"Read the full profile"}</Tx>
           </button>
         )}
       </div>
@@ -55,7 +56,7 @@ export function CeoStory({ items, visible, title }: { items: string[]; visible: 
         >
           <div className="ceo-modal__head">
             <h2 className="ceo-modal__title" id="ceo-modal-title">
-              {title}
+              <Tx>{title}</Tx>
             </h2>
             <button
               type="button"

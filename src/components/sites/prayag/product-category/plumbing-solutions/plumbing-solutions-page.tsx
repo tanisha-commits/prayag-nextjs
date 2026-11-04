@@ -3,6 +3,7 @@ import { PcatPage } from "../pcat-page";
 import "./plumbing-solutions.css";
 
 import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 const BANNER = "/sites/prayag/files/styles";
 
@@ -76,7 +77,7 @@ export function PlumbingSolutionsPage() {
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
-                <h1 className="black_title">Plumbing Solutions</h1>
+                <h1 className="black_title"><Tx>{"Plumbing Solutions"}</Tx></h1>
               </div>
             </div>
           </div>
@@ -96,7 +97,7 @@ export function PlumbingSolutionsPage() {
                             {/* eslint-disable-next-line @next/next/no-img-element -- source intrinsic sizing kept 1:1 */}
                             <img {...fullImg(item.image)} alt={item.alt} />
                           </div>
-                          <h6>{item.label}</h6>
+                          <h6><Tx>{item.label}</Tx></h6>
                         </div>
                       </Link>
                     </div>

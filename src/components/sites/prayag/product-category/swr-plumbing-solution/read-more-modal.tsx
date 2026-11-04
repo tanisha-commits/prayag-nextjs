@@ -12,6 +12,7 @@ import {
 } from "react";
 import { cn } from "@/lib/utils";
 import "./read-more-modal.css";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 // Bootstrap's .modal.fade timing: dialog slides for 300ms (backdrop fades in 150ms).
 const TRANSITION_MS = 300;
@@ -116,14 +117,14 @@ export function ReadMoreDialog({ title, children }: { title: string; children: R
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="prayagReadMoreModalLabel">
-              {title}
+              <Tx>{title}</Tx>
             </h5>
             <button type="button" className="btn-close" aria-label="Close" onClick={close} />
           </div>
           <div className="modal-body">{children}</div>
           <div className="modal-footer">
             <button type="button" className="btn prayag-modal-close-btn" onClick={close}>
-              Close
+              <Tx>{"Close"}</Tx>
             </button>
           </div>
         </div>

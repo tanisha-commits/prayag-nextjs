@@ -14,6 +14,7 @@ import { applications, faqs, features, fittingPanes, flowCards, specPanes } from
 import "./composite-pipes.css";
 import { withBasePath } from "@/lib/base-path";
 import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 const IMG = "/sites/prayag/theme/composite_pipes";
 
@@ -54,7 +55,7 @@ export function CompositePipesPage() {
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
-                <h1 className="black_title">Composite Pipes</h1>
+                <h1 className="black_title"><Tx>{"Composite Pipes"}</Tx></h1>
               </div>
             </div>
           </div>
@@ -66,12 +67,10 @@ export function CompositePipesPage() {
           <div className="row align-items-center">
             <div className="col-12 col-md-6">
               <div className="prayag-content-box">
-                <h2>Unmatched Strength</h2>
-                <p className="prayag-subtitle">For Seamless Water Flow</p>
+                <h2><Tx>{"Unmatched Strength"}</Tx></h2>
+                <p className="prayag-subtitle"><Tx>{"For Seamless Water Flow"}</Tx></p>
                 <p>
-                  At Prayag, we bring you a range of Composite Pipes engineered for high durability, excellent Thermal
-                  compatibility, and long service life. Designed to handle extreme conditions, these pipes ensure
-                  hassle-free installations with zero corrosion and high tensile strength.
+                  <Tx>{"At Prayag, we bring you a range of Composite Pipes engineered for high durability, excellent Thermal compatibility, and long service life. Designed to handle extreme conditions, these pipes ensure hassle-free installations with zero corrosion and high tensile strength."}</Tx>
                 </p>
               </div>
             </div>
@@ -86,7 +85,7 @@ export function CompositePipesPage() {
       <NgpSection
         heading={
           <>
-            Why Choose <strong>Prayag Composite</strong> Pipes?
+            <Tx>{"Why Choose "}</Tx><strong><Tx>{"Prayag Composite"}</Tx></strong><Tx>{" Pipes?"}</Tx>
           </>
         }
         label="Why choose Prayag Composite pipes"
@@ -119,19 +118,14 @@ export function CompositePipesPage() {
 
       <section className="cp-strength">
         <div className="container-fluid">
-          <p className="cp-eyebrow">Composite pipe range</p>
-          <h2 className="cp-title">What are Composite Pipes</h2>
+          <p className="cp-eyebrow"><Tx>{"Composite pipe range"}</Tx></p>
+          <h2 className="cp-title"><Tx>{"What are Composite Pipes"}</Tx></h2>
           <div className="cp-intro">
             <p>
-              A composite pipe is a next-generation pressure solution utilizing a PE-AL-PE
-              (Polyethylene-Aluminum-Polyethylene) multi-layer structure manufactured in strict compliance with IS
-              15450:2022.
+              <Tx>{"A composite pipe is a next-generation pressure solution utilizing a PE-AL-PE (Polyethylene-Aluminum-Polyethylene) multi-layer structure manufactured in strict compliance with IS 15450:2022."}</Tx>
             </p>
             <p>
-              This five-layer architecture integrates a form-stable aluminum core overlap-welded between layers of
-              high-performance polyethylene. This evolution solves the dual problem of plastic&apos;s thermal
-              instability and metal&apos;s corrosive degradation. We have created color-coded safety standards to
-              identify fluid mediums immediately for risk mitigation.
+              <Tx>{"This five-layer architecture integrates a form-stable aluminum core overlap-welded between layers of high-performance polyethylene. This evolution solves the dual problem of plastic's thermal instability and metal's corrosive degradation. We have created color-coded safety standards to identify fluid mediums immediately for risk mitigation."}</Tx>
             </p>
           </div>
           <div className="cp-grid">
@@ -144,13 +138,13 @@ export function CompositePipesPage() {
                 <div className="cp-card-content">
                   <span className="cp-flow-tag">
                     <span className="cp-dot" />
-                    {card.colour}
+                    <Tx>{card.colour}</Tx>
                   </span>
-                  <h3>{card.title}</h3>
+                  <h3><Tx>{card.title}</Tx></h3>
                   <div className="cp-depth">
                     <span />
                   </div>
-                  <p>{card.text}</p>
+                  <p><Tx>{card.text}</Tx></p>
                 </div>
               </div>
             ))}
@@ -160,11 +154,10 @@ export function CompositePipesPage() {
 
       <section className="ka-applications pt-0">
         <div className="container-fluid">
-          <p className="ka-eyebrow">Where our pipes work</p>
-          <h2 className="ka-title">Key Application Areas</h2>
+          <p className="ka-eyebrow"><Tx>{"Where our pipes work"}</Tx></p>
+          <h2 className="ka-title"><Tx>{"Key Application Areas"}</Tx></h2>
           <p className="ka-intro">
-            From residential plumbing to critical medical gas lines, our pipe range is engineered for the specific
-            demands of each application.
+            <Tx>{"From residential plumbing to critical medical gas lines, our pipe range is engineered for the specific demands of each application."}</Tx>
           </p>
           <div className="ka-grid">
             <KaCards items={applications} />
@@ -187,28 +180,23 @@ export function CompositePipesPage() {
             </div>
             <div className="col-lg-6 col-md-12 p-0">
               <div className="prayag_work_content">
-                <h2>Advantage</h2>
-                <p>The Engineering Advantage</p>
+                <h2><Tx>{"Advantage"}</Tx></h2>
+                <p><Tx>{"The Engineering Advantage"}</Tx></p>
                 <ul className="advantages_list">
                   <li>
-                    <strong>Thermal Stability:</strong> The aluminum core ensures an extremely low expansion rate,
-                    preventing the &quot;sagging&quot; common in standard polymers.
+                    <strong><Tx>{"Thermal Stability:"}</Tx></strong><Tx>{" The aluminum core ensures an extremely low expansion rate, preventing the \"sagging\" common in standard polymers."}</Tx>
                   </li>
                   <li>
-                    <strong>Hydraulic Efficiency:</strong> A smooth interior facilitates 30% more flow than traditional
-                    alternatives, reducing pumping energy costs.
+                    <strong><Tx>{"Hydraulic Efficiency:"}</Tx></strong><Tx>{" A smooth interior facilitates 30% more flow than traditional alternatives, reducing pumping energy costs."}</Tx>
                   </li>
                   <li>
-                    <strong>Form-Stability:</strong> The pipes can be hand-bent and retain their shape without
-                    &quot;spring-back,&quot; drastically reducing the need for joint fittings.
+                    <strong><Tx>{"Form-Stability:"}</Tx></strong><Tx>{" The pipes can be hand-bent and retain their shape without \"spring-back,\" drastically reducing the need for joint fittings."}</Tx>
                   </li>
                   <li>
-                    <strong>Risk Mitigation:</strong> Available in coils up to 300m, eliminating up to 80% of potential
-                    leak points compared to rigid 6-meter pipes.
+                    <strong><Tx>{"Risk Mitigation:"}</Tx></strong><Tx>{" Available in coils up to 300m, eliminating up to 80% of potential leak points compared to rigid 6-meter pipes."}</Tx>
                   </li>
                   <li>
-                    <strong>Lightweight:</strong> Up to 70% lighter than metal, making transportation and installation
-                    significantly easier.
+                    <strong><Tx>{"Lightweight:"}</Tx></strong><Tx>{" Up to 70% lighter than metal, making transportation and installation significantly easier."}</Tx>
                   </li>
                 </ul>
               </div>
@@ -221,7 +209,7 @@ export function CompositePipesPage() {
         <div className="container-fluid">
           {/* Inline style as on the source. */}
           <div className="prayag-specs__header" style={{ flexDirection: "column" }}>
-            <h2>Specification</h2>
+            <h2><Tx>{"Specification"}</Tx></h2>
           </div>
           <PcatTabs
             listId="prayagSpecsTabs"
@@ -243,11 +231,9 @@ export function CompositePipesPage() {
       <section className="prayag-fitting-specs" aria-labelledby="fitting-ecosystem-heading">
         <div className="container-fluid">
           <header className="prayag-fitting-specs__header">
-            <h2 id="fitting-ecosystem-heading">Fittings Ecosystem</h2>
+            <h2 id="fitting-ecosystem-heading"><Tx>{"Fittings Ecosystem"}</Tx></h2>
             <p>
-              Prayag&apos;s fitting ecosystem is designed to address the weakest link in any fluid network through
-              high-precision mechanical jointing and strategic risk mitigation. The system is categorized into two
-              material types and supported by a specialized toolset to ensure permanent, leak-proof connections.
+              <Tx>{"Prayag's fitting ecosystem is designed to address the weakest link in any fluid network through high-precision mechanical jointing and strategic risk mitigation. The system is categorized into two material types and supported by a specialized toolset to ensure permanent, leak-proof connections."}</Tx>
             </p>
           </header>
           <PcatTabs
@@ -276,16 +262,13 @@ export function CompositePipesPage() {
               <div className="cta-line" />
               <div className="row relative z-1">
                 <div className="col-lg-12 col-md-12 position-relative">
-                  <h2 className="cta-title">Need Help Choosing the Right Composite Pipe?</h2>
+                  <h2 className="cta-title"><Tx>{"Need Help Choosing the Right Composite Pipe?"}</Tx></h2>
                   <p className="cta-desc">
-                    The modern built environment demands a fundamental shift in infrastructure reliability. For
-                    decades, specifying engineers were forced into a compromise: the structural rigidity of metallic
-                    pipes plagued by corrosion, or the chemical inertness of polymers hampered by high thermal
-                    expansion
+                    <Tx>{"The modern built environment demands a fundamental shift in infrastructure reliability. For decades, specifying engineers were forced into a compromise: the structural rigidity of metallic pipes plagued by corrosion, or the chemical inertness of polymers hampered by high thermal expansion"}</Tx>
                   </p>
                   {/* Local copy of the source booklet; target="blank" (a named window) as on the source. */}
                   <a href={withBasePath("/sites/prayag/theme/Composite-Pipes-Booklet---Edition-1.pdf")} className="cta-link" target="blank">
-                    Download Booklet
+                    <Tx>{"Download Booklet"}</Tx>
                   </a>
                 </div>
               </div>

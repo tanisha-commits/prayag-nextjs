@@ -11,6 +11,7 @@ export type PressGalleryItem = PressItem & { card: ResponsiveImgProps; thumb: Re
 import { PressLightbox } from "./press-lightbox";
 import "./press.css";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const HASH = /^#gallery0-(\d+)$/; // Fancybox's Hash plugin format on the source: #gallery0-<1-based index>
 
@@ -69,15 +70,15 @@ export function PressGallery({ items }: { items: PressGalleryItem[] }) {
                     {/* eslint-disable-next-line @next/next/no-img-element -- source sizing (fixed 199/180px cover crop) on 96 CMS scans */}
                     <img {...item.card} alt={item.title} loading={i < 8 ? "eager" : "lazy"} decoding="async" />
                   </a>
-                  {item.title ? <h3 className="press_title">{item.title}</h3> : <div className="press_title" />}
-                  <p className="press_details">{item.details}</p>
+                  {item.title ? <h3 className="press_title"><Tx>{item.title}</Tx></h3> : <div className="press_title" />}
+                  <p className="press_details"><Tx>{item.details}</Tx></p>
                   {item.href ? (
                     <a href={withBasePath(item.href)} target="_blank" rel="noopener noreferrer" className="press-more">
-                      Know More<span className="sr-only">: {label} (opens in a new tab)</span>
+                      <Tx>{"Know More"}</Tx><span className="sr-only">: <Tx>{label}</Tx><Tx>{" (opens in a new tab)"}</Tx></span>
                     </a>
                   ) : (
                     <a href={withBasePath(item.image)} onClick={opener(i)} className="press-more">
-                      Know More<span className="sr-only">: view image of {label}</span>
+                      <Tx>{"Know More"}</Tx><span className="sr-only"><Tx>{": view image of "}</Tx><Tx>{label}</Tx></span>
                     </a>
                   )}
                 </div>

@@ -10,6 +10,7 @@ import { applications, benefits, faqs, features, fittingSpecs, pipeSpecs, type S
 import "./ugd-pipes-fittings.css";
 
 import { fullImg } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 // This page has no inline slider script, so the theme's `ngpFeatureSlider` Drupal behaviour
 // (script.js) initialises `.ngp-features-slider` with these settings.
@@ -39,7 +40,7 @@ function SpecTableView({ table }: { table: SpecTable }) {
         <thead>
           <tr>
             {table.head.map((label) => (
-              <th key={label}>{label}</th>
+              <th key={label}><Tx>{label}</Tx></th>
             ))}
           </tr>
         </thead>
@@ -54,7 +55,7 @@ function SpecTableView({ table }: { table: SpecTable }) {
                     lines.map((line, l) => (
                       <Fragment key={l}>
                         {l > 0 && <br />}
-                        {line}
+                        <Tx>{line}</Tx>
                       </Fragment>
                     ))
                   )}
@@ -88,13 +89,10 @@ export function UgdPage() {
           <div className="row align-items-center">
             <div className="col-12 col-md-7">
               <div className="prayag-content-box">
-                <h2 className="prayag-heading">THE FOUNDATION OF MODERN HYGIENE.</h2>
-                <p className="prayag-subtitle">Superior UPVC Underground Drainage &amp; Sewerage Systems.</p>
+                <h2 className="prayag-heading"><Tx>{"THE FOUNDATION OF MODERN HYGIENE."}</Tx></h2>
+                <p className="prayag-subtitle"><Tx>{"Superior UPVC Underground Drainage & Sewerage Systems."}</Tx></p>
                 <p className="prayag-desc">
-                  Prayag India’s Underground Drainage (UGD) system is meticulously designed to provide a high-performance,
-                  maintenance-free solution for the disposal of sewage and surface water. Unlike traditional cement or
-                  cast-iron pipes that are prone to cracking and corrosion, Prayag uPVC UGD pipes are built to withstand
-                  the test of time and underground pressure.
+                  <Tx>{"Prayag India’s Underground Drainage (UGD) system is meticulously designed to provide a high-performance, maintenance-free solution for the disposal of sewage and surface water. Unlike traditional cement or cast-iron pipes that are prone to cracking and corrosion, Prayag uPVC UGD pipes are built to withstand the test of time and underground pressure."}</Tx>
                 </p>
               </div>
             </div>
@@ -114,7 +112,7 @@ export function UgdPage() {
       <section className="ngp-section" style={{ background: "#1a1a1a", padding: "60px 0" }}>
         <div className="container-fluid">
           <h2 className="text-center" style={{ color: "#fff" }}>
-            Why Choose <strong>Prayag UGD</strong> Pipes?
+            <Tx>{"Why Choose "}</Tx><strong><Tx>{"Prayag UGD"}</Tx></strong><Tx>{" Pipes?"}</Tx>
           </h2>
           <SlickCarousel settings={featureSlider} className="ngp-features-slider" aria-label="Why choose Prayag UGD pipes">
             {features.map((feature) => (
@@ -124,8 +122,8 @@ export function UgdPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element -- 1:1 port keeps the source <img> */}
                   <img {...fullImg(feature.icon)} alt={feature.iconAlt} />
                 </div>
-                <h3 className="ngp-feature-label">{feature.title}</h3>
-                <p className="ngp_para">{feature.text}</p>
+                <h3 className="ngp-feature-label"><Tx>{feature.title}</Tx></h3>
+                <p className="ngp_para"><Tx>{feature.text}</Tx></p>
               </div>
             ))}
           </SlickCarousel>
@@ -159,17 +157,13 @@ export function UgdPage() {
           </div>
           <div className="psr-content-col">
             <div className="psr-content">
-              <span className="psr-eyebrow">WHAT IS UGD</span>
-              <h2 className="psr-title"> Prayag UGD Pipes &amp; Fittings</h2>
+              <span className="psr-eyebrow"><Tx>{"WHAT IS UGD"}</Tx></span>
+              <h2 className="psr-title"><Tx>{" Prayag UGD Pipes & Fittings"}</Tx></h2>
               <p className="psr-description">
-                uPVC (unplasticized PVC) is a rigid, chemically inert polymer that doesn&apos;t rust, corrode, or react with
-                acidic or alkaline soil conditions — unlike cement or cast iron. Its smooth interior resists scale buildup,
-                while its non-porous structure blocks seepage and chemical erosion entirely.
+                <Tx>{"uPVC (unplasticized PVC) is a rigid, chemically inert polymer that doesn't rust, corrode, or react with acidic or alkaline soil conditions — unlike cement or cast iron. Its smooth interior resists scale buildup, while its non-porous structure blocks seepage and chemical erosion entirely."}</Tx>
               </p>
               <p className="psr-description">
-                Prayag UGD pipes are built on this material advantage: lead-free, corrosion-proof, and engineered for a
-                25-year service life — ensuring the safe, hygienic transport of wastewater while protecting soil and
-                building foundations from contamination.
+                <Tx>{"Prayag UGD pipes are built on this material advantage: lead-free, corrosion-proof, and engineered for a 25-year service life — ensuring the safe, hygienic transport of wastewater while protecting soil and building foundations from contamination."}</Tx>
               </p>
             </div>
           </div>
@@ -181,13 +175,13 @@ export function UgdPage() {
           <div className="row">
             <div className="col-lg-5 col-md-7 p-0">
               <div className="application_iner_content">
-                <h2>Application</h2>
+                <h2><Tx>{"Application"}</Tx></h2>
                 <ul className="feature-list">
                   {applications.map((item, i) => (
                     <li key={item.label}>
-                      <span className="icon">{applicationIcons[applicationIconOrder[i]]}</span>
+                      <span className="icon"><Tx>{applicationIcons[applicationIconOrder[i]]}</Tx></span>
                       <p>
-                        <strong>{item.label}</strong> {item.text}
+                        <strong><Tx>{item.label}</Tx></strong> <Tx>{item.text}</Tx>
                       </p>
                     </li>
                   ))}
@@ -207,7 +201,7 @@ export function UgdPage() {
       <section className="prayag-specs pt-0">
         <div className="prayag-specs__inner">
           <div className="prayag-specs__header">
-            <h2 className="prayag-specs__title">Specifications</h2>
+            <h2 className="prayag-specs__title"><Tx>{"Specifications"}</Tx></h2>
           </div>
           {/* Bootstrap 5.1 data-bs-toggle tabs on the source, hence the fade transition. */}
           <SpecTabs
@@ -231,12 +225,12 @@ export function UgdPage() {
             </div>
             <div className="col-lg-6 col-md-12">
               <div className="prayag_work_content">
-                <h2>Features &amp; Benefits</h2>
-                <p>A product range that continues to set the bar higher.</p>
+                <h2><Tx>{"Features & Benefits"}</Tx></h2>
+                <p><Tx>{"A product range that continues to set the bar higher."}</Tx></p>
                 <ul>
                   {benefits.map((item) => (
                     <li key={item.label}>
-                      <strong>{item.label}</strong> {item.text}
+                      <strong><Tx>{item.label}</Tx></strong> <Tx>{item.text}</Tx>
                     </li>
                   ))}
                 </ul>

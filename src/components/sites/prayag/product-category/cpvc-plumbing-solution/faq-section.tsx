@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { withBasePath } from "@/lib/base-path";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 /** FAQ answer: plain text runs and inline links (local route or absolute live URL). */
 export type FaqPart = string | { text: string; href: string };
@@ -18,13 +19,13 @@ export function FaqSection({ faqs, split = 8 }: { faqs: Faq[]; split?: number })
         <div className="row">
           <div className="col-md-12">
             <div className="faq_sing_pro">
-              <h2>Faq&apos;s</h2>
+              <h2><Tx>{"Faq's"}</Tx></h2>
               <div className="row">
                 {[faqs.slice(0, split), faqs.slice(split)].map((column, c) => (
                   <div key={c} className="col-md-6 col-6">
                     {column.map((faq) => (
                       <div key={faq.question} className="faq_box">
-                        <h3>{faq.question}</h3>
+                        <h3><Tx>{faq.question}</Tx></h3>
                         <p />
                         <p className="MsoNormal">
                           <span lang="EN-IN">
@@ -33,11 +34,11 @@ export function FaqSection({ faqs, split = 8 }: { faqs: Faq[]; split?: number })
                                 part
                               ) : part.href.startsWith("/") ? (
                                 <Link key={i} href={part.href}>
-                                  {part.text}
+                                  <Tx>{part.text}</Tx>
                                 </Link>
                               ) : (
                                 <a key={i} href={withBasePath(part.href)}>
-                                  {part.text}
+                                  <Tx>{part.text}</Tx>
                                 </a>
                               ),
                             )}

@@ -12,7 +12,8 @@ import { z } from "zod";
 import { LISTS, SINGLETONS, isList, isSingleton, type SingletonId } from "../../src/lib/content/schemas";
 import { MARKDOWN_TEMPLATE, parseMarkdownPage, parseMarkdownPost, parseMarkdownSection } from "../../src/lib/content/markdown";
 import { PAGE_TEMPLATE } from "../../src/lib/content/markdown-template";
-import { SITE_PAGES, sitePage } from "../../src/lib/content/page-registry";
+import { SITE_PAGES, sitePage, type SitePageSlug } from "../../src/lib/content/page-registry";
+import { applyTextEdits, markdownToPage, pageTexts, pageToMarkdown } from "../../src/lib/content/page-texts";
 import { ContentError, contentDb, deleteEntry, readList, readListEntry, readSingleton, saveEntry } from "../../src/lib/content/store";
 
 const ACTOR = process.env.PRAYAG_MCP_ACTOR || "claude-mcp";
@@ -38,6 +39,7 @@ const server = new McpServer(
       "Workflow: list_content → get_content (current value) → change only what was asked → save_content with the FULL value (or patch_content for top-level fields). Every save is validated against the entry's schema (get_schema) and recorded in the audit log; invalid input is rejected with the failing paths.",
       "Single-document entries are addressed by id ('site/contact', 'home/hero', 'pages/faq', …). Blog posts: id 'blog' plus key = URL slug.",
       "Every existing page (About, Plumbing Solutions, CPVC, Inspiration pages, …; see list_pages) keeps its design and can get Markdown sections at the top or bottom plus SEO title/description: id 'page-content', key = page slug ('home' = homepage). add_page_section appends one section from Markdown.",
+      "Page TEXT (the words already on a page) is edited with get_page_texts / set_page_texts, or as one .md with export_page_markdown / import_page_markdown; SEO keywords and marketing points live on the same page entry (patch_content id 'page-content': seoTitle, seoDescription, seoKeywords, marketingPoints, marketingHeading, showMarketing). When asked to write marketing or SEO points, write specific, factual points from the page's own texts and products; no invented claims or figures.",
       "New pages written in Markdown: id 'custom-pages', key = URL slug; import_markdown_page creates one from a .md document (format: get_markdown_template with kind 'page').",
       "Images and links are site paths (e.g. /sites/prayag/files/…, /contact-us) or https:// URLs. HTML fields are sanitized (no scripts/iframes/handlers).",
       "Blog posts can also be created from Markdown (import_markdown_post; format via get_markdown_template). Images must already be site paths or https URLs; uploading images is done in the admin.",
@@ -269,6 +271,93 @@ server.registerTool(
       saveEntry({ id: "custom-pages", key: slug }, page, ACTOR, db);
       return json({ ok: true, slug, url: `/${slug}`, title: page.title, warnings });
     }),
+);
+
+/** A page's editable texts; checks a running local site (PRAYAG_PREVIEW_URL) when available. */
+async function textsOf(slug: SitePageSlug) {
+  const content = readListEntry("page-content", slug, db)?.data;
+  let html: string | undefined;
+  const base = process.env.PRAYAG_PREVIEW_URL?.replace(/\/$/, "");
+  const path = sitePage(slug)!.path;
+  if (base) html = await fetch(base + (path === "/" ? "" : path), { signal: AbortSignal.timeout(10000) }).then((r) => (r.ok ? r.text() : undefined)).catch(() => undefined);
+  return { content, texts: pageTexts(slug, content, html), checked: !!html };
+}
+
+server.registerTool(
+  "get_page_texts",
+  {
+    title: "Get a page's texts",
+    description:
+      "Every editable text of an existing page (the words on the page; the design stays). Each has an id, the original and the current text. Without a running local site (PRAYAG_PREVIEW_URL) the list may include a few strings that are not shown.",
+    inputSchema: { page: z.string().describe("Page slug from list_pages"), search: z.string().optional() },
+    annotations: { readOnlyHint: true },
+  },
+  async ({ page, search }) => {
+    if (!sitePage(page)) return fail(`"${page}" is not one of the site's pages (see list_pages).`);
+    const { texts, checked } = await textsOf(page as SitePageSlug);
+    const q = (search ?? "").toLowerCase();
+    return json({ page, checkedAgainstRenderedPage: checked, texts: texts.filter((t) => !q || t.original.toLowerCase().includes(q) || t.text.toLowerCase().includes(q)) });
+  },
+);
+
+server.registerTool(
+  "set_page_texts",
+  {
+    title: "Change texts on a page",
+    description: "Replace texts on an existing page without changing its design. Identify each text by id (from get_page_texts) or by its exact original. Setting a text back to its original removes the edit.",
+    inputSchema: {
+      page: z.string(),
+      changes: z.array(z.object({ id: z.string().optional(), original: z.string().optional(), text: z.string() })).min(1).max(1000),
+    },
+    annotations: { destructiveHint: false, idempotentHint: true },
+  },
+  async ({ page, changes }) => {
+    if (!sitePage(page)) return fail(`"${page}" is not one of the site's pages (see list_pages).`);
+    const { content, texts } = await textsOf(page as SitePageSlug);
+    const byId = new Map(texts.map((t) => [t.id, t.original]));
+    const resolved: { original: string; text: string }[] = [];
+    const notFound: string[] = [];
+    for (const c of changes) {
+      const original = c.id ? byId.get(c.id) : texts.find((t) => t.original === c.original || t.original.trim() === c.original?.trim())?.original;
+      if (original) resolved.push({ original, text: c.text });
+      else notFound.push(c.id ?? c.original ?? "?");
+    }
+    if (!resolved.length) return fail("None of the texts were found on this page (use get_page_texts).", notFound);
+    return guard(() => {
+      saveEntry({ id: "page-content", key: page }, applyTextEdits(content, resolved), ACTOR, db);
+      return json({ ok: true, page, changed: resolved.length, notFound });
+    });
+  },
+);
+
+server.registerTool(
+  "export_page_markdown",
+  { title: "Page as .md", description: "The page's texts, SEO and marketing points as one editable .md document (same file as the admin's Download .md).", inputSchema: { page: z.string() }, annotations: { readOnlyHint: true } },
+  async ({ page }) => {
+    if (!sitePage(page)) return fail(`"${page}" is not one of the site's pages.`);
+    const { content, texts } = await textsOf(page as SitePageSlug);
+    return { content: [{ type: "text" as const, text: pageToMarkdown(page as SitePageSlug, content, texts) }] };
+  },
+);
+
+server.registerTool(
+  "import_page_markdown",
+  {
+    title: "Apply a page .md",
+    description: "Apply an edited page .md (from export_page_markdown): texts by their <!-- text:id --> markers, and seoTitle/seoDescription/seoKeywords/marketingPoints/marketingHeading/showMarketing from the header.",
+    inputSchema: { page: z.string(), markdown: z.string().max(2_000_000) },
+    annotations: { destructiveHint: false },
+  },
+  async ({ page, markdown }) => {
+    if (!sitePage(page)) return fail(`"${page}" is not one of the site's pages.`);
+    const { content, texts } = await textsOf(page as SitePageSlug);
+    const r = markdownToPage(page as SitePageSlug, markdown, content, texts);
+    if (r.errors.length) return fail("The .md could not be applied.", r.errors);
+    return guard(() => {
+      saveEntry({ id: "page-content", key: page }, r.content, ACTOR, db);
+      return json({ ok: true, page, textChanges: r.changed, skippedBlocks: r.unknown });
+    });
+  },
 );
 
 type ProductRow = { public_id: string; slug: string; title: string; item_code: string | null; status: string; short_description: string | null; description_html: string | null; seo_title: string | null; seo_description: string | null };

@@ -1,4 +1,5 @@
 import { transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 /** Local copies of the Drupal image-style derivatives the source banner <img> references. */
 export type BannerImage = { medium: string; thumbnail: string; large: string; wide: string };
@@ -28,7 +29,7 @@ export function CategoryBanner({ image, alt, title }: { image: BannerImage; alt:
           </div>
           <div className="col-md-6">
             <div className="breadcrumb_title">
-              <h1 className="black_title">{title}</h1>
+              <h1 className="black_title"><Tx>{title}</Tx></h1>
             </div>
           </div>
         </div>

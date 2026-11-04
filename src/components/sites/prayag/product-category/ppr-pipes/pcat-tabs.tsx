@@ -2,6 +2,7 @@
 
 import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export type PcatTab = {
   id: string;
@@ -70,7 +71,7 @@ export function PcatTabs({
               onClick={() => setSelected(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
             >
-              {tab.label}
+              <Tx>{tab.label}</Tx>
             </button>
           </li>
         ))}
@@ -85,7 +86,7 @@ export function PcatTabs({
             aria-labelledby={tab.id}
             tabIndex={0}
           >
-            {tab.content}
+            <Tx>{tab.content}</Tx>
           </div>
         ))}
       </div>

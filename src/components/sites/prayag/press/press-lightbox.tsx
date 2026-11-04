@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { withBasePath } from "@/lib/base-path";
 import type { ResponsiveImgProps } from "@/lib/optimized-image";
+import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export interface LightboxSlide {
   src: string;
@@ -109,8 +110,8 @@ export function PressLightbox({
       <div className="press-lb__toolbar">
         <div className="press-lb__items">
           <div className="press-lb__counter" aria-live="polite" aria-atomic="true">
-            <span className="sr-only">Image </span>
-            {index + 1}&nbsp;/&nbsp;{count}
+            <span className="sr-only"><Tx>{"Image "}</Tx></span>
+            {index + 1}&nbsp;/&nbsp;<Tx>{count}</Tx>
           </div>
         </div>
         <div className="press-lb__items">

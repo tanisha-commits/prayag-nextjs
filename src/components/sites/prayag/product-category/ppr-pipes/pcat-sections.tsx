@@ -4,6 +4,7 @@ import { SlickCarousel, type SlickSettings } from "../slick-carousel";
 import type { FaqItem, Feature, FittingCard, FittingPane, ImageCard, RichText, SpecTableData } from "./types";
 import { withBasePath } from "@/lib/base-path";
 import { fullImg } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 // Section markup shared by the PPR, SWR and Composite pipe pages. Class names, nesting and the
 // source's inline styles are kept 1:1 because the ported page CSS targets them.
@@ -32,11 +33,11 @@ export function RichTextView({ text }: { text: RichText }) {
       part
     ) : part.href.startsWith("/") ? (
       <Link key={i} href={part.href}>
-        {part.text}
+        <Tx>{part.text}</Tx>
       </Link>
     ) : (
       <a key={i} href={withBasePath(part.href)}>
-        {part.text}
+        <Tx>{part.text}</Tx>
       </a>
     ),
   );
@@ -60,7 +61,7 @@ export function NgpSection({
     <section className="ngp-section" style={{ background: "#1a1a1a", padding: "60px 0" }}>
       <div className="container-fluid">
         <h2 className="text-center" style={{ color: "#fff" }}>
-          {heading}
+          <Tx>{heading}</Tx>
         </h2>
         <SlickCarousel settings={settings} className="ngp-features-slider" style={{ color: "#fff" }} aria-label={label}>
           {children}
@@ -79,12 +80,12 @@ function fittingCard(card: FittingCard, width: number, height: number, key?: num
         <img {...fullImg(card.src)} alt={card.alt} loading="lazy" width={width} height={height} className="cfs-card__img" />
       </figure>
       <div className="cfs-card__body">
-        <h3 className="cfs-card__title">{card.title}</h3>
+        <h3 className="cfs-card__title"><Tx>{card.title}</Tx></h3>
         <ul className="cfs-card__meta">
           {card.meta.map((row) => (
             <li key={row.label}>
-              <strong>{row.label}</strong>
-              {row.value}
+              <strong><Tx>{row.label}</Tx></strong>
+              <Tx>{row.value}</Tx>
             </li>
           ))}
           {card.emptyMetaItem && <li />}
@@ -124,7 +125,7 @@ export function SpecTable({ table }: { table: SpecTableData }) {
         <thead>
           <tr>
             {table.head.map((cell) => (
-              <th key={cell}>{cell}</th>
+              <th key={cell}><Tx>{cell}</Tx></th>
             ))}
           </tr>
         </thead>
@@ -133,7 +134,7 @@ export function SpecTable({ table }: { table: SpecTableData }) {
             <tr key={row[0]}>
               {row.map((cell, i) => (
                 <td key={i} data-label={table.head[i]}>
-                  {cell}
+                  <Tx>{cell}</Tx>
                 </td>
               ))}
             </tr>
@@ -157,13 +158,13 @@ export function FaqSection({ className, items }: { className: string; items: Faq
         <div className="row">
           <div className="col-md-12">
             <div className="faq_sing_pro">
-              <h2>Faq&apos;s</h2>
+              <h2><Tx>{"Faq's"}</Tx></h2>
               <div className="row">
                 {columns.map((column, c) => (
                   <div key={c} className="col-md-6 col-6">
                     {column.map((item) => (
                       <div key={item.question} className="faq_box">
-                        <h3>{item.question}</h3>
+                        <h3><Tx>{item.question}</Tx></h3>
                         <p />
                         <p className="MsoNormal">
                           <span lang="EN-IN">
@@ -193,8 +194,8 @@ export function KaCards({ items }: { items: ImageCard[] }) {
         <img {...fullImg(item.src)} alt={item.alt} />
       </div>
       <div className="ka-card-body">
-        <h3>{item.title}</h3>
-        <p>{item.text}</p>
+        <h3><Tx>{item.title}</Tx></h3>
+        <p><Tx>{item.text}</Tx></p>
       </div>
     </div>
   ));
@@ -211,8 +212,8 @@ export function featureItems(items: Feature[], Label: "h3" | "span") {
         {/* eslint-disable-next-line @next/next/no-img-element -- source icon, intrinsic size kept */}
         <img {...fullImg(item.src)} alt={item.alt} />
       </div>
-      <Label className="ngp-feature-label">{item.label}</Label>
-      <p className="ngp_para">{item.text}</p>
+      <Label className="ngp-feature-label"><Tx>{item.label}</Tx></Label>
+      <p className="ngp_para"><Tx>{item.text}</Tx></p>
     </div>
   ));
 }

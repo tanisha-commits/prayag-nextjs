@@ -32,6 +32,37 @@ admin forms generated from the schemas (`src/lib/content/fields.ts`, `src/compon
 - **Undoing.** "Reset" restores the built-in content of an entry. Removing a blog post hides it,
   imported articles included.
 
+## Every page's own text (design unchanged): admin, .md, Claude
+
+Admin → **Pages** → a page → **Texts** lists every text on that page: headings, paragraphs, bullet
+points and labels, including texts in tabs and pop-ups. The list is checked against the live page.
+There are three ways to change them; all write to the same place.
+
+1. **In the admin.** Edit a text in place and save. "Original" restores a single text.
+2. **As .md.** **Download .md** gives one file per page. Its header holds `seoTitle`,
+   `seoDescription`, `seoKeywords`, `marketingPoints`, `marketingHeading` and `showMarketing`, and
+   every text follows under a `<!-- text:… -->` marker. Edit the file and **Upload .md**. Keep the
+   markers; a text left unchanged keeps the original.
+3. **Claude.** `get_page_texts` / `set_page_texts`, or `export_page_markdown` /
+   `import_page_markdown`. Claude also writes marketing and SEO points with `patch_content`
+   (id `page-content`). With `npm run dev` running, the MCP server checks texts against the page
+   (`PRAYAG_PREVIEW_URL` in `.mcp.json`).
+
+**Marketing points** show as a "Why choose Prayag" block above the footer when "Show marketing
+points" is on. **SEO keywords** go into the page's keywords meta tag. Both are on the
+**SEO, marketing & sections** tab.
+
+How it works: the page components render their text through `<Tx>`
+(`src/components/sites/prayag/cms/tx.tsx` on the server, `tx-client.tsx` in the browser).
+`<Tx>` returns the edited text when one exists, else the original, and adds no markup. Edits are
+stored on the page's `page-content` entry, keyed by the original text, so they also apply to text
+that comes from data lists. `npm run prebuild` regenerates the list of each page's texts
+(`src/lib/content/text-manifest.generated.json`). **New page components:** run
+`node scripts/content/wrap-texts.mjs` to wrap their text (it skips files already done).
+
+If a developer later changes a text in the code, an edit made to the old text no longer applies.
+It stays listed (marked edited), so you can re-apply it or remove it.
+
 ## Every page: Markdown sections, SEO, and new pages
 
 - **Existing pages** (Home, About, CEO profile, Plumbing Solutions, CPVC, HDPE, the product

@@ -1,7 +1,10 @@
 import "server-only";
 import type { Metadata } from "next";
 import { cache } from "react";
+import { MarketingPoints } from "@/components/sites/prayag/cms/marketing-points";
 import { PageSections } from "@/components/sites/prayag/cms/page-sections";
+import { pageTextStore } from "@/components/sites/prayag/cms/tx";
+import { PageTextProvider } from "@/components/sites/prayag/cms/tx-client";
 import type { PageContent } from "./schemas";
 import type { SitePageSlug } from "./page-registry";
 import { readListEntry } from "./store";
@@ -15,11 +18,18 @@ export const getPageContent = cache((slug: SitePageSlug): PageContent | undefine
  */
 export function withPageContent<P extends object>(slug: SitePageSlug, Page: React.ComponentType<P>) {
   function PageWithContent(props: P) {
-    const sections = getPageContent(slug)?.sections ?? [];
+    const content = getPageContent(slug);
+    const sections = content?.sections ?? [];
+    // Text edits: server components read them from the request store, client components from context.
+    const texts = Object.fromEntries((content?.texts ?? []).filter((t) => t.text !== t.original).map((t) => [t.original, t.text]));
+    pageTextStore().map = texts;
     return (
       <>
         <PageSections sections={sections.filter((s) => s.position === "top")} />
-        <Page {...props} />
+        <PageTextProvider texts={texts}>
+          <Page {...props} />
+        </PageTextProvider>
+        {content?.showMarketing && <MarketingPoints heading={content.marketingHeading} points={content.marketingPoints} />}
         <PageSections sections={sections.filter((s) => s.position === "bottom")} />
       </>
     );
@@ -30,12 +40,14 @@ export function withPageContent<P extends object>(slug: SitePageSlug, Page: Reac
 
 function applySeo(slug: SitePageSlug, base: Metadata): Metadata {
   const c = getPageContent(slug);
-  if (!c?.seoTitle && !c?.seoDescription) return base;
+  const keywords = c?.seoKeywords?.length ? { keywords: c.seoKeywords } : {};
+  if (!c?.seoTitle && !c?.seoDescription) return { ...base, ...keywords };
   const title = c.seoTitle ? { absolute: c.seoTitle } : base.title;
   const description = c.seoDescription || base.description;
   const plain = c.seoTitle || (typeof base.title === "string" ? base.title : undefined);
   return {
     ...base,
+    ...keywords,
     title,
     description,
     openGraph: { ...base.openGraph, ...(plain ? { title: plain } : {}), ...(description ? { description } : {}) },

@@ -7,6 +7,7 @@ import { SplitRevealSection } from "../split-reveal";
 import "./casing-pipes.css";
 
 import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 const IMG = "/sites/prayag/theme/casing-pipes";
 const BANNER = "/sites/prayag/files/styles";
@@ -136,10 +137,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "1. What are casing pipes used for?",
       a: (
         <>
-          Casing pipes are used to support and protect borewells and tube wells from surrounding soil pressure and
-          harsh underground conditions. Prayag Casing Pipes are designed for applications such as domestic and urban
-          tube wells, deep borewell systems, <Link href="/agri-pipe">agricultural irrigation</Link>,
-          industrial and mining projects, and wastewater disposal systems.
+          <Tx>{"Casing pipes are used to support and protect borewells and tube wells from surrounding soil pressure and harsh underground conditions. Prayag Casing Pipes are designed for applications such as domestic and urban tube wells, deep borewell systems, "}</Tx><Link href="/agri-pipe"><Tx>{"agricultural irrigation"}</Tx></Link><Tx>{", industrial and mining projects, and wastewater disposal systems."}</Tx>
         </>
       ),
     },
@@ -147,10 +145,8 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "2. What are Prayag Casing Pipes made from?",
       a: (
         <>
-          Prayag Casing Pipes are manufactured using high-quality{" "}
-          <Link href="/upvc-pipes">uPVC compounds</Link>. The material is designed to resist
-          underground pressure, corrosion, chemical exposure, and demanding terrain conditions, making the pipes
-          suitable for long-term borewell installations.
+          <Tx>{"Prayag Casing Pipes are manufactured using high-quality"}</Tx><Tx>{" "}</Tx>
+          <Link href="/upvc-pipes"><Tx>{"uPVC compounds"}</Tx></Link><Tx>{". The material is designed to resist underground pressure, corrosion, chemical exposure, and demanding terrain conditions, making the pipes suitable for long-term borewell installations."}</Tx>
         </>
       ),
     },
@@ -158,10 +154,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "3. Why are uPVC casing pipes suitable for borewells?",
       a: (
         <>
-          <Link href="/upvc-vs-cpvc-vs-ppr-pipes-which-one-best-your-project">uPVC casing pipes</Link> are well suited
-          to borewells because they do not rust and offer strong resistance to corrosion and chemicals commonly found
-          in soil and groundwater. Their durable construction also helps them withstand soil pressure and demanding
-          underground conditions.
+          <Link href="/upvc-vs-cpvc-vs-ppr-pipes-which-one-best-your-project"><Tx>{"uPVC casing pipes"}</Tx></Link><Tx>{" are well suited to borewells because they do not rust and offer strong resistance to corrosion and chemicals commonly found in soil and groundwater. Their durable construction also helps them withstand soil pressure and demanding underground conditions."}</Tx>
         </>
       ),
     },
@@ -169,9 +162,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "4. Can Prayag Casing Pipes be used for deep borewells?",
       a: (
         <>
-          Yes. Prayag Casing Pipes are designed for borewell applications, including deep installations. Their strong
-          construction and <Link href="/upvc-column-pipes">threaded connections</Link> are designed to handle the
-          loads encountered at greater depths.
+          <Tx>{"Yes. Prayag Casing Pipes are designed for borewell applications, including deep installations. Their strong construction and "}</Tx><Link href="/upvc-column-pipes"><Tx>{"threaded connections"}</Tx></Link><Tx>{" are designed to handle the loads encountered at greater depths."}</Tx>
         </>
       ),
     },
@@ -187,9 +178,9 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "7. Are Prayag Casing Pipes resistant to corrosion?",
       a: (
         <>
-          Yes. Prayag uPVC Casing Pipes are{" "}
-          <Link href="/how-select-durable-pipes-fittings-long-term-use">resistant to rust, corrosion, and chemical erosion</Link>
-          . Unlike traditional metal pipes, uPVC does not rust when exposed to groundwater or underground environments.
+          <Tx>{"Yes. Prayag uPVC Casing Pipes are"}</Tx><Tx>{" "}</Tx>
+          <Link href="/how-select-durable-pipes-fittings-long-term-use"><Tx>{"resistant to rust, corrosion, and chemical erosion"}</Tx></Link>
+          <Tx>{". Unlike traditional metal pipes, uPVC does not rust when exposed to groundwater or underground environments."}</Tx>
         </>
       ),
     },
@@ -203,9 +194,8 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "9. What sizes are available in Prayag Casing Pipes?",
       a: (
         <>
-          The product specifications listed by Prayag include{" "}
-          <Link href="/pipes-fittings">casing pipe sizes</Link> ranging from 40 mm to 200 mm.
-          Available sizes include 40 mm, 50 mm, 80 mm, 100 mm, 115 mm, 125 mm, 150 mm, 175 mm, and 200 mm.
+          <Tx>{"The product specifications listed by Prayag include"}</Tx><Tx>{" "}</Tx>
+          <Link href="/pipes-fittings"><Tx>{"casing pipe sizes"}</Tx></Link><Tx>{" ranging from 40 mm to 200 mm. Available sizes include 40 mm, 50 mm, 80 mm, 100 mm, 115 mm, 125 mm, 150 mm, 175 mm, and 200 mm."}</Tx>
         </>
       ),
     },
@@ -233,14 +223,11 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "15. How do I choose the right casing pipe for my borewell?",
       a: (
         <>
-          The appropriate casing pipe depends on factors such as borewell depth, pipe diameter, soil conditions,
-          water-bearing strata, and the intended application. RMS pipes may be selected for water-bearing sections
-          where filtration is required, while CM casing pipes are designed for structural support in medium-depth
-          wells. A qualified borewell or installation professional should determine the{" "}
+          <Tx>{"The appropriate casing pipe depends on factors such as borewell depth, pipe diameter, soil conditions, water-bearing strata, and the intended application. RMS pipes may be selected for water-bearing sections where filtration is required, while CM casing pipes are designed for structural support in medium-depth wells. A qualified borewell or installation professional should determine the"}</Tx><Tx>{" "}</Tx>
           <Link href="/plumbers-guide-choosing-right-pipe-different-plumbing-points">
-            correct pipe size and configuration
-          </Link>{" "}
-          for the site.
+            <Tx>{"correct pipe size and configuration"}</Tx>
+          </Link><Tx>{" "}</Tx>
+          <Tx>{"for the site."}</Tx>
         </>
       ),
     },
@@ -274,7 +261,7 @@ export function CasingPipesPage() {
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
-                <h1 className="black_title">Casing Pipes</h1>
+                <h1 className="black_title"><Tx>{"Casing Pipes"}</Tx></h1>
               </div>
             </div>
           </div>
@@ -286,13 +273,10 @@ export function CasingPipesPage() {
           <div className="row align-items-center">
             <div className="col-12 col-md-6">
               <div className="prayag-content-box">
-                <h2>The Ultimate Shield for Your Borewells </h2>
-                <p className="prayag-subtitle">Designed for strength, built for longevity. </p>
+                <h2><Tx>{"The Ultimate Shield for Your Borewells "}</Tx></h2>
+                <p className="prayag-subtitle"><Tx>{"Designed for strength, built for longevity. "}</Tx></p>
                 <p>
-                  Prayag Casing Pipes are manufactured using high-quality uPVC compounds, specifically designed to
-                  withstand the harsh underground conditions of Indian terrains. Unlike traditional metal pipes, these
-                  uPVC solutions are immune to corrosion and chemical erosion, ensuring your borewell remains
-                  functional for decades.
+                  <Tx>{"Prayag Casing Pipes are manufactured using high-quality uPVC compounds, specifically designed to withstand the harsh underground conditions of Indian terrains. Unlike traditional metal pipes, these uPVC solutions are immune to corrosion and chemical erosion, ensuring your borewell remains functional for decades."}</Tx>
                 </p>
               </div>
             </div>
@@ -307,7 +291,7 @@ export function CasingPipesPage() {
       <section className="ngp-section" style={{ background: "#1a1a1a", padding: "60px 0" }}>
         <div className="container-fluid">
           <h2 className="text-center" style={{ color: "#fff" }}>
-            Why Choose <strong>Prayag uPVC Casing</strong> Pipes?
+            <Tx>{"Why Choose "}</Tx><strong><Tx>{"Prayag uPVC Casing"}</Tx></strong><Tx>{" Pipes?"}</Tx>
           </h2>
           <SlickCarousel
             settings={featureSlider}
@@ -317,9 +301,9 @@ export function CasingPipesPage() {
           >
             {features.map((f) => (
               <div key={f.label} className="ngp-feature-item">
-                <div className="ngp-icon-circle">{f.icon}</div>
-                <h3 className="ngp-feature-label">{f.label}</h3>
-                <p className="ngp_para">{f.text}</p>
+                <div className="ngp-icon-circle"><Tx>{f.icon}</Tx></div>
+                <h3 className="ngp-feature-label"><Tx>{f.label}</Tx></h3>
+                <p className="ngp_para"><Tx>{f.text}</Tx></p>
               </div>
             ))}
           </SlickCarousel>
@@ -349,21 +333,13 @@ export function CasingPipesPage() {
           </div>
           <div className="psr-content-col">
             <div className="psr-content">
-              <p style={{ fontWeight: 800 }}>High-Strength Rising Main Solution for Borewell Applications</p>
-              <h2>Lead-Free uPVC Casing Pipes</h2>
+              <p style={{ fontWeight: 800 }}><Tx>{"High-Strength Rising Main Solution for Borewell Applications"}</Tx></p>
+              <h2><Tx>{"Lead-Free uPVC Casing Pipes"}</Tx></h2>
               <p className="psr-description">
-                Prayag Casing Pipes are high-performance uPVC pipes designed to provide structural support and
-                long-term protection to borewells. Installed as the outer lining of the borewell, they stabilize the
-                borehole walls, prevent soil collapse, and protect the well from the ingress of sand, silt, and other
-                external contaminants. Their robust construction ensures a secure and reliable borewell system, even in
-                challenging ground conditions.
+                <Tx>{"Prayag Casing Pipes are high-performance uPVC pipes designed to provide structural support and long-term protection to borewells. Installed as the outer lining of the borewell, they stabilize the borehole walls, prevent soil collapse, and protect the well from the ingress of sand, silt, and other external contaminants. Their robust construction ensures a secure and reliable borewell system, even in challenging ground conditions."}</Tx>
               </p>
               <p className="psr-description">
-                Engineered for exceptional strength, corrosion resistance, and durability, Prayag Casing Pipes deliver
-                dependable performance throughout the life of the borewell. They create a stable passage for the
-                installation of column pipes and pumping systems while maintaining the integrity of the borewell
-                structure. To meet varying geological conditions and application requirements, Prayag Casing Pipes are
-                available in multiple variants, each designed for specific installation needs.
+                <Tx>{"Engineered for exceptional strength, corrosion resistance, and durability, Prayag Casing Pipes deliver dependable performance throughout the life of the borewell. They create a stable passage for the installation of column pipes and pumping systems while maintaining the integrity of the borewell structure. To meet varying geological conditions and application requirements, Prayag Casing Pipes are available in multiple variants, each designed for specific installation needs."}</Tx>
               </p>
               <a href="#advantge" className="prayag-btn">
                 <svg width="22" height="12" viewBox="0 0 22 12" fill="none" aria-hidden="true">
@@ -372,7 +348,7 @@ export function CasingPipesPage() {
                     fill="black"
                   />
                 </svg>
-                Know More
+                <Tx>{"Know More"}</Tx>
               </a>
             </div>
           </div>
@@ -381,7 +357,7 @@ export function CasingPipesPage() {
 
       <section className="ka-applications pt-0">
         <div className="container-fluid">
-          <h2 className="ka-title">Applications</h2>
+          <h2 className="ka-title"><Tx>{"Applications"}</Tx></h2>
           <div className="ka-grid">
             {applications.map((a) => (
               <div key={a.title} className="ka-card">
@@ -390,7 +366,7 @@ export function CasingPipesPage() {
                   <img {...fullImg(`${IMG}/${a.image}`)} alt={a.alt} />
                 </div>
                 <div className="ka-card-body">
-                  <h3>{a.title}</h3>
+                  <h3><Tx>{a.title}</Tx></h3>
                 </div>
               </div>
             ))}
@@ -413,15 +389,14 @@ export function CasingPipesPage() {
             </div>
             <div className="col-lg-6 col-md-12 p-0">
               <div className="prayag_work_content">
-                <h2>The Prayag Advantage</h2>
+                <h2><Tx>{"The Prayag Advantage"}</Tx></h2>
                 <ul className="advantages_list">
                   {advantages.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li key={item}><Tx>{item}</Tx></li>
                   ))}
                 </ul>
                 <p>
-                  Choose Prayag Lead-Free uPVC Casing Pipes for dependable borewell performance, superior strength, and
-                  long-lasting water delivery solutions.
+                  <Tx>{"Choose Prayag Lead-Free uPVC Casing Pipes for dependable borewell performance, superior strength, and long-lasting water delivery solutions."}</Tx>
                 </p>
               </div>
             </div>
@@ -436,16 +411,16 @@ export function CasingPipesPage() {
           <div className="row">
             <div className="col-md-12">
               <div className="faq_sing_pro">
-                <h2>Faq&apos;s</h2>
+                <h2><Tx>{"Faq's"}</Tx></h2>
                 <div className="row">
                   {faqs.map((column, i) => (
                     <div key={i} className="col-md-6 col-6">
                       {column.map((item) => (
                         <div key={item.q} className="faq_box">
-                          <h3>{item.q}</h3>
+                          <h3><Tx>{item.q}</Tx></h3>
                           <p />
                           <p className="MsoNormal">
-                            <span lang="EN-IN">{item.a}</span>
+                            <span lang="EN-IN"><Tx>{item.a}</Tx></span>
                           </p>
                           <p />
                         </div>

@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import styles from "./contact.module.css";
 import { withBasePath } from "@/lib/base-path";
 import { fullImg } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 /** Factory icon used for every manufacturing unit on the source (inline SVG, 32x32). */
 function FactoryIcon() {
@@ -39,33 +40,33 @@ export function ContactInfoSection() {
           <div className="w-full px-3 min-[992px]:w-1/2">
             <div className="w-[81%]">
               <h2 className="m-0 mb-6 p-0 text-[24px] leading-8 font-medium text-black min-[768px]:text-[38px] min-[768px]:leading-[46px] min-[1400px]:text-[52px] min-[1400px]:leading-[62px]">
-                Contact our team
+                <Tx>{"Contact our team"}</Tx>
               </h2>
               <p className="m-0 mb-3 text-[1.1rem] leading-[25px] font-medium text-black min-[577px]:text-[1.2rem] min-[768px]:leading-6 min-[1400px]:leading-7">
-                Let&apos;s help you get started.
+                <Tx>{"Let's help you get started."}</Tx>
               </p>
               <p className="m-0 mb-4 text-[18px] leading-7 text-black">
-                Please complete this form to give our team more information about your business needs.
+                <Tx>{"Please complete this form to give our team more information about your business needs."}</Tx>
               </p>
             </div>
           </div>
           <div className="w-full px-3 min-[992px]:w-1/2">
             <div className="mt-10 ml-[30px] md:mt-0">
-              <h3 className="m-0 mb-3 text-[28px] leading-[38px] font-medium text-black">Corporate office</h3>
+              <h3 className="m-0 mb-3 text-[28px] leading-[38px] font-medium text-black"><Tx>{"Corporate office"}</Tx></h3>
               <div className="pb-12 transition-transform duration-300 ease-[ease] hover:translate-x-[5px]">
                 <div className="text-[18px] leading-7 text-black">
-                  2483-84, Prayag Infinity House, Nalwa Street,
-                  <br /> Pahar Ganj, New Delhi - 110055
+                  <Tx>{"2483-84, Prayag Infinity House, Nalwa Street,"}</Tx>
+                  <br /><Tx>{" Pahar Ganj, New Delhi - 110055"}</Tx>
                 </div>
                 <div className="mt-6">
                   <div className="-mx-3 flex flex-wrap">
                     {NUMBERS.map((n) => (
                       <div key={n.label} className="flex w-full items-baseline gap-2 px-3">
-                        <h5 className="m-0 text-[18px] leading-[25.2px] font-medium text-black">{n.label}</h5>
+                        <h5 className="m-0 text-[18px] leading-[25.2px] font-medium text-black"><Tx>{n.label}</Tx></h5>
                         <ul className="m-0 list-none p-0">
                           <li className="m-0 text-[16px] leading-[28.8px] text-black">
                             <a href={withBasePath(n.href)} className="p-0 text-black underline transition-colors duration-300 hover:text-[#2980b9]">
-                              {n.text}
+                              <Tx>{n.text}</Tx>
                             </a>
                           </li>
                         </ul>
@@ -80,14 +81,14 @@ export function ContactInfoSection() {
         <hr className="mt-4 mb-12 h-px border-0 bg-black opacity-25" />
         <div className="-mx-3 flex flex-wrap">
           <div className="w-full px-3">
-            <h3 className="m-0 mb-6 text-[32px] leading-[42px] font-medium text-black">Manufacturing</h3>
+            <h3 className="m-0 mb-6 text-[32px] leading-[42px] font-medium text-black"><Tx>{"Manufacturing"}</Tx></h3>
           </div>
           <div className="grid w-full grid-cols-1 gap-y-3 px-3 md:grid-cols-2 md:gap-12">
             {UNITS.map((u) => (
               <div key={u.label} className="w-full bg-[#dddddd78] p-6 text-left">
                 <FactoryIcon />
-                <div className="mb-2 text-[18px] leading-[28.8px] font-medium text-black">{u.label}</div>
-                <div className="text-[18px] leading-7 text-black">{u.address}</div>
+                <div className="mb-2 text-[18px] leading-[28.8px] font-medium text-black"><Tx>{u.label}</Tx></div>
+                <div className="text-[18px] leading-7 text-black"><Tx>{u.address}</Tx></div>
               </div>
             ))}
           </div>
@@ -118,7 +119,7 @@ export function ContactLinkBoxes() {
                     <img {...fullImg(box.image)} alt={box.title} loading="lazy" className="h-[230px] w-full object-cover" />
                   </div>
                   <div className="relative flex items-center gap-x-4 border-b border-[#dbdbdb] py-5 before:absolute before:bottom-0 before:block before:h-[2px] before:w-0 before:bg-black before:transition-all before:duration-300 before:content-[''] group-hover:before:w-full">
-                    <h4 className="m-0 text-[23px] leading-[32.2px] font-semibold text-black">{box.title}</h4>
+                    <h4 className="m-0 text-[23px] leading-[32.2px] font-semibold text-black"><Tx>{box.title}</Tx></h4>
                   </div>
                 </a>
               </div>

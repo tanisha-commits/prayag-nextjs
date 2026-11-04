@@ -6,6 +6,7 @@ import { SpecsTabs, type SpecsTab } from "./specs-tabs";
 import "./upvc-column-pipes.css";
 import { withBasePath } from "@/lib/base-path";
 import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
+import { Tx } from "@/components/sites/prayag/cms/tx";
 
 const THEME = "/sites/prayag/theme";
 // Source folder names contain spaces ("UPVC Column Pipes/Why choose icon"); the copies keep them.
@@ -171,7 +172,7 @@ function SizesTable({ rows, labelled }: { rows: string[][]; labelled: boolean })
         <thead>
           <tr>
             {sizeHeads.map((h) => (
-              <th key={h}>{h}</th>
+              <th key={h}><Tx>{h}</Tx></th>
             ))}
           </tr>
         </thead>
@@ -180,7 +181,7 @@ function SizesTable({ rows, labelled }: { rows: string[][]; labelled: boolean })
             <tr key={row.join("|")}>
               {row.map((cell, i) => (
                 <td key={i} data-label={labelled ? sizeHeads[i] : undefined}>
-                  {cell}
+                  <Tx>{cell}</Tx>
                 </td>
               ))}
             </tr>
@@ -204,15 +205,15 @@ const specsTabs: SpecsTab[] = [
             <table className="table tech-table table-borderless">
               <thead>
                 <tr>
-                  <th>Parameter</th>
-                  <th>Specification</th>
+                  <th><Tx>{"Parameter"}</Tx></th>
+                  <th><Tx>{"Specification"}</Tx></th>
                 </tr>
               </thead>
               <tbody>
                 {techSpecs.map(([k, v]) => (
                   <tr key={k}>
-                    <td>{k}</td>
-                    <td>{v}</td>
+                    <td><Tx>{k}</Tx></td>
+                    <td><Tx>{v}</Tx></td>
                   </tr>
                 ))}
               </tbody>
@@ -249,9 +250,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "1. What are Prayag uPVC Column Pipes used for?",
       a: (
         <>
-          Prayag uPVC Column Pipes are used as the rising main in <Link href="/casing-pipes">borewell systems</Link>.
-          They carry water from a submersible pump installed inside the borewell to the surface while supporting the
-          suspended load of the pump, water column, cable, and pipe assembly.
+          <Tx>{"Prayag uPVC Column Pipes are used as the rising main in "}</Tx><Link href="/casing-pipes"><Tx>{"borewell systems"}</Tx></Link><Tx>{". They carry water from a submersible pump installed inside the borewell to the surface while supporting the suspended load of the pump, water column, cable, and pipe assembly."}</Tx>
         </>
       ),
     },
@@ -263,9 +262,8 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "3. What material are Prayag Column Pipes made from?",
       a: (
         <>
-          They are manufactured from premium-grade, lead-free{" "}
-          <Link href="/upvc-pipes">uPVC compound</Link>. The material combines low weight with high
-          mechanical and tensile strength and is designed for continuous use in demanding borewell environments.
+          <Tx>{"They are manufactured from premium-grade, lead-free"}</Tx><Tx>{" "}</Tx>
+          <Link href="/upvc-pipes"><Tx>{"uPVC compound"}</Tx></Link><Tx>{". The material combines low weight with high mechanical and tensile strength and is designed for continuous use in demanding borewell environments."}</Tx>
         </>
       ),
     },
@@ -273,10 +271,8 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "4. Where can Prayag uPVC Column Pipes be installed?",
       a: (
         <>
-          The listed applications include residential water supply,{" "}
-          <Link href="/agri-pipe">agricultural irrigation</Link>, commercial buildings, and
-          industrial water-transfer systems. The appropriate configuration depends on borewell depth, pump load,
-          operating pressure, discharge requirement, and site conditions.
+          <Tx>{"The listed applications include residential water supply,"}</Tx><Tx>{" "}</Tx>
+          <Link href="/agri-pipe"><Tx>{"agricultural irrigation"}</Tx></Link><Tx>{", commercial buildings, and industrial water-transfer systems. The appropriate configuration depends on borewell depth, pump load, operating pressure, discharge requirement, and site conditions."}</Tx>
         </>
       ),
     },
@@ -284,10 +280,8 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "5. Why are uPVC column pipes used instead of metal pipes?",
       a: (
         <>
-          Unlike metal pipes, uPVC column pipes do not rust and are resistant to corrosion and electrochemical
-          reactions found in underground water systems. Their lightweight construction can also simplify handling and
-          installation while supporting{" "}
-          <Link href="/how-select-durable-pipes-fittings-long-term-use">long-term borewell operation</Link>.
+          <Tx>{"Unlike metal pipes, uPVC column pipes do not rust and are resistant to corrosion and electrochemical reactions found in underground water systems. Their lightweight construction can also simplify handling and installation while supporting"}</Tx><Tx>{" "}</Tx>
+          <Link href="/how-select-durable-pipes-fittings-long-term-use"><Tx>{"long-term borewell operation"}</Tx></Link>.
         </>
       ),
     },
@@ -295,10 +289,8 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "6. Can Prayag Column Pipes support a submersible pump?",
       a: (
         <>
-          Yes. Prayag states that its column pipes are engineered to support the combined weight of the{" "}
-          <Link href="/plumbers-guide-choosing-right-pipe-different-plumbing-points">submersible pump</Link>, water
-          column, cable, and pipe assembly. The suitable size and pressure class must be selected for the actual
-          installation depth and operating load.
+          <Tx>{"Yes. Prayag states that its column pipes are engineered to support the combined weight of the"}</Tx><Tx>{" "}</Tx>
+          <Link href="/plumbers-guide-choosing-right-pipe-different-plumbing-points"><Tx>{"submersible pump"}</Tx></Link><Tx>{", water column, cable, and pipe assembly. The suitable size and pressure class must be selected for the actual installation depth and operating load."}</Tx>
         </>
       ),
     },
@@ -306,11 +298,8 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "7. How do the threaded joints help prevent leakage?",
       a: (
         <>
-          Precision-engineered threaded connections create secure joints between compatible pipe sections. Correct
-          assembly helps{" "}
-          <Link href="/how-choose-leak-resistant-pipe-fittings-new-home-construction">minimize leakage</Link> during
-          operation, but the threads must be kept clean, aligned properly, and tightened according to the installation
-          requirements.
+          <Tx>{"Precision-engineered threaded connections create secure joints between compatible pipe sections. Correct assembly helps"}</Tx><Tx>{" "}</Tx>
+          <Link href="/how-choose-leak-resistant-pipe-fittings-new-home-construction"><Tx>{"minimize leakage"}</Tx></Link><Tx>{" during operation, but the threads must be kept clean, aligned properly, and tightened according to the installation requirements."}</Tx>
         </>
       ),
     },
@@ -324,9 +313,7 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "9. What sizes are available in Prayag uPVC Column Pipes?",
       a: (
         <>
-          Prayag lists <Link href="/best-pipes-for-plumbing-and-types-of-plastic-pipes">nominal sizes</Link> from 1
-          inch to 4 inches, corresponding to DN 25 mm through DN 100 mm. The product page also identifies a standard
-          pipe length of 3 metres. Availability varies by pipe type and pressure class.
+          <Tx>{"Prayag lists "}</Tx><Link href="/best-pipes-for-plumbing-and-types-of-plastic-pipes"><Tx>{"nominal sizes"}</Tx></Link><Tx>{" from 1 inch to 4 inches, corresponding to DN 25 mm through DN 100 mm. The product page also identifies a standard pipe length of 3 metres. Availability varies by pipe type and pressure class."}</Tx>
         </>
       ),
     },
@@ -334,12 +321,11 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "10. Which pressure classes are available?",
       a: (
         <>
-          The range includes Class 1 through Class 4, with listed pressure ratings that vary by nominal size and pipe
-          configuration. Because the correct class depends on depth, load, and operating conditions, the{" "}
+          <Tx>{"The range includes Class 1 through Class 4, with listed pressure ratings that vary by nominal size and pipe configuration. Because the correct class depends on depth, load, and operating conditions, the"}</Tx><Tx>{" "}</Tx>
           <Link href="/why-builders-contractors-prefer-certified-pipes-fittings-large-projects">
-            project specification
-          </Link>{" "}
-          should be confirmed before purchase.
+            <Tx>{"project specification"}</Tx>
+          </Link><Tx>{" "}</Tx>
+          <Tx>{"should be confirmed before purchase."}</Tx>
         </>
       ),
     },
@@ -355,10 +341,8 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "13. Are Prayag Column Pipes corrosion resistant?",
       a: (
         <>
-          Yes. The uPVC material is immune to rust and offers strong resistance to{" "}
-          <Link href="/why-prayag-trusted-among-pvc-pipe-manufacturers">corrosion</Link> and electrochemical
-          reactions. This makes the pipes suitable for underground water systems where metal components may be
-          affected by moisture and water chemistry.
+          <Tx>{"Yes. The uPVC material is immune to rust and offers strong resistance to"}</Tx><Tx>{" "}</Tx>
+          <Link href="/why-prayag-trusted-among-pvc-pipe-manufacturers"><Tx>{"corrosion"}</Tx></Link><Tx>{" and electrochemical reactions. This makes the pipes suitable for underground water systems where metal components may be affected by moisture and water chemistry."}</Tx>
         </>
       ),
     },
@@ -366,10 +350,8 @@ const faqs: { q: string; a: React.ReactNode }[][] = [
       q: "14. Are uPVC Column Pipes easy to install and maintain?",
       a: (
         <>
-          Their lightweight design can reduce handling effort and installation time. Coupler Type pipes allow
-          individual sections to be maintained or replaced, while Belling Type pipes reduce the component count.
-          Installation should still be completed by trained professionals using{" "}
-          <Link href="/pipes-fittings">compatible pipes</Link>, threads, and accessories.
+          <Tx>{"Their lightweight design can reduce handling effort and installation time. Coupler Type pipes allow individual sections to be maintained or replaced, while Belling Type pipes reduce the component count. Installation should still be completed by trained professionals using"}</Tx><Tx>{" "}</Tx>
+          <Link href="/pipes-fittings"><Tx>{"compatible pipes"}</Tx></Link><Tx>{", threads, and accessories."}</Tx>
         </>
       ),
     },
@@ -407,7 +389,7 @@ export function UpvcColumnPipesPage() {
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
-                <h1 className="black_title">uPVC Column Pipes</h1>
+                <h1 className="black_title"><Tx>{"uPVC Column Pipes"}</Tx></h1>
               </div>
             </div>
           </div>
@@ -419,13 +401,10 @@ export function UpvcColumnPipesPage() {
           <div className="row align-items-center">
             <div className="col-12 col-md-6">
               <div className="prayag-content-box">
-                <h2>Unmatched Strength</h2>
-                <p className="prayag-subtitle">For Seamless Water Flow</p>
+                <h2><Tx>{"Unmatched Strength"}</Tx></h2>
+                <p className="prayag-subtitle"><Tx>{"For Seamless Water Flow"}</Tx></p>
                 <p>
-                  At Prayag, we bring you a range of uPVC Column Pipes engineered for high durability, excellent
-                  load-bearing capacity, and long service life. Designed to handle extreme conditions, these pipes
-                  ensure hassle-free borewell and submersible pump installations with zero corrosion and high tensile
-                  strength.
+                  <Tx>{"At Prayag, we bring you a range of uPVC Column Pipes engineered for high durability, excellent load-bearing capacity, and long service life. Designed to handle extreme conditions, these pipes ensure hassle-free borewell and submersible pump installations with zero corrosion and high tensile strength."}</Tx>
                 </p>
               </div>
             </div>
@@ -440,7 +419,7 @@ export function UpvcColumnPipesPage() {
       <section className="ngp-section" style={{ background: "#1a1a1a", padding: "60px 0" }}>
         <div className="container-fluid">
           <h2 className="text-center" style={{ color: "#fff" }}>
-            Why Choose <strong> Prayag uPVC Column</strong> Pipes?
+            <Tx>{"Why Choose "}</Tx><strong><Tx>{" Prayag uPVC Column"}</Tx></strong><Tx>{" Pipes?"}</Tx>
           </h2>
           <SlickCarousel
             settings={featureSlider}
@@ -454,8 +433,8 @@ export function UpvcColumnPipesPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element -- intrinsic sizing as on the source */}
                   <img {...fullImg(f.icon)} alt={f.alt} />
                 </div>
-                <h3 className="ngp-feature-label">{f.label}</h3>
-                <p className="ngp_para">{f.text}</p>
+                <h3 className="ngp-feature-label"><Tx>{f.label}</Tx></h3>
+                <p className="ngp_para"><Tx>{f.text}</Tx></p>
               </div>
             ))}
           </SlickCarousel>
@@ -472,8 +451,8 @@ export function UpvcColumnPipesPage() {
               </div>
               <div className="msf-overlay">
                 <div className="msf-content">
-                  <h2 className="msf-title">Explore Our uPVC Column Pipes</h2>
-                  <p className="msf-subtitle">CP Faucets</p>
+                  <h2 className="msf-title"><Tx>{"Explore Our uPVC Column Pipes"}</Tx></h2>
+                  <p className="msf-subtitle"><Tx>{"CP Faucets"}</Tx></p>
                 </div>
               </div>
             </div>
@@ -491,18 +470,13 @@ export function UpvcColumnPipesPage() {
           </div>
           <div className="psr-content-col">
             <div className="psr-content">
-              <span className="psr-eyebrow">High-Strength Rising Main Solution for Borewell Applications</span>
-              <h2> Lead-Free uPVC Column Pipes</h2>
+              <span className="psr-eyebrow"><Tx>{"High-Strength Rising Main Solution for Borewell Applications"}</Tx></span>
+              <h2><Tx>{" Lead-Free uPVC Column Pipes"}</Tx></h2>
               <p className="psr-description">
-                Prayag Lead-Free uPVC Column Pipes are engineered to deliver reliable water transportation from
-                submersible pumps to the surface. These pipes are manufactured from premium-grade lead-free uPVC
-                compound. And offer superior strength, corrosion resistance, and long-term performance in demanding
-                borewell conditions.
+                <Tx>{"Prayag Lead-Free uPVC Column Pipes are engineered to deliver reliable water transportation from submersible pumps to the surface. These pipes are manufactured from premium-grade lead-free uPVC compound. And offer superior strength, corrosion resistance, and long-term performance in demanding borewell conditions."}</Tx>
               </p>
               <p className="psr-description">
-                Designed to withstand high tensile loads and pressure variations, Prayag Column Pipes provide a
-                dependable rising main solution for domestic, agricultural, commercial, and industrial water systems.
-                Available in Coupler Type and Belling Type configurations…
+                <Tx>{"Designed to withstand high tensile loads and pressure variations, Prayag Column Pipes provide a dependable rising main solution for domestic, agricultural, commercial, and industrial water systems. Available in Coupler Type and Belling Type configurations…"}</Tx>
               </p>
               <a href="#comparison-section" className="prayag-btn">
                 <svg width="22" height="12" viewBox="0 0 22 12" fill="none" aria-hidden="true">
@@ -511,7 +485,7 @@ export function UpvcColumnPipesPage() {
                     fill="black"
                   />
                 </svg>
-                Know More
+                <Tx>{"Know More"}</Tx>
               </a>
             </div>
           </div>
@@ -523,7 +497,7 @@ export function UpvcColumnPipesPage() {
           <div className="row">
             <div className="col-12 col-lg-5">
               <div className="application_iner_content">
-                <h2>Application</h2>
+                <h2><Tx>{"Application"}</Tx></h2>
                 <ul className="feature-list">
                   {applications.map((a) => (
                     <li key={a.title}>
@@ -533,8 +507,8 @@ export function UpvcColumnPipesPage() {
                         </svg>
                       </span>
                       <p>
-                        <span className="featured_span_color">{a.title}</span>
-                        {a.text}
+                        <span className="featured_span_color"><Tx>{a.title}</Tx></span>
+                        <Tx>{a.text}</Tx>
                       </p>
                     </li>
                   ))}
@@ -566,14 +540,12 @@ export function UpvcColumnPipesPage() {
             </div>
             <div className="col-lg-6 col-md-12">
               <div className="prayag_work_content">
-                <h2>How Prayag Column Pipes Work</h2>
+                <h2><Tx>{"How Prayag Column Pipes Work"}</Tx></h2>
                 <p>
-                  Prayag Column Pipes act as the rising main in a borewell system, carrying water from the submersible
-                  pump installed deep inside the borewell to the surface.
+                  <Tx>{"Prayag Column Pipes act as the rising main in a borewell system, carrying water from the submersible pump installed deep inside the borewell to the surface."}</Tx>
                 </p>
                 <p>
-                  The pipe system not only transports water but also supports the suspended load of the pump assembly,
-                  making strength and reliability critical factors in borewell performance.
+                  <Tx>{"The pipe system not only transports water but also supports the suspended load of the pump assembly, making strength and reliability critical factors in borewell performance."}</Tx>
                 </p>
               </div>
             </div>
@@ -583,18 +555,18 @@ export function UpvcColumnPipesPage() {
 
       <section id="comparison-section" className="prayag-comparison-section">
         <div className="container-fluid">
-          <h2>Coupler Type vs Belling Type</h2>
+          <h2><Tx>{"Coupler Type vs Belling Type"}</Tx></h2>
           <div className="row">
             {comparison.map((c, i) => (
               <div key={c.title} className={i === 0 ? "col-lg-6 col-md-12 mb-4 mb-lg-0" : "col-lg-6 col-md-12"}>
                 <div className="comp-card">
-                  <div className="comp-card-header">{c.title}</div>
+                  <div className="comp-card-header"><Tx>{c.title}</Tx></div>
                   <div className="comp-card-body">
-                    <p>{c.text}</p>
-                    <h4 className="benefits-title">Benefits</h4>
+                    <p><Tx>{c.text}</Tx></p>
+                    <h4 className="benefits-title"><Tx>{"Benefits"}</Tx></h4>
                     <ul className="comp-list">
                       {c.benefits.map((b) => (
-                        <li key={b}>{b}</li>
+                        <li key={b}><Tx>{b}</Tx></li>
                       ))}
                     </ul>
                   </div>
@@ -608,10 +580,9 @@ export function UpvcColumnPipesPage() {
       <section className="prayag-specs pt-0">
         <div className="container-fluid">
           <div className="prayag-specs__header" style={{ flexDirection: "column" }}>
-            <h2>Available Sizes</h2>
+            <h2><Tx>{"Available Sizes"}</Tx></h2>
             <p>
-              Prayag Column Pipes are available in multiple sizes to suit various pumping capacities and water
-              discharge requirements.
+              <Tx>{"Prayag Column Pipes are available in multiple sizes to suit various pumping capacities and water discharge requirements."}</Tx>
             </p>
           </div>
           <SpecsTabs tabs={specsTabs} />
@@ -621,20 +592,19 @@ export function UpvcColumnPipesPage() {
       <section className="section_strength p-0">
         <div className="container-fluid">
           <div className="wrap">
-            <span className="eyebrow">Strength Guide</span>
-            <h2>Choose the Right Strength for Your Borewell</h2>
+            <span className="eyebrow"><Tx>{"Strength Guide"}</Tx></span>
+            <h2><Tx>{"Choose the Right Strength for Your Borewell"}</Tx></h2>
             <p>
-              To meet different installation depths and operating conditions, Prayag Column Pipes are available in
-              multiple pressure classes.
+              <Tx>{"To meet different installation depths and operating conditions, Prayag Column Pipes are available in multiple pressure classes."}</Tx>
             </p>
             <div className="grid classes">
               {strengthClasses.map(([name, text]) => (
                 <div key={name} className="card class-card">
-                  <h3>{name}</h3>
+                  <h3><Tx>{name}</Tx></h3>
                   <div className="depth">
                     <span />
                   </div>
-                  <p>{text}</p>
+                  <p><Tx>{text}</Tx></p>
                 </div>
               ))}
             </div>
@@ -646,17 +616,16 @@ export function UpvcColumnPipesPage() {
         <div className="container-fluid">
           <div className="row align-items-center">
             <div className="col-lg-5 col-md-12 mb-4 mb-lg-0">
-              <h2>The Prayag Advantage</h2>
+              <h2><Tx>{"The Prayag Advantage"}</Tx></h2>
               <p>
-                Choose Prayag Lead-Free uPVC Column Pipes for dependable borewell performance, superior strength, and
-                long-lasting water delivery solutions.
+                <Tx>{"Choose Prayag Lead-Free uPVC Column Pipes for dependable borewell performance, superior strength, and long-lasting water delivery solutions."}</Tx>
               </p>
             </div>
             <div className="col-lg-7 col-md-12">
               <div className="adv-list-card">
                 <ul className="adv-grid-list">
                   {advantages.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li key={item}><Tx>{item}</Tx></li>
                   ))}
                 </ul>
               </div>
@@ -669,14 +638,13 @@ export function UpvcColumnPipesPage() {
               <div className="cta-line" />
               <div className="row relative z-1">
                 <div className="col-lg-12 col-md-12 position-relative">
-                  <h2 className="cta-title">Need Help Choosing the Right uPVC Column Pipe?</h2>
+                  <h2 className="cta-title"><Tx>{"Need Help Choosing the Right uPVC Column Pipe?"}</Tx></h2>
                   <p className="cta-desc">
-                    Whether you&apos;re installing a domestic borewell, agricultural irrigation system, or industrial
-                    pumping setup, our experts can help you choose the correct size, pressure class, and pipe type.
+                    <Tx>{"Whether you're installing a domestic borewell, agricultural irrigation system, or industrial pumping setup, our experts can help you choose the correct size, pressure class, and pipe type."}</Tx>
                   </p>
                   {/* Source links the theme PDF; served from the local copy (identical to the backup file). */}
                   <a href={withBasePath(`${IMG}/Column-PIPE-Booklet---Edition-1.pdf`)} className="cta-link">
-                    Download Booklet
+                    <Tx>{"Download Booklet"}</Tx>
                   </a>
                 </div>
               </div>
@@ -690,16 +658,16 @@ export function UpvcColumnPipesPage() {
           <div className="row">
             <div className="col-md-12">
               <div className="faq_sing_pro">
-                <h2>Faq&apos;s</h2>
+                <h2><Tx>{"Faq's"}</Tx></h2>
                 <div className="row">
                   {faqs.map((column, i) => (
                     <div key={i} className="col-md-6 col-6">
                       {column.map((item) => (
                         <div key={item.q} className="faq_box">
-                          <h3>{item.q}</h3>
+                          <h3><Tx>{item.q}</Tx></h3>
                           <p />
                           <p className="MsoNormal">
-                            <span lang="EN-IN">{item.a}</span>
+                            <span lang="EN-IN"><Tx>{item.a}</Tx></span>
                           </p>
                           <p />
                         </div>
