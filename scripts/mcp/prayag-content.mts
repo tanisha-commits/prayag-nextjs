@@ -10,6 +10,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { LISTS, SINGLETONS, isList, isSingleton, type SingletonId } from "../../src/lib/content/schemas";
+import { MARKDOWN_TEMPLATE, parseMarkdownPost } from "../../src/lib/content/markdown";
 import { ContentError, contentDb, deleteEntry, readList, readListEntry, readSingleton, saveEntry } from "../../src/lib/content/store";
 
 const ACTOR = process.env.PRAYAG_MCP_ACTOR || "claude-mcp";
@@ -35,6 +36,7 @@ const server = new McpServer(
       "Workflow: list_content → get_content (current value) → change only what was asked → save_content with the FULL value (or patch_content for top-level fields). Every save is validated against the entry's schema (get_schema) and recorded in the audit log; invalid input is rejected with the failing paths.",
       "Single-document entries are addressed by id ('site/contact', 'home/hero', 'pages/faq', …). Blog posts: id 'blog' plus key = URL slug.",
       "Images and links are site paths (e.g. /sites/prayag/files/…, /contact-us) or https:// URLs. HTML fields are sanitized (no scripts/iframes/handlers).",
+      "Blog posts can also be created from Markdown (import_markdown_post; format via get_markdown_template). Images must already be site paths or https URLs; uploading images is done in the admin.",
       "Products are read-only here (list_products/get_product); product edits are made in the admin.",
       "Changes are saved to the local database; the local dev site shows them on reload, and they reach the live site with the next deploy package.",
     ].join("\n"),
@@ -165,6 +167,32 @@ server.registerTool(
       deleteEntry({ id, key }, ACTOR, db);
       return json({ ok: true, id, key: key ?? null, result: isList(id) ? "removed" : "reset to built-in content" });
     }),
+);
+
+server.registerTool(
+  "import_markdown_post",
+  {
+    title: "Create a blog post from Markdown",
+    description:
+      "Create (or with overwrite, replace) a blog post from a Markdown document with a YAML header: title, slug, date (YYYY-MM-DD), metaTitle, description, bannerImage (site path or https URL), bannerAlt, related (list of existing slugs). Same format as the admin's 'Import .md files'. Use get_markdown_template for an example.",
+    inputSchema: { markdown: z.string().max(400_000), overwrite: z.boolean().optional() },
+    annotations: { destructiveHint: false },
+  },
+  ({ markdown, overwrite }) =>
+    guard(() => {
+      const r = parseMarkdownPost(markdown, { posts: readList("blog", db) });
+      if (!r.ok) return fail("The Markdown could not be imported.", r.errors);
+      const { slug, post, warnings } = r.value;
+      if (readListEntry("blog", slug, db) && !overwrite) return fail(`/${slug} already exists. Pass overwrite: true to replace it, or change the slug.`);
+      saveEntry({ id: "blog", key: slug }, post, ACTOR, db);
+      return json({ ok: true, slug, url: `/${slug}`, title: post.title, warnings });
+    }),
+);
+
+server.registerTool(
+  "get_markdown_template",
+  { title: "Markdown post template", description: "The .md format for blog posts, with comments.", inputSchema: {}, annotations: { readOnlyHint: true } },
+  () => ({ content: [{ type: "text" as const, text: MARKDOWN_TEMPLATE }] }),
 );
 
 type ProductRow = { public_id: string; slug: string; title: string; item_code: string | null; status: string; short_description: string | null; description_html: string | null; seo_title: string | null; seo_description: string | null };

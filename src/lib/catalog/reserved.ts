@@ -8,7 +8,7 @@ import type { Taxonomy } from "./mapping";
  * app prefix. Products live at /<slug>, like on prayagindia.com.
  */
 export function reservedSlugs(tax: Taxonomy): Set<string> {
-  const out = new Set(["admin", "api", "products", "blog", "search", "_next"]);
+  const out = new Set(["admin", "api", "products", "blog", "search", "_next", "sites", "media"]);
   const root = /* turbopackIgnore: true */ process.cwd();
   const pages = path.join(root, "src/app/(pages)");
   if (fs.existsSync(pages)) for (const d of fs.readdirSync(pages)) if (!d.startsWith("[")) out.add(d);

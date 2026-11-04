@@ -32,6 +32,24 @@ admin forms generated from the schemas (`src/lib/content/fields.ts`, `src/compon
 - **Undoing.** "Reset" restores the built-in content of an entry. Removing a blog post hides it,
   imported articles included.
 
+## Images and Markdown blog posts
+
+- **Upload images.** Every image field in the admin has an **Upload** button. Uploads are checked by
+  their content (JPEG, PNG, GIF, WebP or AVIF; up to 15 MB) and stored as WebP, at most 2000 px wide.
+  They go in a `media/` folder next to the database, are served at `/media/<yyyy-mm>/<name>.webp`
+  and survive deploys.
+- **Import Markdown.** Admin → Content → Blog posts → **Import .md files**. Download the template,
+  write one `.md` file per post, then drop the `.md` files and their images in together.
+  - **Header.** The block between the two `---` lines holds `title`, `slug`, `date` (YYYY-MM-DD),
+    `metaTitle`, `description`, `bannerImage`, `bannerAlt` and `related` (slugs of existing posts).
+  - **Body.** The article is Markdown, below the header.
+  - **Images.** A `bannerImage` or `![…](photo.jpg)` that names an uploaded file is linked to it
+    automatically.
+  - **Preview first.** **Preview** shows each post with its warnings. An existing slug is replaced
+    only when "Replace existing posts" is ticked.
+- **Claude** can do the same through `import_markdown_post`; `get_markdown_template` returns the
+  format. Images must already be site paths or URLs, because uploading is done in the admin.
+
 ## Claude (local MCP server)
 
 `scripts/mcp/prayag-content.mts` runs on this machine over stdio and edits the local database
@@ -55,7 +73,8 @@ Tools: `list_content`, `get_schema`, `get_content`, `list_blog_posts`, `save_con
 
 Local edits (yours or Claude's) and live-admin edits are in two different databases.
 
-- **Laptop → live.** `npm run deploy:package` writes `content-sync.json` into the zip. When the server
+- **Laptop → live.** `npm run deploy:package` writes `content-sync.json` and `media-sync/` (images
+  uploaded locally) into the zip. The server copies images it doesn't have yet. When the server
   starts, it merges the file entry by entry, and **the newer edit wins**: anything changed in the live
   admin after your export is kept. The server then re-renders all pages from its own database.
 - **Live → laptop.** Admin → Content → *Download content.json*, then

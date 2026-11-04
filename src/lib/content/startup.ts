@@ -3,6 +3,7 @@ import { timingSafeEqual } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { BASE_PATH } from "@/lib/base-path";
+import { copyMissingMedia, mediaDir } from "./media-dir";
 import { importContent } from "./store";
 
 const SYNC_FILE = "content-sync.json";
@@ -14,17 +15,31 @@ const SYNC_FILE = "content-sync.json";
  */
 export function applyContentSync() {
   const file = path.resolve(/* turbopackIgnore: true */ process.cwd(), SYNC_FILE);
-  if (!fs.existsSync(file)) return;
+  if (!fs.existsSync(/* turbopackIgnore: true */ file)) return;
   try {
-    const result = importContent(JSON.parse(fs.readFileSync(file, "utf8")));
+    const result = importContent(JSON.parse(fs.readFileSync(/* turbopackIgnore: true */ file, "utf8")));
     console.log(`[content-sync] applied ${result.applied}, kept ${result.kept} newer server edit(s)${result.skipped.length ? `, skipped invalid: ${result.skipped.join(", ")}` : ""}.`);
     try {
-      fs.rmSync(file);
+      fs.rmSync(/* turbopackIgnore: true */ file);
     } catch {
       console.warn(`[content-sync] could not delete ${file}; re-applying it is harmless.`);
     }
   } catch (e) {
     console.error(`[content-sync] not applied (${file} kept): ${(e as Error).message}`);
+  }
+}
+
+/**
+ * Images uploaded locally (admin, Markdown import) travel in the package as media-sync/; copy the
+ * ones this server does not have yet into its media folder (next to its database).
+ */
+export function applyMediaSync() {
+  const from = path.resolve(/* turbopackIgnore: true */ process.cwd(), "media-sync");
+  try {
+    const n = copyMissingMedia(from, mediaDir());
+    if (n) console.log(`[media-sync] copied ${n} new image(s) to ${mediaDir()}.`);
+  } catch (e) {
+    console.error(`[media-sync] not applied: ${(e as Error).message}`);
   }
 }
 

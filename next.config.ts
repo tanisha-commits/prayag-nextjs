@@ -52,7 +52,11 @@ const nextConfig: NextConfig = {
     qualities: [75],
     formats: ["image/webp"],
     minimumCacheTTL: 2592000,
-    localPatterns: [{ pathname: `${basePath}/sites/prayag/**`, search: "" }],
+    // Site images, plus images uploaded in the admin (served by src/app/media/[...path]/route.ts).
+    localPatterns: [
+      { pathname: `${basePath}/sites/prayag/**`, search: "" },
+      { pathname: `${basePath}/media/**`, search: "" },
+    ],
   },
   async redirects() {
     return LIVE_REDIRECTS;

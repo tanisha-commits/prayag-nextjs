@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ActionForm } from "@/components/admin/action-form";
 import { ContentEditor } from "@/components/admin/content-editor";
+import { MarkdownImporter } from "@/components/admin/markdown-importer";
 import { deleteContent, saveContent } from "@/lib/admin/content-actions";
 import { describe } from "@/lib/content/fields";
 import { LISTS, SINGLETONS, isList, isSingleton, type BlogPost } from "@/lib/content/schemas";
@@ -55,6 +56,15 @@ export default async function AdminContentEntry({ params, searchParams }: PagePr
   }
 
   if (!isList(collection)) notFound();
+  if (key === "import") {
+    return (
+      <>
+        <p className="mt-0 mb-2 text-[13px]"><Link href={`/admin/content/${collection}`} className="text-[#007ac3]">← {LISTS[collection].title}</Link></p>
+        <h1 className="mb-4 text-[26px] font-semibold">Import blog posts from Markdown</h1>
+        <MarkdownImporter />
+      </>
+    );
+  }
   const isNew = key === "new";
   const entry = isNew ? undefined : readListEntry(collection, key);
   if (!isNew && !entry) notFound();

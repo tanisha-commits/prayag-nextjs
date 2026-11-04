@@ -199,7 +199,8 @@ export function saveEntry(target: { id: string; key?: string }, data: unknown, a
  */
 function assertFreeRootSlug(slug: string, db: Sqlite) {
   const pages = path.join(process.cwd(), "src/app/(pages)");
-  const reserved = new Set(["admin", "api", "products", "blog", "search", "_next", "sites"]);
+  // "new" and "import" are admin pages under /admin/content/blog/.
+  const reserved = new Set(["admin", "api", "products", "blog", "search", "_next", "sites", "media", "new", "import"]);
   if (fs.existsSync(pages)) for (const d of fs.readdirSync(pages)) if (!d.startsWith("[")) reserved.add(d);
   const taken =
     reserved.has(slug) ||

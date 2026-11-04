@@ -20,7 +20,7 @@ rm -rf "$OUT" "$OUT.zip"
 mkdir -p dist
 
 cp -a .next/standalone "$OUT"
-rm -f "$OUT/public" "$OUT/.next/static"            # symlinks from local test runs, if any
+rm -rf "$OUT/public" "$OUT/.next/static"           # symlinks from local test runs / traced copies, if any
 cp -a .next/static "$OUT/.next/static"
 cp -a public "$OUT/public"
 rm -rf "$OUT/data" && mkdir "$OUT/data"            # the server keeps its own prayag.db
@@ -34,6 +34,9 @@ fi
 # Content edited locally (admin or Claude via MCP) travels with the package; the server merges it
 # at start-up, keeping any newer edits made in the live admin.
 npx tsx --env-file-if-exists=.env.local scripts/content/export.mts "$OUT/content-sync.json"
+# Images uploaded locally (stored next to the local database) go along; the server copies new ones.
+MEDIA_DIR="${PRAYAG_MEDIA_DIR:-$(dirname "${PRAYAG_DB_PATH:-data/prayag.db}")/media}"
+if [ -d "$MEDIA_DIR" ]; then cp -a "$MEDIA_DIR" "$OUT/media-sync"; echo "Included $(find "$OUT/media-sync" -type f | wc -l) uploaded image(s)."; fi
 
 if [ -f admin-bootstrap.json ]; then
   cp admin-bootstrap.json "$OUT/admin-bootstrap.json"
