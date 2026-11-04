@@ -10,7 +10,8 @@ import type Database from "better-sqlite3";
 import { z } from "zod";
 import { openDb } from "@/lib/db/client";
 import { mapHtml, sanitizeContentHtml } from "./fields";
-import { LISTS, SINGLETONS, SLUG, isList, isSingleton, type BlogPost, type ListId, type SingletonData, type SingletonId } from "./schemas";
+import { sitePage } from "./page-registry";
+import { LISTS, SINGLETONS, SLUG, isList, isSingleton, type BlogPost, type ListData, type ListId, type SingletonData, type SingletonId } from "./schemas";
 
 export type ContentRow = {
   collection: string;
@@ -107,12 +108,15 @@ export function builtInBlogPosts(): Map<string, BlogPost> {
   return (builtInBlog = map);
 }
 
-export type ListEntry = { key: string; data: BlogPost; source: "saved" | "default"; updatedAt?: number; updatedBy?: string };
+export type ListEntry<K extends ListId = "blog"> = { key: string; data: ListData[K]; source: "saved" | "default"; updatedAt?: number; updatedBy?: string };
 
-/** Entries of a list collection: built-in posts overlaid with saved rows, minus removed ones. */
-export function readList(id: ListId, db?: Sqlite): ListEntry[] {
-  const out = new Map<string, ListEntry>();
-  for (const [key, data] of builtInBlogPosts()) out.set(key, { key, data, source: "default" });
+/**
+ * Entries of a list collection: built-in entries (only blog posts have them, the imported articles)
+ * overlaid with saved rows, minus removed ones.
+ */
+export function readList<K extends ListId>(id: K, db?: Sqlite): ListEntry<K>[] {
+  const out = new Map<string, ListEntry<K>>();
+  if (id === "blog") for (const [key, data] of builtInBlogPosts()) out.set(key, { key, data: data as ListData[K], source: "default" });
   let rows: ContentRow[] = [];
   try {
     rows = (db ?? contentDb()).prepare("SELECT * FROM content_entries WHERE collection = ?").all(id).map((r) => toRow(r as Parameters<typeof toRow>[0]));
@@ -125,13 +129,13 @@ export function readList(id: ListId, db?: Sqlite): ListEntry[] {
       continue;
     }
     const parsed = LISTS[id].schema.safeParse(row.data);
-    if (parsed.success) out.set(row.key, { key: row.key, data: parsed.data, source: "saved", updatedAt: row.updatedAt, updatedBy: row.updatedBy });
+    if (parsed.success) out.set(row.key, { key: row.key, data: parsed.data as ListData[K], source: "saved", updatedAt: row.updatedAt, updatedBy: row.updatedBy });
     else console.error(`[content] ${id}/${row.key}: saved value no longer valid; skipped`);
   }
   return [...out.values()];
 }
 
-export function readListEntry(id: ListId, key: string, db?: Sqlite): ListEntry | undefined {
+export function readListEntry<K extends ListId>(id: K, key: string, db?: Sqlite): ListEntry<K> | undefined {
   return readList(id, db).find((e) => e.key === key);
 }
 
@@ -181,12 +185,14 @@ export function saveEntry(target: { id: string; key?: string }, data: unknown, a
   }
   if (isList(target.id)) {
     const key = target.key ?? "";
-    if (!SLUG.test(key) || key.length > 120) throw new ContentError("The key must be lower-case words joined by hyphens (it becomes the URL).");
-    const schema = LISTS[target.id].schema;
+    const list = LISTS[target.id];
+    if (list.keys === "page" ? !sitePage(key) : !SLUG.test(key) || key.length > 120)
+      throw new ContentError(list.keys === "page" ? `"${key}" is not one of the site's pages.` : "The key must be lower-case words joined by hyphens (it becomes the URL).");
+    const schema = list.schema;
     const parsed = schema.safeParse(mapHtml(schema, data, sanitizeContentHtml));
     if (!parsed.success) throw new ContentError("Some fields are not valid.", issues(parsed.error));
     const exists = readListEntry(target.id, key, db);
-    if (!exists) assertFreeRootSlug(key, db);
+    if (!exists && list.keys === "url") assertFreeRootSlug(key, db, target.id);
     write(db, target.id, key, parsed.data, actor, exists ? "content.update" : "content.create", false);
     return parsed.data;
   }
@@ -197,7 +203,7 @@ export function saveEntry(target: { id: string; key?: string }, data: unknown, a
  * Blog posts, products, categories and pages all live at /<slug>: a new post may not take a slug
  * that is already in use.
  */
-function assertFreeRootSlug(slug: string, db: Sqlite) {
+function assertFreeRootSlug(slug: string, db: Sqlite, list: ListId) {
   const pages = path.join(process.cwd(), "src/app/(pages)");
   // "new" and "import" are admin pages under /admin/content/blog/.
   const reserved = new Set(["admin", "api", "products", "blog", "search", "_next", "sites", "media", "new", "import"]);
@@ -206,7 +212,9 @@ function assertFreeRootSlug(slug: string, db: Sqlite) {
     reserved.has(slug) ||
     !!db.prepare("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'products'").get() &&
       (!!db.prepare("SELECT 1 FROM products WHERE slug = ?").get(slug) || !!db.prepare("SELECT 1 FROM categories WHERE slug = ? OR slug LIKE ?").get(slug, `${slug}/%`));
-  if (taken) throw new ContentError(`"/${slug}" is already used by a page, product or category. Choose another slug.`);
+  // Blog posts and custom pages share the URL space too.
+  const other = (["blog", "custom-pages"] as const).find((l) => l !== list && readListEntry(l, slug, db));
+  if (taken || other) throw new ContentError(`"/${slug}" is already used by ${other === "blog" ? "a blog post" : other ? "a custom page" : "a page, product or category"}. Choose another slug.`);
 }
 
 /** Singleton: back to the built-in default. List entry: removed (tombstone). */

@@ -1,14 +1,15 @@
 import { CpvcPage } from "@/components/sites/prayag/product-category/cpvc-plumbing-solution/cpvc-page";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "cPVC Pipes & Fittings for Hot & Cold Water | Prayag",
   description:
     "Explore Prayag cPVC Pipes for hot and cold water plumbing, designed for durability, corrosion resistance, leak-proof joints and reliable long-term performance.",
   path: "/cpvc-plumbing-solution",
 });
 
-export default function CpvcPlumbingSolutionPage() {
+function CpvcPlumbingSolutionPage() {
   return (
     <>
       <BreadcrumbJsonLd
@@ -21,3 +22,6 @@ export default function CpvcPlumbingSolutionPage() {
     </>
   );
 }
+
+export default withPageContent("cpvc-plumbing-solution", CpvcPlumbingSolutionPage);
+export const generateMetadata = withSeo("cpvc-plumbing-solution", pageMetadataBase);

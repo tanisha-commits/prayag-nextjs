@@ -32,3 +32,39 @@ A paragraph with a [link to the faucets](/faucets) and a list:
 
 ![An image uploaded with this file](photo-1.jpg)
 `;
+
+export const PAGE_TEMPLATE = `---
+# A new page of the Prayag site, at /<slug>.
+# Put a value in "double quotes" when it contains a colon (:).
+title: "Prayag Service Centres"
+# The address: /prayag-service-centres (optional: made from the title)
+slug: prayag-service-centres
+# Search results / social preview (optional)
+metaTitle: "Prayag Service Centres | Prayag India"
+description: "Find a Prayag service centre near you."
+# Banner (optional): a site path, or the file name of an image uploaded with this file
+bannerImage: banner.jpg
+bannerAlt: Prayag service centre
+---
+
+Write the page in **Markdown** below the header.
+
+## A heading
+
+| City | Address | Phone |
+|------|---------|-------|
+| Delhi | Paharganj, New Delhi | 1800 257 0304 |
+
+![A photo uploaded with this file](photo-1.jpg)
+`;
+
+export const SECTION_TEMPLATE = `---
+# Optional header for a page section: where it goes and its heading.
+# position: top (under the header) or bottom (above the footer)
+position: bottom
+heading: "Why choose Prayag CPVC pipes"
+---
+
+Section text in **Markdown**: paragraphs, lists, [links](/contact-us), tables and images
+(![photo](photo-1.jpg) – upload the image in the editor first, or use a site path).
+`;

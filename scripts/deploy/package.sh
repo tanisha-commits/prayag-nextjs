@@ -24,6 +24,7 @@ rm -rf "$OUT/public" "$OUT/.next/static"           # symlinks from local test ru
 cp -a .next/static "$OUT/.next/static"
 cp -a public "$OUT/public"
 rm -rf "$OUT/data" && mkdir "$OUT/data"            # the server keeps its own prayag.db
+rm -rf "$OUT/dist"                                 # stray source-map references to older packages
 rm -rf "$OUT/.next/cache/images" && mkdir -p "$OUT/.next/cache/images"
 find "$OUT" -maxdepth 1 -name '.env*' ! -name '.env.production' -delete
 if [ -f "$OUT/.env.production" ]; then             # ship only the public site URL

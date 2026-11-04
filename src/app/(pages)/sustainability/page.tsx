@@ -2,15 +2,16 @@ import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { susBanner } from "@/components/sites/prayag/sustainability/data";
 import { SusPage } from "@/components/sites/prayag/sustainability/sus-page";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Sustainable Manufacturing Information in India | Prayag",
   description:
     "Learn about sustainable manufacturing at Prayag, including practices, resource efficiency and product innovation aimed at reducing environmental impact.",
   path: "/sustainability",
 });
 
-export default function SustainabilityPage() {
+function SustainabilityPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Sustainability", path: "/sustainability" }]} />
@@ -20,3 +21,6 @@ export default function SustainabilityPage() {
     </>
   );
 }
+
+export default withPageContent("sustainability", SustainabilityPage);
+export const generateMetadata = withSeo("sustainability", pageMetadataBase);

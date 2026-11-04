@@ -10,7 +10,9 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { LISTS, SINGLETONS, isList, isSingleton, type SingletonId } from "../../src/lib/content/schemas";
-import { MARKDOWN_TEMPLATE, parseMarkdownPost } from "../../src/lib/content/markdown";
+import { MARKDOWN_TEMPLATE, parseMarkdownPage, parseMarkdownPost, parseMarkdownSection } from "../../src/lib/content/markdown";
+import { PAGE_TEMPLATE } from "../../src/lib/content/markdown-template";
+import { SITE_PAGES, sitePage } from "../../src/lib/content/page-registry";
 import { ContentError, contentDb, deleteEntry, readList, readListEntry, readSingleton, saveEntry } from "../../src/lib/content/store";
 
 const ACTOR = process.env.PRAYAG_MCP_ACTOR || "claude-mcp";
@@ -35,6 +37,8 @@ const server = new McpServer(
       "Edits the content of the Prayag website (prayagindia.com clone): site contact details, social links, header/footer/drawer menus, homepage sections, FAQ, press coverage, privacy policy and blog posts.",
       "Workflow: list_content → get_content (current value) → change only what was asked → save_content with the FULL value (or patch_content for top-level fields). Every save is validated against the entry's schema (get_schema) and recorded in the audit log; invalid input is rejected with the failing paths.",
       "Single-document entries are addressed by id ('site/contact', 'home/hero', 'pages/faq', …). Blog posts: id 'blog' plus key = URL slug.",
+      "Every existing page (About, Plumbing Solutions, CPVC, Inspiration pages, …; see list_pages) keeps its design and can get Markdown sections at the top or bottom plus SEO title/description: id 'page-content', key = page slug ('home' = homepage). add_page_section appends one section from Markdown.",
+      "New pages written in Markdown: id 'custom-pages', key = URL slug; import_markdown_page creates one from a .md document (format: get_markdown_template with kind 'page').",
       "Images and links are site paths (e.g. /sites/prayag/files/…, /contact-us) or https:// URLs. HTML fields are sanitized (no scripts/iframes/handlers).",
       "Blog posts can also be created from Markdown (import_markdown_post; format via get_markdown_template). Images must already be site paths or https URLs; uploading images is done in the admin.",
       "Products are read-only here (list_products/get_product); product edits are made in the admin.",
@@ -91,9 +95,11 @@ server.registerTool(
     guard(() => {
       if (isSingleton(id)) return json(readSingleton(id, db));
       if (isList(id)) {
-        if (!key) return fail("Give the post slug as `key` (see list_blog_posts).");
+        if (!key) return fail("Give the entry key: post slug (list_blog_posts), page slug (list_pages) or custom page slug.");
         const entry = readListEntry(id, key, db);
-        return entry ? json(entry) : fail(`No blog post "${key}".`);
+        if (entry) return json(entry);
+        if (id === "page-content" && sitePage(key)) return json({ key, data: { sections: [] }, source: "default" });
+        return fail(`No ${id} entry "${key}".`);
       }
       return fail(`Unknown id "${id}". Use list_content.`);
     }),
@@ -147,7 +153,7 @@ server.registerTool(
     guard(() => {
       let current: Record<string, unknown> | undefined;
       if (isSingleton(id)) current = readSingleton(id, db).data as Record<string, unknown>;
-      else if (isList(id) && key) current = readListEntry(id, key, db)?.data as Record<string, unknown> | undefined;
+      else if (isList(id) && key) current = (readListEntry(id, key, db)?.data ?? (id === "page-content" && sitePage(key) ? { sections: [] } : undefined)) as Record<string, unknown> | undefined;
       if (!current) return fail(isList(id) ? `No blog post "${key}". Use save_content to create one.` : `Unknown id "${id}".`);
       const saved = saveEntry({ id, key }, { ...current, ...fields }, ACTOR, db);
       return json({ ok: true, id, key: key ?? null, saved });
@@ -191,8 +197,78 @@ server.registerTool(
 
 server.registerTool(
   "get_markdown_template",
-  { title: "Markdown post template", description: "The .md format for blog posts, with comments.", inputSchema: {}, annotations: { readOnlyHint: true } },
-  () => ({ content: [{ type: "text" as const, text: MARKDOWN_TEMPLATE }] }),
+  {
+    title: "Markdown templates",
+    description: "The .md format, with comments: kind 'post' (blog post, default) or 'page' (custom page).",
+    inputSchema: { kind: z.enum(["post", "page"]).optional() },
+    annotations: { readOnlyHint: true },
+  },
+  ({ kind }) => ({ content: [{ type: "text" as const, text: kind === "page" ? PAGE_TEMPLATE : MARKDOWN_TEMPLATE }] }),
+);
+
+server.registerTool(
+  "list_pages",
+  {
+    title: "List site pages",
+    description: "Every existing page that can carry Markdown sections and SEO overrides: slug, path, title, group, number of sections, SEO overridden. Also lists custom (Markdown) pages.",
+    inputSchema: {},
+    annotations: { readOnlyHint: true },
+  },
+  () =>
+    guard(() => {
+      const saved = new Map(readList("page-content", db).map((e) => [e.key, e.data]));
+      return json({
+        pages: SITE_PAGES.map((p) => {
+          const c = saved.get(p.slug);
+          return { ...p, sections: c?.sections.length ?? 0, seo: !!(c?.seoTitle || c?.seoDescription) };
+        }),
+        customPages: readList("custom-pages", db).map((p) => ({ slug: p.key, path: `/${p.key}`, title: p.data.title })),
+      });
+    }),
+);
+
+server.registerTool(
+  "add_page_section",
+  {
+    title: "Add a Markdown section to a page",
+    description:
+      "Append a section to an existing page (keeps the page's design). position 'bottom' (above the footer, default) or 'top' (under the header). The markdown may start with a --- header holding position/heading. Images must be site paths or https URLs.",
+    inputSchema: {
+      page: z.string().describe("Page slug from list_pages, e.g. 'about-prayag'; 'home' for the homepage"),
+      markdown: z.string().max(300_000),
+      heading: z.string().max(300).optional(),
+      position: z.enum(["top", "bottom"]).optional(),
+    },
+    annotations: { destructiveHint: false },
+  },
+  ({ page, markdown, heading, position }) =>
+    guard(() => {
+      if (!sitePage(page)) return fail(`"${page}" is not one of the site's pages (see list_pages).`);
+      const parsed = parseMarkdownSection(markdown);
+      const current = readListEntry("page-content", page, db)?.data ?? { sections: [] };
+      const section = { position: position ?? parsed.position ?? "bottom", ...((heading ?? parsed.heading) ? { heading: heading ?? parsed.heading } : {}), markdown: parsed.markdown };
+      const saved = saveEntry({ id: "page-content", key: page }, { ...current, sections: [...current.sections, section] }, ACTOR, db);
+      return json({ ok: true, page, sections: (saved as { sections: unknown[] }).sections.length, warnings: parsed.warnings });
+    }),
+);
+
+server.registerTool(
+  "import_markdown_page",
+  {
+    title: "Create a page from Markdown",
+    description: "Create (or with overwrite, replace) a custom page at /<slug> from a Markdown document with a YAML header: title, slug, metaTitle, description, bannerImage (optional), bannerAlt. Format: get_markdown_template kind 'page'.",
+    inputSchema: { markdown: z.string().max(400_000), overwrite: z.boolean().optional() },
+    annotations: { destructiveHint: false },
+  },
+  ({ markdown, overwrite }) =>
+    guard(() => {
+      const r = parseMarkdownPage(markdown);
+      if (!r.ok) return fail("The Markdown could not be imported.", r.errors);
+      const { slug, page, warnings } = r.value;
+      if (readListEntry("custom-pages", slug, db) && !overwrite) return fail(`/${slug} already exists. Pass overwrite: true to replace it, or change the slug.`);
+      saveEntry({ id: "custom-pages", key: slug }, page, ACTOR, db);
+      return json({ ok: true, slug, url: `/${slug}`, title: page.title, warnings });
+    }),
 );
 
 type ProductRow = { public_id: string; slug: string; title: string; item_code: string | null; status: string; short_description: string | null; description_html: string | null; seo_title: string | null; seo_description: string | null };

@@ -5,7 +5,10 @@ import type { ActionState } from "@/lib/admin/actions";
 import type { Field } from "@/lib/content/fields";
 import { withBasePath } from "@/lib/base-path";
 import { cn } from "@/lib/utils";
-import { uploadImage } from "./markdown-importer";
+import { marked } from "marked";
+import { parseSectionFiles } from "@/lib/admin/markdown-actions";
+import { SECTION_TEMPLATE } from "@/lib/content/markdown-template";
+import { downloadText, uploadImage } from "./markdown-importer";
 
 type Value = unknown;
 type Obj = Record<string, Value>;
@@ -131,10 +134,135 @@ function HtmlField({ id, value, onChange }: { id: string; value: string; onChang
         // Preview of the editor's own text; the saved copy is sanitized on the server.
         <div
           className="max-h-[480px] overflow-auto rounded-[6px] border border-[#e5e7eb] bg-white p-4 text-[15px] leading-7 [&_a]:text-[#007ac3] [&_a]:underline [&_h2]:mt-4 [&_h2]:text-[20px] [&_h2]:font-semibold [&_h3]:mt-3 [&_h3]:text-[17px] [&_h3]:font-semibold [&_img]:max-w-full [&_li]:ml-5 [&_li]:list-disc [&_p]:my-2 [&_table]:border-collapse [&_td]:border [&_td]:px-2 [&_th]:border [&_th]:px-2"
-          dangerouslySetInnerHTML={{ __html: value.replace(/<\s*script\b[\s\S]*?<\s*\/\s*script\s*>/gi, "").replace(/\son[a-z]+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "") }}
+          dangerouslySetInnerHTML={{ __html: previewSafe(value) }}
         />
       )}
       <p className="mt-1 mb-0 text-[12px] text-[#6b7280]">Scripts, frames and inline event handlers are removed when saving.</p>
+    </div>
+  );
+}
+
+/** Rough preview cleanup (the saved page is sanitized on the server). */
+const BASE = withBasePath("/").replace(/\/$/, "");
+/** Site-relative image/link paths get the base path, as on the live page. */
+const withBase = (html: string) => (BASE ? html.replace(/\b(src|href)="\/(?!\/)/g, (m, a: string) => `${a}="${BASE}/`).replace(new RegExp(`(src|href)="${BASE}${BASE}/`, "g"), `$1="${BASE}/`) : html);
+const previewSafe = (html: string) => withBase(html).replace(/<\s*script\b[\s\S]*?<\s*\/\s*script\s*>/gi, "").replace(/\son[a-z]+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "");
+const previewClass =
+  "max-h-[520px] overflow-auto rounded-[6px] border border-[#e5e7eb] bg-white p-4 text-[15px] leading-7 [&_a]:text-[#007ac3] [&_a]:underline [&_h2]:mt-4 [&_h2]:text-[20px] [&_h2]:font-semibold [&_h3]:mt-3 [&_h3]:text-[17px] [&_h3]:font-semibold [&_img]:max-w-full [&_li]:ml-5 [&_ol>li]:list-decimal [&_ul>li]:list-disc [&_p]:my-2 [&_table]:my-3 [&_table]:border-collapse [&_td]:border [&_td]:border-[#ddd] [&_td]:px-2 [&_th]:border [&_th]:border-[#ddd] [&_th]:bg-[#f6f6f6] [&_th]:px-2";
+
+function MarkdownField({ id, value, onChange }: { id: string; value: string; onChange: (v: string) => void }) {
+  const [tab, setTab] = useState<"write" | "preview">("write");
+  const [busy, setBusy] = useState<string | null>(null);
+  const area = useRef<HTMLTextAreaElement>(null);
+  const img = useRef<HTMLInputElement>(null);
+  const md = useRef<HTMLInputElement>(null);
+  const insert = (text: string) => {
+    const el = area.current;
+    const at = el ? el.selectionStart : value.length;
+    onChange(value.slice(0, at) + text + value.slice(el ? el.selectionEnd : value.length));
+  };
+  return (
+    <div>
+      <div className="mb-1 flex flex-wrap items-center gap-1 text-[12px]">
+        {(["write", "preview"] as const).map((t) => (
+          <button key={t} type="button" aria-pressed={tab === t} onClick={() => setTab(t)} className={cn("rounded-[6px] px-2.5 py-1", tab === t ? "bg-[#111] text-white" : "bg-[#f3f4f6] text-[#333]")}>
+            {t === "write" ? "Markdown" : "Preview"}
+          </button>
+        ))}
+        <span className="mx-1 h-4 w-px bg-[#e5e7eb]" />
+        <button type="button" className={smallBtn} disabled={!!busy} onClick={() => img.current?.click()}>Insert image</button>
+        <button type="button" className={smallBtn} disabled={!!busy} onClick={() => md.current?.click()}>Load .md file</button>
+        {busy && <span className="text-[#5b5f66]">{busy}</span>}
+        <input
+          ref={img}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={async (e) => {
+            const file = e.target.files?.[0];
+            e.target.value = "";
+            if (!file) return;
+            setBusy("Uploading…");
+            try {
+              insert(`\n![${file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ")}](${await uploadImage(file)})\n`);
+              setBusy(null);
+            } catch (err) {
+              setBusy((err as Error).message);
+            }
+          }}
+        />
+        <input
+          ref={md}
+          type="file"
+          accept=".md,.markdown,text/markdown,text/plain"
+          className="hidden"
+          onChange={async (e) => {
+            const file = e.target.files?.[0];
+            e.target.value = "";
+            if (!file) return;
+            // A header between --- lines (if any) is dropped here; use "Add sections from .md files" to apply it.
+            onChange((await file.text()).replace(/^\uFEFF?---\r?\n[\s\S]*?\r?\n---\r?\n?/, "").trim());
+            setTab("write");
+          }}
+        />
+      </div>
+      {tab === "write" ? (
+        <textarea ref={area} id={id} value={value} onChange={(e) => onChange(e.target.value)} rows={Math.min(28, Math.max(8, value.split("\n").length + 2))} className={cn(input, "font-mono text-[13px] leading-6")} spellCheck />
+      ) : (
+        <div className={previewClass} dangerouslySetInnerHTML={{ __html: previewSafe(marked.parse(value, { async: false, gfm: true }) as string) }} />
+      )}
+      <p className="mt-1 mb-0 text-[12px] text-[#6b7280]">
+        Markdown: <code>## Heading</code>, <code>**bold**</code>, <code>- list</code>, <code>[link](/contact-us)</code>, <code>![image](/media/…)</code>, tables with <code>|</code>.
+      </p>
+    </div>
+  );
+}
+
+/** Page-sections editor extra: turn several .md files (and their images) into sections at once. */
+function SectionFilesLoader({ value, onChange }: { value: Value; onChange: (v: Value) => void }) {
+  const [state, setState] = useState<{ busy?: string; done?: string; warnings?: string[]; error?: string }>({});
+  const input = useRef<HTMLInputElement>(null);
+  return (
+    <div className="rounded-[10px] border border-dashed border-[#b9c6d3] bg-[#f6fafd] p-3">
+      <div className="flex flex-wrap items-center gap-2">
+        <button type="button" className={cn(smallBtn, "h-9 bg-black px-3 text-[13px] text-white hover:bg-[#222]")} disabled={!!state.busy} onClick={() => input.current?.click()}>
+          Add sections from .md files
+        </button>
+        <button type="button" className="text-[13px] text-[#007ac3] underline" onClick={() => downloadText(SECTION_TEMPLATE, "prayag-page-section-template.md")}>Download section template</button>
+        <span className="text-[12px] text-[#5b5f66]">Select .md files together with the images they use. Each file becomes one section.</span>
+      </div>
+      <input
+        ref={input}
+        type="file"
+        multiple
+        accept=".md,.markdown,text/markdown,image/*"
+        className="hidden"
+        onChange={async (e) => {
+          const files = [...(e.target.files ?? [])];
+          e.target.value = "";
+          const mds = files.filter((f) => /\.(md|markdown)$/i.test(f.name));
+          const imgs = files.filter((f) => !mds.includes(f));
+          if (!mds.length) return setState({ error: "Choose at least one .md file." });
+          try {
+            const media: Record<string, string> = {};
+            for (const [i, f] of imgs.entries()) {
+              setState({ busy: `Uploading image ${i + 1} of ${imgs.length}…` });
+              media[f.name] = await uploadImage(f);
+            }
+            setState({ busy: "Reading files…" });
+            const r = await parseSectionFiles(await Promise.all(mds.map(async (f) => ({ name: f.name, text: await f.text() }))), media);
+            const obj = (value && typeof value === "object" ? value : {}) as Obj;
+            onChange({ ...obj, sections: [...(Array.isArray(obj.sections) ? obj.sections : []), ...r.sections] });
+            setState({ done: `Added ${r.sections.length} section(s). Review them below, then save.`, warnings: r.warnings });
+          } catch (err) {
+            setState({ error: (err as Error).message });
+          }
+        }}
+      />
+      {state.busy && <p className="mt-2 mb-0 text-[13px] text-[#5b5f66]">{state.busy}</p>}
+      {state.done && <p className="mt-2 mb-0 text-[13px] text-[#1e7d3a]">{state.done}</p>}
+      {state.error && <p className="mt-2 mb-0 text-[13px] text-[#a12622]">{state.error}</p>}
+      {state.warnings?.map((w) => <p key={w} className="mt-1 mb-0 text-[12px] text-[#8a5a00]">! {w}</p>)}
     </div>
   );
 }
@@ -165,6 +293,8 @@ function Editor({ f, value, onChange, path }: { f: Field; value: Value; onChange
           {label}
           {f.widget === "html" ? (
             <HtmlField id={id} value={v} onChange={onChange} />
+          ) : f.widget === "markdown" ? (
+            <MarkdownField id={id} value={v} onChange={onChange} />
           ) : f.widget === "image" ? (
             <ImageField id={id} value={v} onChange={onChange} />
           ) : f.widget === "textarea" ? (
@@ -342,6 +472,7 @@ export function ContentEditor({
         ) : (
           entryKey && <input type="hidden" name="key" value={entryKey} />
         )}
+        {id === "page-content" && <SectionFilesLoader value={value} onChange={setValue} />}
         <Editor f={field} path="" value={value} onChange={setValue} />
         <div className="sticky bottom-0 z-10 -mx-4 -mb-4 flex flex-wrap items-center gap-3 rounded-b-[10px] border-t border-[#e5e7eb] bg-white/95 px-4 py-3 backdrop-blur">
           <button type="submit" disabled={pending || !dirty} className="h-10 rounded-[8px] bg-black px-5 text-[14px] font-medium text-white disabled:opacity-50">

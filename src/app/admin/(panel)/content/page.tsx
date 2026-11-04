@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LISTS, SINGLETONS, type SingletonId } from "@/lib/content/schemas";
+import { SITE_PAGES } from "@/lib/content/page-registry";
 import { readList, readSingleton } from "@/lib/content/store";
 import { withBasePath } from "@/lib/base-path";
 
@@ -21,6 +22,8 @@ const when = (ms?: number) => (ms ? new Date(ms).toLocaleString("en-IN", { dateS
 export default function AdminContent() {
   const ids = Object.keys(SINGLETONS) as SingletonId[];
   const posts = readList("blog");
+  const pageEdits = readList("page-content").length;
+  const customCount = readList("custom-pages").length;
   const edited = posts.filter((p) => p.source === "saved").length;
   return (
     <>
@@ -57,6 +60,23 @@ export default function AdminContent() {
           </ul>
         </section>
       ))}
+      <section className="mb-6 rounded-[10px] border-2 border-[#007ac3]/20 bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+        <h2 className="mt-0 mb-1 text-[16px] font-semibold">Pages: Markdown sections &amp; SEO</h2>
+        <p className="mt-0 mb-3 max-w-[760px] text-[13px] text-[#5b5f66]">
+          Every page (About, Plumbing Solutions, CPVC, Inspiration pages, …) keeps its design; add Markdown sections at the top or
+          bottom (write them or upload .md files) and override its search title/description. {pageEdits} of {SITE_PAGES.length} pages edited.
+        </p>
+        <Link href="/admin/content/page-content" className="rounded-[8px] bg-black px-4 py-2 text-[14px] font-medium text-white">Open pages</Link>
+      </section>
+      <section className="mb-6 rounded-[10px] bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+        <h2 className="mt-0 mb-1 text-[16px] font-semibold">{LISTS["custom-pages"].title}</h2>
+        <p className="mt-0 mb-3 text-[13px] text-[#5b5f66]">New pages written in Markdown, with a banner and title · {customCount} page(s)</p>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/admin/content/custom-pages" className="rounded-[8px] border border-[#d1d5db] px-4 py-2 text-[14px] font-medium hover:bg-[#f3f4f6]">All pages</Link>
+          <Link href="/admin/content/custom-pages/new" className="rounded-[8px] bg-black px-4 py-2 text-[14px] font-medium text-white">+ New page</Link>
+          <Link href="/admin/content/custom-pages/import" className="rounded-[8px] border border-[#d1d5db] px-4 py-2 text-[14px] font-medium hover:bg-[#f3f4f6]">Import .md files</Link>
+        </div>
+      </section>
       <section className="mb-6 rounded-[10px] bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
         <h2 className="mt-0 mb-1 text-[16px] font-semibold">{LISTS.blog.title}</h2>
         <p className="mt-0 mb-3 text-[13px] text-[#5b5f66]">{posts.length} posts · {edited} added or edited here</p>

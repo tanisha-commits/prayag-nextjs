@@ -2,15 +2,16 @@ import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { feedbackVideosPage } from "@/components/sites/prayag/videos/data";
 import { InlineVideoSection } from "@/components/sites/prayag/videos/video-sections";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Customer Feedback Videos Information in India | Prayag",
   description:
     "Watch customer feedback videos from Prayag to hear experiences and perspectives related to its bathroom, plumbing and home improvement product ranges.",
   path: "/feedback-videos",
 });
 
-export default function FeedbackVideosPage() {
+function FeedbackVideosPage() {
   const { banner, cards } = feedbackVideosPage;
   return (
     <>
@@ -20,3 +21,6 @@ export default function FeedbackVideosPage() {
     </>
   );
 }
+
+export default withPageContent("feedback-videos", FeedbackVideosPage);
+export const generateMetadata = withSeo("feedback-videos", pageMetadataBase);

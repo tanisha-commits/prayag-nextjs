@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { importMarkdownPosts, previewMarkdownPosts, type MdFile, type MdResult } from "@/lib/admin/markdown-actions";
-import { MARKDOWN_TEMPLATE } from "@/lib/content/markdown-template";
+import { importMarkdownPosts, previewMarkdownPosts, type MdFile, type MdKind, type MdResult } from "@/lib/admin/markdown-actions";
+import { MARKDOWN_TEMPLATE, PAGE_TEMPLATE } from "@/lib/content/markdown-template";
 import { withBasePath } from "@/lib/base-path";
 import { cn } from "@/lib/utils";
 
@@ -21,14 +21,16 @@ export async function uploadImage(file: File): Promise<string> {
   return json.path;
 }
 
-function downloadTemplate() {
-  const url = URL.createObjectURL(new Blob([MARKDOWN_TEMPLATE], { type: "text/markdown" }));
-  const a = Object.assign(document.createElement("a"), { href: url, download: "prayag-blog-post-template.md" });
+export function downloadText(text: string, name: string) {
+  const url = URL.createObjectURL(new Blob([text], { type: "text/markdown" }));
+  const a = Object.assign(document.createElement("a"), { href: url, download: name });
   a.click();
   URL.revokeObjectURL(url);
 }
 
-export function MarkdownImporter() {
+export function MarkdownImporter({ kind = "blog" }: { kind?: MdKind }) {
+  const isBlog = kind === "blog";
+  const noun = isBlog ? "post" : "page";
   const [files, setFiles] = useState<File[]>([]);
   const [drag, setDrag] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
@@ -69,7 +71,7 @@ export function MarkdownImporter() {
     try {
       const { docs, map } = await readAll();
       setBusy("Checking posts…");
-      setResults(await previewMarkdownPosts(docs, map));
+      setResults(await previewMarkdownPosts(kind, docs, map));
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -82,7 +84,7 @@ export function MarkdownImporter() {
     try {
       const { docs, map } = await readAll();
       setBusy("Importing…");
-      setResults(await importMarkdownPosts(docs, map, overwrite));
+      setResults(await importMarkdownPosts(kind, docs, map, overwrite));
       setDone(true);
     } catch (e) {
       setError((e as Error).message);
@@ -97,10 +99,10 @@ export function MarkdownImporter() {
     <div className="grid gap-5">
       <div className="flex flex-wrap items-center gap-3 rounded-[10px] bg-[#f0f7fc] px-4 py-3 text-[14px] text-[#24435c]">
         <span className="min-w-0 flex-1">
-          Each <b>.md</b> file is one post: a header with the title, slug, date, SEO text and banner, then the article in Markdown.
-          Upload the images it mentions (banner, pictures in the article) together with it.
+          Each <b>.md</b> file is one {noun}: a header with the title, slug, {isBlog ? "date, " : ""}SEO text and banner, then the{" "}
+          {isBlog ? "article" : "page content"} in Markdown. Upload the images it mentions together with it.
         </span>
-        <button type="button" onClick={downloadTemplate} className={cn(btn, "border border-[#007ac3] bg-white text-[#007ac3]")}>
+        <button type="button" onClick={() => downloadText(isBlog ? MARKDOWN_TEMPLATE : PAGE_TEMPLATE, isBlog ? "prayag-blog-post-template.md" : "prayag-page-template.md")} className={cn(btn, "border border-[#007ac3] bg-white text-[#007ac3]")}>
           Download template (.md)
         </button>
       </div>
@@ -120,7 +122,7 @@ export function MarkdownImporter() {
       {files.length > 0 && (
         <div className="rounded-[10px] bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
           <div className="mb-2 flex items-center gap-3">
-            <h2 className="m-0 text-[15px] font-semibold">{mdFiles.length} post file(s) · {images.length} image(s)</h2>
+            <h2 className="m-0 text-[15px] font-semibold">{mdFiles.length} {noun} file(s) · {images.length} image(s)</h2>
             <button type="button" className="ml-auto text-[13px] text-[#a12622]" onClick={() => (setFiles([]), setResults(null), setMedia({}), setDone(false))}>Clear</button>
           </div>
           <ul className="m-0 flex list-none flex-wrap gap-2 p-0 text-[13px]">
@@ -161,14 +163,14 @@ export function MarkdownImporter() {
                   {r.saved && r.slug && (
                     <p className="mt-2 mb-0 flex gap-4 text-[13px]">
                       <a href={withBasePath(`/${r.slug}`)} target="_blank" rel="noopener noreferrer" className="text-[#007ac3]">View on site ↗</a>
-                      <Link href={`/admin/content/blog/${r.slug}`} className="text-[#007ac3]">Edit</Link>
+                      <Link href={`/admin/content/${kind}/${r.slug}`} className="text-[#007ac3]">Edit</Link>
                     </p>
                   )}
                 </div>
               </div>
               {r.bodyHtml && !r.saved && (
                 <details className="mt-3">
-                  <summary className="cursor-pointer text-[13px] text-[#007ac3]">Preview article</summary>
+                  <summary className="cursor-pointer text-[13px] text-[#007ac3]">Preview {isBlog ? "article" : "page"}</summary>
                   <div className="prose-preview mt-2 max-h-[420px] overflow-auto rounded-[6px] border border-[#e5e7eb] p-4 text-[15px] leading-7 [&_h2]:mt-4 [&_h2]:text-[20px] [&_h2]:font-semibold [&_h3]:text-[17px] [&_h3]:font-semibold [&_img]:max-w-full [&_li]:ml-5 [&_li]:list-disc [&_a]:text-[#007ac3] [&_a]:underline [&_p]:my-2" dangerouslySetInnerHTML={{ __html: r.bodyHtml }} />
                 </details>
               )}
@@ -184,11 +186,11 @@ export function MarkdownImporter() {
             <>
               {results.some((r) => r.exists) && (
                 <label className="flex items-center gap-2 text-[14px]">
-                  <input type="checkbox" checked={overwrite} onChange={(e) => setOverwrite(e.target.checked)} /> Replace existing posts
+                  <input type="checkbox" checked={overwrite} onChange={(e) => setOverwrite(e.target.checked)} /> Replace existing {noun}s
                 </label>
               )}
               <button type="button" onClick={run} disabled={!!busy || !ready.length} className={cn(btn, "bg-black text-white")}>
-                Import {ready.length} post{ready.length === 1 ? "" : "s"}
+                Import {ready.length} {noun}{ready.length === 1 ? "" : "s"}
               </button>
             </>
           )}
@@ -197,7 +199,7 @@ export function MarkdownImporter() {
       )}
       {done && (
         <p className="m-0 flex gap-4 text-[14px]">
-          <Link href="/admin/content/blog" className="text-[#007ac3]">← All posts</Link>
+          <Link href={`/admin/content/${kind}`} className="text-[#007ac3]">← All {noun}s</Link>
           <button type="button" className="text-[#007ac3]" onClick={() => (setFiles([]), setResults(null), setMedia({}), setDone(false))}>Import more</button>
         </p>
       )}

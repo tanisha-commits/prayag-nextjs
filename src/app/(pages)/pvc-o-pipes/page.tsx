@@ -1,14 +1,15 @@
 import { PvcOPipesPage } from "@/components/sites/prayag/product-category/pvc-o-pipes/pvc-o-pipes-page";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "PVC-O Pipes for High-Pressure Water Supply | Prayag",
   description:
     "Explore Prayag PVC-O Pipes for high-pressure water supply, irrigation and infrastructure, with high flow, impact resistance, durability and easy installation.",
   path: "/pvc-o-pipes",
 });
 
-export default function PvcOPipesRoute() {
+function PvcOPipesRoute() {
   return (
     <>
       <BreadcrumbJsonLd
@@ -21,3 +22,6 @@ export default function PvcOPipesRoute() {
     </>
   );
 }
+
+export default withPageContent("pvc-o-pipes", PvcOPipesRoute);
+export const generateMetadata = withSeo("pvc-o-pipes", pageMetadataBase);

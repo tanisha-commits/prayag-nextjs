@@ -1,7 +1,8 @@
 import { BabluPage } from "@/components/sites/prayag/product-category/bablu/bablu-page";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "PRAYAG KA BABLU Plumbers’ Loyalty Program | Prayag",
   // Verbatim from the source, including the missing space after "Prayag".
   description:
@@ -9,7 +10,7 @@ export const metadata = pageMetadata({
   path: "/prayag-ka-bablu-plumbers-loyalty-program",
 });
 
-export default function BabluLoyaltyProgramRoute() {
+function BabluLoyaltyProgramRoute() {
   return (
     <>
       <BreadcrumbJsonLd
@@ -21,3 +22,6 @@ export default function BabluLoyaltyProgramRoute() {
     </>
   );
 }
+
+export default withPageContent("prayag-ka-bablu-plumbers-loyalty-program", BabluLoyaltyProgramRoute);
+export const generateMetadata = withSeo("prayag-ka-bablu-plumbers-loyalty-program", pageMetadataBase);

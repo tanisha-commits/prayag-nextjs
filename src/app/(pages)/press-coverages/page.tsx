@@ -4,8 +4,9 @@ import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { getContent } from "@/lib/content";
 import { imageDims } from "@/lib/image-dimensions";
 import { responsiveImg } from "@/lib/optimized-image";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Prayag India - Press Coverages",
   description:
     "Our aim is to keep everyone updated about our company through press coverages and other commercial advertisements.",
@@ -32,7 +33,7 @@ function pressImages() {
   });
 }
 
-export default function PressCoveragesPage() {
+function PressCoveragesPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Press Coverages", path: "/press-coverages" }]} />
@@ -41,3 +42,6 @@ export default function PressCoveragesPage() {
     </>
   );
 }
+
+export default withPageContent("press-coverages", PressCoveragesPage);
+export const generateMetadata = withSeo("press-coverages", pageMetadataBase);

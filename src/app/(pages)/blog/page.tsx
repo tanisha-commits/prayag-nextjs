@@ -2,15 +2,16 @@ import { BlogList } from "@/components/sites/prayag/blog/blog-list";
 import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { getBlogIndex } from "@/lib/blog";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Bathroom And Plumbing Blog: Guide for Indian Homes | Prayag",
   description:
     "Read the bathroom and plumbing blog from Prayag for practical guides, product comparisons, selection tips, installation insights and ideas for modern spaces.",
   path: "/blog",
 });
 
-export default function BlogPage() {
+function BlogPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Blog", path: "/blog" }]} />
@@ -19,3 +20,6 @@ export default function BlogPage() {
     </>
   );
 }
+
+export default withPageContent("blog", BlogPage);
+export const generateMetadata = withSeo("blog", pageMetadataBase);

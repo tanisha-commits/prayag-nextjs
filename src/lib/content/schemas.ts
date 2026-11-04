@@ -9,10 +9,11 @@ import { pressItems } from "@/content/prayag/press/items";
 import { privacyPolicyHtml } from "@/content/prayag/privacy/policy";
 
 /** Widgets the admin form knows; strings default to a one-line text input. */
-export type Widget = "text" | "textarea" | "html" | "image" | "url";
+export type Widget = "text" | "textarea" | "html" | "image" | "url" | "markdown";
 
 const text = (title: string, description?: string) => z.string().max(2000).meta({ title, description });
 const longText = (title: string, description?: string) => z.string().max(5000).meta({ title, description, widget: "textarea" });
+const markdown = (title: string, description?: string) => z.string().max(300_000).meta({ title, description, widget: "markdown" });
 const html = (title: string, description?: string) => z.string().max(500_000).meta({ title, description, widget: "html" });
 // Links and images may be site paths, https:// URLs, or mailto:/tel: links; never script URLs.
 const SAFE_LINK = /^\s*(?!(?:javascript|data|vbscript):)/i;
@@ -195,6 +196,36 @@ export const blogPost = z.object({
 });
 export type BlogPost = z.infer<typeof blogPost>;
 
+// ---------- page sections & custom pages ----------
+
+/** Markdown sections and SEO overrides added to an existing page (key = page slug, "home" = /). */
+export const pageContent = z.object({
+  seoTitle: text("SEO title", "Replaces the page's title in search results and browser tabs. Leave empty to keep the original.").optional(),
+  seoDescription: longText("SEO description", "Replaces the page's search-result description. Leave empty to keep the original.").optional(),
+  sections: list(
+    z
+      .object({
+        position: z.union([z.literal("bottom"), z.literal("top")]).meta({ title: "Where", description: "bottom = after the page, above the footer; top = under the header, before the page." }),
+        heading: text("Heading (optional)").optional(),
+        markdown: markdown("Content (Markdown)"),
+      })
+      .meta({ title: "Section" }),
+    "Markdown sections",
+  ).default([]),
+});
+export type PageContent = z.infer<typeof pageContent>;
+
+/** A new page made from Markdown, at /<slug>. */
+export const customPage = z.object({
+  title: text("Title"),
+  metaTitle: text("SEO title").nullable(),
+  description: longText("SEO description").nullable(),
+  bannerImage: image("Banner image (optional)").optional(),
+  bannerAlt: text("Banner alt text").optional(),
+  markdown: markdown("Page content (Markdown)"),
+});
+export type CustomPage = z.infer<typeof customPage>;
+
 // ---------- registry ----------
 
 type Singleton<S extends z.ZodType> = { title: string; description: string; schema: S; default: () => z.input<S> };
@@ -264,8 +295,23 @@ export const LISTS = {
     title: "Blog posts",
     description: "Articles at /<slug>, listed on /blog newest first. The key is the URL slug (lower-case words joined by hyphens).",
     schema: blogPost,
+    keys: "url",
+  },
+  "page-content": {
+    title: "Page sections & SEO",
+    description: "Markdown sections (top or bottom) and SEO overrides for each existing page. The key is the page slug (see the page list; 'home' is the homepage).",
+    schema: pageContent,
+    keys: "page",
+  },
+  "custom-pages": {
+    title: "Custom pages",
+    description: "New pages written in Markdown, at /<slug>, with a banner and title. The key is the URL slug.",
+    schema: customPage,
+    keys: "url",
   },
 } as const;
+
+export type ListData = { blog: BlogPost; "page-content": PageContent; "custom-pages": CustomPage };
 
 export type ListId = keyof typeof LISTS;
 

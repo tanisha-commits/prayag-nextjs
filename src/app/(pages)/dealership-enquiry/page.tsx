@@ -1,15 +1,16 @@
 import { DealershipForm } from "@/components/sites/prayag/dealership/dealership-form";
 import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Prayag Dealership - Explore Official Information | Prayag",
   description:
     "Submit a Prayag dealership enquiry to connect with the team about dealer opportunities, distribution requirements, product categories and business support.",
   path: "/dealership-enquiry",
 });
 
-export default function DealershipEnquiryPage() {
+function DealershipEnquiryPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Dealership Enquiry", path: "/dealership-enquiry" }]} />
@@ -38,3 +39,6 @@ export default function DealershipEnquiryPage() {
     </>
   );
 }
+
+export default withPageContent("dealership-enquiry", DealershipEnquiryPage);
+export const generateMetadata = withSeo("dealership-enquiry", pageMetadataBase);

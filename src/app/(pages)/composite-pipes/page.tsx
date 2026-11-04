@@ -1,14 +1,15 @@
 import { CompositePipesPage } from "@/components/sites/prayag/product-category/composite-pipes/composite-pipes-page";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Composite Pipes for Water, Gas & Industry | Prayag",
   description:
     "Explore Prayag Composite Pipes with PE-AL-PE construction for water, gas and specialised applications, offering corrosion resistance, strength and durability.",
   path: "/composite-pipes",
 });
 
-export default function CompositePipesRoute() {
+function CompositePipesRoute() {
   return (
     <>
       <BreadcrumbJsonLd
@@ -21,3 +22,6 @@ export default function CompositePipesRoute() {
     </>
   );
 }
+
+export default withPageContent("composite-pipes", CompositePipesRoute);
+export const generateMetadata = withSeo("composite-pipes", pageMetadataBase);

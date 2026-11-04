@@ -2,15 +2,16 @@ import { FaqTabs } from "@/components/sites/prayag/faq/faq-tabs";
 import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { getContent } from "@/lib/content";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Prayag Faqs Information for Homes & Projects | Prayag",
   description:
     "Explore Prayag FAQs for answers about products, services, support, installation, maintenance and customer queries related to bathroom and plumbing solutions.",
   path: "/faq",
 });
 
-export default function FaqPage() {
+function FaqPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Faq", path: "/faq" }]} />
@@ -20,3 +21,6 @@ export default function FaqPage() {
     </>
   );
 }
+
+export default withPageContent("faq", FaqPage);
+export const generateMetadata = withSeo("faq", pageMetadataBase);

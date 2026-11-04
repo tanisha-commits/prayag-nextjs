@@ -7,6 +7,7 @@ import { MarkdownImporter } from "@/components/admin/markdown-importer";
 import { deleteContent, saveContent } from "@/lib/admin/content-actions";
 import { describe } from "@/lib/content/fields";
 import { LISTS, SINGLETONS, isList, isSingleton, type BlogPost } from "@/lib/content/schemas";
+import { sitePage } from "@/lib/content/page-registry";
 import { readListEntry, readSingleton } from "@/lib/content/store";
 import { withBasePath } from "@/lib/base-path";
 
@@ -56,22 +57,60 @@ export default async function AdminContentEntry({ params, searchParams }: PagePr
   }
 
   if (!isList(collection)) notFound();
+  const back = <p className="mt-0 mb-2 text-[13px]"><Link href={`/admin/content/${collection}`} className="text-[#007ac3]">← {LISTS[collection].title}</Link></p>;
+  const savedBanner = saved && <p role="status" className="mb-4 rounded-[8px] bg-[#e7f6ec] px-3 py-2 text-[14px] text-[#1e7d3a]">Saved. The site shows the change now.</p>;
+  const field = describe(LISTS[collection].schema);
+
+  // Markdown sections + SEO of an existing page: the key is the page slug; nothing to create.
+  if (collection === "page-content") {
+    const page = sitePage(key);
+    if (!page) notFound();
+    const entry = readListEntry("page-content", key);
+    return (
+      <>
+        {back}
+        <h1 className="mb-1 text-[26px] font-semibold">{page.title}</h1>
+        <p className="mt-0 mb-4 max-w-[820px] text-[14px] text-[#5b5f66]">
+          <a href={withBasePath(page.path)} target="_blank" rel="noopener noreferrer" className="text-[#007ac3]">{page.path} ↗</a> · The page keeps its design. Sections
+          added here appear at the top (under the header) or the bottom (above the footer); write them in Markdown or load a .md file.
+        </p>
+        {savedBanner}
+        <div className={card}>
+          <ContentEditor key={`${key}-${entry?.updatedAt ?? 0}`} id={collection} entryKey={key} field={field} initial={entry?.data ?? { sections: [] }} action={saveContent} />
+        </div>
+        {entry && (
+          <details className={`${card} mt-6`}>
+            <summary className="cursor-pointer text-[14px] font-medium text-[#a12622]">Remove all sections and SEO changes</summary>
+            <div className="mt-3">
+              <ActionForm action={deleteContent} submitLabel="Remove" confirmText="Yes, restore this page to its original content">
+                <input type="hidden" name="id" value={collection} />
+                <input type="hidden" name="key" value={key} />
+              </ActionForm>
+            </div>
+          </details>
+        )}
+      </>
+    );
+  }
+
+  const noun = collection === "blog" ? "post" : "page";
   if (key === "import") {
     return (
       <>
-        <p className="mt-0 mb-2 text-[13px]"><Link href={`/admin/content/${collection}`} className="text-[#007ac3]">← {LISTS[collection].title}</Link></p>
-        <h1 className="mb-4 text-[26px] font-semibold">Import blog posts from Markdown</h1>
-        <MarkdownImporter />
+        {back}
+        <h1 className="mb-4 text-[26px] font-semibold">Import {collection === "blog" ? "blog posts" : "pages"} from Markdown</h1>
+        <MarkdownImporter kind={collection} />
       </>
     );
   }
   const isNew = key === "new";
   const entry = isNew ? undefined : readListEntry(collection, key);
   if (!isNew && !entry) notFound();
+  const initial = entry?.data ?? (collection === "blog" ? newPost() : { title: "", metaTitle: null, description: null, markdown: "" });
   return (
     <>
-      <p className="mt-0 mb-2 text-[13px]"><Link href={`/admin/content/${collection}`} className="text-[#007ac3]">← {LISTS[collection].title}</Link></p>
-      <h1 className="mb-1 text-[26px] font-semibold">{isNew ? "New post" : entry!.data.title}</h1>
+      {back}
+      <h1 className="mb-1 text-[26px] font-semibold">{isNew ? `New ${noun}` : entry!.data.title}</h1>
       {!isNew && (
         <p className="mt-0 mb-4 text-[14px] text-[#5b5f66]">
           <a href={withBasePath(`/${key}`)} target="_blank" rel="noopener noreferrer" className="text-[#007ac3]">/{key} ↗</a>
@@ -79,15 +118,15 @@ export default async function AdminContentEntry({ params, searchParams }: PagePr
           {entry!.source === "saved" ? `Last edited by ${entry!.updatedBy}` : "Imported article (not edited yet)"}
         </p>
       )}
-      {saved && <p role="status" className="mb-4 rounded-[8px] bg-[#e7f6ec] px-3 py-2 text-[14px] text-[#1e7d3a]">Saved. The site shows the change now.</p>}
+      {savedBanner}
       <div className={card}>
-        <ContentEditor key={`${key}-${entry?.updatedAt ?? 0}`} id={collection} entryKey={isNew ? "" : key} isNew={isNew} field={describe(LISTS[collection].schema)} initial={entry?.data ?? newPost()} action={saveContent} />
+        <ContentEditor key={`${key}-${entry?.updatedAt ?? 0}`} id={collection} entryKey={isNew ? "" : key} isNew={isNew} field={field} initial={initial} action={saveContent} />
       </div>
       {!isNew && (
         <details className={`${card} mt-6`}>
-          <summary className="cursor-pointer text-[14px] font-medium text-[#a12622]">Remove this post</summary>
+          <summary className="cursor-pointer text-[14px] font-medium text-[#a12622]">Remove this {noun}</summary>
           <div className="mt-3">
-            <ActionForm action={deleteContent} submitLabel="Remove post" confirmText={`Yes, remove /${key} from the site`}>
+            <ActionForm action={deleteContent} submitLabel={`Remove ${noun}`} confirmText={`Yes, remove /${key} from the site`}>
               <input type="hidden" name="id" value={collection} />
               <input type="hidden" name="key" value={key} />
             </ActionForm>

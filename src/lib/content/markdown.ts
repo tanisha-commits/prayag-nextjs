@@ -3,7 +3,8 @@
 // Plain module, no server-only.
 import { marked } from "marked";
 import { parse as parseYaml } from "yaml";
-import { blogPost, SLUG, type BlogPost } from "./schemas";
+import { sanitizeContentHtml } from "./fields";
+import { blogPost, customPage, SLUG, type BlogPost, type CustomPage } from "./schemas";
 import type { ListEntry } from "./store";
 
 export { MARKDOWN_TEMPLATE } from "./markdown-template";
@@ -118,4 +119,77 @@ export function parseMarkdownPost(text: string, opts: { media?: Record<string, s
   const checked = blogPost.safeParse(post);
   if (!checked.success) return { ok: false, errors: checked.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`) };
   return { ok: true, value: { slug, post: checked.data, warnings } };
+}
+
+// ---------- pages and page sections (stored as Markdown, rendered on the server) ----------
+
+/** Markdown → sanitized HTML (GitHub-flavoured: tables, lists, links). Base path is added at render. */
+export function renderMarkdown(md: string): string {
+  return sanitizeContentHtml((marked.parse(md, { async: false, gfm: true }) as string).trim());
+}
+
+/** Point `![alt](name.jpg)` image references at uploaded files with that name. */
+export function linkUploadedImages(md: string, media: Record<string, string> = {}): { markdown: string; missing: string[] } {
+  const map = new Map(Object.entries(media).map(([k, v]) => [k.toLowerCase(), v]));
+  const missing: string[] = [];
+  const markdown = md.replace(/(!\[[^\]]*\]\()\s*<?([^)\s>]+)>?((?:\s+"[^"]*")?\s*\))/g, (all, open: string, ref: string, close: string) => {
+    const hit = map.get(ref.split("/").pop()!.toLowerCase());
+    if (hit) return `${open}${hit}${close}`;
+    if (!ref.startsWith("/") && !/^https?:\/\//.test(ref)) missing.push(ref);
+    return all;
+  });
+  return { markdown, missing };
+}
+
+function frontMatter(text: string): { meta: Record<string, unknown>; body: string } | { error: string } | null {
+  const m = /^﻿?---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(text);
+  if (!m) return null;
+  try {
+    const parsed = parseYaml(m[1]) as unknown;
+    return { meta: parsed && typeof parsed === "object" && !Array.isArray(parsed) ? (parsed as Record<string, unknown>) : {}, body: m[2].trim() };
+  } catch (e) {
+    return { error: `The header could not be read (${(e as Error).message.split("\n")[0]}). Put values that contain a colon (:) in "double quotes".` };
+  }
+}
+
+export type ParsedPage = { slug: string; page: CustomPage; warnings: string[] };
+
+/** A custom page from a .md file: header with title, slug, SEO, optional banner; Markdown body. */
+export function parseMarkdownPage(text: string, opts: { media?: Record<string, string>; fileName?: string } = {}): { ok: true; value: ParsedPage } | { ok: false; errors: string[] } {
+  const fm = frontMatter(text);
+  if (!fm) return { ok: false, errors: ["The file must start with a header between two '---' lines (download the page template to see the format)."] };
+  if ("error" in fm) return { ok: false, errors: [fm.error] };
+  const { meta, body } = fm;
+  const errors: string[] = [];
+  const title = str(meta.title);
+  if (!title) errors.push("title is missing.");
+  const slug = str(meta.slug) || slugify(title || (opts.fileName ?? "").replace(/\.md$/i, ""));
+  if (!SLUG.test(slug)) errors.push(`slug "${slug}" must be lower-case words joined by hyphens.`);
+  if (!body) errors.push("The page content (below the header) is empty.");
+  const media = new Map(Object.entries(opts.media ?? {}).map(([k, v]) => [k.toLowerCase(), v]));
+  const bannerRef = str(meta.bannerImage);
+  const bannerImage = bannerRef ? (media.get(bannerRef.split("/").pop()!.toLowerCase()) ?? bannerRef) : undefined;
+  if (bannerImage && !bannerImage.startsWith("/") && !/^https:\/\//.test(bannerImage)) errors.push(`bannerImage "${bannerRef}" was not uploaded and is not a site path or https:// URL.`);
+  const { markdown, missing } = linkUploadedImages(body, opts.media);
+  if (errors.length) return { ok: false, errors };
+  const page: CustomPage = {
+    title,
+    metaTitle: str(meta.metaTitle) || null,
+    description: str(meta.description) || null,
+    ...(bannerImage ? { bannerImage, bannerAlt: str(meta.bannerAlt) || title } : {}),
+    markdown,
+  };
+  const checked = customPage.safeParse(page);
+  if (!checked.success) return { ok: false, errors: checked.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`) };
+  return { ok: true, value: { slug, page: checked.data, warnings: missing.map((m) => `Image "${m}" was not uploaded; it will not show.`) } };
+}
+
+/** A page section from a .md file. The header is optional: position (top/bottom) and heading. */
+export function parseMarkdownSection(text: string, media?: Record<string, string>): { position?: "top" | "bottom"; heading?: string; markdown: string; warnings: string[] } {
+  const fm = frontMatter(text);
+  const meta = fm && !("error" in fm) ? fm.meta : {};
+  const body = fm && !("error" in fm) ? fm.body : text.trim();
+  const { markdown, missing } = linkUploadedImages(body, media);
+  const position = str(meta.position) === "top" ? "top" : str(meta.position) === "bottom" ? "bottom" : undefined;
+  return { position, heading: str(meta.heading) || undefined, markdown, warnings: missing.map((m) => `Image "${m}" was not uploaded; it will not show.`) };
 }

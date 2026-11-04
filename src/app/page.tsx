@@ -9,8 +9,9 @@ import { SiteFooter } from "@/components/sites/prayag/site-footer";
 import { SiteHeader } from "@/components/sites/prayag/site-header";
 import { SportingSpirit } from "@/components/sites/prayag/sporting-spirit";
 import { WhyPrayag } from "@/components/sites/prayag/why-prayag";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Prayag Polymers Limited - India's No.1 Sanitaryware Manufacturer",
   description:
     "Prayag Polymers Limited is India’s leading Sanitaryware manufacturing brand. It offers a premium, wide range of reliable, and affordable sanitary products in India.",
@@ -82,7 +83,7 @@ const STRUCTURED_DATA = [
 
 // Source: https://prayagindia.com/ (Drupal page--homepage.html.twig).
 // The source's "Stay in Touch" section is omitted: the live site hides it (`section.stay_touch { display: none }`).
-export default function Home() {
+function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA).replace(/</g, "\\u003c") }} />
@@ -101,3 +102,6 @@ export default function Home() {
     </>
   );
 }
+
+export default withPageContent("home", Home);
+export const generateMetadata = withSeo("home", pageMetadataBase);

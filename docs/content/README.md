@@ -32,6 +32,30 @@ admin forms generated from the schemas (`src/lib/content/fields.ts`, `src/compon
 - **Undoing.** "Reset" restores the built-in content of an entry. Removing a blog post hides it,
   imported articles included.
 
+## Every page: Markdown sections, SEO, and new pages
+
+- **Existing pages** (Home, About, CEO profile, Plumbing Solutions, CPVC, HDPE, the product
+  categories, the Inspiration pages, Contact, FAQ, …: all 39 in `src/lib/content/page-registry.ts`)
+  keep their design. Admin → Content → **Pages** → a page lets you:
+  - **Override SEO.** Set the page's SEO title and description (empty keeps the original).
+  - **Add Markdown sections.** Each goes at the **top** (under the header) or the **bottom** (above
+    the footer). Write it in the editor (Markdown / Preview, **Insert image**, **Load .md file**), or
+    use **Add sections from .md files**: select several `.md` files plus their images and each file
+    becomes a section. An optional header in the file sets `position` and `heading` (download the
+    section template).
+  - **Undo.** "Remove all sections and SEO changes" restores the page.
+- **New pages**: Admin → Content → **Custom pages** → New page, or **Import .md files** (page
+  template: `title`, `slug`, `metaTitle`, `description`, optional `bannerImage`/`bannerAlt`, then
+  Markdown). They live at `/<slug>`, show the Prayag banner and are listed in the sitemap. Their
+  slugs can't clash with pages, products, categories or blog posts.
+- **Claude**: `list_pages`, `add_page_section`, `import_markdown_page`, plus
+  `get_content`/`save_content`/`patch_content` with id `page-content` (key = page slug) or
+  `custom-pages`.
+- **Code**: each page file is wrapped with `withPageContent("<slug>", Page)` and its metadata with
+  `withSeo`/`withSeoFn` (`src/lib/content/page-content.tsx`). Sections reuse the blog article
+  typography (`.cms-md .pf-bd-content`). **A new page folder must be added to the registry and
+  wrapped the same way.**
+
 ## Images and Markdown blog posts
 
 - **Upload images.** Every image field in the admin has an **Upload** button. Uploads are checked by

@@ -2,8 +2,9 @@ import { ContactForm } from "@/components/sites/prayag/contact/contact-form";
 import { ContactInfoSection, ContactLinkBoxes } from "@/components/sites/prayag/contact/contact-sections";
 import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Contact Prayag - Information, Support & Resources | Prayag",
   description:
     "Use contact Prayag details to reach the team for product enquiries, customer support, dealership questions, information and manufacturing location details.",
@@ -15,7 +16,7 @@ export const metadata = pageMetadata({
  * query changes nothing visible — the form reads it at submit time and the server carries it
  * into the forwarded lead (see src/lib/enquiry/forward.ts).
  */
-export default function ContactUsPage() {
+function ContactUsPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Contact Us", path: "/contact-us" }]} />
@@ -36,3 +37,6 @@ export default function ContactUsPage() {
     </>
   );
 }
+
+export default withPageContent("contact-us", ContactUsPage);
+export const generateMetadata = withSeo("contact-us", pageMetadataBase);

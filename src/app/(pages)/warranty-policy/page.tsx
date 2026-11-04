@@ -1,5 +1,6 @@
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { withBasePath } from "@/lib/base-path";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
 // The live site has no Warranty Policy page; it links straight to this PDF
 // (https://prayagindia.com/sites/default/files/2024-09/Warranty_Policy.pdf). The local copy
@@ -8,7 +9,7 @@ import { withBasePath } from "@/lib/base-path";
 const PDF = "/sites/prayag/files/2024-09/Warranty_Policy.pdf";
 const DOWNLOAD_NAME = "Prayag-Warranty-Policy.pdf";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Warranty Policy | Prayag",
   description: "View or download the official Prayag warranty policy (PDF) for Prayag products.",
   path: "/warranty-policy",
@@ -17,7 +18,7 @@ export const metadata = pageMetadata({
 const actionBase =
   "inline-flex items-center justify-center rounded-[28px] px-[35px] py-[13px] text-[18px] leading-6 font-medium transition-all duration-500 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d6efd]";
 
-export default function WarrantyPolicyPage() {
+function WarrantyPolicyPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Warranty Policy", path: "/warranty-policy" }]} />
@@ -66,3 +67,6 @@ export default function WarrantyPolicyPage() {
     </>
   );
 }
+
+export default withPageContent("warranty-policy", WarrantyPolicyPage);
+export const generateMetadata = withSeo("warranty-policy", pageMetadataBase);

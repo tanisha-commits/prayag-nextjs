@@ -6,7 +6,9 @@ import { ArticleShare } from "@/components/sites/prayag/blog/article-share";
 import "@/components/sites/prayag/blog/article.css";
 import { CatalogRoute, catalogMetadata } from "@/components/sites/prayag/catalog/catalog-route";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
+import { CustomPageView } from "@/components/sites/prayag/cms/custom-page";
 import { getBlogArticle, getBlogIndex } from "@/lib/blog";
+import { readList, readListEntry } from "@/lib/content/store";
 import { withBasePath } from "@/lib/base-path";
 import { storedHtml } from "@/lib/stored-html";
 import { imageDims, responsiveImagesHtml } from "@/lib/image-dimensions";
@@ -18,13 +20,18 @@ import { imageDims, responsiveImagesHtml } from "@/lib/image-dimensions";
 export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return getBlogIndex().map((post) => ({ slug: post.slug }));
+  return [...getBlogIndex().map((post) => ({ slug: post.slug })), ...readList("custom-pages").map((p) => ({ slug: p.key }))];
 }
 
 export async function generateMetadata({ params }: PageProps<"/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const article = await getBlogArticle(slug);
-  if (!article) return catalogMetadata(slug);
+  if (!article) {
+    const custom = readListEntry("custom-pages", slug)?.data;
+    if (custom)
+      return pageMetadata({ title: custom.metaTitle ?? `${custom.title} | Prayag`, description: custom.description ?? undefined, path: `/${slug}`, image: custom.bannerImage });
+    return catalogMetadata(slug);
+  }
   const meta = pageMetadata({
     title: article.metaTitle ?? `${article.title} | Prayag`,
     description: article.description ?? undefined,
@@ -40,7 +47,12 @@ export default async function BlogArticlePage({ params }: PageProps<"/[slug]">) 
   // This route is statically generated, where reading searchParams fails in production. Category
   // landings that use filters/pagination have their own route folders (e.g. ../faucets); any other
   // category reached here (such as one added later in the admin) shows its first, unfiltered page.
-  if (!article) return <CatalogRoute path={slug} searchParams={Promise.resolve({})} />;
+  if (!article) {
+    // Pages made from Markdown in the admin (Content → Custom pages).
+    const custom = readListEntry("custom-pages", slug)?.data;
+    if (custom) return <CustomPageView page={custom} />;
+    return <CatalogRoute path={slug} searchParams={Promise.resolve({})} />;
+  }
 
   const url = `https://prayagindia.com/${article.slug}`;
   // From 1200px the source banner is the image at its natural aspect ratio (height: auto), so the

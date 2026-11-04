@@ -1,13 +1,14 @@
 import { AgritechPage } from "@/components/sites/prayag/product-category/agritech/agritech-page";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
 // The source page has no meta description.
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Agritech | Prayag",
   path: "/agritech",
 });
 
-export default function AgritechRoute() {
+function AgritechRoute() {
   return (
     <>
       {/* "Agritec" is the source h1 text (sic). */}
@@ -21,3 +22,6 @@ export default function AgritechRoute() {
     </>
   );
 }
+
+export default withPageContent("agritech", AgritechRoute);
+export const generateMetadata = withSeo("agritech", pageMetadataBase);

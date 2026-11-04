@@ -2,15 +2,16 @@ import { AboutPage } from "@/components/sites/prayag/about/about-page";
 import { aboutBanner } from "@/components/sites/prayag/about/data";
 import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
+import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-export const metadata = pageMetadata({
+const pageMetadataBase = pageMetadata({
   title: "Prayag Polymers - Information, Support & Resources | Prayag",
   description:
     "Discover Prayag Polymers, its journey, product portfolio, growth and milestones across bathware, sanitaryware, plumbing and building solutions in India.",
   path: "/about-prayag",
 });
 
-export default function AboutPrayagPage() {
+function AboutPrayagPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "About Prayag", path: "/about-prayag" }]} />
@@ -19,3 +20,6 @@ export default function AboutPrayagPage() {
     </>
   );
 }
+
+export default withPageContent("about-prayag", AboutPrayagPage);
+export const generateMetadata = withSeo("about-prayag", pageMetadataBase);
