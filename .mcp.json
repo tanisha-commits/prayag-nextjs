@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "prayag-content": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["tsx", "--env-file-if-exists=.env.local", "scripts/mcp/prayag-content.mts"]
+    }
+  }
+}

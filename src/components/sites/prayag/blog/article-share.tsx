@@ -1,4 +1,4 @@
-import { socialLinks } from "../data";
+import { getContent } from "@/lib/content";
 import { withBasePath } from "@/lib/base-path";
 
 const ICON = "/sites/prayag/theme";
@@ -9,6 +9,7 @@ const ICON = "/sites/prayag/theme";
  * real share links (Facebook, X, LinkedIn) and profile links (YouTube, Instagram).
  */
 export function ArticleShare({ url, title }: { url: string; title: string }) {
+  const socialLinks = getContent("site/social");
   const u = encodeURIComponent(url);
   const t = encodeURIComponent(title);
   const links = [

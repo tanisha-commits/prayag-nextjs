@@ -1,16 +1,18 @@
-import { insights, pageLinks } from "./data";
+import { getContent } from "@/lib/content";
+import { pageLinks } from "./data";
 import { ArrowIcon } from "./icons";
 import { withBasePath } from "@/lib/base-path";
 import { img } from "@/lib/image-dimensions";
 
 export function LatestInsights() {
+  const { heading, cards: insights } = getContent("home/insights");
   return (
     <section className="relative bg-[rgba(221,221,221,0.47)] py-[50px] md:py-[60px]">
       <div className="prayag-container">
         <div className="-mx-3 flex flex-wrap items-start">
           <div className="w-full px-3 md:w-1/2">
             <h2 className="mb-12 text-[28px] leading-[38px] font-medium text-black min-[768px]:text-[30px] min-[768px]:leading-[41px] min-[992px]:text-[38px] min-[992px]:leading-[46px] min-[1400px]:text-[52px] min-[1400px]:leading-[62px]">
-              Our Latest Insights
+              {heading}
             </h2>
           </div>
           <div className="hidden w-full px-3 text-right md:block md:w-1/2">

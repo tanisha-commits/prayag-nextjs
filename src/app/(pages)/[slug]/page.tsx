@@ -6,7 +6,7 @@ import { ArticleShare } from "@/components/sites/prayag/blog/article-share";
 import "@/components/sites/prayag/blog/article.css";
 import { CatalogRoute, catalogMetadata } from "@/components/sites/prayag/catalog/catalog-route";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
-import { blogIndex, getBlogArticle } from "@/lib/blog";
+import { getBlogArticle, getBlogIndex } from "@/lib/blog";
 import { withBasePath } from "@/lib/base-path";
 import { storedHtml } from "@/lib/stored-html";
 import { imageDims, responsiveImagesHtml } from "@/lib/image-dimensions";
@@ -18,7 +18,7 @@ import { imageDims, responsiveImagesHtml } from "@/lib/image-dimensions";
 export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return blogIndex.map((post) => ({ slug: post.slug }));
+  return getBlogIndex().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/[slug]">): Promise<Metadata> {

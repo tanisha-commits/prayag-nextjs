@@ -61,3 +61,6 @@ temp/
 
 # One-time admin setup file (password hash) made by `npm run admin:bundle`
 admin-bootstrap.json
+
+# Content sync file written by `npm run content:export` / deploy:package
+content-sync.json

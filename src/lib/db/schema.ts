@@ -239,3 +239,22 @@ export const rateLimit = sqliteTable("rate_limit", {
   count: integer("count").notNull(),
   lastRequest: integer("last_request").notNull(),
 });
+
+/**
+ * Editable site content (src/lib/content): one validated JSON document per (collection, key), e.g.
+ * ("site", "contact") or ("blog", "<slug>"). A missing row means "use the built-in default", so the
+ * site renders as before until something is edited. `deletedAt` marks a removed list entry (blog
+ * post) so the removal also reaches other copies of the database through content sync.
+ */
+export const contentEntries = sqliteTable(
+  "content_entries",
+  {
+    collection: text("collection").notNull(),
+    key: text("key").notNull(),
+    data: text("data", { mode: "json" }).notNull(),
+    updatedAt: integer("updated_at").notNull(),
+    updatedBy: text("updated_by").notNull(),
+    deletedAt: integer("deleted_at"),
+  },
+  (t) => [primaryKey({ columns: [t.collection, t.key] })],
+);

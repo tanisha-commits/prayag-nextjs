@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { and, eq, isNull } from "drizzle-orm";
 import { SITE_URL } from "@/components/sites/prayag/seo";
-import { blogIndex } from "@/lib/blog";
+import { getBlogIndex } from "@/lib/blog";
 import { getDb } from "@/lib/db";
 import { categories, products } from "@/lib/db/schema";
 
@@ -53,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((c) => `/${c.slug}`);
   const entries = new Map<string, Date | undefined>();
   for (const path of [...STATIC_PATHS, ...categoryPaths]) entries.set(path, undefined);
-  for (const post of blogIndex) entries.set(`/${post.slug}`, new Date(post.timestamp * 1000));
+  for (const post of getBlogIndex()) entries.set(`/${post.slug}`, new Date(post.timestamp * 1000));
   for (const p of db.select({ slug: products.slug, updatedAt: products.updatedAt }).from(products).where(eq(products.status, "published")).all())
     entries.set(`/${p.slug}`, p.updatedAt);
   return [...entries].map(([path, lastModified]) => ({ url: `${SITE_URL}${path === "/" ? "" : path}`, ...(lastModified ? { lastModified } : {}) }));

@@ -1,7 +1,7 @@
 import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { PressGallery } from "@/components/sites/prayag/press/press-gallery";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
-import { pressItems } from "@/content/prayag/press/items";
+import { getContent } from "@/lib/content";
 import { imageDims } from "@/lib/image-dimensions";
 import { responsiveImg } from "@/lib/optimized-image";
 
@@ -19,7 +19,7 @@ export const metadata = pageMetadata({
  * Lightbox thumbnails are 96×64 covers; the lightbox image is at most the viewport.
  */
 function pressImages() {
-  return pressItems.map((item) => {
+  return getContent("pages/press").items.map((item) => {
     const dims = imageDims(item.image);
     const ratio = dims ? dims.width / dims.height : 1;
     const h = (px: number) => `${Math.ceil(px * ratio)}px`;

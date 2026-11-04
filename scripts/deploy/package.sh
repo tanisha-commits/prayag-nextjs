@@ -31,6 +31,10 @@ if [ -f "$OUT/.env.production" ]; then             # ship only the public site U
   mv "$OUT/.env.tmp" "$OUT/.env.production"
 fi
 
+# Content edited locally (admin or Claude via MCP) travels with the package; the server merges it
+# at start-up, keeping any newer edits made in the live admin.
+npx tsx --env-file-if-exists=.env.local scripts/content/export.mts "$OUT/content-sync.json"
+
 if [ -f admin-bootstrap.json ]; then
   cp admin-bootstrap.json "$OUT/admin-bootstrap.json"
   rm -f admin-bootstrap.json
@@ -55,6 +59,11 @@ Built with \`BASE_PATH=/prayagindia\` and \`output: standalone\`. Serve it under
 No database is included, so the server's existing prayag.db is used. Point PRAYAG_DB_PATH at it, or
 copy it into ./data/ before starting. Without a database the app creates an empty one and the
 category pages fail with a 500 error.
+
+## Content
+content-sync.json holds content edited locally (admin or Claude). At start-up the server merges it
+(newer edits win, so live-admin changes since the export are kept), deletes it and re-renders all
+pages from its own database. Look for [content-sync] and [startup] lines in the server log.
 
 ## Admin
 If admin-bootstrap.json is present, the server creates or updates that admin once at start-up and

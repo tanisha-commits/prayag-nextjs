@@ -1,9 +1,7 @@
 import "server-only";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import { getDb } from "@/lib/db";
 import { productImages, products } from "@/lib/db/schema";
-import { blogIndex, type BlogArticle } from "@/lib/blog";
+import { getBlogArticle, getBlogIndex } from "@/lib/blog";
 import { draftPreview } from "@/lib/catalog/public";
 
 // Keyword search behind /search/node, modelled on the source's Drupal node search: every keyword
@@ -42,12 +40,14 @@ function htmlToText(html: string | null) {
 }
 
 let docsPromise: Promise<SearchDoc[]> | null = null;
+let docsAt = 0;
+// Rebuilt at most every 5 minutes, so posts and products edited in the admin become searchable.
+const DOCS_TTL_MS = 5 * 60 * 1000;
 
 async function loadDocs(): Promise<SearchDoc[]> {
   const blogs = await Promise.all(
-    blogIndex.map(async (post) => {
-      const file = path.join(process.cwd(), "src/content/prayag/blog/articles", `${post.slug}.json`);
-      const article = JSON.parse(await readFile(file, "utf8")) as BlogArticle;
+    getBlogIndex().map(async (post) => {
+      const article = (await getBlogArticle(post.slug))!;
       const d = new Date(post.timestamp * 1000);
       return {
         href: `/${post.slug}`,
@@ -77,7 +77,10 @@ async function loadDocs(): Promise<SearchDoc[]> {
 function docs() {
   // Built once per server process; draft preview (dev only) rebuilds on every request.
   if (draftPreview()) return loadDocs();
-  docsPromise ??= loadDocs();
+  if (!docsPromise || Date.now() - docsAt > DOCS_TTL_MS) {
+    docsPromise = loadDocs();
+    docsAt = Date.now();
+  }
   return docsPromise;
 }
 

@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { readList } from "@/lib/content/store";
 import type { Taxonomy } from "./mapping";
 
 /**
@@ -11,11 +12,8 @@ export function reservedSlugs(tax: Taxonomy): Set<string> {
   const root = /* turbopackIgnore: true */ process.cwd();
   const pages = path.join(root, "src/app/(pages)");
   if (fs.existsSync(pages)) for (const d of fs.readdirSync(pages)) if (!d.startsWith("[")) out.add(d);
-  const blogIndex = path.join(root, "src/content/prayag/blog/index.json");
-  if (fs.existsSync(blogIndex)) {
-    const idx = JSON.parse(fs.readFileSync(blogIndex, "utf8")) as { slug: string }[] | { articles?: { slug: string }[] };
-    for (const a of Array.isArray(idx) ? idx : (idx.articles ?? [])) out.add(a.slug);
-  }
+  // Blog posts: imported articles plus any added in the admin or by Claude.
+  for (const post of readList("blog")) out.add(post.key);
   for (const c of tax.categories) out.add(c.slug.split("/")[0]);
   return out;
 }

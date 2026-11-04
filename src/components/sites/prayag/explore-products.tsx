@@ -1,13 +1,14 @@
-import { productTiles } from "./data";
+import { getContent } from "@/lib/content";
 import { withBasePath } from "@/lib/base-path";
 import { img } from "@/lib/image-dimensions";
 
 export function ExploreProducts() {
+  const { heading, tiles: productTiles } = getContent("home/products");
   return (
     <section className="relative bg-[rgba(221,221,221,0.47)] py-[50px] md:py-[60px]">
       <div className="prayag-container">
         <h1 className="mb-6 text-[30px] leading-[50px] font-semibold text-black md:text-[40px]">
-          Explore Our Products
+          {heading}
         </h1>
         <div className="-mx-3 flex flex-wrap justify-center md:justify-start">
           {productTiles.map((tile) => (

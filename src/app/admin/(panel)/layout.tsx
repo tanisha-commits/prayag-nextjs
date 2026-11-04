@@ -10,6 +10,7 @@ const NAV = [
   ["/admin", "Dashboard"],
   ["/admin/products", "Products"],
   ["/admin/categories", "Categories"],
+  ["/admin/content", "Content"],
   ["/admin/import", "Import"],
   ["/admin/ai", "AI suggestions"],
   ["/admin/audit", "Audit log"],

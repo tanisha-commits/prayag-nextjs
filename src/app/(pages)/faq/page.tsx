@@ -1,7 +1,7 @@
 import { FaqTabs } from "@/components/sites/prayag/faq/faq-tabs";
 import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
-import { faqTabs } from "@/content/prayag/faq/faq";
+import { getContent } from "@/lib/content";
 
 export const metadata = pageMetadata({
   title: "Prayag Faqs Information for Homes & Projects | Prayag",
@@ -16,7 +16,7 @@ export default function FaqPage() {
       <BreadcrumbJsonLd items={[{ name: "Faq", path: "/faq" }]} />
       {/* Source banner is the theme image FAQ.webp with alt "Banner Image"; title reads "Faq". */}
       <PageBanner image="/sites/prayag/theme/FAQ.webp" imageAlt="Banner Image" title="Faq" />
-      <FaqTabs tabs={faqTabs} />
+      <FaqTabs tabs={getContent("pages/faq").tabs} />
     </>
   );
 }
