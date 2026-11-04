@@ -51,7 +51,7 @@ export function CategoryPanel() {
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       />
-      <aside
+      <div
         id="pm-category-panel"
         role="dialog"
         aria-modal="true"
@@ -196,7 +196,7 @@ export function CategoryPanel() {
             </li>
           </ul>
         </div>
-      </aside>
+      </div>
     </>
   );
 }

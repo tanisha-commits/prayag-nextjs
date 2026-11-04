@@ -85,7 +85,7 @@ export function CpvcPage() {
                 </p>
                 <a href="#advanced_plumbling" className="prayag-btn">
                   <ArrowIcon />
-                  Know More
+                  Know More<span className="sr-only"> about advanced plumbing</span>
                 </a>
               </div>
             </div>
@@ -171,7 +171,7 @@ export function CpvcPage() {
               </p>
               <a href="#prayag-advantage" className="prayag-btn">
                 <ArrowIcon />
-                Know More
+                Know More<span className="sr-only"> about the Prayag advantage</span>
               </a>
             </div>
           </div>

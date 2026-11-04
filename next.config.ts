@@ -35,6 +35,13 @@ const nextConfig: NextConfig = {
   // ~14 KB gzip on the homepage). Measured on the homepage, mobile Lighthouse: FCP 2.1 s → 1.0 s,
   // performance 77–80 → 87–89; desktop unchanged or better.
   experimental: { inlineCss: true },
+  // Next always bundles a polyfill module for ES2019–2022 methods its supported browsers already
+  // have (PageSpeed: "Legacy JavaScript"). Swap it for a stub that keeps only URL.canParse.
+  turbopack: {
+    resolveAlias: {
+      "../build/polyfills/polyfill-module": { browser: "./src/lib/polyfills/next-polyfill-module.js" },
+    },
+  },
   // Built-in optimizer behind src/lib/optimized-image.ts: plain <img srcset> candidates are resized
   // WebP copies of the original files under /sites/prayag (originals stay untouched). The width lists
   // are a dense ladder (~15% steps) so the chosen candidate stays close to the rendered size; keep

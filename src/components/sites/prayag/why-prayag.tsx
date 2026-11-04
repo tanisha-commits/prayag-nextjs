@@ -34,7 +34,7 @@ export function WhyPrayag() {
                 ))}
               </ul>
               <PrayagButton href={pageLinks.manufacturing} className="[text-shadow:0_0_4px_#000]">
-                Know More
+                Know More<span className="sr-only"> about our manufacturing process</span>
               </PrayagButton>
             </div>
           </div>

@@ -36,7 +36,7 @@ export function CustomerService() {
                 for every valued customer.
               </p>
               <PrayagButton href={pageLinks.contact} className="bg-[rgba(161,152,152,0.41)] px-6 py-2.5">
-                Know More
+                Know More<span className="sr-only"> about customer service</span>
               </PrayagButton>
             </div>
           </div>
