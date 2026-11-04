@@ -2,13 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-/**
- * Source `section.product_split_reveal_sec` (shared by the product-category pages) with the theme
- * script.js scroll-progress reveal: `.psr-image-wrap` slides in from the left and `.psr-content`
- * from the right (100px, 50px at <=768px), fading in while the section top travels from the
- * viewport bottom to 40% of the viewport, eased out-cubic. Reduced motion shows the final state.
- * Before hydration both stay hidden, as on the source before its script runs (pcat-base.css).
- */
 export function SplitRevealSection({ id, children }: { id?: string; children: React.ReactNode }) {
   const ref = useRef<HTMLElement>(null);
 

@@ -12,8 +12,6 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Deploy packages (git-ignored build output with copied sources).
-    "dist/**",
   ]),
 ]);
 

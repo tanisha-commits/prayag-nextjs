@@ -4,11 +4,6 @@ import path from "node:path";
 
 const cache = new Map<string, Promise<string | undefined>>();
 
-/**
- * A tiny blurred preview of a local image (about 0.5 KB, data URI) to paint behind it while the real
- * file loads, so the first frames show the image's colours instead of an empty box. Undefined for
- * remote or missing images; never throws.
- */
 export function blurPlaceholder(src: string | undefined): Promise<string | undefined> {
   if (!src || !src.startsWith("/sites/")) return Promise.resolve(undefined);
   let hit = cache.get(src);

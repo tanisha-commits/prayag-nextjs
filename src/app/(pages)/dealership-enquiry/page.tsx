@@ -1,21 +1,19 @@
 import { DealershipForm } from "@/components/sites/prayag/dealership/dealership-form";
 import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
-import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-const pageMetadataBase = pageMetadata({
+export const metadata = pageMetadata({
   title: "Prayag Dealership - Explore Official Information | Prayag",
   description:
     "Submit a Prayag dealership enquiry to connect with the team about dealer opportunities, distribution requirements, product categories and business support.",
   path: "/dealership-enquiry",
 });
 
-function DealershipEnquiryPage() {
+export default function DealershipEnquiryPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Dealership Enquiry", path: "/dealership-enquiry" }]} />
       <PageBanner image="/sites/prayag/files/2024-09/Banner_0.webp" title="Dealership Enquiry" />
-      {/* Source `section.dealership_form_main.sp` */}
       <section className="py-6 min-[768px]:py-[60px]">
         <div className="prayag-container">
           <div className="-mx-3 flex flex-wrap">
@@ -39,6 +37,3 @@ function DealershipEnquiryPage() {
     </>
   );
 }
-
-export default withPageContent("dealership-enquiry", DealershipEnquiryPage);
-export const generateMetadata = withSeo("dealership-enquiry", pageMetadataBase);

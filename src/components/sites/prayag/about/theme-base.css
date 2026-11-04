@@ -1,9 +1,3 @@
-/*
- * Element defaults from the source theme (themes/custom/prayag style.css on top of Bootstrap
- * reboot) that the ported page CSS of About / CEO / Sustainability / Manufacturing relies on.
- * Scoped with :where() so specificity stays at element level, exactly like the theme rules,
- * and every page-specific rule still wins. Unlayered, so it beats Tailwind's preflight.
- */
 :where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) :where(h1, h2, h3, h4, h5, h6) {
   margin: 0;
   color: #000;
@@ -60,7 +54,6 @@
 }
 
 @media (max-width: 767px) {
-  /* theme: `body p` */
   :where(.hist-page, .ceo-profile-page, .sus-page, .mf-page) p {
     font-size: 15px;
     line-height: 25px;

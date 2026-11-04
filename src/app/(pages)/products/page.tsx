@@ -2,9 +2,8 @@ import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { responsiveImg } from "@/components/sites/prayag/responsive-image";
 import "@/components/sites/prayag/products/products.css";
 import { withBasePath } from "@/lib/base-path";
-import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-const pageMetadataBase = pageMetadata({
+export const metadata = pageMetadata({
   title: "Premium Bathroom And Plumbing Products in India | Prayag",
   description:
     "Explore bathroom and plumbing products from Prayag for reliable quality and practical use. View key features, specifications and applications for homes and.",
@@ -12,8 +11,6 @@ const pageMetadataBase = pageMetadata({
   image: "/sites/prayag/files/2024-10/products-1-.webp",
 });
 
-// Source https://prayagindia.com/products: the category grid in the live order. Every card carries
-// the same "Bathroom, Kitchen and Lighting" line on the source.
 const CATEGORIES = [
   { name: "Plumbing Solutions", href: "/plumbing-solutions", image: "/sites/prayag/files/2026-08/Plumbing-pipe.png" },
   { name: "CP Faucets", href: "/faucets", image: "/sites/prayag/files/2025-07/PTMT.webp" },
@@ -29,7 +26,7 @@ const CATEGORIES = [
 ];
 
 /* eslint-disable @next/next/no-img-element -- source <img> markup kept 1:1 under the scoped theme CSS */
-function ProductsPage() {
+export default function ProductsPage() {
   return (
     <div className="pcat-products">
       <BreadcrumbJsonLd items={[{ name: "Products", path: "/products" }]} />
@@ -73,6 +70,3 @@ function ProductsPage() {
     </div>
   );
 }
-
-export default withPageContent("products", ProductsPage);
-export const generateMetadata = withSeo("products", pageMetadataBase);

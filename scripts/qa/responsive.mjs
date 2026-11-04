@@ -1,10 +1,3 @@
-// Usage: PLAYWRIGHT_DIR=... node scripts/qa/responsive.mjs <out.json> [--widths=375,390,768,1366,1440,1920] [--all | path...]
-// Opens each local page at each width (GET only) after scrolling it through, and records:
-//   overflowX     document wider than the viewport (horizontal scroll) + the widest offending elements
-//   brokenImages  <img> that finished loading with no pixels
-//   consoleErrors console errors / uncaught exceptions
-//   failed        requests answering >= 400 or failing
-// --all takes the paths from the local sitemap. Prints only pages with findings.
 import fs from "fs";
 import { LOCAL, WIDTHS, launch, settle, sitemapPaths } from "./browser.mjs";
 
@@ -30,7 +23,6 @@ async function run({ path, width }) {
   page.on("response", (r) => r.status() >= 400 && failed.push(`${r.status()} ${r.url().replace(LOCAL, "")}`));
   page.on("requestfailed", (r) => {
     const f = r.failure()?.errorText ?? "";
-    // Aborted media/prefetch requests are normal when navigation/scrolling cancels them.
     if (!/ERR_ABORTED/.test(f)) failed.push(`failed ${f} ${r.url().replace(LOCAL, "")}`);
   });
   await page.route("**/*", (r) => (r.request().method() === "GET" || r.request().url().startsWith(LOCAL) ? r.continue() : r.abort()));
@@ -49,7 +41,6 @@ async function run({ path, width }) {
           for (const el of document.querySelectorAll("body *")) {
             const r = el.getBoundingClientRect();
             if (r.width && r.right > vw + 1) {
-              // Skip elements clipped by an ancestor with overflow hidden/auto.
               let clipped = false;
               for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
                 const s = getComputedStyle(a);
@@ -81,7 +72,6 @@ await Promise.all(
   Array.from({ length: CONCURRENCY }, async () => {
     while (jobs.length) {
       const job = jobs.shift();
-      // A page that never settles is reported, not waited on forever.
       await Promise.race([run(job), new Promise((r) => setTimeout(r, 240000))]).catch(() => {});
     }
   }),

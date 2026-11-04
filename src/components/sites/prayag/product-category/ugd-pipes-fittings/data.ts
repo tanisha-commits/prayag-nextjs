@@ -1,9 +1,5 @@
-// Content for /ugd-pipes-fittings (source: prayagindia.com/ugd-pipes-fittings, taxonomy/term/213).
-// Text is verbatim from the live page, including its typos.
-
 import type { Faq } from "../cpvc-plumbing-solution/faq-section";
 
-/** "Why Choose" card; `iconAlt` is omitted where the source <img> has no alt attribute. */
 export type FeatureCard = { title: string; text: string; icon: string; iconAlt?: string };
 
 export type LabelledItem = { label: string; text: string };
@@ -35,10 +31,8 @@ export const benefits: LabelledItem[] = [
   { label: "High Flow Efficiency:", text: "The smooth inner surface ensures easy flow of water and prevents scale buildup." },
 ];
 
-/** Spec table cells; each cell is a list of lines (the source separates some with <br>). */
 export type SpecTable = { head: string[]; rows: string[][][] };
 
-/** Pane #pane-testing. */
 export const pipeSpecs: SpecTable = {
   head: ["Type", "Size Range (mm)", "Thickness Range (mm)"],
   rows: [
@@ -47,7 +41,6 @@ export const pipeSpecs: SpecTable = {
   ],
 };
 
-/** Pane #pane-defined. */
 export const fittingSpecs: SpecTable = {
   head: ["Jointing System", "Sizes Available", "Fittings Offered"],
   rows: [

@@ -1,34 +1,16 @@
-/**
- * Product-category landing pages rebuilt 1:1 from prayagindia.com (taxonomy-term listing views).
- * Filter titles, their order and the option lists are the source's exposed-form fieldsets, read
- * from the live pages; options map to stored attribute values by slug. `subcategory` groups list
- * the category's own subcategories. Static parts (banner, SEO content, FAQ) and the source listing
- * order live in src/content/prayag/catalog/category-pages.json (scripts/prayag-category-pages.py).
- */
 export interface FilterGroup {
-  /** Attribute key, or "subcategory" for the category tree. */
   key: string;
   label: string;
-  /** Attribute groups: option labels in source order. */
   options?: string[];
-  /** Subcategory groups: source label for a subcategory slug where it differs from the name. */
   rename?: Record<string, string>;
-  /** The source renders this group as flat `.bef-checkboxes` (no `.bef-nested` list). */
   flat?: boolean;
 }
 
 export interface LiveCategoryConfig {
-  /** "filters": sidebar + paged 3-column grid (9 per page); "plain": every product in a 3-column grid. */
   layout: "filters" | "plain";
-  /**
-   * Card colours: "dots" = `.color-options` spans (always rendered, as on CP Faucets/PTMT); "radio" =
-   * `.color-options .color-radio` circles, only when the product has colours; "none" = no colour row.
-   */
   swatches: "dots" | "radio" | "none";
   filters: FilterGroup[];
-  /** Source exposed-form id (some theme rules target it). */
   formId?: string;
-  /** The source view wrapper lacks the `filterview` class (Kitchen Sinks), so its form is not a grid. */
   noFilterviewClass?: boolean;
 }
 
@@ -104,7 +86,6 @@ export const LIVE_CATEGORY_PAGES: Record<string, LiveCategoryConfig> = {
     formId: "views-exposed-form-bathroom-accessories-filter-page-1",
     swatches: "radio",
     filters: [
-      // Source terms with no products tagged (the source returns nothing for them either).
       { key: "accessory range", label: "Filter by Collection", flat: true, options: ["CP Faucets", "PTMT"] },
       { key: "subcategory", label: "Filter by Type", flat: true, rename: { "bathroom-accessories/shower": "Showers" } },
     ],
@@ -114,9 +95,6 @@ export const LIVE_CATEGORY_PAGES: Record<string, LiveCategoryConfig> = {
     formId: "views-exposed-form-pipes-fittings-filter-page-1",
     swatches: "none",
     filters: [
-      // The source filters on a separate "plumbing category" vocabulary (Plumbing Pipes > CPVC/UPVC/OPVC,
-      // Agriculture, Sewerage Drainage) that the local catalog does not hold; the local subcategories
-      // are listed under the source labels instead. Matching the source tree needs a catalog change.
       {
         key: "subcategory",
         label: "Filter By Category",

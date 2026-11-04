@@ -1,17 +1,11 @@
-/* Theme shared by the public stylesheet (globals.css) and the admin one (admin/admin.css). */
 @custom-variant dark (&:is(.dark *));
 
-/* Breakpoints follow the Prayag source CSS (Bootstrap + navik header):
-   sm 576, md 769 (source mobile rules are max-width: 768px),
-   lg 991, xl 1200, nav 1040 (header desktop layout), 2xl 1400 (container gutter jumps to 90px: the
-   source's `max-width: 1399px` 60px rule wins over its older `> 1320px` 90px one). */
 @theme {
   --breakpoint-sm: 576px;
   --breakpoint-md: 769px;
   --breakpoint-lg: 991px;
   --breakpoint-xl: 1200px;
   --breakpoint-2xl: 1400px;
-  /* Header only: desktop nav from where its links fit on one line (they wrap below ~1036px). */
   --breakpoint-nav: 1040px;
 }
 

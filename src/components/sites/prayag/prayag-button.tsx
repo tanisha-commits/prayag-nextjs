@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils";
 import { ArrowIcon } from "./icons";
 import { withBasePath } from "@/lib/base-path";
 
-/** Source `.prayag-btn`: black pill with an arrow; lifts to a blue gradient on hover. */
 export function PrayagButton({
   href,
   children,
@@ -12,7 +11,6 @@ export function PrayagButton({
   href: string;
   children: React.ReactNode;
   className?: string;
-  /** Accessible name when the visible text alone is ambiguous (must start with the visible text). */
   label?: string;
 }) {
   return (

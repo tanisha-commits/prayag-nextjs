@@ -1,6 +1,3 @@
-// Line icons of the source `.application_inter_main_sec .feature-list` (shared by the cPVC and UGD
-// pages), verbatim; names follow the source's HTML comments. Decorative, so aria-hidden.
-
 import type { ReactElement } from "react";
 
 export type ApplicationIcon = "pump" | "rock" | "industry" | "home" | "shield";

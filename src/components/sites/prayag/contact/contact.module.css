@@ -1,4 +1,3 @@
-/* Source inline CSS on /contact-us: `.contact-section { animation: fadeIn 1s ease-in; }` */
 @keyframes contactFadeIn {
   from {
     opacity: 0;

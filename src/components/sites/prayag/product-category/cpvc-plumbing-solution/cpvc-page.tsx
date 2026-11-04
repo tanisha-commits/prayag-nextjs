@@ -12,13 +12,9 @@ import "./cpvc-plumbing-solution.css";
 import "./cpvc-responsive.css";
 
 import { fullImg } from "@/lib/image-dimensions";
-import { Tx } from "@/components/sites/prayag/cms/tx";
 
 const IMG = "/sites/prayag/theme/cpvc";
 
-// The source HTML already carries data-once="ngp-feature-slider" / "cp-slider", so the theme's
-// Drupal behaviours skip both sliders and the page's inline script initialises them with these
-// settings (confirmed on the live page: 3 cards per view at 820px, which only these allow).
 const featureSlider: SlickSettings = {
   autoplay: true,
   autoplaySpeed: 3000,
@@ -53,10 +49,8 @@ const rangeSlider: SlickSettings = {
 
 const applicationIconOrder: ApplicationIcon[] = ["pump", "rock", "industry", "home", "home", "home"];
 
-// Inline styles copied from the source markup (they outrank the ported stylesheet there too).
 const specCell = { textAlign: "left", paddingLeft: 24 } as const;
 
-/** /cpvc-plumbing-solution — source taxonomy/term/209 (page--taxonomy--term--209.html.twig). */
 export function CpvcPage() {
   return (
     <PcatPage slug="cpvc-plumbing-solution">
@@ -76,14 +70,17 @@ export function CpvcPage() {
           <div className="row align-items-center">
             <div className="col-12 col-md-6">
               <div className="prayag-content-box">
-                <h2 className="prayag-heading"><Tx>{"What are cPVC Pipes?"}</Tx></h2>
-                <p className="prayag-subtitle"><Tx>{"Superior Hot & Cold Water Distribution System "}</Tx></p>
+                <h2 className="prayag-heading">What are cPVC Pipes?</h2>
+                <p className="prayag-subtitle">Superior Hot &amp; Cold Water Distribution System </p>
                 <p className="prayag-desc">
-                  <Tx>{"Prayag cPVC Pipes are advanced chlorinated polyvinyl chloride plumbing pipes designed specifically for hot and cold potable water distribution. Manufactured using premium-grade cPVC compound, they offer higher thermal stability, superior pressure handling, corrosion resistance, and excellent durability compared to conventional piping materials."}</Tx>
+                  Prayag cPVC Pipes are advanced chlorinated polyvinyl chloride plumbing pipes designed specifically for hot
+                  and cold potable water distribution. Manufactured using premium-grade cPVC compound, they offer higher
+                  thermal stability, superior pressure handling, corrosion resistance, and excellent durability compared to
+                  conventional piping materials.
                 </p>
                 <a href="#advanced_plumbling" className="prayag-btn" aria-label="Know More about advanced plumbing">
                   <ArrowIcon />
-                  <Tx>{"Know More"}</Tx>
+                  Know More
                 </a>
               </div>
             </div>
@@ -97,9 +94,8 @@ export function CpvcPage() {
 
       <section className="ngp-section" style={{ background: "#1a1a1a", padding: "60px 0" }}>
         <div className="container-fluid">
-          {/* Source heading has a stray </strong> (no opening tag), which the parser drops. */}
           <h2 className="text-center" style={{ color: "#fff", marginBottom: 40 }}>
-            <Tx>{"Why Choose Prayag cPVC Casing Pipes?"}</Tx>
+            Why Choose Prayag cPVC Casing Pipes?
           </h2>
           <SlickCarousel
             settings={featureSlider}
@@ -109,9 +105,9 @@ export function CpvcPage() {
           >
             {features.map((feature, i) => (
               <div key={feature.title} className="ngp-feature-item">
-                <div className="ngp-icon-circle"><Tx>{featureIcons[i]}</Tx></div>
-                <h3 className="ngp-feature-label"><Tx>{feature.title}</Tx></h3>
-                <p className="ngp_para"><Tx>{feature.text}</Tx></p>
+                <div className="ngp-icon-circle">{featureIcons[i]}</div>
+                <h3 className="ngp-feature-label">{feature.title}</h3>
+                <p className="ngp_para">{feature.text}</p>
               </div>
             ))}
           </SlickCarousel>
@@ -127,8 +123,8 @@ export function CpvcPage() {
             </div>
             <div className="msf-overlay">
               <div className="msf-content">
-                <h2 className="msf-title"><Tx>{"Explore Our Plumling Solution"}</Tx></h2>
-                <p className="msf-subtitle"><Tx>{"cPVC Pipes"}</Tx></p>
+                <h2 className="msf-title">Explore Our Plumling Solution</h2>
+                <p className="msf-subtitle">cPVC Pipes</p>
               </div>
             </div>
           </div>
@@ -149,17 +145,27 @@ export function CpvcPage() {
           </div>
           <div className="psr-content-col">
             <div className="psr-content">
-              <span className="psr-eyebrow"><Tx>{"Advanced Plumbing Solutions for Modern Infrastructure"}</Tx></span>
-              <h2 className="psr-title"><Tx>{"High Performance cPVC Pipes"}</Tx></h2>
+              <span className="psr-eyebrow">Advanced Plumbing Solutions for Modern Infrastructure</span>
+              <h2 className="psr-title">High Performance cPVC Pipes</h2>
               <p className="psr-description">
-                <Tx>{"Prayag CPVC Pipes are engineered to deliver safe, reliable, and long-lasting hot and cold water distribution for residential, commercial, and industrial applications. Manufactured from premium-grade Chlorinated Polyvinyl Chloride (CPVC), they offer exceptional resistance to heat, pressure, corrosion, chemicals, and scaling, ensuring consistent performance even under demanding conditions. Their high Vicat Softening Temperature and superior burst strength make them ideal for continuous hot water systems, while the smooth inner surface promotes efficient water flow with minimal friction loss."}</Tx>
+                Prayag CPVC Pipes are engineered to deliver safe, reliable, and long-lasting hot and cold water
+                distribution for residential, commercial, and industrial applications. Manufactured from premium-grade
+                Chlorinated Polyvinyl Chloride (CPVC), they offer exceptional resistance to heat, pressure, corrosion,
+                chemicals, and scaling, ensuring consistent performance even under demanding conditions. Their high Vicat
+                Softening Temperature and superior burst strength make them ideal for continuous hot water systems, while
+                the smooth inner surface promotes efficient water flow with minimal friction loss.
               </p>
               <p className="psr-description">
-                <Tx>{"Made from food-grade, non-toxic material, Prayag CPVC Pipes preserve the purity, taste, and odour of drinking water. Lightweight construction and solvent-welded joints allow for quick, leak-proof installation, reducing both labour and maintenance costs. Supported by a comprehensive range of compatible fittings and accessories, Prayag provides a complete plumbing solution designed for durability, efficiency, and peace of mind. Whether for new construction or renovation projects, Prayag CPVC Pipes are built to deliver dependable performance for years to come."}</Tx>
+                Made from food-grade, non-toxic material, Prayag CPVC Pipes preserve the purity, taste, and odour of
+                drinking water. Lightweight construction and solvent-welded joints allow for quick, leak-proof
+                installation, reducing both labour and maintenance costs. Supported by a comprehensive range of compatible
+                fittings and accessories, Prayag provides a complete plumbing solution designed for durability,
+                efficiency, and peace of mind. Whether for new construction or renovation projects, Prayag CPVC Pipes are
+                built to deliver dependable performance for years to come.
               </p>
               <a href="#prayag-advantage" className="prayag-btn" aria-label="Know More about the Prayag advantage">
                 <ArrowIcon />
-                <Tx>{"Know More"}</Tx>
+                Know More
               </a>
             </div>
           </div>
@@ -171,12 +177,12 @@ export function CpvcPage() {
           <div className="row">
             <div className="col-12 col-lg-5">
               <div className="application_iner_content">
-                <h2><Tx>{"Application"}</Tx></h2>
+                <h2>Application</h2>
                 <ul className="feature-list">
                   {applications.map((text, i) => (
                     <li key={text}>
-                      <span className="icon"><Tx>{applicationIcons[applicationIconOrder[i]]}</Tx></span>
-                      <p><Tx>{text}</Tx></p>
+                      <span className="icon">{applicationIcons[applicationIconOrder[i]]}</span>
+                      <p>{text}</p>
                     </li>
                   ))}
                 </ul>
@@ -195,7 +201,7 @@ export function CpvcPage() {
       <section className="prayag-advantage-acc-sec pt-0" id="prayag-advantage">
         <div className="container-fluid">
           <h2 className="prayag-adv-heading">
-            <Tx>{"The "}</Tx><strong><Tx>{"Prayag Advantage"}</Tx></strong>
+            The <strong>Prayag Advantage</strong>
           </h2>
           <div className="prayag-adv-split">
             <div className="prayag-adv-accordion-col col-6">
@@ -212,15 +218,14 @@ export function CpvcPage() {
 
       <section className="cp-strength p-0">
         <div className="container-fluid">
-          <h2 className="cp-title"><Tx>{"CPVC Fittings & Pipes Range"}</Tx></h2>
-          <p className="cp-eyebrow"><Tx>{"CPVC Fittings for Every Connection"}</Tx></p>
+          <h2 className="cp-title">CPVC Fittings &amp; Pipes Range</h2>
+          <p className="cp-eyebrow">CPVC Fittings for Every Connection</p>
           <div className="cp-intro">
             <p>
-              <Tx>{"Explore our complete range of high-performance CPVC pipes, fittings, valves, and accessories designed for secure, leak-proof joints in hot and cold water distribution systems."}</Tx>
+              Explore our complete range of high-performance CPVC pipes, fittings, valves, and accessories designed for
+              secure, leak-proof joints in hot and cold water distribution systems.
             </p>
           </div>
-          {/* The source uses slick lazyLoad (data-lazy, loaded before a slide shows). Images load eagerly here: a
-              not-yet-loaded image has no intrinsic width, which would shrink its flex card until it arrives. */}
           <SlickCarousel settings={rangeSlider} className="cp-slider" aria-label="CPVC fittings and pipes range">
             {rangeCards.map((card, i) => (
               <div key={i} className="cp-card">
@@ -229,10 +234,10 @@ export function CpvcPage() {
                   <img {...fullImg(card.image)} alt={card.alt} />
                 </figure>
                 <div className="cp-card-content">
-                  <h3 className="cp-card-title"><Tx>{card.title}</Tx></h3>
+                  <h3 className="cp-card-title">{card.title}</h3>
                   <div className={`cp-card-bar cp-card-bar--${card.bar}`} />
                   <p>
-                    <strong><Tx>{"Range:"}</Tx></strong> <Tx>{card.range}</Tx>
+                    <strong>Range:</strong> {card.range}
                   </p>
                 </div>
               </div>
@@ -244,8 +249,8 @@ export function CpvcPage() {
       <section className="prayag-specs">
         <div className="prayag-specs__inner">
           <div className="prayag-specs__header">
-            <h2 className="prayag-specs__title"><Tx>{"Specifications"}</Tx></h2>
-            <p className="prayag-specs__subtitle"><Tx>{"Quality you can measure"}</Tx></p>
+            <h2 className="prayag-specs__title">Specifications</h2>
+            <p className="prayag-specs__subtitle">Quality you can measure</p>
           </div>
           <SpecTabs
             tabs={[
@@ -258,10 +263,10 @@ export function CpvcPage() {
                       <thead>
                         <tr>
                           <th scope="col" style={{ ...specCell, width: "35%" }}>
-                            <Tx>{"Parameter"}</Tx>
+                            Parameter
                           </th>
                           <th scope="col" className="is-highlight" style={specCell}>
-                            <Tx>{"Specification Details"}</Tx>
+                            Specification Details
                           </th>
                         </tr>
                       </thead>
@@ -269,14 +274,14 @@ export function CpvcPage() {
                         {specRows.map((row) => (
                           <tr key={row.param}>
                             <td className="cell-param" data-label="Parameter">
-                              <Tx>{row.param}</Tx>
+                              {row.param}
                             </td>
                             <td
                               className={row.highlight ? "cell-highlight" : undefined}
                               data-label="Specification"
                               style={specCell}
                             >
-                              <Tx>{row.value}</Tx>
+                              {row.value}
                             </td>
                           </tr>
                         ))}

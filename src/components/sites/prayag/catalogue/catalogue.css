@@ -1,7 +1,3 @@
-/*
- * /download-cataglogue — ported from the source theme rules for `.catalogue_wrapper` / `.catalogue_item`
- * (themes/custom/prayag style.css + Bootstrap grid), keeping the source class names.
- */
 section.catalogue_wrapper {
   position: relative;
   padding: 60px 0;
@@ -13,7 +9,6 @@ section.catalogue_wrapper {
   margin: 0 -12px;
 }
 
-/* `.col-md-4`, plus theme overrides: 50% at <=767px, 100% at <=575px */
 .catalogue_wrapper .catalogue-col {
   flex: 0 0 auto;
   width: 100%;
@@ -38,7 +33,6 @@ section.catalogue_wrapper {
   display: block;
 }
 
-/* Heading colours apply to their links (the source wraps the whole card in one <a>). */
 .catalogue_content a {
   color: inherit;
 }

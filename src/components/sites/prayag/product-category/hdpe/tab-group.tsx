@@ -2,23 +2,14 @@
 
 import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export interface TabGroupItem {
-  /** Source tab id, if it has one (otherwise `tab-<paneId>`). */
   tabId?: string;
   paneId: string;
   label: ReactNode;
   panel: ReactNode;
 }
 
-/**
- * The source pages' vanilla tab scripts (`.prayag-specs__tab` / `.prayag-fitting-specs__tab`):
- * clicking a tab moves `active` (+ `show` on Bootstrap `.tab-pane`s) to it and its pane. Renders the
- * source `ul.nav[role=tablist]` followed by the pane container, keeping the source classes so the
- * ported CSS applies. Added: WAI-ARIA tabs pattern (aria-controls/labelledby, roving tabindex,
- * arrow keys / Home / End with automatic activation).
- */
 export function TabGroup({
   items,
   listClassName,
@@ -39,7 +30,6 @@ export function TabGroup({
   contentClassName: string;
   contentId?: string;
   paneClassName: string;
-  /** "active" for `.prayag-specs__pane`, "show active" for Bootstrap `.tab-pane.fade`. */
   activePaneClassName: string;
   paneTabIndex?: number;
 }) {
@@ -80,7 +70,7 @@ export function TabGroup({
               onClick={() => setSelected(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
             >
-              <Tx>{item.label}</Tx>
+              {item.label}
             </button>
           </li>
         ))}
@@ -95,7 +85,7 @@ export function TabGroup({
             aria-labelledby={tabIdOf(item)}
             tabIndex={paneTabIndex}
           >
-            <Tx>{item.panel}</Tx>
+            {item.panel}
           </div>
         ))}
       </div>

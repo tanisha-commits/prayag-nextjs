@@ -1,9 +1,3 @@
-/*
- * Not from the source (hand-written; the other CSS files here are generated). Between 768px and
- * about 1000px the source sizes the product image box at 250px (its max-width: 1399px rule) while
- * the card column is narrower, so the box spills over the next card and the page scrolls sideways
- * (prayagindia.com does the same). Capping it at the card width changes nothing where it already fits.
- */
 .pcat-catalog .pro_p_img {
   max-width: 100%;
 }

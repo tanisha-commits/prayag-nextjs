@@ -7,7 +7,6 @@ import { ceoBanner, ceoFacts, ceoPortrait, ceoStory, ceoVisibleItems } from "./d
 
 import { fullImg } from "@/lib/image-dimensions";
 
-/** Body of /ceo-profile (source `.ceo-profile-page`; styles ported 1:1 into ceo.css). */
 export function CeoPage() {
   return (
     <div className="ceo-profile-page">

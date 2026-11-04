@@ -1,13 +1,8 @@
 import "server-only";
-import { getDb } from "@/lib/db";
-import { productImages, products } from "@/lib/db/schema";
-import { getBlogArticle, getBlogIndex } from "@/lib/blog";
-import { draftPreview } from "@/lib/catalog/public";
-
-// Keyword search behind /search/node, modelled on the source's Drupal node search: every keyword
-// must occur (AND), title hits rank above body hits, 10 results per page, and each result shows an
-// excerpt with the keywords in <strong>. Indexes blog articles and published products. The source
-// also indexes its static pages; their copy lives in components here, so they are not searchable.
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { blogIndex, type BlogArticle } from "@/lib/blog";
+import { allProducts } from "@/lib/catalog/queries";
 
 export const SEARCH_PAGE_SIZE = 10;
 
@@ -16,7 +11,6 @@ export interface SearchDoc {
   title: string;
   image: string | null;
   imageAlt: string;
-  /** Source display date, e.g. "31  July,  2026" (blog articles only). */
   date: string | null;
   text: string;
 }
@@ -40,14 +34,12 @@ function htmlToText(html: string | null) {
 }
 
 let docsPromise: Promise<SearchDoc[]> | null = null;
-let docsAt = 0;
-// Rebuilt at most every 5 minutes, so posts and products edited in the admin become searchable.
-const DOCS_TTL_MS = 5 * 60 * 1000;
 
 async function loadDocs(): Promise<SearchDoc[]> {
   const blogs = await Promise.all(
-    getBlogIndex().map(async (post) => {
-      const article = (await getBlogArticle(post.slug))!;
+    blogIndex.map(async (post) => {
+      const file = path.join(process.cwd(), "src/content/prayag/blog/articles", `${post.slug}.json`);
+      const article = JSON.parse(await readFile(file, "utf8")) as BlogArticle;
       const d = new Date(post.timestamp * 1000);
       return {
         href: `/${post.slug}`,
@@ -59,34 +51,26 @@ async function loadDocs(): Promise<SearchDoc[]> {
       };
     }),
   );
-  const db = getDb();
-  const rows = db.select().from(products).all().filter((p) => p.status === "published" || (draftPreview() && p.status === "draft"));
-  const images = new Map<number, { src: string; alt: string | null }>();
-  for (const img of db.select().from(productImages).orderBy(productImages.sortOrder).all()) if (!images.has(img.productId)) images.set(img.productId, img);
-  const items = rows.map((p) => ({
-    href: `/${p.slug}`,
-    title: p.title,
-    image: images.get(p.id)?.src ?? null,
-    imageAlt: images.get(p.id)?.alt || p.title,
-    date: null,
-    text: [p.title, p.itemCode, p.shortDescription, htmlToText(p.descriptionHtml), ...(p.features ?? []), ...(p.applications ?? [])].filter(Boolean).join(" "),
-  }));
+  const items = allProducts
+    .filter((p) => p.status === "published")
+    .map((p) => ({
+      href: `/${p.slug}`,
+      title: p.title,
+      image: p.images[0]?.src ?? null,
+      imageAlt: p.images[0]?.alt || p.title,
+      date: null,
+      text: [p.title, p.itemCode, p.shortDescription, htmlToText(p.descriptionHtml), ...p.features, ...p.applications].filter(Boolean).join(" "),
+    }));
   return [...blogs, ...items];
 }
 
 function docs() {
-  // Built once per server process; draft preview (dev only) rebuilds on every request.
-  if (draftPreview()) return loadDocs();
-  if (!docsPromise || Date.now() - docsAt > DOCS_TTL_MS) {
-    docsPromise = loadDocs();
-    docsAt = Date.now();
-  }
+  docsPromise ??= loadDocs();
   return docsPromise;
 }
 
 const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-/** Up to three ~80-character excerpts around keyword hits, joined by " … " like Drupal's search_excerpt(). */
 function snippet(text: string, words: string[]) {
   const re = new RegExp(`(${words.map(escapeRe).join("|")})`, "gi");
   const parts: string[] = [];

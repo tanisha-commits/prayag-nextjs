@@ -1,10 +1,3 @@
-// Usage: PLAYWRIGHT_DIR=<dir containing node_modules/playwright> node scripts/prayag-css-capture.mjs <out-dir> <slug>...
-// Loads each https://prayagindia.com/<slug> in Chrome at 1440px (GET only) and writes
-//   <out-dir>/<slug>.used.json      external theme-stylesheet rules whose selector matches an element
-//                                   of the page content (header/footer/drawer excluded), with a global
-//                                   rule index so pages can be merged in source order;
-//   <out-dir>/<slug>.pagecss.json   the page's own inline <style> blocks, every rule, in source order.
-// Then run scripts/prayag-css-generate.py to write the scoped CSS files.
 import { createRequire } from "module";
 const require = createRequire((process.env.PLAYWRIGHT_DIR ?? process.cwd()).replace(/\/?$/, "/"));
 const { chromium } = require("playwright");
@@ -34,7 +27,7 @@ for (const slug of pages) {
       }
     }
     for (const sh of document.styleSheets) {
-      if (!sh.href) continue; // inline <style> = page CSS, handled separately
+      if (!sh.href) continue;
       try { walk(sh.cssRules, "", sh.href); } catch (e) { out.push({ href: sh.href, error: String(e) }); }
     }
     return { out, sheets: [...document.styleSheets].map(s => s.href) };

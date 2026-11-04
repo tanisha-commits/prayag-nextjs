@@ -4,12 +4,7 @@ import { SlickCarousel, type SlickSettings } from "../slick-carousel";
 import type { FaqItem, Feature, FittingCard, FittingPane, ImageCard, RichText, SpecTableData } from "./types";
 import { withBasePath } from "@/lib/base-path";
 import { fullImg } from "@/lib/image-dimensions";
-import { Tx } from "@/components/sites/prayag/cms/tx";
 
-// Section markup shared by the PPR, SWR and Composite pipe pages. Class names, nesting and the
-// source's inline styles are kept 1:1 because the ported page CSS targets them.
-
-/** slick options of theme script.js `Drupal.behaviors.ngpFeatureSlider` (PPR and Composite pages). */
 export const THEME_NGP_SLICK: SlickSettings = {
   slidesToShow: 4,
   slidesToScroll: 1,
@@ -33,17 +28,16 @@ export function RichTextView({ text }: { text: RichText }) {
       part
     ) : part.href.startsWith("/") ? (
       <Link key={i} href={part.href}>
-        <Tx>{part.text}</Tx>
+        {part.text}
       </Link>
     ) : (
       <a key={i} href={withBasePath(part.href)}>
-        <Tx>{part.text}</Tx>
+        {part.text}
       </a>
     ),
   );
 }
 
-/** Dark "Why Choose Prayag … Pipes?" band with the feature slider. */
 export function NgpSection({
   heading,
   label,
@@ -51,17 +45,15 @@ export function NgpSection({
   children,
 }: {
   heading: ReactNode;
-  /** Accessible name for the carousel region (the source slider has none). */
   label: string;
   settings: SlickSettings;
   children: ReactNode;
 }) {
   return (
-    // Inline styles as on the source; they outrank the theme's .ngp-section rules.
     <section className="ngp-section" style={{ background: "#1a1a1a", padding: "60px 0" }}>
       <div className="container-fluid">
         <h2 className="text-center" style={{ color: "#fff" }}>
-          <Tx>{heading}</Tx>
+          {heading}
         </h2>
         <SlickCarousel settings={settings} className="ngp-features-slider" style={{ color: "#fff" }} aria-label={label}>
           {children}
@@ -71,7 +63,6 @@ export function NgpSection({
   );
 }
 
-// A plain element (not a component) so SlickCarousel's cloneElement puts its inline style on the <article>.
 function fittingCard(card: FittingCard, width: number, height: number, key?: number) {
   return (
     <article key={key} className="cfs-card">
@@ -80,12 +71,12 @@ function fittingCard(card: FittingCard, width: number, height: number, key?: num
         <img {...fullImg(card.src)} alt={card.alt} loading="lazy" width={width} height={height} className="cfs-card__img" />
       </figure>
       <div className="cfs-card__body">
-        <h3 className="cfs-card__title"><Tx>{card.title}</Tx></h3>
+        <h3 className="cfs-card__title">{card.title}</h3>
         <ul className="cfs-card__meta">
           {card.meta.map((row) => (
             <li key={row.label}>
-              <strong><Tx>{row.label}</Tx></strong>
-              <Tx>{row.value}</Tx>
+              <strong>{row.label}</strong>
+              {row.value}
             </li>
           ))}
           {card.emptyMetaItem && <li />}
@@ -95,7 +86,6 @@ function fittingCard(card: FittingCard, width: number, height: number, key?: num
   );
 }
 
-/** `.cfs-slider` of fitting cards. `wrapped`: the PPR source nests every card in a bare `<div>`. */
 export function FittingSlider({
   pane,
   settings,
@@ -125,7 +115,7 @@ export function SpecTable({ table }: { table: SpecTableData }) {
         <thead>
           <tr>
             {table.head.map((cell) => (
-              <th key={cell}><Tx>{cell}</Tx></th>
+              <th key={cell}>{cell}</th>
             ))}
           </tr>
         </thead>
@@ -134,7 +124,7 @@ export function SpecTable({ table }: { table: SpecTableData }) {
             <tr key={row[0]}>
               {row.map((cell, i) => (
                 <td key={i} data-label={table.head[i]}>
-                  <Tx>{cell}</Tx>
+                  {cell}
                 </td>
               ))}
             </tr>
@@ -145,11 +135,6 @@ export function SpecTable({ table }: { table: SpecTableData }) {
   );
 }
 
-/**
- * "Faq's" block: questions 1–8 in the left column, the rest on the right. Each answer keeps the
- * source's empty paragraphs around `p.MsoNormal` (Drupal wrapped a pasted <p> in another <p>);
- * they add their margins to the layout.
- */
 export function FaqSection({ className, items }: { className: string; items: FaqItem[] }) {
   const columns = [items.slice(0, 8), items.slice(8)];
   return (
@@ -158,13 +143,13 @@ export function FaqSection({ className, items }: { className: string; items: Faq
         <div className="row">
           <div className="col-md-12">
             <div className="faq_sing_pro">
-              <h2><Tx>{"Faq's"}</Tx></h2>
+              <h2>Faq&apos;s</h2>
               <div className="row">
                 {columns.map((column, c) => (
                   <div key={c} className="col-md-6 col-6">
                     {column.map((item) => (
                       <div key={item.question} className="faq_box">
-                        <h3><Tx>{item.question}</Tx></h3>
+                        <h3>{item.question}</h3>
                         <p />
                         <p className="MsoNormal">
                           <span lang="EN-IN">
@@ -185,7 +170,6 @@ export function FaqSection({ className, items }: { className: string; items: Faq
   );
 }
 
-/** `.ka-card`s of a "Where our pipes work" grid. */
 export function KaCards({ items }: { items: ImageCard[] }) {
   return items.map((item) => (
     <div key={item.title} className="ka-card">
@@ -194,17 +178,13 @@ export function KaCards({ items }: { items: ImageCard[] }) {
         <img {...fullImg(item.src)} alt={item.alt} />
       </div>
       <div className="ka-card-body">
-        <h3><Tx>{item.title}</Tx></h3>
-        <p><Tx>{item.text}</Tx></p>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
       </div>
     </div>
   ));
 }
 
-/**
- * `.ngp-feature-item`s with image icons (PPR uses an <h3> label, Composite a <span>). Returns the
- * elements themselves (not a component) because SlickCarousel treats each child as one slide.
- */
 export function featureItems(items: Feature[], Label: "h3" | "span") {
   return items.map((item) => (
     <div key={item.label} className="ngp-feature-item">
@@ -212,8 +192,8 @@ export function featureItems(items: Feature[], Label: "h3" | "span") {
         {/* eslint-disable-next-line @next/next/no-img-element -- source icon, intrinsic size kept */}
         <img {...fullImg(item.src)} alt={item.alt} />
       </div>
-      <Label className="ngp-feature-label"><Tx>{item.label}</Tx></Label>
-      <p className="ngp_para"><Tx>{item.text}</Tx></p>
+      <Label className="ngp-feature-label">{item.label}</Label>
+      <p className="ngp_para">{item.text}</p>
     </div>
   ));
 }

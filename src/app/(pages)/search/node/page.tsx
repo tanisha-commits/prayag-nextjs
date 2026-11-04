@@ -6,9 +6,6 @@ import "@/components/sites/prayag/search/search.css";
 import { withBasePath } from "@/lib/base-path";
 import { storedHtml } from "@/lib/stored-html";
 
-// Source https://prayagindia.com/search/node?keys=… (Drupal node search, olivero pager), rebuilt on
-// the live markup under the scoped theme CSS. The source form POSTs and redirects to ?keys=…; a GET
-// form lands on the same URL. Result pages are not indexed.
 export const metadata: Metadata = {
   ...pageMetadata({ title: "Search | Prayag", path: "/search/node" }),
   robots: { index: false, follow: true },
@@ -17,7 +14,6 @@ export const metadata: Metadata = {
 const ARROW = "M1.11201 7.19126L9.41183 1.15503C10.0728 0.674329 11 1.14648 11 1.96377V14.0362C11 14.8535 10.0728 15.3257 9.41183 14.845L1.11201 8.80874C0.562908 8.40939 0.562907 7.59061 1.11201 7.19126Z";
 const EDGE = "M5.1,7.2l8.3-6C14.1,0.7,15,1.1,15,2V14c0,0.8-0.9,1.3-1.6,0.8l-8.3-6C4.6,8.4,4.6,7.6,5.1,7.2z M0,0h2v16H0V0z";
 
-/** Drupal core pager: up to 9 page links centred on the current page, plus first/previous/next/last. */
 function Pager({ keys, page, pages }: { keys: string; page: number; pages: number }) {
   if (pages < 2) return null;
   const href = (p: number) => `?keys=${encodeURIComponent(keys)}&page=${p}`;

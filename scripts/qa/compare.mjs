@@ -1,8 +1,3 @@
-// Usage: PLAYWRIGHT_DIR=... node scripts/qa/compare.mjs <out-dir> [--widths=1440,390] <path>...
-// Loads each path on prayagindia.com and on the local server (GET only; every non-GET request is
-// aborted so no form or tracker on the live site is triggered), then writes full-page screenshots
-// <out-dir>/<slug>-<width>-{live,local}.png and prints page heights and the vertical size of every
-// top-level block between header and footer, so section-by-section differences stand out.
 import fs from "fs";
 import { LIVE, LOCAL, launch, settle } from "./browser.mjs";
 
@@ -28,7 +23,6 @@ for (const path of paths) {
           const skip = (el) => el.matches("header, footer, script, style, noscript, aside, .navik-header, [hidden]") || el.offsetHeight === 0;
           const main = document.querySelector("main") ?? document.querySelector(".dialog-off-canvas-main-canvas") ?? document.body;
           let blocks = [...main.children].filter((el) => !skip(el));
-          // Unwrap single wrappers (layout divs) so the list shows real sections.
           while (blocks.length === 1 && blocks[0].children.length) blocks = [...blocks[0].children].filter((el) => !skip(el));
           return {
             height: document.documentElement.scrollHeight,

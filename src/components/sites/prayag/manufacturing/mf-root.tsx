@@ -2,13 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-/**
- * `.mf-page` root + the source script's scroll reveals and image safety:
- * - children of `.mf-text` / `.mf-index` and every `[data-rv]` element ease in, markers and
- *   step lines draw in, `.mf-mask` photos reveal with a clip mask (12% visible, or already
- *   above the viewport). Off with reduced motion; if anything throws, content stays visible.
- * - a photo that fails to load hides its figure and collapses the grid to one column.
- */
 export function MfRoot({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -57,7 +50,7 @@ export function MfRoot({ children }: { children: React.ReactNode }) {
         io = observer;
         root.querySelectorAll(".mf-rv, .mf-mask").forEach((el) => observer.observe(el));
       } catch {
-        root.classList.remove("mf-js"); // never leave content hidden
+        root.classList.remove("mf-js");
       }
     }
 

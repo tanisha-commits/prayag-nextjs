@@ -1,14 +1,7 @@
 import { transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
-import { Tx } from "@/components/sites/prayag/cms/tx";
 
-/** Local copies of the Drupal image-style derivatives the source banner <img> references. */
 export type BannerImage = { medium: string; thumbnail: string; large: string; wide: string };
 
-/**
- * Source `.breadcrumb_main` banner (shared by the cPVC and UGD pages): image left, page title
- * right. The srcset is the source's verbatim, including the thumbnail derivative listed twice
- * (300w and 600w) by the Drupal template.
- */
 export function CategoryBanner({ image, alt, title }: { image: BannerImage; alt: string; title: string }) {
   return (
     <div className="breadcrumb_main">
@@ -29,7 +22,7 @@ export function CategoryBanner({ image, alt, title }: { image: BannerImage; alt:
           </div>
           <div className="col-md-6">
             <div className="breadcrumb_title">
-              <h1 className="black_title"><Tx>{title}</Tx></h1>
+              <h1 className="black_title">{title}</h1>
             </div>
           </div>
         </div>
@@ -38,7 +31,6 @@ export function CategoryBanner({ image, alt, title }: { image: BannerImage; alt:
   );
 }
 
-/** "Know More" arrow of the source `.prayag-btn` links. */
 export function ArrowIcon() {
   return (
     <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

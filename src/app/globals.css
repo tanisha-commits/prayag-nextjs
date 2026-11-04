@@ -4,8 +4,6 @@
 
 @import "./theme.css";
 
-/* Admin-only markup gets its own stylesheet (src/app/admin/admin.css), loaded on admin pages only, so
-   public pages do not carry the admin's utility classes (the CSS is inlined into every page). */
 @source not "./admin";
 @source not "../components/admin";
 @source not "../components/ui";
@@ -93,9 +91,7 @@
     @apply font-sans;
   }
 }
-/* ---------- Prayag clone ---------- */
 
-/* Source `.container-fluid`: 12px (<=768), 60px (769-1399), 90px (>=1400). */
 @utility prayag-container {
   width: 100%;
   margin-inline: auto;

@@ -1,11 +1,3 @@
-"""Pixel-compare the live/local screenshot pairs written by scripts/qa/compare.mjs.
-
-Usage: python3 -I scripts/qa/pixel-diff.py <out-dir>
-
-For every <name>-live.png / <name>-local.png pair, prints the share of differing pixels (channel
-difference > 40, which ignores anti-aliasing noise) over the common height, and writes
-<name>-diff.png: live | local | differences in red. Needs Pillow.
-"""
 import glob
 import sys
 

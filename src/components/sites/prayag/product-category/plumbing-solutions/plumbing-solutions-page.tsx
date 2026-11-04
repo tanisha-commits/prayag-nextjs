@@ -3,11 +3,9 @@ import { PcatPage } from "../pcat-page";
 import "./plumbing-solutions.css";
 
 import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
-import { Tx } from "@/components/sites/prayag/cms/tx";
 
 const BANNER = "/sites/prayag/files/styles";
 
-// Source order, labels and (copy-pasted) alt texts verbatim from https://prayagindia.com/plumbing-solutions.
 const subcategories = [
   { label: "HDPE", href: "/hdpe", image: "/sites/prayag/files/2026-10/main-banner-hdpe.webp", alt: "Bromo Vertical " },
   { label: "Agritec", href: "/agritech", image: "/sites/prayag/files/2026-09/hero-section.webp", alt: "Bromo Vertical " },
@@ -48,11 +46,9 @@ const subcategories = [
     alt: "Nile Vertical ",
   },
   { label: "PPR Pipes", href: "/ppr-pipes", image: "/sites/prayag/files/2026-08/PPR-main-banner.webp", alt: "Pico Vertical " },
-  // Source href is "/PVC-O%20Pipes", which the live site redirects to /pvc-o-pipes.
   { label: "PVC-O Pipes", href: "/pvc-o-pipes", image: "/sites/prayag/files/2026-09/cpvcO.webp", alt: "PVC-O Pipes" },
 ];
 
-/** Plumbing Solutions hub (source taxonomy term page): banner + grid of the 10 sub-categories. */
 export function PlumbingSolutionsPage() {
   return (
     <PcatPage slug="plumbing-solutions">
@@ -77,7 +73,7 @@ export function PlumbingSolutionsPage() {
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
-                <h1 className="black_title"><Tx>{"Plumbing Solutions"}</Tx></h1>
+                <h1 className="black_title">Plumbing Solutions</h1>
               </div>
             </div>
           </div>
@@ -97,7 +93,7 @@ export function PlumbingSolutionsPage() {
                             {/* eslint-disable-next-line @next/next/no-img-element -- source intrinsic sizing kept 1:1 */}
                             <img {...fullImg(item.image)} alt={item.alt} />
                           </div>
-                          <h6><Tx>{item.label}</Tx></h6>
+                          <h6>{item.label}</h6>
                         </div>
                       </Link>
                     </div>

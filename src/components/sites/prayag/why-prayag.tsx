@@ -1,20 +1,19 @@
-import { getContent } from "@/lib/content";
+import { pageLinks, whyImages, whyPoints } from "./data";
 import { PrayagButton } from "./prayag-button";
 import { withBasePath } from "@/lib/base-path";
 import { img } from "@/lib/image-dimensions";
 
 export function WhyPrayag() {
-  const { heading, points: whyPoints, topImage, sideImage, buttonLabel, buttonHref } = getContent("home/why");
   return (
     <section className="relative bg-white py-[50px] md:py-[60px]">
       <div className="prayag-container overflow-hidden">
         <div className="-mx-3 flex flex-wrap">
           <div className="w-full px-3 md:w-1/2">
             {/* eslint-disable-next-line @next/next/no-img-element -- natural-ratio editorial image */}
-            <img {...img(topImage, "auto, (min-width: 769px) 50vw, 100vw")} alt="" loading="lazy" className="h-auto w-full max-lg:object-cover" />
+            <img {...img(whyImages.top, "auto, (min-width: 769px) 50vw, 100vw")} alt="" loading="lazy" className="h-auto w-full max-lg:object-cover" />
             <div className="pt-10 pr-5 pl-2.5 lg:pr-[50px] lg:pl-10 xl:pt-[50px] xl:pr-20 xl:pl-[50px]">
               <h2 className="mb-[30px] text-[30px] leading-10 font-medium text-black sm:text-[36px] sm:leading-[42px] lg:mb-12 min-[992px]:text-[38px] min-[992px]:leading-[46px] min-[1400px]:text-[52px] min-[1400px]:leading-[62px]">
-                {heading}
+                Why Prayag
               </h2>
               <ul>
                 {whyPoints.map((point) => (
@@ -34,18 +33,16 @@ export function WhyPrayag() {
                   </li>
                 ))}
               </ul>
-              <PrayagButton href={buttonHref} className="[text-shadow:0_0_4px_#000]" label={`${buttonLabel}: ${heading}`}>
-                {buttonLabel}
+              <PrayagButton href={pageLinks.manufacturing} className="[text-shadow:0_0_4px_#000]" label="Know More about our manufacturing process">
+                Know More
               </PrayagButton>
             </div>
           </div>
           <div className="w-full px-3 md:w-1/2">
-            {/* Source uses `position: sticky; top: 150px` inside an overflow-hidden container,
-                which renders as a fixed 150px offset that never moves on scroll. */}
             <div className="relative text-right md:top-[150px]">
               {/* eslint-disable-next-line @next/next/no-img-element -- natural-ratio editorial image */}
               <img
-                {...img(sideImage, "auto, 45vw")}
+                {...img(whyImages.side, "auto, 45vw")}
                 alt=""
                 loading="lazy"
                 className="ml-auto hidden h-[350px] w-[90%] object-cover md:inline lg:h-auto lg:w-[85%]"

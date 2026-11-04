@@ -1,11 +1,6 @@
 import { cn } from "@/lib/utils";
 import { responsiveImg } from "./responsive-image";
 
-/**
- * Inner-page banner (source `.breadcrumb_main`): image left, black title panel right;
- * stacks below 769px. The source row keeps Bootstrap's -12px gutters with zero column
- * padding, so each half is 12px wider than 50% and the overflow is clipped.
- */
 export function PageBanner({
   image,
   imageAlt = "",
@@ -16,7 +11,6 @@ export function PageBanner({
   image: string;
   imageAlt?: string;
   title: string;
-  /** Extra content under the title (e.g. blog publish date + share links). */
   children?: React.ReactNode;
   className?: string;
 }) {

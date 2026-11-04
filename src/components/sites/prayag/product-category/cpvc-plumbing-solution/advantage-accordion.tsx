@@ -3,13 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import type { AdvantageItem } from "./data";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-/**
- * Source `.prayag-accordion`: the first card starts `active`; the page's inline script moves
- * `active` to whichever card the pointer enters (no click/keyboard handling on the source).
- * The closed cards' text stays in the DOM, so it remains available to assistive technology.
- */
 export function AdvantageAccordion({ items }: { items: AdvantageItem[] }) {
   const [active, setActive] = useState(0);
   return (
@@ -21,11 +15,11 @@ export function AdvantageAccordion({ items }: { items: AdvantageItem[] }) {
           onMouseEnter={() => setActive(i)}
         >
           <div className="prayag-acc-head">
-            <span className="prayag-acc-num"><Tx>{item.num}</Tx></span>
-            <h3><Tx>{item.title}</Tx></h3>
+            <span className="prayag-acc-num">{item.num}</span>
+            <h3>{item.title}</h3>
           </div>
           <div className="prayag-acc-content">
-            <p><Tx>{item.text}</Tx></p>
+            <p>{item.text}</p>
           </div>
         </div>
       ))}

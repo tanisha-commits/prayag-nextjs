@@ -1,15 +1,10 @@
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { withBasePath } from "@/lib/base-path";
-import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-// The live site has no Warranty Policy page; it links straight to this PDF
-// (https://prayagindia.com/sites/default/files/2024-09/Warranty_Policy.pdf). The local copy
-// is byte-identical to that official file (SHA-256 22ccc725…3e79, verified 2026-10-28), so
-// the PDF stays the authoritative document and no policy text is reproduced here.
 const PDF = "/sites/prayag/files/2024-09/Warranty_Policy.pdf";
 const DOWNLOAD_NAME = "Prayag-Warranty-Policy.pdf";
 
-const pageMetadataBase = pageMetadata({
+export const metadata = pageMetadata({
   title: "Warranty Policy | Prayag",
   description: "View or download the official Prayag warranty policy (PDF) for Prayag products.",
   path: "/warranty-policy",
@@ -18,7 +13,7 @@ const pageMetadataBase = pageMetadata({
 const actionBase =
   "inline-flex items-center justify-center rounded-[28px] px-[35px] py-[13px] text-[18px] leading-6 font-medium transition-all duration-500 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d6efd]";
 
-function WarrantyPolicyPage() {
+export default function WarrantyPolicyPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Warranty Policy", path: "/warranty-policy" }]} />
@@ -58,7 +53,6 @@ function WarrantyPolicyPage() {
             </a>
           </div>
 
-          {/* Inline preview where browsers render PDFs reliably; phones get the buttons above. */}
           <div className="hidden overflow-hidden rounded-[10px] border border-[#e5e7eb] md:block">
             <iframe src={withBasePath(`${PDF}#view=FitH`)} title="Prayag Warranty Policy (PDF)" className="block h-[80vh] min-h-[600px] w-full" />
           </div>
@@ -67,6 +61,3 @@ function WarrantyPolicyPage() {
     </>
   );
 }
-
-export default withPageContent("warranty-policy", WarrantyPolicyPage);
-export const generateMetadata = withSeo("warranty-policy", pageMetadataBase);

@@ -1,12 +1,7 @@
 "use client";
 
 import type { MouseEvent, ReactNode } from "react";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-/**
- * Source `.pt-tile` button: `showModal()`s the `<dialog>` named by its data-target. Focus returns
- * to the tile when the dialog closes (close button, backdrop click or Esc).
- */
 export function PtTile({ target, children }: { target: string; children: ReactNode }) {
   const open = (e: MouseEvent<HTMLButtonElement>) => {
     const tile = e.currentTarget;
@@ -22,10 +17,6 @@ export function PtTile({ target, children }: { target: string; children: ReactNo
   );
 }
 
-/**
- * Source `dialog.pt-fitting-dialog`: header (title + subtitle + close button) and body. As on the
- * source, a click on the dialog element itself (its ::backdrop) closes it; Esc is native.
- */
 export function PtDialog({
   id,
   title,
@@ -49,8 +40,8 @@ export function PtDialog({
     >
       <div className="pt-dialog-head">
         <div>
-          <h3 id={labelId}><Tx>{title}</Tx></h3>
-          <p><Tx>{subtitle}</Tx></p>
+          <h3 id={labelId}>{title}</h3>
+          <p>{subtitle}</p>
         </div>
         <button
           type="button"

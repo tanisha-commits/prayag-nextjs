@@ -2,12 +2,9 @@ import { ENQUIRY_FALLBACK_CONTACT as C, type EnquiryResult, type FormId, HONEYPO
 import { forwardEnquiry } from "./forward";
 import { validateEnquiry } from "./validate";
 
-/** Generous for these forms (all fields at maxlength stay well below this). */
 const MAX_BODY_BYTES = 32 * 1024;
 const MAX_PRODUCT_LENGTH = 200;
 
-// Best-effort per-instance limiter (serverless instances do not share it; a platform WAF rule
-// should back it in production).
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX = 20;
 const hits = new Map<string, number[]>();
@@ -43,7 +40,7 @@ function clientKey(request: Request): string {
 
 function sameOrigin(request: Request): boolean {
   const origin = request.headers.get("origin");
-  if (!origin) return true; // non-browser clients (curl) send none
+  if (!origin) return true;
   try {
     const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
     return new URL(origin).host === host;
@@ -86,7 +83,6 @@ export async function handleEnquiry(formId: FormId, request: Request): Promise<R
   }
   const input = body as Record<string, unknown>;
 
-  // Honeypot: hidden from people, filled by naive bots. Rejected without forwarding.
   const trap = input[HONEYPOT_FIELD];
   if (typeof trap === "string" && trap.trim() !== "") {
     return reply(400, { status: "error", message: MESSAGES.rejected });
@@ -101,7 +97,6 @@ export async function handleEnquiry(formId: FormId, request: Request): Promise<R
   if (results === null) {
     return reply(503, { status: "pending", message: MESSAGES.pending });
   }
-  // Status codes only — never the payload or the upstream response body.
   console.info(`[enquiry] ${formId}: ${results.map((r) => `${r.destination}=${r.status || "network-error"}`).join(" ")}`);
   if (results.some((r) => r.ok)) {
     return reply(200, { status: "success", message: MESSAGES.success });

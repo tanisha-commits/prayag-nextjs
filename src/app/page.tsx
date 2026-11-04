@@ -9,9 +9,8 @@ import { SiteFooter } from "@/components/sites/prayag/site-footer";
 import { SiteHeader } from "@/components/sites/prayag/site-header";
 import { SportingSpirit } from "@/components/sites/prayag/sporting-spirit";
 import { WhyPrayag } from "@/components/sites/prayag/why-prayag";
-import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-const pageMetadataBase = pageMetadata({
+export const metadata = pageMetadata({
   title: "Prayag Polymers Limited - India's No.1 Sanitaryware Manufacturer",
   description:
     "Prayag Polymers Limited is India’s leading Sanitaryware manufacturing brand. It offers a premium, wide range of reliable, and affordable sanitary products in India.",
@@ -19,8 +18,6 @@ const pageMetadataBase = pageMetadata({
   image: "/sites/prayag/theme/logo.png",
 });
 
-// The source homepage's structured data, with the same facts. Organization appears once (the source
-// repeats it); the logo and search URLs point at addresses this site serves.
 const STRUCTURED_DATA = [
   {
     "@context": "https://schema.org",
@@ -81,9 +78,7 @@ const STRUCTURED_DATA = [
   },
 ];
 
-// Source: https://prayagindia.com/ (Drupal page--homepage.html.twig).
-// The source's "Stay in Touch" section is omitted: the live site hides it (`section.stay_touch { display: none }`).
-function Home() {
+export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA).replace(/</g, "\\u003c") }} />
@@ -102,6 +97,3 @@ function Home() {
     </>
   );
 }
-
-export default withPageContent("home", Home);
-export const generateMetadata = withSeo("home", pageMetadataBase);

@@ -1,6 +1,3 @@
-// Content of https://prayagindia.com/ppr-pipes, verbatim (including "Temprature" in the tab labels).
-// Feature icons are /media/<id> on the source; the identical files from the Drupal backup are used.
-
 import type { FaqItem, Feature, FittingPane, SpecPane } from "./types";
 
 export const fittingPanes: FittingPane[] = [

@@ -2,9 +2,6 @@
 
 import { useEffect } from "react";
 
-// Port of the source theme's Drupal.behaviors.ppProduct (gallery, tabs, related slider, copy link),
-// attached to the server-rendered markup of the product page. The tabs are rendered already
-// initialised (`is-ready`, first tab selected), so nothing shifts when this runs.
 export function ProductBehaviours() {
   useEffect(() => {
     const root = document.querySelector<HTMLElement>(".pcat-product");
@@ -15,7 +12,6 @@ export function ProductBehaviours() {
       off.push(() => el.removeEventListener(type, fn as EventListener, opts));
     };
 
-    // Gallery
     const gallery = root.querySelector<HTMLElement>("[data-pp-gallery]");
     const main = gallery?.querySelector<HTMLImageElement>("[data-pp-main]");
     const thumbs = gallery ? [...gallery.querySelectorAll<HTMLButtonElement>("[data-pp-thumb]")] : [];
@@ -24,7 +20,6 @@ export function ProductBehaviours() {
       const show = (index: number) => {
         current = (index + thumbs.length) % thumbs.length;
         const t = thumbs[current];
-        // The main image has responsive sources; swap the set along with the fallback src.
         if (t.dataset.srcset) main.srcset = t.dataset.srcset;
         main.src = t.dataset.src ?? main.src;
         main.alt = t.dataset.alt ?? "";
@@ -33,7 +28,6 @@ export function ProductBehaviours() {
           if (i === current) el.setAttribute("aria-current", "true");
           else el.removeAttribute("aria-current");
         });
-        // Keep the active thumbnail visible by scrolling the thumbnail rail only (never the page).
         const rail = t.parentElement;
         rail?.scrollTo({ top: t.offsetTop - (rail.clientHeight - t.offsetHeight) / 2, left: t.offsetLeft - (rail.clientWidth - t.offsetWidth) / 2, behavior: "smooth" });
       };
@@ -55,7 +49,6 @@ export function ProductBehaviours() {
       }
     }
 
-    // Tabs
     const tabsRoot = root.querySelector<HTMLElement>("[data-pp-tabs]");
     const tabs = tabsRoot ? [...tabsRoot.querySelectorAll<HTMLButtonElement>("[data-pp-tab]")] : [];
     const panels = tabsRoot ? [...tabsRoot.querySelectorAll<HTMLElement>(".pp-panel")] : [];
@@ -78,7 +71,6 @@ export function ProductBehaviours() {
       });
     });
 
-    // Related products slider
     const rel = root.querySelector<HTMLElement>("[data-pp-rel]");
     const track = rel?.querySelector<HTMLElement>("[data-pp-rel-track]");
     const prev = rel?.querySelector<HTMLButtonElement>("[data-pp-rel-prev]");
@@ -97,7 +89,6 @@ export function ProductBehaviours() {
       update();
     }
 
-    // Copy link
     const copy = root.querySelector<HTMLButtonElement>("[data-pp-copy]");
     const status = root.querySelector<HTMLElement>("[data-pp-copy-status]");
     if (copy) {

@@ -1,11 +1,3 @@
-
-/* ==========================================================================
-   Prayag – History page
-   Brand colours only: #000, #fff, #40ADE3
-   Every rule is scoped under .hist-page (header / footer / banner untouched).
-   Layout: full width, 90px side padding – same as the rest of the site.
-   ========================================================================== */
-
 .hist-page {
   --hp-black: #000;
   --hp-white: #fff;
@@ -13,8 +5,8 @@
   --hp-text: rgba(0, 0, 0, 0.82);
   --hp-muted: rgba(0, 0, 0, 0.6);
   --hp-line: rgba(0, 0, 0, 0.14);
-  --hp-pad: 90px;                /* side padding, same as your site */
-  --hp-header-offset: 6.5rem;    /* sticky header height + breathing room */
+  --hp-pad: 90px;
+  --hp-header-offset: 6.5rem;
 
   display: block;
   background: var(--hp-white);
@@ -36,7 +28,6 @@
   padding: 0 var(--hp-pad);
 }
 
-/* shared heading look */
 .hist-page .hist-lead h1,
 .hist-page .hist-lead h2,
 .hist-page .hist-lead h3,
@@ -52,7 +43,6 @@
   text-transform: none;
 }
 
-/* ---------- 1. Intro: lead statement across the full width ---------- */
 .hist-page .hist-intro {
   padding: clamp(3rem, 6vw, 6rem) 0 clamp(2rem, 4vw, 4rem);
 }
@@ -85,8 +75,6 @@
   margin-bottom: 0;
 }
 
-/* wide screens: the long lead runs in two columns so lines stay readable
-   and the right side is filled instead of left empty */
 @media (min-width: 1400px) {
   .hist-page .hist-lead {
     column-count: 2;
@@ -94,7 +82,6 @@
   }
 }
 
-/* ---------- 2. Image + description ---------- */
 .hist-page .hist-story {
   padding: 0 0 clamp(3rem, 5vw, 5rem);
 }
@@ -103,7 +90,7 @@
   display: grid;
   grid-template-columns: minmax(0, 28rem) minmax(0, 1fr);
   column-gap: clamp(2rem, 6vw, 7rem);
-  align-items: center;           /* image and text share the same centre line */
+  align-items: center;
 }
 
 .hist-page .hist-desc {
@@ -122,7 +109,6 @@ section.hist-intro .hist-wrap .hist-lead {
   margin-bottom: 0;
 }
 
-/* first paragraph opens the story */
 .hist-page .hist-desc > p:first-child:not(:last-child) {
   margin-bottom: 1.75rem;
   color: var(--hp-black);
@@ -131,7 +117,6 @@ section.hist-intro .hist-wrap .hist-lead {
   line-height: 1.5;
 }
 
-/* last paragraph closes it – set apart by a hairline */
 .hist-page .hist-desc > p:last-child:not(:first-child) {
   margin-top: 2rem;
   padding-top: 1.5rem;
@@ -175,7 +160,7 @@ section.hist-intro .hist-wrap .hist-lead {
 .hist-page .hist-figure {
   width: 100%;
   margin: 0;
-  padding: 0 1rem 1rem 0;       /* room for the offset outline */
+  padding: 0 1rem 1rem 0;
 }
 
 .hist-page .hist-figure__frame {
@@ -196,11 +181,10 @@ section.hist-intro .hist-wrap .hist-lead {
   display: block;
   width: 100%;
   max-width: 100%;
-  height: auto;                  /* natural proportions, never stretched */
+  height: auto;
   background: var(--hp-line);
 }
 
-/* ---------- 3. Counters (black band) ---------- */
 .hist-page .hist-counters {
   padding: clamp(2.5rem, 4vw, 4rem) 0;
   background: var(--hp-black);
@@ -236,10 +220,8 @@ section.hist-intro .hist-wrap .hist-lead {
   line-height: 1;
   letter-spacing: -0.02em;
   text-transform: none;
-  font-variant-numeric: tabular-nums;   /* digits keep equal width while counting */
+  font-variant-numeric: tabular-nums;
 }
-
-
 
 .hist-page .hist-counters h4,
 .hist-page .hist-counters p {
@@ -252,7 +234,6 @@ section.hist-intro .hist-wrap .hist-lead {
   text-transform: none;
 }
 
-/* ---------- 4. Key milestones: scroll-linked timeline ---------- */
 .hist-page .hist-miles {
   padding: clamp(3rem, 6vw, 6rem) 0 clamp(4rem, 7vw, 7rem);
 }
@@ -270,12 +251,11 @@ section.hist-intro .hist-wrap .hist-lead {
     position: relative;
 }
 
-/* spine: grey track + accent fill that grows with scroll */
 .hist-page .hist-spine {
   position: absolute;
   top: var(--spine-top, 3rem);
   bottom: var(--spine-bottom, 3rem);
-  left: 7px;                                      /* mobile: sits on the left */
+  left: 7px;
   width: 2px;
   margin-left: -1px;
   background: var(--hp-line);
@@ -337,7 +317,6 @@ section.hist-intro .hist-wrap .hist-lead {
   list-style: none;
 }
 
-/* node on the spine */
 .hist-page .hist-node {
   position: absolute;
   z-index: 2;
@@ -351,7 +330,6 @@ section.hist-intro .hist-wrap .hist-lead {
   transition: background-color 0.35s, border-color 0.35s, transform 0.5s var(--ease-spring), box-shadow 0.4s;
 }
 
-/* card */
 .hist-page .hist-card {
   position: relative;
   padding: 1.5rem 1.75rem 1.75rem;
@@ -365,7 +343,6 @@ section.hist-intro .hist-wrap .hist-lead {
     border-color 0.4s ease;
 }
 
-/* connector from node to card */
 .hist-page .hist-card::before {
   content: "";
   position: absolute;
@@ -400,7 +377,6 @@ section.hist-intro .hist-wrap .hist-lead {
   transition: opacity 0.6s ease 0.24s, translate 0.8s var(--ease-spring) 0.24s;
 }
 
-/* latest milestone: solid black card */
 .hist-page .hist-item:last-child .hist-card {
   border-color: var(--hp-black);
   background: var(--hp-black);
@@ -411,7 +387,6 @@ section.hist-intro .hist-wrap .hist-lead {
   color: var(--hp-white);
 }
 
-/* hover / active: card lifts, accent offset shadow (same motif as the photo outline) */
 .hist-page .hist-item:hover .hist-card,
 .hist-page .hist-item.is-active .hist-card {
   border-color: var(--hp-black);
@@ -424,7 +399,6 @@ section.hist-intro .hist-wrap .hist-lead {
   box-shadow: 0 0 0 6px rgba(64, 173, 227, 0.25);
 }
 
-/* ---- JS enhancements (only when the script runs and motion is allowed) ---- */
 .hist-page.hist-js .hist-item:not(.is-passed):not(.is-active) .hist-node {
   border-color: rgba(0, 0, 0, 0.25);
   background: var(--hp-white);
@@ -435,10 +409,9 @@ section.hist-intro .hist-wrap .hist-lead {
 }
 
 .hist-page.hist-js .hist-item:not(.is-passed):not(:last-child):not(.is-active):not(:hover) .hist-year {
-  color: rgba(0, 0, 0, 0.55);           /* upcoming: dimmer, still AA-contrast */
+  color: rgba(0, 0, 0, 0.55);
 }
 
-/* staggered entrance: card → year → title */
 .hist-page.hist-js .hist-item:not(.is-in) .hist-card {
   opacity: 0;
   translate: var(--dx, 0) 28px;
@@ -457,7 +430,6 @@ section.hist-intro .hist-wrap .hist-lead {
   translate: 0 0;
 }
 
-/* ---- desktop: alternating cards around a centre spine ---- */
 @media (min-width: 992px) {
   .hist-page .hist-track .hist-spine {
     left: 50%;
@@ -476,7 +448,6 @@ section.hist-intro .hist-wrap .hist-lead {
   .hist-page .hist-item:nth-child(odd)  { grid-column: 1; --dx: -36px; }
   .hist-page .hist-item:nth-child(even) { grid-column: 3; --dx: 36px; }
 
-  /* interleave: item n starts on row n and spans two rows */
   .hist-page .hist-item:nth-child(1) { grid-row: 1 / span 2; }
   .hist-page .hist-item:nth-child(2) { grid-row: 2 / span 2; }
   .hist-page .hist-item:nth-child(3) { grid-row: 3 / span 2; }
@@ -512,7 +483,6 @@ section.hist-intro .hist-wrap .hist-lead {
     max-width: 46rem;
   }
 
-  /* left cards hug the spine on their right, right cards on their left */
   .hist-page .hist-item:nth-child(odd) .hist-card  { margin-left: auto; }
   .hist-page .hist-item:nth-child(even) .hist-card { margin-right: auto; }
 
@@ -531,7 +501,6 @@ section.hist-intro .hist-wrap .hist-lead {
   }
 }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 1199.98px) {
   .hist-page { --hp-pad: 40px; }
 }

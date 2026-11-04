@@ -1,15 +1,14 @@
 import { UgdPage } from "@/components/sites/prayag/product-category/ugd-pipes-fittings/ugd-page";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
-import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-const pageMetadataBase = pageMetadata({
+export const metadata = pageMetadata({
   title: "UGD Pipes & Fittings for Drainage Systems | Prayag",
   description:
     "Explore Prayag UGD Pipes & Fittings for underground drainage and sewerage, built for corrosion resistance, high flow efficiency and long-lasting performance.",
   path: "/ugd-pipes-fittings",
 });
 
-function UgdPipesFittingsPage() {
+export default function UgdPipesFittingsPage() {
   return (
     <>
       <BreadcrumbJsonLd
@@ -22,6 +21,3 @@ function UgdPipesFittingsPage() {
     </>
   );
 }
-
-export default withPageContent("ugd-pipes-fittings", UgdPipesFittingsPage);
-export const generateMetadata = withSeo("ugd-pipes-fittings", pageMetadataBase);

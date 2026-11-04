@@ -2,12 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-/**
- * `.sus-page` root + the source scroll-storytelling script: children of every `.sus-text`
- * and every `[data-rv]` element fade/slide in, `.sus-mask` images reveal with a clip mask,
- * once 12% is visible (or they are already above the viewport). Skipped with reduced motion;
- * if anything throws the animation layer switches itself off so content is never hidden.
- */
 export function SusRoot({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -44,7 +38,7 @@ export function SusRoot({ children }: { children: React.ReactNode }) {
       io = observer;
       root.querySelectorAll(".sus-rv, .sus-mask").forEach((el) => observer.observe(el));
     } catch {
-      root.classList.remove("sus-js"); // never leave content hidden
+      root.classList.remove("sus-js");
     }
     return () => io?.disconnect();
   }, []);

@@ -1,8 +1,3 @@
-/*
- * /press-coverages — ported from the source theme rules for `section.press_wrapper` / `.press_item`
- * (themes/custom/prayag style.css + Bootstrap grid), keeping the source class names.
- * Breakpoints are the source's own: Bootstrap col-lg (992), theme max-width 1399/1199/767.
- */
 section.press_wrapper {
   position: relative;
   padding: 60px 0;
@@ -15,7 +10,6 @@ section.press_wrapper {
   margin: 0 -12px;
 }
 
-/* `.col-6 .col-sm-6 .col-md-6 .col-lg-3` + `section.press_wrapper .row .col-… { margin-bottom: 24px }` */
 .press_wrapper .press-col {
   flex: 0 0 auto;
   width: 50%;
@@ -108,7 +102,6 @@ section.press_wrapper {
     padding: 50px 0;
   }
 
-  /* Same fixed card height as the source: long titles overflow the card (source behaviour). */
   .press_item {
     height: 280px;
     max-height: 100%;
@@ -134,7 +127,6 @@ section.press_wrapper {
   }
 }
 
-/* ---------- Lightbox (reproduces the source's Fancybox v4 gallery look) ---------- */
 .press-lb {
   position: fixed;
   inset: 0;

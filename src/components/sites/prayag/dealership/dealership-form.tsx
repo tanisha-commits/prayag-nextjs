@@ -8,9 +8,7 @@ import { FieldError, FormMessages, Honeypot, SubmittingIndicator } from "../form
 import { useEnquiryForm, webformValidityProps } from "../forms/use-enquiry-form";
 import { ITI_BASE, type ItiInstance } from "./intl-tel-input";
 import { withBasePath } from "@/lib/base-path";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-/** Source `.dealership_form .form-item-*` widths (all 100% at <= 768px). */
 const THIRDS = new Set(["name", "e_mail", "phone_number", "dealership_requirements", "pincode", "company_name"]);
 
 const CONTROL =
@@ -27,9 +25,6 @@ export function DealershipForm() {
   const initIti = useCallback(() => {
     if (iti.current || !phoneInput.current || !window.intlTelInput) return;
     iti.current = window.intlTelInput(phoneInput.current, {
-      // Source: initialCountry "auto" with an ipinfo.io lookup that the live site's own CSP
-      // blocks, so no country is ever preselected (blank flag). Reproduced without the
-      // third-party request: the lookup simply never resolves.
       initialCountry: "auto",
       geoIpLookup: () => {},
       utilsScript: `${ITI_BASE}/js/utils.js`,
@@ -40,7 +35,6 @@ export function DealershipForm() {
     if (itiLoaded) initIti();
   }, [itiLoaded, initIti]);
 
-  // Layout-effect cleanup runs before React detaches the input, so iti can unwrap it first.
   useLayoutEffect(
     () => () => {
       iti.current?.destroy();
@@ -53,8 +47,6 @@ export function DealershipForm() {
     e.preventDefault();
     if (submitting) return;
     const overrides: Record<string, string> = {};
-    // Source submit handler: intl-tel-input validation with a blocking alert, then the full
-    // international number replaces the typed value.
     if (iti.current && phoneInput.current) {
       if (!iti.current.isValidNumber()) {
         window.alert("Please enter a valid phone number with the country code.");
@@ -134,7 +126,7 @@ export function DealershipForm() {
     if (field.name === "phone_number") {
       return (
         <div className="[&_.iti]:w-full">
-          <Tx>{input}</Tx>
+          {input}
         </div>
       );
     }
@@ -143,7 +135,6 @@ export function DealershipForm() {
 
   return (
     <div className="mx-0 w-full px-[15px] py-[10px] min-[768px]:mx-auto min-[768px]:w-[90%] min-[768px]:p-0">
-      {/* React 19 hoists precedence stylesheets into <head> during SSR. */}
       <link rel="stylesheet" href={withBasePath(`${ITI_BASE}/css/intlTelInput.min.css`)} precedence="default" />
       <Script src={`${ITI_BASE}/js/intlTelInput.min.js`} strategy="afterInteractive" onReady={() => setItiLoaded(true)} />
       <FormMessages state={state} messageRef={messageRef} />
@@ -165,7 +156,7 @@ export function DealershipForm() {
             )}
           >
             <label htmlFor={field.id} className="sr-only">
-              <Tx>{field.label}</Tx>
+              {field.label}
             </label>
             {renderControl(field)}
             <FieldError id={`${field.id}-error`} message={state.errors[field.name]} />

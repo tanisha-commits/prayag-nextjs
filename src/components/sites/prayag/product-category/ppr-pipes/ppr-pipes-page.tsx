@@ -8,11 +8,9 @@ import { SplitReveal } from "./split-reveal";
 import "./ppr-pipes.css";
 
 import { fullImg, transcodedSrcSet, transcodedUrl } from "@/lib/image-dimensions";
-import { Tx } from "@/components/sites/prayag/cms/tx";
 
 const IMG = "/sites/prayag/theme/ppr-pipes";
 
-// SLICK_OPTS of the page's inline script (fittings sliders).
 const CFS_SLICK: SlickSettings = {
   slidesToShow: 3,
   slidesToScroll: 1,
@@ -25,7 +23,6 @@ const CFS_SLICK: SlickSettings = {
   ],
 };
 
-// Application list with the source's outline icons (decorative).
 const applicationAreas: { title: string; text: string; icon: ReactNode }[] = [
   {
     title: "Residential & Commercial:",
@@ -67,7 +64,6 @@ const applicationAreas: { title: string; text: string; icon: ReactNode }[] = [
   },
 ];
 
-/** https://prayagindia.com/ppr-pipes (Drupal taxonomy term page). */
 export function PprPipesPage() {
   return (
     <PcatPage slug="ppr-pipes">
@@ -89,8 +85,8 @@ export function PprPipesPage() {
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
-                <h1 className="black_title"><Tx>{"PPR Pipes"}</Tx></h1>
-                <p><Tx>{"Durability • Efficiency • Reliability"}</Tx></p>
+                <h1 className="black_title">PPR Pipes</h1>
+                <p>Durability • Efficiency • Reliability</p>
               </div>
             </div>
           </div>
@@ -102,10 +98,15 @@ export function PprPipesPage() {
           <div className="row align-items-center">
             <div className="col-12 col-md-6">
               <div className="prayag-content-box">
-                <h2><Tx>{"Unmatched Performance for Reliable Plumbing"}</Tx></h2>
-                <p className="prayag-subtitle"><Tx>{"The Future of Smart Plumbing Infrastructure"}</Tx></p>
+                <h2>Unmatched Performance for Reliable Plumbing</h2>
+                <p className="prayag-subtitle">The Future of Smart Plumbing Infrastructure</p>
                 <p>
-                  <Tx>{"Prayag PPR Pipes are engineered to deliver exceptional strength, thermal stability, and long-term reliability. Manufactured using advanced Polypropylene Random Copolymer technology, they offer superior resistance to heat, pressure, and corrosion, ensuring a service life of up to 50 years. Lightweight, leak-proof, and easy to install, Prayag PPR systems are ideal for hot and cold water supply, industrial applications, and HVAC networks. Backed by decades of manufacturing excellence, they provide a dependable solution for efficient and safe fluid transportation."}</Tx>
+                  Prayag PPR Pipes are engineered to deliver exceptional strength, thermal stability, and long-term
+                  reliability. Manufactured using advanced Polypropylene Random Copolymer technology, they offer
+                  superior resistance to heat, pressure, and corrosion, ensuring a service life of up to 50 years.
+                  Lightweight, leak-proof, and easy to install, Prayag PPR systems are ideal for hot and cold water
+                  supply, industrial applications, and HVAC networks. Backed by decades of manufacturing excellence,
+                  they provide a dependable solution for efficient and safe fluid transportation.
                 </p>
               </div>
             </div>
@@ -120,7 +121,7 @@ export function PprPipesPage() {
       <NgpSection
         heading={
           <>
-            <Tx>{"Why Choose "}</Tx><strong><Tx>{"Prayag PPR"}</Tx></strong><Tx>{" Pipes?"}</Tx>
+            Why Choose <strong>Prayag PPR</strong> Pipes?
           </>
         }
         label="Why choose Prayag PPR pipes"
@@ -149,27 +150,35 @@ export function PprPipesPage() {
         }
         content={
           <>
-            <h2><Tx>{"What are PPR Pipes?"}</Tx></h2>
+            <h2>What are PPR Pipes?</h2>
             <p className="psr-description">
-              <Tx>{"PPR stands for Polypropylene Random Copolymer, a material engineered for precision and high performance in plumbing and industrial applications. These pipes are \"built for performance,\" offering high pressure strength and long-life durability. They provide a winning combination of high temperature resistance, corrosion resistance, and a lightweight design."}</Tx>
+              PPR stands for Polypropylene Random Copolymer, a material engineered for precision and high performance
+              in plumbing and industrial applications. These pipes are &quot;built for performance,&quot; offering high
+              pressure strength and long-life durability. They provide a winning combination of high temperature
+              resistance, corrosion resistance, and a lightweight design.
             </p>
-            <h3><Tx>{"Specialized Temperature Categories"}</Tx></h3>
+            <h3>Specialized Temperature Categories</h3>
             <p className="psr-description">
-              <Tx>{"Prayag produces specialized triple-layer pipes that are color-coded to indicate their specific low-temperature tolerances:"}</Tx>
+              Prayag produces specialized triple-layer pipes that are color-coded to indicate their specific
+              low-temperature tolerances:
             </p>
             <ul className="what_common_li">
               <li>
-                <strong><Tx>{"Bluetech:"}</Tx></strong><Tx>{" These are anti-freezing pipes designed to work in temperatures as low as -35°C."}</Tx>
+                <strong>Bluetech:</strong> These are anti-freezing pipes designed to work in temperatures as low as
+                -35°C.
               </li>
               <li>
-                <strong><Tx>{"Puretech:"}</Tx></strong><Tx>{" Suitable for environments reaching -15°C."}</Tx>
+                <strong>Puretech:</strong> Suitable for environments reaching -15°C.
               </li>
               <li>
-                <strong><Tx>{"Toughtech:"}</Tx></strong><Tx>{" Engineered for functionality in temperatures down to -10°C."}</Tx>
+                <strong>Toughtech:</strong> Engineered for functionality in temperatures down to -10°C.
               </li>
             </ul>
             <p className="psr-description">
-              <Tx>{"These pipes are available in various pressure ratings, including PN-10, PN-16, and PN-20, to handle different operational demands. To ensure a leak-proof connection, they are joined using socket fusion welding with a specialized tool kit. This process involves heating the pipe and fitting it to a working temperature (typically 0-300°C) to create a permanent, strong, and reliable joint."}</Tx>
+              These pipes are available in various pressure ratings, including PN-10, PN-16, and PN-20, to handle
+              different operational demands. To ensure a leak-proof connection, they are joined using socket fusion
+              welding with a specialized tool kit. This process involves heating the pipe and fitting it to a working
+              temperature (typically 0-300°C) to create a permanent, strong, and reliable joint.
             </p>
           </>
         }
@@ -180,7 +189,7 @@ export function PprPipesPage() {
           <div className="row">
             <div className="col-12 col-lg-5">
               <div className="application_iner_content">
-                <h2><Tx>{"Prayag PPR pipes are versatile and used extensively in the following areas:"}</Tx></h2>
+                <h2>Prayag PPR pipes are versatile and used extensively in the following areas:</h2>
                 <ul className="feature-list">
                   {applicationAreas.map((area) => (
                     <li key={area.title}>
@@ -190,8 +199,8 @@ export function PprPipesPage() {
                         </svg>
                       </span>
                       <p>
-                        <span className="featured_span_color"><Tx>{area.title}</Tx></span>
-                        <Tx>{area.text}</Tx>
+                        <span className="featured_span_color">{area.title}</span>
+                        {area.text}
                       </p>
                     </li>
                   ))}
@@ -223,36 +232,41 @@ export function PprPipesPage() {
             </div>
             <div className="col-lg-6 col-md-12">
               <div className="prayag_work_content">
-                <h2><Tx>{"The Prayag Advantage"}</Tx></h2>
+                <h2>The Prayag Advantage</h2>
                 <ul className="advantages_list">
                   <li>
-                    <strong><Tx>{"High Strength & Durability:"}</Tx></strong><Tx>{" Engineered for long service life with excellent pressure handling and structural reliability."}</Tx>
+                    <strong>High Strength &amp; Durability:</strong> Engineered for long service life with excellent
+                    pressure handling and structural reliability.
                   </li>
                   <li>
-                    <strong><Tx>{"Temperature-Specific Range:"}</Tx></strong><Tx>{" Triple-layer system designed for extreme conditions:"}</Tx>
+                    <strong>Temperature-Specific Range:</strong> Triple-layer system designed for extreme conditions:
                     <ul>
                       <li>
-                        <strong><Tx>{"Bluetech:"}</Tx></strong><Tx>{" Works up to -35°C."}</Tx>
+                        <strong>Bluetech:</strong> Works up to -35°C.
                       </li>
                       <li>
-                        <strong><Tx>{"Puretech:"}</Tx></strong><Tx>{" Suitable up to -15°C."}</Tx>
+                        <strong>Puretech:</strong> Suitable up to -15°C.
                       </li>
                       <li>
-                        <strong><Tx>{"Toughtech:"}</Tx></strong><Tx>{" Suitable up to -10°C."}</Tx>
+                        <strong>Toughtech:</strong> Suitable up to -10°C.
                       </li>
                     </ul>
                   </li>
                   <li>
-                    <strong><Tx>{"Heat & Corrosion Resistance:"}</Tx></strong><Tx>{" Lightweight yet highly resistant to scaling, rust, and chemical corrosion."}</Tx>
+                    <strong>Heat &amp; Corrosion Resistance:</strong> Lightweight yet highly resistant to scaling, rust,
+                    and chemical corrosion.
                   </li>
                   <li>
-                    <strong><Tx>{"Leak-Proof Joints:"}</Tx></strong><Tx>{" Secure socket fusion welding ensures permanent, leak-resistant connections."}</Tx>
+                    <strong>Leak-Proof Joints:</strong> Secure socket fusion welding ensures permanent, leak-resistant
+                    connections.
                   </li>
                   <li>
-                    <strong><Tx>{"Quality Control:"}</Tx></strong><Tx>{" Multi-stage testing including material checks, bonding integrity, dimensional accuracy, and pressure testing."}</Tx>
+                    <strong>Quality Control:</strong> Multi-stage testing including material checks, bonding
+                    integrity, dimensional accuracy, and pressure testing.
                   </li>
                   <li>
-                    <strong><Tx>{"Complete System Offering:"}</Tx></strong><Tx>{" Backed by a wide ecosystem of fittings and tools for smooth installation across all project types."}</Tx>
+                    <strong>Complete System Offering:</strong> Backed by a wide ecosystem of fittings and tools for
+                    smooth installation across all project types.
                   </li>
                 </ul>
               </div>
@@ -264,9 +278,12 @@ export function PprPipesPage() {
       <section className="prayag-fitting-specs" aria-labelledby="fitting-ecosystem-heading">
         <div className="container-fluid">
           <header className="prayag-fitting-specs__header">
-            <h2 id="fitting-ecosystem-heading"><Tx>{"Fittings, built to match your pipe"}</Tx></h2>
+            <h2 id="fitting-ecosystem-heading">Fittings, built to match your pipe</h2>
             <p>
-              <Tx>{"Discover Prayag's comprehensive range of precision-engineered PPR fittings, designed to create secure, leak-proof, and long-lasting plumbing connections. From elbows and tees to couplers, adapters, valves, and accessories, every fitting is manufactured for seamless fusion welding, superior durability, and dependable performance in hot and cold water distribution systems."}</Tx>
+              Discover Prayag&apos;s comprehensive range of precision-engineered PPR fittings, designed to create
+              secure, leak-proof, and long-lasting plumbing connections. From elbows and tees to couplers, adapters,
+              valves, and accessories, every fitting is manufactured for seamless fusion welding, superior durability,
+              and dependable performance in hot and cold water distribution systems.
             </p>
           </header>
           <PcatTabs
@@ -288,11 +305,11 @@ export function PprPipesPage() {
 
       <section className="prayag-specs">
         <div className="container-fluid">
-          {/* Inline style as on the source. */}
           <div className="prayag-specs__header" style={{ flexDirection: "column" }}>
-            <h2><Tx>{"Technical Specifications"}</Tx></h2>
+            <h2>Technical Specifications</h2>
             <p>
-              <Tx>{"Based on the sources, the following tables provide a comprehensive overview of the technical specifications, product categories, and applications for Prayag PPR pipes."}</Tx>
+              Based on the sources, the following tables provide a comprehensive overview of the technical
+              specifications, product categories, and applications for Prayag PPR pipes.
             </p>
           </div>
           <PcatTabs
@@ -308,7 +325,7 @@ export function PprPipesPage() {
               label: pane.label,
               content: (
                 <>
-                  {pane.intro && <p><Tx>{pane.intro}</Tx></p>}
+                  {pane.intro && <p>{pane.intro}</p>}
                   <SpecTable table={pane.table} />
                 </>
               ),

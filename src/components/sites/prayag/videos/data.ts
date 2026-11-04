@@ -1,17 +1,9 @@
-// Content for /product-video, /video-tv-advertisement and /feedback-videos
-// (source: prayagindia.com, node/1075, node/62, node/1076). Every YouTube id was checked
-// against YouTube oEmbed — see docs/research/prayag/video-verification.md.
-
 import type { ResponsiveImgProps } from "@/lib/optimized-image";
 
 export type VideoCard = {
-  /** YouTube id that is played. */
   id: string;
-  /** Card heading, verbatim from the source. */
   title: string;
-  /** Local copy of the source thumbnail. */
   thumb: string;
-  /** Optimizer candidates for `thumb`, added on the server (video-sections.tsx). */
   thumbImg?: ResponsiveImgProps;
 };
 
@@ -20,10 +12,8 @@ export type VideoPage = {
   cards: VideoCard[];
 };
 
-/** Product / feedback cards: the source appends "?autoplay=1&rel=0" on click. */
 export const inlineEmbedUrl = (id: string) => `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
 
-/** TV page modal: theme script.js builds this URL from `data-video-id`. */
 export const modalEmbedUrl = (id: string) => `https://www.youtube.com/embed/${id}?autoplay=1&feature=oembed`;
 
 export const productVideoPage: VideoPage = {
@@ -61,9 +51,6 @@ export const feedbackVideosPage: VideoPage = {
       thumb: "/sites/prayag/theme/Dealer-trust-speaker.webp",
     },
     {
-      // Deliberate fix: the source plays xaTiH0hlURs ("Why Distributors Stay with Prayag…",
-      // the same video as card 4). Its own thumbnail is LZXPJD1JCsM, whose oEmbed title is
-      // this card's title, so that id is played here.
       id: "LZXPJD1JCsM",
       title: "Prayag CEO Nitin Aggarwal Making European Luxury Affordable for India NDTV Business Conclave",
       thumb: "/sites/prayag/files/youtube/LZXPJD1JCsM-hqdefault.jpg",

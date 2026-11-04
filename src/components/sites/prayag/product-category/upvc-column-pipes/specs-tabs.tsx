@@ -2,21 +2,13 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { cn } from "@/lib/utils";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export interface SpecsTab {
-  /** Source ids: the button is `tab-<id>`, its pane `pane-<id>`. */
   id: string;
   label: string;
   pane: React.ReactNode;
 }
 
-/**
- * Source Bootstrap 5.1 tabs (`data-bs-toggle="tab"` on `.prayag-specs__tab`). As in Bootstrap,
- * the tab button switches at once, the old `.tab-pane.fade` fades out (150ms), then the new
- * one gets `active` and, a frame later, `show`. Added: roving tabindex and Arrow/Home/End keys
- * (Bootstrap 5.1 has none) and aria-labelledby on every pane.
- */
 export function SpecsTabs({ tabs }: { tabs: SpecsTab[] }) {
   const [selected, setSelected] = useState(0);
   const [activePane, setActivePane] = useState(0);
@@ -75,7 +67,7 @@ export function SpecsTabs({ tabs }: { tabs: SpecsTab[] }) {
               onClick={() => select(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
             >
-              <Tx>{t.label}</Tx>
+              {t.label}
             </button>
           </li>
         ))}
@@ -90,7 +82,7 @@ export function SpecsTabs({ tabs }: { tabs: SpecsTab[] }) {
             aria-labelledby={`tab-${t.id}`}
             tabIndex={0}
           >
-            <Tx>{t.pane}</Tx>
+            {t.pane}
           </div>
         ))}
       </div>

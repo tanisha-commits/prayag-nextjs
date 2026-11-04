@@ -1,17 +1,5 @@
 import type { FormId } from "./forms";
 
-/**
- * Server-side lead forwarding, mirroring the Drupal custom module
- * `webform_api_integration` (hook_webform_submission_insert): every submission is sent to
- *   1. ezeone.tech  POST /api/enquiry/website-enquiry   (JSON, `api_auth_key` in the body)
- *   2. AbacusDesk TrackerHub POST /api/v1/leads         (multipart form fields — PHP cURL with an
- *      array body — and `x-website-id` / `x-api-key` headers)
- *
- * Credentials are read from server-only env vars; nothing here is ever bundled for the client.
- * Nothing is sent unless PRAYAG_ENQUIRY_FORWARDING=enabled and at least one destination has its
- * credentials configured.
- */
-
 if (typeof window !== "undefined") {
   throw new Error("enquiry forwarding is server-only");
 }
@@ -19,7 +7,6 @@ if (typeof window !== "undefined") {
 const DEFAULT_EZEONE_URL = "https://ezeone.tech/api/enquiry/website-enquiry";
 const DEFAULT_TRACKERHUB_URL = "https://api.abacusdesk.co.in/api/v1/leads";
 const DEFAULT_TIMEOUT_MS = 10_000;
-/** Drupal's module always reported the site root as the page URL. */
 const SOURCE_SITE_URL = "https://prayagindia.com";
 
 interface ForwardingConfig {
@@ -49,7 +36,6 @@ export function readForwardingConfig(): ForwardingConfig {
   };
 }
 
-/** PHP `(int)` cast of a numeric string (pincode) as used by the Drupal module. */
 function phpInt(value: string): number {
   const n = Number(value.trim());
   if (Number.isFinite(n)) return Math.trunc(n);
@@ -83,9 +69,6 @@ function ezeonePayload(formId: FormId, v: Values, authKey: string): Record<strin
       },
     };
   }
-  // Contact: the Drupal branch also sent alternate_mobile_no, country, state, district, remark
-  // and form_data built from variables that are undefined in that branch (always empty/null).
-  // Only fields that exist on the contact webform are mapped here.
   return {
     api_auth_key: authKey,
     name: v.name.trim(),
@@ -142,14 +125,12 @@ export type DestinationName = "ezeone" | "trackerhub";
 export interface DestinationResult {
   destination: DestinationName;
   ok: boolean;
-  /** HTTP status, or 0 for network errors / timeouts. */
   status: number;
 }
 
 async function post(destination: DestinationName, url: string, init: RequestInit, timeoutMs: number): Promise<DestinationResult> {
   try {
     const res = await fetch(url, { ...init, method: "POST", redirect: "manual", cache: "no-store", signal: AbortSignal.timeout(timeoutMs) });
-    // Drain the body so the connection is released; its content is never logged (may echo PII).
     await res.arrayBuffer().catch(() => undefined);
     return { destination, ok: res.status >= 200 && res.status < 300, status: res.status };
   } catch {
@@ -158,20 +139,13 @@ async function post(destination: DestinationName, url: string, init: RequestInit
 }
 
 export interface ForwardOptions {
-  /** Product title from `/contact-us?product=…` (product pages link there). */
   product?: string;
 }
 
-/**
- * Sends the validated values to every configured destination in parallel.
- * Returns null when forwarding is disabled or no destination is configured.
- */
 export async function forwardEnquiry(formId: FormId, values: Values, options: ForwardOptions = {}): Promise<DestinationResult[] | null> {
   const config = readForwardingConfig();
   if (!config.enabled || (!config.ezeone && !config.trackerHub)) return null;
 
-  // The source keeps ?product= only on the form action; Drupal never forwarded it. We carry it in
-  // TrackerHub's page_url so the lead shows which product page the visitor came from.
   const pageUrl =
     formId === "contact" && options.product
       ? `${SOURCE_SITE_URL}/contact-us?product=${encodeURIComponent(options.product)}`

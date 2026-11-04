@@ -12,9 +12,7 @@ import {
 } from "react";
 import { cn } from "@/lib/utils";
 import "./read-more-modal.css";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-// Bootstrap's .modal.fade timing: dialog slides for 300ms (backdrop fades in 150ms).
 const TRANSITION_MS = 300;
 
 type ModalApi = {
@@ -30,14 +28,6 @@ function unlockScroll() {
   document.body.style.paddingRight = "";
 }
 
-/**
- * Source `#prayagReadMoreModal`: a Bootstrap 5 modal opened by the "Read More" button
- * (`data-bs-toggle="modal"`). Rebuilt on a native <dialog> that keeps the Bootstrap markup and
- * classes: showModal() gives the focus trap and top layer, Esc / backdrop click / both close
- * buttons close it with Bootstrap's fade + slide, the page scroll is locked like `body.modal-open`,
- * and focus returns to the Read More button. The provider wraps the section and the dialog so the
- * dialog can stay outside the section, as on the source (section text styles must not reach it).
- */
 export function ReadMoreModalProvider({ children }: { children: ReactNode }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLElement | null>(null);
@@ -56,12 +46,10 @@ export function ReadMoreModalProvider({ children }: { children: ReactNode }) {
     const dialog = dialogRef.current;
     if (!dialog || dialog.open) return;
     opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    // body.modal-open: hide the page scrollbar and keep the layout width.
     const scrollbar = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     if (scrollbar > 0) document.body.style.paddingRight = `${scrollbar}px`;
     dialog.showModal();
-    // Like Bootstrap, focus the modal itself (tabindex=-1) rather than its first button.
     dialog.focus();
     requestAnimationFrame(() => setShown(true));
   };
@@ -94,8 +82,6 @@ export function ReadMoreDialog({ title, children }: { title: string; children: R
   const modal = useContext(ModalContext);
   const close = () => modal?.close();
 
-  // Bootstrap closes on clicks outside .modal-content; .modal-dialog has pointer-events: none,
-  // so those clicks land on the <dialog> itself.
   const onClick = (e: MouseEvent<HTMLDialogElement>) => {
     if (e.target === e.currentTarget) close();
   };
@@ -117,14 +103,14 @@ export function ReadMoreDialog({ title, children }: { title: string; children: R
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="prayagReadMoreModalLabel">
-              <Tx>{title}</Tx>
+              {title}
             </h5>
             <button type="button" className="btn-close" aria-label="Close" onClick={close} />
           </div>
           <div className="modal-body">{children}</div>
           <div className="modal-footer">
             <button type="button" className="btn prayag-modal-close-btn" onClick={close}>
-              <Tx>{"Close"}</Tx>
+              Close
             </button>
           </div>
         </div>

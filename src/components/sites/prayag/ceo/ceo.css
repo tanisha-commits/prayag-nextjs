@@ -1,11 +1,3 @@
-
-/* ==========================================================================
-   Prayag – CEO Profile page
-   Brand colours only: #000, #fff, #40ADE3
-   Every rule is scoped under .ceo-profile-page (header/footer/banner untouched).
-   Layout: full width, 90px side padding – same as the rest of the site.
-   ========================================================================== */
-
 .ceo-profile-page {
   --ceo-black: #000;
   --ceo-white: #fff;
@@ -13,7 +5,7 @@
   --ceo-text: rgba(0, 0, 0, 0.82);
   --ceo-muted: rgba(0, 0, 0, 0.6);
   --ceo-line: rgba(0, 0, 0, 0.14);
-  --ceo-pad: 90px;               /* side padding, same as your site */
+  --ceo-pad: 90px;
 
   display: block;
   background: var(--ceo-white);
@@ -28,7 +20,6 @@
   box-sizing: border-box;
 }
 
-/* ---------- Layout ---------- */
 .ceo-profile-page .ceo-body {
   padding: clamp(3rem, 6vw, 6rem) 0;
 }
@@ -44,9 +35,8 @@
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
   gap: clamp(2rem, 5vw, 6rem);
-  align-items: center;           /* text sits centred next to the portrait */
+  align-items: center;
 }
-
 
 .ceo-profile-page .ceo-story ul {
   margin: 0;
@@ -70,7 +60,6 @@
   content: none;
 }
 
-/* Opening paragraph = introduction (flush left, accent bar above) */
 .ceo-profile-page .ceo-story li:first-child,
 .ceo-profile-page .ceo-story > p:first-child {
   margin-bottom: 2rem;
@@ -90,7 +79,6 @@
   background: var(--ceo-accent);
 }
 
-/* Closing summary */
 .ceo-profile-page .ceo-story li:last-child:not(:first-child),
 .ceo-profile-page .ceo-story > p:last-child:not(:first-child) {
   margin-top: 2.5rem;
@@ -137,11 +125,10 @@
   display: block;
   width: 100%;
   max-width: 100%;
-  height: auto;                  /* natural proportions, never stretched */
+  height: auto;
   background: var(--ceo-line);
 }
 
-/* ---------- Key facts: full-width strip ---------- */
 .ceo-profile-page .ceo-facts {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -169,7 +156,7 @@
   font-weight: 600;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  font-variant-numeric: tabular-nums;   /* digits keep equal width while counting */
+  font-variant-numeric: tabular-nums;
 }
 
 .ceo-profile-page .ceo-facts span {
@@ -180,7 +167,6 @@
   line-height: 1.4;
 }
 
-/* ---------- "Read the full profile" button ---------- */
 .ceo-profile-page .ceo-more {
   display: inline-flex;
   align-items: center;
@@ -203,7 +189,7 @@
 .ceo-profile-page .ceo-more:focus-visible {
   border-color: var(--ceo-accent);
   background: var(--ceo-accent);
-  color: var(--ceo-black);       /* black on #40ADE3 keeps good contrast */
+  color: var(--ceo-black);
 }
 
 .ceo-profile-page .ceo-more:focus-visible {
@@ -211,7 +197,6 @@
   outline-offset: 3px;
 }
 
-/* ---------- Pop-up ---------- */
 .ceo-profile-page .ceo-modal {
   width: min(820px, calc(100% - 2rem));
   max-height: calc(100vh - 2rem);
@@ -287,7 +272,6 @@ body.ceo-modal-open {
   overflow: hidden;
 }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 1199.98px) {
   .ceo-profile-page { --ceo-pad: 40px; }
 }
@@ -299,7 +283,7 @@ body.ceo-modal-open {
   }
 
   .ceo-profile-page .ceo-aside {
-    order: -1;                   /* portrait first on small screens */
+    order: -1;
     max-width: 26rem;
     justify-self: start;
   }

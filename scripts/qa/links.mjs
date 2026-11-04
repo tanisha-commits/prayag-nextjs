@@ -1,12 +1,3 @@
-// Usage: node scripts/qa/links.mjs [base=http://localhost:3000] [out.json]
-// Crawls the local site starting from its /sitemap.xml plus every internal link found on the way
-// (GET only, no browser) and reports:
-//   broken     internal links/assets answering >= 400 (with the pages that reference them)
-//   redirected internal links answering 3xx (target shown) — fine for legacy URLs, not for nav
-//   hash       href="#", "javascript:" or empty hrefs
-//   toLive     href/src pointing at https://prayagindia.com (should be relative locally)
-//   toLocal    href/src pointing at localhost / 127.0.0.1 (would break in production)
-//   undiscovered internal pages linked from somewhere but not in the sitemap
 import fs from "fs";
 
 const base = (process.argv[2] ?? "http://localhost:3000").replace(/\/$/, "");
@@ -18,8 +9,8 @@ const CONCURRENCY = Number(process.env.QA_CONCURRENCY ?? 6);
 
 const sitemap = [...(await (await fetch(`${base}/sitemap.xml`)).text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
 const inSitemap = new Set(sitemap);
-const status = new Map(); // url -> { code, location }
-const refs = new Map(); // url -> Set(referrer page)
+const status = new Map();
+const refs = new Map();
 const issues = { hash: [], toLive: [], toLocal: [] };
 const queue = [...sitemap];
 const seen = new Set(queue);
@@ -57,7 +48,6 @@ async function crawl(path) {
     status.set(path, Promise.resolve({ code: 0, location: String(e).slice(0, 80) }));
     return;
   }
-  // Only the server-rendered DOM; the RSC payload repeats the same values as JSON.
   html = html.replace(/<script[\s\S]*?<\/script>/gi, "");
   const checks = [];
   for (const m of html.matchAll(/<(a|img|source|video|iframe|link|script)\b[^>]*?\s(href|src|srcset|poster)="([^"]*)"/gi)) {
@@ -79,7 +69,7 @@ async function crawl(path) {
       } catch {
         continue;
       }
-      if (url.startsWith("/_next/image")) continue; // optimizer URLs are checked through their src
+      if (url.startsWith("/_next/image")) continue;
       addRef(url, path);
       checks.push(check(url));
       const isPage = tag.toLowerCase() === "a" && !/\.(pdf|webp|png|jpe?g|svg|gif|mp4|webm|zip)$/i.test(url.split("?")[0]);

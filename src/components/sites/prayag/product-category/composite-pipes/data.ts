@@ -1,6 +1,3 @@
-// Content of https://prayagindia.com/composite-pipes, verbatim (card alts and titles do not
-// always match on the source, e.g. the brass cards; kept as published).
-
 import type { FaqItem, Feature, FittingPane, ImageCard, SpecPane } from "../ppr-pipes/types";
 
 export const fittingPanes: FittingPane[] = [
@@ -186,7 +183,6 @@ export const features: Feature[] = [
   { src: "/sites/prayag/theme/composite_pipes/application_icon/uv_protection.webp", alt: "Weather Proof", label: "Weather Proof", text: "Built with excellent UV resistance to withstand harsh conditions without degradation." },
 ];
 
-/** `.cp-card`s of "What are Composite Pipes" (`data-flow` drives the colour accents in the page CSS). */
 export const flowCards = [
   {
     flow: "life",

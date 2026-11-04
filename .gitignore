@@ -53,17 +53,6 @@ temp/
 .env*
 !.env.example
 
-# Product catalog: local database, backups and raw source snapshots (may contain internal sheet remarks)
-/data/*.db
-/data/*.db-*
-/data/backups/
-/data/catalog/
-
-# One-time admin setup file (password hash) made by `npm run admin:bundle`
+# Old local database (no longer used)
+/data/
 admin-bootstrap.json
-
-# Content sync file written by `npm run content:export` / deploy:package
-content-sync.json
-
-# Images uploaded in the admin (stored next to the database; carried to the server as media-sync/)
-data/media/

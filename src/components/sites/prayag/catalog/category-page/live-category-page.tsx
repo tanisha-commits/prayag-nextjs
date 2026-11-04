@@ -17,10 +17,8 @@ import "./catalog-fixes.css";
 import { withBasePath } from "@/lib/base-path";
 import { storedHtml } from "@/lib/stored-html";
 import { img, responsiveImagesHtml } from "@/lib/image-dimensions";
-import { Tx } from "@/components/sites/prayag/cms/tx";
 
 export interface LiveCategoryData {
-  /** The source page's <title> and meta description. */
   metaTitle: string;
   metaDescription: string;
   bannerHtml: string;
@@ -37,7 +35,6 @@ export const LIVE_PAGE_SIZE = 9;
 
 type Item = PublicListResult["items"][number];
 
-// Drafts only reach these pages in the local draft preview; theme CSS resets utility classes here.
 const DRAFT_STYLE: CSSProperties = {
   display: "inline-block",
   marginBottom: 6,
@@ -48,7 +45,7 @@ const DRAFT_STYLE: CSSProperties = {
   fontSize: 11,
   fontWeight: 600,
 };
-const draft = (p: Item) => p.status !== "published" && <span style={DRAFT_STYLE}><Tx>{"DRAFT — LOCAL PREVIEW"}</Tx></span>;
+const draft = (p: Item) => p.status !== "published" && <span style={DRAFT_STYLE}>DRAFT — LOCAL PREVIEW</span>;
 
 const css = (s: string): CSSProperties =>
   Object.fromEntries(
@@ -62,13 +59,8 @@ const css = (s: string): CSSProperties =>
       }),
   );
 
-/**
- * Product card image slot: `.col-6.col-md-4` (two columns on phones, three from 768px, inside the
- * sidebar layout on desktop). "auto" lets lazy images use their laid-out width.
- */
 const CARD_SIZES = "auto, (min-width: 768px) 25vw, 50vw";
 
-/** Source `.product_p_box` card of the listing views (image box, title, colour dots). */
 function Card({ p, swatches }: { p: Item; swatches: LiveCategoryConfig["swatches"] }) {
   const colours = (p.attributes ?? []).filter((a) => a.key === "colour" && a.value.trim());
   return (
@@ -80,11 +72,11 @@ function Card({ p, swatches }: { p: Item; swatches: LiveCategoryConfig["swatches
               <div className="field-content">
                 <div className="paragraph paragraph--type--products-data-wrapper paragraph--view-mode--default">
                   <div className="field field--name-field-product-image field--type-entity-reference field--label-above">
-                    <div className="field__label"><Tx>{"Product Image"}</Tx></div>
+                    <div className="field__label">Product Image</div>
                     <div className="field__item">
                       <div className="media media--type-image media--view-mode-default">
                         <div className="field field--name-field-media-image field--type-image field--label-visually_hidden">
-                          <div className="field__label visually-hidden"><Tx>{"Image"}</Tx></div>
+                          <div className="field__label visually-hidden">Image</div>
                           <div className="field__item">
                             {/* eslint-disable-next-line @next/next/no-img-element -- source <img> kept 1:1 */}
                             {p.image && <img loading="lazy" {...img(p.image, CARD_SIZES)} width={800} height={800} alt={p.title} />}
@@ -101,7 +93,7 @@ function Card({ p, swatches }: { p: Item; swatches: LiveCategoryConfig["swatches
             </div>
           </div>
           {draft(p)}
-          <h6><Tx>{p.title}</Tx></h6>
+          <h6>{p.title}</h6>
           {swatches === "dots" && (
             <div className="color-options">
               {colours.map((c) => (
@@ -127,7 +119,6 @@ function Card({ p, swatches }: { p: Item; swatches: LiveCategoryConfig["swatches
   );
 }
 
-/** Card of the non-filtered landing pages (`.category_page .filter_prod`). */
 function PlainCard({ p }: { p: Item }) {
   return (
     <div className="col-6 col-sm-6 col-md-4" style={{ display: "block" }}>
@@ -138,7 +129,7 @@ function PlainCard({ p }: { p: Item }) {
             {p.image && <img {...img(p.image, CARD_SIZES)} alt={p.title} />}
           </div>
           {draft(p)}
-          <h6><Tx>{p.title}</Tx></h6>
+          <h6>{p.title}</h6>
         </div>
       </a>
     </div>
@@ -150,7 +141,6 @@ const PREV = (
 );
 const FIRST = <path d="M5.1,7.2l8.3-6C14.1,0.7,15,1.1,15,2V14c0,0.8-0.9,1.3-1.6,0.8l-8.3-6C4.6,8.4,4.6,7.6,5.1,7.2z M0,0h2v16H0V0z" />;
 
-/** Drupal full pager (9 numbers around the current page, 0-based ?page=), as rendered by the source. */
 function Pager({ query, total }: { query: PublicQuery; total: number }) {
   const pages = Math.ceil(total / LIVE_PAGE_SIZE);
   if (pages <= 1) return null;
@@ -160,7 +150,6 @@ function Pager({ query, total }: { query: PublicQuery; total: number }) {
     p.set("page", String(i));
     return `?${p}`;
   };
-  // Drupal: a window of 9 page numbers centred on the current page, shifted inside 1..pages.
   let first = current + 1 - 4;
   let last = current + 1 + 4;
   if (first < 1) {
@@ -175,7 +164,7 @@ function Pager({ query, total }: { query: PublicQuery; total: number }) {
   const control = (cls: string, i: number, title: string, label: string, icon: ReactNode, w: string, rel?: string) => (
     <li className={`pager__item pager__item--control pager__item--${cls}`}>
       <a href={withBasePath(href(i))} className="pager__link" title={title} rel={rel}>
-        <span className="visually-hidden"><Tx>{label}</Tx></span>
+        <span className="visually-hidden">{label}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={w}
@@ -190,32 +179,32 @@ function Pager({ query, total }: { query: PublicQuery; total: number }) {
   return (
     <nav className="pager layout--content-medium" role="navigation" aria-labelledby="pagination-heading">
       <h4 id="pagination-heading" className="visually-hidden">
-        <Tx>{"Pagination"}</Tx>
+        Pagination
       </h4>
       <ul className="pager__items js-pager__items">
         {current > 0 && control("first", 0, "Go to first page", "First page", FIRST, "15px")}
         {current > 0 && control("previous", current - 1, "Go to previous page", "Previous page", PREV, "11", "prev")}
         {first > 1 && (
           <li className="pager__item pager__item--ellipsis" role="presentation">
-            <Tx>{"&hellip;"}</Tx>
+            &hellip;
           </li>
         )}
         {numbers.map((n) =>
           n === current + 1 ? (
             <li key={n} className="pager__item pager__item--active pager__item--number">
-              <span className="visually-hidden"><Tx>{"Current page"}</Tx></span> <Tx>{n}</Tx>
+              <span className="visually-hidden">Current page</span> {n}
             </li>
           ) : (
             <li key={n} className="pager__item pager__item--number">
               <a href={withBasePath(href(n - 1))} className="pager__link" title={`Go to page ${n}`}>
-                <span className="visually-hidden"><Tx>{"Page"}</Tx></span> <Tx>{n}</Tx>
+                <span className="visually-hidden">Page</span> {n}
               </a>
             </li>
           ),
         )}
         {last < pages && (
           <li className="pager__item pager__item--ellipsis" role="presentation">
-            <Tx>{"&hellip;"}</Tx>
+            &hellip;
           </li>
         )}
         {current < pages - 1 && control("next", current + 1, "Go to next page", "Next page", PREV, "11", "next")}
@@ -246,7 +235,6 @@ function formGroups(slug: string, query: PublicQuery, subcategories: Subcategory
   });
 }
 
-/** https://prayagindia.com/<slug> product-category landing page, between the header and the footer. */
 export function LiveCategoryPage({
   slug,
   query,
@@ -263,7 +251,6 @@ export function LiveCategoryPage({
   const plain = config.layout === "plain";
   return (
     <div className={plain ? "pcat-catalog-plain" : `pcat-catalog pcat-${slug}`}>
-      {/* The source <html dir="ltr" class="js">: theme rules depend on both (checkbox label gap, hidden Apply button). */}
       <div dir="ltr" className="js">
         <div dangerouslySetInnerHTML={{ __html: storedHtml(responsiveImagesHtml(data.bannerHtml)) }} />
         {plain ? (

@@ -1,12 +1,3 @@
-"""Copy the assets a Prayag source page references into public/sites/prayag/.
-
-Usage: python3 -I scripts/prayag-assets.py <page.html> <drupal-backup-root> public/sites/prayag <map.json>
-
-Files are copied (never moved) from the read-only Drupal backup when present; otherwise
-they are fetched from https://prayagindia.com with a GET. Names are sanitised and the
-source URL -> local path -> origin mapping is written to <map.json>. Verify content types
-afterwards (`file --mime-type`): the live site answers missing files with an HTML page.
-"""
 import sys, re, json, os, shutil, urllib.parse, urllib.request
 html, backup, pub, mapout = sys.argv[1:5]
 h = open(html).read()
@@ -41,7 +32,6 @@ for u in sorted(urls):
         try:
             req = urllib.request.Request('https://prayagindia.com' + urllib.parse.quote(p), headers={'User-Agent': 'Mozilla/5.0'})
             with urllib.request.urlopen(req, timeout=60) as r: data = r.read()
-            # The live site answers missing files with an HTML page (HTTP 200); never save that as an asset.
             if data[:15].lstrip().lower().startswith((b'<!doctype', b'<html')):
                 origin = 'MISSING (live returned HTML)'
             else:

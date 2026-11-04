@@ -2,25 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export type SpecTab = {
-  /** Source id suffix: the button is `#tab-<id>`, the pane `#pane-<id>`. */
   id: string;
   label: string;
   content: React.ReactNode;
 };
 
-const FADE_MS = 150; // Bootstrap `.fade { transition: opacity .15s linear }`
+const FADE_MS = 150;
 
-/**
- * Source `.prayag-specs` tab strip + `.tab-content` (shared by the cPVC and UGD pages); keeps the
- * Bootstrap classes (`active` on the tab, `fade show active` on the pane) the ported CSS targets.
- * With `fade` it reproduces Bootstrap 5.1's tab switch: the old pane fades out, then the new one
- * becomes active and fades in. Without it the classes swap at once, like cPVC's inline script.
- * Added over the source: WAI-ARIA tabs keyboard support (roving tabindex, arrow keys / Home / End
- * with automatic activation) and `aria-labelledby` + `tabindex=0` on every pane.
- */
 export function SpecTabs({ tabs, fade = false }: { tabs: SpecTab[]; fade?: boolean }) {
   const [selected, setSelected] = useState(0);
   const [active, setActive] = useState(0);
@@ -49,7 +39,6 @@ export function SpecTabs({ tabs, fade = false }: { tabs: SpecTab[]; fade?: boole
       setShown(i);
       return;
     }
-    // Fade the old pane out, then display the new one and fade it in on a later frame.
     cancel();
     setShown(-1);
     timers.current.timeout = window.setTimeout(() => {
@@ -93,7 +82,7 @@ export function SpecTabs({ tabs, fade = false }: { tabs: SpecTab[]; fade?: boole
               onClick={() => select(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
             >
-              <Tx>{tab.label}</Tx>
+              {tab.label}
             </button>
           </li>
         ))}
@@ -108,7 +97,7 @@ export function SpecTabs({ tabs, fade = false }: { tabs: SpecTab[]; fade?: boole
             aria-labelledby={`tab-${tab.id}`}
             tabIndex={0}
           >
-            <Tx>{tab.content}</Tx>
+            {tab.content}
           </div>
         ))}
       </div>

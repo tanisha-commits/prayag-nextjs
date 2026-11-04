@@ -1,21 +1,11 @@
 import { type FieldDef, type FieldErrors, FORM_FIELDS, type FormId } from "./forms";
 
-/**
- * Server-side validation equivalent to what Drupal + Webform enforce for these forms
- * (messages follow Drupal core / Webform wording). The first error per field wins, like
- * Drupal's FormState::setError().
- */
-
-// Drupal's email validator is RFC-based; this is the HTML spec's "valid e-mail address" rule,
-// which is what the browser enforces for type=email on the source page.
 const EMAIL_SYNTAX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-/** Hard cap for fields without a source maxlength (textareas, number). */
 const DEFAULT_MAX = 5000;
 
 function patternMatches(pattern: string, value: string): boolean {
-  // Webform wraps patterns as {^(?:pattern)$}u — same anchoring as the HTML pattern attribute.
   return new RegExp(`^(?:${pattern})$`, "u").test(value);
 }
 
@@ -52,14 +42,12 @@ export interface ValidationOutcome {
   errors: FieldErrors;
 }
 
-/** Validates `input` against the form's field list; unknown keys are dropped. */
 export function validateEnquiry(formId: FormId, input: Record<string, unknown>): ValidationOutcome {
   const values: Record<string, string> = {};
   const errors: FieldErrors = {};
   for (const field of FORM_FIELDS[formId]) {
     const rawValue = input[field.name];
     const value = typeof rawValue === "string" ? rawValue : rawValue == null ? "" : String(rawValue);
-    // Drupal textfields drop line breaks; textareas keep them.
     const normalised = field.type === "textarea" ? value.replace(/\r\n?/g, "\n") : value.replace(/[\r\n]+/g, "");
     values[field.name] = normalised;
     const error = validateField(field, normalised);

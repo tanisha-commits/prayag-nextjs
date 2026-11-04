@@ -15,9 +15,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "@/lib/utils";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-/** The subset of slick 1.8 options the product-category pages use. */
 export interface SlickOptions {
   slidesToShow?: number;
   slidesToScroll?: number;
@@ -26,15 +24,12 @@ export interface SlickOptions {
   dots?: boolean;
   autoplay?: boolean;
   autoplaySpeed?: number;
-  /** Slide transition in ms (slick default 300). */
   speed?: number;
-  /** Only applies with slidesToShow 1, as in slick. */
   adaptiveHeight?: boolean;
   swipe?: boolean;
 }
 
 export interface SlickSettings extends SlickOptions {
-  /** Desktop-first like slick: a breakpoint applies while window.innerWidth < breakpoint. */
   responsive?: { breakpoint: number; settings: SlickOptions }[];
 }
 
@@ -51,8 +46,6 @@ const DEFAULTS: Required<SlickOptions> = {
   swipe: true,
 };
 
-// slick merges the matching breakpoint over the original settings (not cumulatively),
-// choosing the smallest breakpoint that is still wider than the window.
 function resolve(settings: SlickSettings, width: number | null): Required<SlickOptions> {
   const { responsive = [], ...base } = settings;
   const match =
@@ -62,7 +55,6 @@ function resolve(settings: SlickSettings, width: number | null): Required<SlickO
   return { ...DEFAULTS, ...base, ...match?.settings };
 }
 
-// slick getDotCount() + 1
 function pageCount(n: number, o: Required<SlickOptions>) {
   if (n <= o.slidesToShow) return 1;
   if (!o.infinite) return 1 + Math.ceil((n - o.slidesToShow) / o.slidesToScroll);
@@ -77,13 +69,6 @@ function pageCount(n: number, o: Required<SlickOptions>) {
   return pages;
 }
 
-/**
- * React port of the slick carousel markup the source pages initialise with jQuery
- * (`.slick-slider > .slick-list > .slick-track > .slick-slide > div > item`), so the
- * ported page CSS that targets slick's classes applies unchanged. Slides are laid out
- * in measured px like slick (percentages while unmeasured), so sliders inside hidden tab panes
- * need no re-initialising.
- */
 export function SlickCarousel({
   settings,
   className,
@@ -120,7 +105,6 @@ export function SlickCarousel({
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
 
-  // Keep the index valid when a breakpoint changes the layout (slick refresh keeps currentSlide).
   const current = enabled ? Math.min(Math.max(index, o.infinite ? -o.slidesToShow : 0), o.infinite ? n : n - 1) : 0;
 
   const goTo = (target: number) => {
@@ -130,7 +114,6 @@ export function SlickCarousel({
     setAnimate(true);
     setIndex(to);
     setBusy(true);
-    // Infinite wrap: after sliding onto a clone, jump to the real slide without a transition.
     window.setTimeout(() => {
       if (o.infinite && (to < 0 || to >= n)) {
         if (to < 0) to = n % o.slidesToScroll !== 0 ? n - (n % o.slidesToScroll) : n + to;
@@ -145,7 +128,6 @@ export function SlickCarousel({
   const next = () => goTo(current + o.slidesToScroll);
   const prev = () => goTo(current - o.slidesToScroll);
 
-  // slick autoplay with its default pauseOnHover / pauseOnFocus; skipped for reduced motion.
   const autoplayTick = useEffectEvent(() => next());
   useEffect(() => {
     if (!o.autoplay || !enabled || hovered || focused) return;
@@ -154,15 +136,12 @@ export function SlickCarousel({
     return () => window.clearInterval(id);
   }, [o.autoplay, o.autoplaySpeed, enabled, hovered, focused]);
 
-  // Re-enable the transition on the frame after a no-transition jump.
   useEffect(() => {
     if (animate) return;
     const id = requestAnimationFrame(() => setAnimate(true));
     return () => cancelAnimationFrame(id);
   }, [animate]);
 
-  // slick sizes slides at Math.ceil(listWidth / slidesToShow) px; percentages stand in until the
-  // list is measured (and while it is hidden, e.g. in an inactive tab pane, where it is 0 wide).
   const listRef = useRef<HTMLDivElement>(null);
   const [listWidth, setListWidth] = useState(0);
   useEffect(() => {
@@ -174,7 +153,6 @@ export function SlickCarousel({
   }, []);
   const slidePx = listWidth > 0 ? Math.ceil(listWidth / o.slidesToShow) : 0;
 
-  // adaptiveHeight: the list takes the height of the current slide.
   const [height, setHeight] = useState<number | null>(null);
   const adaptive = o.adaptiveHeight && o.slidesToShow === 1 && enabled;
   useEffect(() => {
@@ -188,7 +166,6 @@ export function SlickCarousel({
     return () => ro.disconnect();
   }, [adaptive, current, width]);
 
-  // Swipe / mouse drag: past 1/5 of the list width moves one step (slick touchThreshold 5).
   const start = useRef<{ x: number; y: number; id: number } | null>(null);
   const moved = useRef(false);
   const onPointerDown = (e: PointerEvent) => {
@@ -233,7 +210,6 @@ export function SlickCarousel({
   const atStart = !o.infinite && current <= 0;
   const atEnd = !o.infinite && current >= n - o.slidesToShow;
 
-  // slick wraps each item in two divs and gives the item width:100% + inline-block.
   const renderSlide = (item: ReactElement<{ style?: CSSProperties }>, pos: number, real: number, cloned: boolean) => {
     const active = !enabled || (pos >= offset && pos < offset + o.slidesToShow);
     return (
@@ -282,7 +258,7 @@ export function SlickCarousel({
           aria-disabled={atStart || undefined}
           onClick={prev}
         >
-          <Tx>{"Previous"}</Tx>
+          Previous
         </button>
       )}
       <div
@@ -294,7 +270,6 @@ export function SlickCarousel({
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         onDragStart={(e) => e.preventDefault()}
-        // A drag must not also follow the link it started on.
         onClickCapture={(e) => {
           if (moved.current) {
             e.preventDefault();
@@ -307,7 +282,6 @@ export function SlickCarousel({
           className="slick-track"
           style={{
             opacity: 1,
-            // slick sizes slides from slidesToShow even when there are fewer slides.
             width: slidePx ? slidePx * trackCount : `${(trackCount / o.slidesToShow) * 100}%`,
             transform: slidePx
               ? `translate3d(${-offset * slidePx + drag}px, 0, 0)`
@@ -315,7 +289,7 @@ export function SlickCarousel({
             transition: animate && !drag ? `transform ${o.speed}ms ease` : undefined,
           }}
         >
-          <Tx>{track}</Tx>
+          {track}
         </div>
       </div>
       {showArrows && (
@@ -326,7 +300,7 @@ export function SlickCarousel({
           aria-disabled={atEnd || undefined}
           onClick={next}
         >
-          <Tx>{"Next"}</Tx>
+          Next
         </button>
       )}
       {showDots && (

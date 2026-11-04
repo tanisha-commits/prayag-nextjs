@@ -1,15 +1,9 @@
-// Records the natural width/height of every raster image under public/sites/prayag into
-// src/lib/image-dimensions.generated.json ({ "/sites/prayag/...": [width, height] }).
-// The site uses it (server-side only) to give <img> elements width/height attributes and to build
-// srcset candidates through the image optimizer. Runs automatically before `npm run build`; run it by
-// hand (`node scripts/images/image-dimensions.mjs`) after adding images if you use `next dev`.
-// Read-only on the images themselves.
 import { readdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
-const sharp = require("sharp"); // ships with Next.js (its image optimizer dependency)
+const sharp = require("sharp");
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
 const publicDir = path.join(root, "public");
@@ -31,7 +25,6 @@ let failed = 0;
 for (const file of files) {
   try {
     const meta = await sharp(file).metadata();
-    // EXIF-rotated JPEGs display with swapped axes.
     const rotated = (meta.orientation ?? 1) >= 5;
     const width = rotated ? meta.height : meta.width;
     const height = rotated ? meta.width : meta.height;

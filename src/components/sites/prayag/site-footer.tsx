@@ -1,7 +1,4 @@
-import { getContent } from "@/lib/content";
-import { pageLinks, socialIcons } from "./data";
-
-const escapeHtml = (v: string) => v.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+import { contact, footerColumns, pageLinks, socialIcons, socialLinks } from "./data";
 import { LinkedInIcon } from "./icons";
 import { withBasePath } from "@/lib/base-path";
 
@@ -9,9 +6,6 @@ const linkClass =
   "mb-1.5 inline-block text-[15px] leading-[25px] font-light text-white transition-all duration-200 hover:ml-[7px] md:mb-2.5 md:text-[17px] md:leading-[28.8px]";
 
 export function SiteFooter() {
-  const contact = getContent("site/contact");
-  const socialLinks = getContent("site/social");
-  const { columns: footerColumns } = getContent("site/footer");
   return (
     <footer className="bg-[#171717] text-[18px] leading-[1.6]">
       <div className="prayag-container">
@@ -75,12 +69,9 @@ export function SiteFooter() {
                   </a>
                 </li>
               ))}
-              {/* email_off keeps Cloudflare's Email Obfuscation from rewriting this link and injecting its
-                  render-blocking email-decode.min.js (React cannot emit HTML comments, hence innerHTML).
-                  The email is editable content (validated as an email) and is escaped here as well. */}
               <li
                 dangerouslySetInnerHTML={{
-                  __html: `<!--email_off--><a href="mailto:${escapeHtml(contact.email)}" class="${linkClass}">${escapeHtml(contact.email)}</a><!--/email_off-->`,
+                  __html: `<!--email_off--><a href="mailto:${contact.email}" class="${linkClass}">${contact.email}</a><!--/email_off-->`,
                 }}
               />
             </ul>

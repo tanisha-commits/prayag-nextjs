@@ -1,15 +1,8 @@
-/**
- * Catalogue cards from https://prayagindia.com/download-cataglogue, in source order. Titles and image
- * alt text are verbatim (incl. "Geyser Catalgue" and the trailing space in the CP title's alt).
- * PDFs and covers are local copies from the Drupal backup — byte-identical to the live files
- * (size + SHA-256 checks: docs/research/prayag/catalogue-notes.md).
- */
 export interface Catalogue {
   title: string;
   alt: string;
   image: string;
   pdf: string;
-  /** Size of the PDF, shown to assistive tech only (download links). */
   size: string;
 }
 

@@ -5,17 +5,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { modalEmbedUrl, type VideoCard } from "./data";
 import { withBasePath } from "@/lib/base-path";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-const FADE_MS = 300; // Bootstrap .modal.fade dialog transition
+const FADE_MS = 300;
 
-/**
- * Source `section.video_wrapper` on /video-tv-advertisement: `a.video-link[data-video-id]`
- * cards opening Bootstrap modal `#exampleModal`, whose iframe gets
- * `embed/<id>?autoplay=1&feature=oembed` on click and `src=""` on hide (stops playback).
- * Closes on Esc and backdrop click like Bootstrap; adds a keyboard-visible close button,
- * keeps focus inside while open and returns it to the card that opened it.
- */
 export function TvVideoGrid({ cards }: { cards: VideoCard[] }) {
   const [active, setActive] = useState<VideoCard | null>(null);
   const [shown, setShown] = useState(false);
@@ -30,12 +22,11 @@ export function TvVideoGrid({ cards }: { cards: VideoCard[] }) {
     openerRef.current = opener;
     setActive(card);
     setPlaying(true);
-    // Two frames so the .fade start state is painted before .is-shown transitions in.
     requestAnimationFrame(() => requestAnimationFrame(() => setShown(true)));
   };
 
   const close = useCallback(() => {
-    setPlaying(false); // source: $('#videoFrame').attr('src', '') on hide.bs.modal
+    setPlaying(false);
     setShown(false);
     clearTimeout(hideTimer.current);
     hideTimer.current = setTimeout(() => setActive(null), FADE_MS);
@@ -48,7 +39,6 @@ export function TvVideoGrid({ cards }: { cards: VideoCard[] }) {
   useEffect(() => {
     if (!isOpen) return;
     const opener = openerRef.current;
-    // Bootstrap .modal-open: lock page scroll and compensate for the scrollbar.
     const bodyStyle = document.body.style;
     const scrollbar = window.innerWidth - document.documentElement.clientWidth;
     const prev = { overflow: bodyStyle.overflow, paddingRight: bodyStyle.paddingRight };
@@ -65,7 +55,6 @@ export function TvVideoGrid({ cards }: { cards: VideoCard[] }) {
         modalRef.current?.querySelector("iframe")?.focus();
       }
     };
-    // Focus leaving the dialog (e.g. tabbing out of the player) is sent back to it.
     const onFocusIn = (e: FocusEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) closeRef.current?.focus({ preventScroll: true });
     };
@@ -76,7 +65,6 @@ export function TvVideoGrid({ cards }: { cards: VideoCard[] }) {
       bodyStyle.setProperty("padding-right", prev.paddingRight);
       document.removeEventListener("keydown", onKey);
       document.removeEventListener("focusin", onFocusIn);
-      // After the trap is gone, return focus to the card that opened the player.
       opener?.focus({ preventScroll: true });
     };
   }, [isOpen, close]);
@@ -99,13 +87,11 @@ export function TvVideoGrid({ cards }: { cards: VideoCard[] }) {
               {/* eslint-disable-next-line @next/next/no-img-element -- natural-ratio thumbnail (250px cover-crop below 768px), as the source */}
               <img {...(card.thumbImg ?? { src: withBasePath(card.thumb) })} alt="" width={600} height={400} loading="lazy" />
             </button>
-            <h3><Tx>{card.title}</Tx></h3>
+            <h3>{card.title}</h3>
           </div>
         </div>
       ))}
 
-      {/* Source `.video_modal_outer` is a full-width, zero-height flex item of the row, so the
-          row gets one more 24px row-gap below the last cards — kept for identical spacing. */}
       <div className="w-full px-3">
         {active && (
           <>
@@ -121,7 +107,6 @@ export function TvVideoGrid({ cards }: { cards: VideoCard[] }) {
                 if (e.target === e.currentTarget) close();
               }}
             >
-              {/* pointer-events: none, so clicks beside the player reach the backdrop handler above */}
               <div className="vd-dialog">
                 <div className="vd-content">
                   <button ref={closeRef} type="button" className="vd-close" aria-label="Close video" onClick={close}>

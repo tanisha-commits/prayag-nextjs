@@ -2,9 +2,7 @@ import { HONEYPOT_FIELD } from "@/lib/enquiry/forms";
 import { cn } from "@/lib/utils";
 import type { EnquiryState } from "./use-enquiry-form";
 import { withBasePath } from "@/lib/base-path";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-/** Olivero (the source's base theme) status icons — core/themes/olivero/images/{error,status}.svg. */
 function ErrorIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" aria-hidden="true" className="fill-[#e33f1e] align-top">
@@ -21,11 +19,6 @@ function StatusIcon() {
   );
 }
 
-/**
- * Drupal/Olivero status-messages block (`.messages--status` / `.messages--error`), shown for
- * the submission outcome. Rendered empty (and taking no space) while idle/submitting so the
- * page layout matches the source until something happens.
- */
 export function FormMessages({
   state,
   messageRef,
@@ -44,8 +37,6 @@ export function FormMessages({
       {visible ? (
         <div
           className="my-[18px] min-h-[68px] bg-[#0d1214] px-[27px] py-[18px] text-white outline outline-1 outline-transparent"
-          // Drupal's Olivero markup uses role="contentinfo" (a page-footer landmark); a labelled
-          // group inside the single polite live region announces the message once.
           role="group"
           aria-label={isError ? "Error message" : "Status message"}
           data-enquiry-state={phase}
@@ -57,7 +48,7 @@ export function FormMessages({
                 <ul className="m-0 list-none p-0">
                   {items.map((item) => (
                     <li key={item} className="[&+li]:mt-[9px]">
-                      <Tx>{item}</Tx>
+                      {item}
                     </li>
                   ))}
                 </ul>
@@ -72,7 +63,6 @@ export function FormMessages({
   );
 }
 
-/** Webform inline error (`strong.form-item--error-message`, Olivero styling). */
 export function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
@@ -81,28 +71,26 @@ export function FieldError({ id, message }: { id: string; message?: string }) {
       className="my-[9px] block bg-[length:18px_18px] bg-left-top bg-no-repeat pl-[27px] font-bold text-[#e33f1e]"
       style={{ backgroundImage: `url(${withBasePath("/sites/prayag/icons/form-error.svg")})` }}
     >
-      <Tx>{message}</Tx>
+      {message}
     </strong>
   );
 }
 
-/** Off-screen honeypot; never visible, not focusable, ignored by assistive tech. */
 export function Honeypot() {
   return (
     <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-      <label htmlFor={`edit-${HONEYPOT_FIELD}`}><Tx>{"Leave this field blank"}</Tx></label>
+      <label htmlFor={`edit-${HONEYPOT_FIELD}`}>Leave this field blank</label>
       <input id={`edit-${HONEYPOT_FIELD}`} type="text" name={HONEYPOT_FIELD} tabIndex={-1} autoComplete="off" defaultValue="" />
     </div>
   );
 }
 
-/** Small spinner shown beside the submit button while a submission is in flight. */
 export function SubmittingIndicator({ active, className }: { active: boolean; className?: string }) {
   if (!active) return null;
   return (
     <span role="status" className={cn("inline-flex items-center gap-2 self-center text-[16px]", className)}>
       <span aria-hidden="true" className="inline-block size-5 animate-spin rounded-full border-2 border-current border-r-transparent" />
-      <span className="sr-only"><Tx>{"Submitting…"}</Tx></span>
+      <span className="sr-only">Submitting…</span>
     </span>
   );
 }

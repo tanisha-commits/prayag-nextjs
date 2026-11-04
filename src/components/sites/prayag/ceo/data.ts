@@ -1,11 +1,8 @@
-// Content for /ceo-profile (source: prayagindia.com/ceo-profile).
-
 export const ceoBanner = {
   image: "/sites/prayag/files/2025-02/banner.webp",
   title: "CEO Profile",
 };
 
-/** Biography paragraphs, verbatim. The page shows the first two; the rest open in a pop-up. */
 export const ceoStory: string[] = [
   "It's truly enlightening to witness the energy, clear vision, and unwavering conviction of someone like Mr. Nitin Aggarwal, the CEO of Prayag, who has revolutionized the Indian Brassware and Ceramicware market in his own unique way.",
   "In 2000, Mr. Nitin Aggarwal, a Mechanical Engineer from Bangalore University, embarked on a transformative journey by joining his father's business. Equipped with strategic acumen and exceptional management skills, he rapidly elevated the company’s status and was honored with the prestigious Young Entrepreneur Award in 2009 by the Indian Achievers Podium covered in 4ps among India’s generation next. Also adding to his achievements are accolades like “Star Brands” in 2010, “Rising Star” in 2012, “Most promising Brand” in 2013, “The Admired Brand of India” in 2014-15 & “The World’s Greatest Brands 2015 Asia & GCC”.",
@@ -19,7 +16,6 @@ export const ceoStory: string[] = [
   "In summary, Mr. Nitin Aggarwal’s dynamic leadership and forward-thinking vision have solidified Prayag’s position as a leading brand while demonstrating his commitment to employee welfare, environmental sustainability, and sports development.",
 ];
 
-/** Number of biography items visible on the page before "Read the full profile". */
 export const ceoVisibleItems = 2;
 
 export const ceoPortrait = {
@@ -29,7 +25,6 @@ export const ceoPortrait = {
   height: 784,
 };
 
-/** `start` mirrors the source `data-start` attribute on the first counter. */
 export const ceoFacts: { value: string; label: string; start?: number }[] = [
   { value: "2000", label: "Joined the family business", start: 1900 },
   { value: "4,500+", label: "Product SKUs, up from 150 in 2006" },

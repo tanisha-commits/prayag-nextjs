@@ -2,11 +2,6 @@
 
 import { useSyncExternalStore } from "react";
 
-/**
- * Site-wide UI state shared between the header (which opens things) and overlays rendered elsewhere
- * in the tree (which close themselves). A tiny external store instead of Redux, so pages that only
- * need these two flags do not ship Redux Toolkit, React-Redux and Immer.
- */
 export interface UiState {
   categoryPanelOpen: boolean;
   mobileNavOpen: boolean;

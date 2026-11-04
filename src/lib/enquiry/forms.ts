@@ -1,22 +1,3 @@
-/**
- * Field definitions for the two Prayag Drupal webforms, copied 1:1 from the source HTML
- * (`webform-submission-dealership-enquiry-node-67-add-form`, `webform-submission-contact-node-4-add-form`).
- * Shared by the client forms (rendering + native validation) and the route handler
- * (server-side validation). Contains no secrets.
- *
- * Source quirks kept on purpose:
- * - contact "Phone" is submitted as `subject` (pattern ^\d{10}$); contact Name placeholder is "Name1".
- * - contact enquiry options are "Comments and Suggestions" and
- *   "Comments and Suggestions Complaints & Grievances".
- * - dealership "All  option" value has two spaces in the source markup.
- * - required errors: dealership enquiry type says "This field is required" (lower-case f), all
- *   other custom ones "This Field is required"; fields without a custom message fall back to the
- *   browser's message on the client and Drupal's "<Label> field is required." on the server.
- * - The email pattern is not a valid `v`-flag regex, so Chrome ignores it client-side on the source
- *   (logging a console error). We omit that attribute (same client behaviour, no console error);
- *   Drupal (PCRE) and our server still enforce it.
- */
-
 export type FormId = "contact" | "dealership";
 
 export type FieldType = "select" | "text" | "email" | "tel" | "number" | "textarea";
@@ -28,26 +9,19 @@ export interface FieldOption {
 
 export interface FieldDef {
   name: string;
-  /** Source `<label>` text (visually hidden on both pages, kept for a11y and error messages). */
   label: string;
   type: FieldType;
-  /** Source `id` attribute. */
   id: string;
   placeholder?: string;
   required: boolean;
   requiredError?: string;
   pattern?: string;
   patternError?: string;
-  /**
-   * The browser cannot compile this pattern (HTML patterns use the regex `v` flag) and ignores it,
-   * logging a console error. It is therefore not rendered; the server still enforces it.
-   */
   serverOnlyPattern?: boolean;
   maxLength?: number;
   size?: number;
   rows?: number;
   options?: FieldOption[];
-  /** Empty-value first option text (`- Select -` or the dealership requirements prompt). */
   emptyOption?: string;
   autoComplete?: string;
 }
@@ -295,10 +269,8 @@ export const FORM_FIELDS: Record<FormId, FieldDef[]> = {
   dealership: DEALERSHIP_FIELDS,
 };
 
-/** Honeypot input name. Real visitors never see or fill it. */
 export const HONEYPOT_FIELD = "website_url";
 
-/** Contact details as shown on the source /contact-us page (and its footer e-mail). */
 export const ENQUIRY_FALLBACK_CONTACT = {
   tollFree: "+1 (800) 257 0304",
   enquiry: "92898 74228",

@@ -5,12 +5,7 @@ import { TabGroup } from "../hdpe/tab-group";
 import "./agritech.css";
 
 import { fullImg, fullSource, transcodedUrl } from "@/lib/image-dimensions";
-import { Tx } from "@/components/sites/prayag/cms/tx";
 
-// Slick settings verbatim from the page's inline scripts. The first script initialises every
-// .js-cfs-slider (FITTINGS_SLICK) and .ngp-features-slider (NGP_SLICK, ahead of the theme's Drupal
-// behavior); the second then re-initialises only the visible #pane-nylon slider with its own
-// options (NYLON_SLICK: 2 slides below 1200px, dots instead of arrows below 768px).
 const NGP_SLICK: SlickSettings = {
   infinite: true,
   swipe: true,
@@ -52,7 +47,6 @@ const NYLON_SLICK: SlickSettings = {
   ],
 };
 
-/** https://prayagindia.com/agritech (taxonomy term 219), content between the header and the footer. */
 export function AgritechPage() {
   return (
     <PcatPage slug="agritech">
@@ -65,7 +59,7 @@ export function AgritechPage() {
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
-                <h1 className="black_title"><Tx>{"Agritec"}</Tx></h1>
+                <h1 className="black_title">Agritec</h1>
               </div>
             </div>
           </div>
@@ -76,10 +70,10 @@ export function AgritechPage() {
           <div className="row align-items-center">
             <div className="col-12 col-md-7">
               <div className="prayag-content-box">
-                <h2><Tx>{"Agritec Pipes"}</Tx></h2>
-                <p className="prayag-subtitle"><Tx>{"for Reliable Agricultural Water Flow"}</Tx></p>
+                <h2>Agritec Pipes</h2>
+                <p className="prayag-subtitle">for Reliable Agricultural Water Flow</p>
                 <p>
-                  <Tx>{"Prayag Agritec Pipes offer a dependable piping solution for irrigation and water distribution applications. Designed as part of an integrated range of agricultural pipes and fittings, the Agritec range is available across multiple pressure classes and sizes to support different agricultural water-flow requirements."}</Tx>
+                  Prayag Agritec Pipes offer a dependable piping solution for irrigation and water distribution applications. Designed as part of an integrated range of agricultural pipes and fittings, the Agritec range is available across multiple pressure classes and sizes to support different agricultural water-flow requirements.
                 </p>
               </div>
             </div>
@@ -92,7 +86,7 @@ export function AgritechPage() {
       </section>
       <section className="ngp-section" style={{ background: "#1a1a1a", padding: "60px 0" }}>
         <div className="container-fluid">
-          <h2 className="text-center" style={{ color: "#fff" }}><Tx>{"Why Choose "}</Tx><strong><Tx>{"Prayag Agritec"}</Tx></strong><Tx>{" Pipes?"}</Tx></h2>
+          <h2 className="text-center" style={{ color: "#fff" }}>Why Choose <strong>Prayag Agritec</strong> Pipes?</h2>
           <SlickCarousel className="ngp-features-slider" style={{ color: "#fff" }} settings={NGP_SLICK} aria-label="Why Choose Prayag Agritec Pipes?">
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
@@ -107,8 +101,8 @@ export function AgritechPage() {
                   </defs>
                 </svg>
               </div>
-              <span className="ngp-feature-label"><Tx>{"Multiple Pressure Classes"}</Tx></span>
-              <p className="ngp_para"><Tx>{"Available in PN-4, PN-6 and PN-10 configurations to suit different system requirements."}</Tx></p>
+              <span className="ngp-feature-label">Multiple Pressure Classes</span>
+              <p className="ngp_para">Available in PN-4, PN-6 and PN-10 configurations to suit different system requirements.</p>
             </div>
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
@@ -123,8 +117,8 @@ export function AgritechPage() {
                   </defs>
                 </svg>
               </div>
-              <span className="ngp-feature-label"><Tx>{"Multiple Pipe Sizes"}</Tx></span>
-              <p className="ngp_para"><Tx>{"The Agritec Pipe range includes sizes from 90 mm to 160 mm in the listed pipe range."}</Tx></p>
+              <span className="ngp-feature-label">Multiple Pipe Sizes</span>
+              <p className="ngp_para">The Agritec Pipe range includes sizes from 90 mm to 160 mm in the listed pipe range.</p>
             </div>
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
@@ -139,8 +133,8 @@ export function AgritechPage() {
                   </defs>
                 </svg>
               </div>
-              <span className="ngp-feature-label"><Tx>{"Complete Fittings Range"}</Tx></span>
-              <p className="ngp_para"><Tx>{"A dedicated range of agricultural fittings helps create a complete piping system."}</Tx></p>
+              <span className="ngp-feature-label">Complete Fittings Range</span>
+              <p className="ngp_para">A dedicated range of agricultural fittings helps create a complete piping system.</p>
             </div>
             <div className="ngp-feature-item">
               <div className="ngp-icon-circle">
@@ -159,9 +153,9 @@ export function AgritechPage() {
                   </defs>
                 </svg>
               </div>
-              <span className="ngp-feature-label"><Tx>{"Multiple Fitting Sizes"}</Tx></span>
+              <span className="ngp-feature-label">Multiple Fitting Sizes</span>
               <p className="ngp_para">
-                <Tx>{"Agriculture fittings are available across a broad size range, extending from 63 mm to 200 mm in several fitting categories."}</Tx>
+                Agriculture fittings are available across a broad size range, extending from 63 mm to 200 mm in several fitting categories.
               </p>
             </div>
           </SlickCarousel>
@@ -186,8 +180,8 @@ export function AgritechPage() {
             <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M21.2308 5.99866C21.2211 5.78469 21.1301 5.53538 20.9771 5.37908L15.9807 0.279282C15.6418 -0.0128267 14.993 -0.133765 14.6154 0.204859C14.2436 0.537901 14.2533 1.18352 14.6251 1.51656L18.1381 5.09813H0.937304C0.420215 5.09813 0 5.50188 0 5.99864C0 6.49542 0.420245 6.89914 0.937304 6.89914H18.1381L14.6251 10.4807C14.3055 10.7877 14.2455 11.4557 14.6154 11.7924C14.9834 12.1292 15.6573 12.0213 15.9807 11.718L20.9771 6.61819C21.1475 6.4433 21.2308 6.23868 21.2308 5.99866Z" fill="black" />
             </svg>
-            <Tx>{" "}</Tx>
-            <Tx>{"View Product Range"}</Tx>
+            {" "}
+            View Product Range
           </a>
         </div>
       </section>
@@ -201,18 +195,18 @@ export function AgritechPage() {
           </div>
           <div className="psr-content-col">
             <div className="psr-content">
-              <span className="psr-eyebrow"><Tx>{"Agricultural Piping Solutions for Water Distribution"}</Tx></span>
-              <h2><Tx>{"What is Prayag Agritec Pipe?"}</Tx></h2>
-              <p className="psr-description"><Tx>{"Prayag Agritec Pipe is an agricultural piping solution designed for water distribution systems."}</Tx></p>
+              <span className="psr-eyebrow">Agricultural Piping Solutions for Water Distribution</span>
+              <h2>What is Prayag Agritec Pipe?</h2>
+              <p className="psr-description">Prayag Agritec Pipe is an agricultural piping solution designed for water distribution systems.</p>
               <p className="psr-description">
-                <Tx>{"The range includes different pressure classifications and pipe sizes, along with a corresponding range of agricultural fittings for creating practical and adaptable piping networks. Agritec Pipes are available in PN-4, PN-6 and PN-10 variants. The listed pipe sizes range from 90 mm to 160 mm, with individual configurations varying by pressure class. The range is supported by agricultural fittings including couplers, equal tees, 90° elbows, end caps and other connection/reduction fittings, depending on the pressure class and fitting series."}</Tx>
+                The range includes different pressure classifications and pipe sizes, along with a corresponding range of agricultural fittings for creating practical and adaptable piping networks. Agritec Pipes are available in PN-4, PN-6 and PN-10 variants. The listed pipe sizes range from 90 mm to 160 mm, with individual configurations varying by pressure class. The range is supported by agricultural fittings including couplers, equal tees, 90° elbows, end caps and other connection/reduction fittings, depending on the pressure class and fitting series.
               </p>
               <a href="#agri-fittings-heading" className="prayag-btn">
                 <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M21.2308 5.99866C21.2211 5.78469 21.1301 5.53538 20.9771 5.37908L15.9807 0.279282C15.6418 -0.0128267 14.993 -0.133765 14.6154 0.204859C14.2436 0.537901 14.2533 1.18352 14.6251 1.51656L18.1381 5.09813H0.937304C0.420215 5.09813 0 5.50188 0 5.99864C0 6.49542 0.420245 6.89914 0.937304 6.89914H18.1381L14.6251 10.4807C14.3055 10.7877 14.2455 11.4557 14.6154 11.7924C14.9834 12.1292 15.6573 12.0213 15.9807 11.718L20.9771 6.61819C21.1475 6.4433 21.2308 6.23868 21.2308 5.99866Z" fill="black" />
                 </svg>
-                <Tx>{" "}</Tx>
-                <Tx>{"Know More"}</Tx>
+                {" "}
+                Know More
               </a>
             </div>
           </div>
@@ -220,9 +214,9 @@ export function AgritechPage() {
       </SplitRevealSection>
       <section className="ka-applications pt-0">
         <div className="container-fluid">
-          <p className="ka-eyebrow"><Tx>{"Where our pipes work"}</Tx></p>
-          <h2 className="ka-title"><Tx>{"Applications"}</Tx></h2>
-          <p className="ka-intro"><Tx>{"Prayag Agritec Pipes are built for dependable water distribution across agricultural and farm settings."}</Tx></p>
+          <p className="ka-eyebrow">Where our pipes work</p>
+          <h2 className="ka-title">Applications</h2>
+          <p className="ka-intro">Prayag Agritec Pipes are built for dependable water distribution across agricultural and farm settings.</p>
           <div className="ka-grid ka-grid--single-row" style={{ gridTemplateColumns: "repeat(5, 1fr)" }}>
             <div className="ka-card">
               <div className="ka-image">
@@ -230,7 +224,7 @@ export function AgritechPage() {
                 <img {...fullImg("/sites/prayag/files/2026-09/Agricultural-Irrigation.webp")} alt="" />
               </div>
               <div className="ka-card-body">
-                <h3><Tx>{"Agricultural Irrigation"}</Tx></h3>
+                <h3>Agricultural Irrigation</h3>
               </div>
             </div>
             <div className="ka-card">
@@ -239,7 +233,7 @@ export function AgritechPage() {
                 <img {...fullImg("/sites/prayag/files/2026-09/Farm-Water-Distribution.webp")} alt="Farm Water Distribution" />
               </div>
               <div className="ka-card-body">
-                <h3><Tx>{"Farm Water Distribution"}</Tx></h3>
+                <h3>Farm Water Distribution</h3>
               </div>
             </div>
             <div className="ka-card">
@@ -248,7 +242,7 @@ export function AgritechPage() {
                 <img {...fullImg("/sites/prayag/files/2026-09/Agricultural-Water-Supply-Networks.webp")} alt="" />
               </div>
               <div className="ka-card-body">
-                <h3><Tx>{"Agricultural Water Supply Networks"}</Tx></h3>
+                <h3>Agricultural Water Supply Networks</h3>
               </div>
             </div>
             <div className="ka-card">
@@ -257,7 +251,7 @@ export function AgritechPage() {
                 <img {...fullImg("/sites/prayag/files/2026-09/field-water-distribution.webp")} alt="" />
               </div>
               <div className="ka-card-body">
-                <h3><Tx>{"Field Water Distribution"}</Tx></h3>
+                <h3>Field Water Distribution</h3>
               </div>
             </div>
             <div className="ka-card">
@@ -266,7 +260,7 @@ export function AgritechPage() {
                 <img {...fullImg("/sites/prayag/files/2026-09/Irrigation-Pipeline-Systems.webp")} alt="" />
               </div>
               <div className="ka-card-body">
-                <h3><Tx>{"Irrigation Pipeline Systems"}</Tx></h3>
+                <h3>Irrigation Pipeline Systems</h3>
               </div>
             </div>
           </div>
@@ -283,24 +277,24 @@ export function AgritechPage() {
             </div>
             <div className="col-lg-6 col-md-12 p-0">
               <div className="prayag_work_content">
-                <h2><Tx>{"Features & Benefits"}</Tx></h2>
+                <h2>Features &amp; Benefits</h2>
                 <ul className="advantages_list">
                   <li>
-                    <strong><Tx>{"Multiple Pressure Options"}</Tx></strong>
-                    <Tx>{" "}</Tx>
-                    <Tx>{"— Choose from PN-4, PN-6 and PN-10 pipe configurations according to system requirements."}</Tx>
+                    <strong>Multiple Pressure Options</strong>
+                    {" "}
+                    — Choose from PN-4, PN-6 and PN-10 pipe configurations according to system requirements.
                   </li>
-                  <li><strong><Tx>{"Wide Size Availability"}</Tx></strong><Tx>{" — The listed Agritec Pipe range covers 90 mm, 110 mm and 160 mm sizes."}</Tx></li>
+                  <li><strong>Wide Size Availability</strong> — The listed Agritec Pipe range covers 90 mm, 110 mm and 160 mm sizes.</li>
                   <li>
-                    <strong><Tx>{"Complete Fitting Compatibility"}</Tx></strong>
-                    <Tx>{" "}</Tx>
-                    <Tx>{"— A dedicated agricultural fitting range includes couplers, equal tees, elbows and end caps."}</Tx>
+                    <strong>Complete Fitting Compatibility</strong>
+                    {" "}
+                    — A dedicated agricultural fitting range includes couplers, equal tees, elbows and end caps.
                   </li>
-                  <li><strong><Tx>{"Broad Fitting Range"}</Tx></strong><Tx>{" — Fittings are available in multiple sizes, with several categories extending up to 200 mm."}</Tx></li>
+                  <li><strong>Broad Fitting Range</strong> — Fittings are available in multiple sizes, with several categories extending up to 200 mm.</li>
                   <li>
-                    <strong><Tx>{"Multiple Connection Options"}</Tx></strong>
-                    <Tx>{" "}</Tx>
-                    <Tx>{"— The range includes standard fittings as well as reducer fittings and bushes for different connection requirements."}</Tx>
+                    <strong>Multiple Connection Options</strong>
+                    {" "}
+                    — The range includes standard fittings as well as reducer fittings and bushes for different connection requirements.
                   </li>
                 </ul>
               </div>
@@ -308,27 +302,26 @@ export function AgritechPage() {
           </div>
         </div>
       </section>
-      {/* Source keeps this Bootstrap modal but no button opens it (the Features section has no Read More); it stays hidden. */}
       <div className="modal fade" id="prayagReadMoreModal" tabIndex={-1} aria-labelledby="prayagReadMoreModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="prayagReadMoreModalLabel"><Tx>{"Prayag Agritec Pipes — Features & Benefits"}</Tx></h5>
+              <h5 className="modal-title" id="prayagReadMoreModalLabel">Prayag Agritec Pipes — Features &amp; Benefits</h5>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
             </div>
             <div className="modal-body">
               <p>
-                <Tx>{"Prayag Agritec Pipes are designed to give agricultural and irrigation systems dependable performance across a wide range of operating pressures and sizes. With PN-4, PN-6 and PN-10 pressure classifications available, the range can be matched to the specific demands of different water-distribution setups, from field-level irrigation to broader farm water supply networks."}</Tx>
+                Prayag Agritec Pipes are designed to give agricultural and irrigation systems dependable performance across a wide range of operating pressures and sizes. With PN-4, PN-6 and PN-10 pressure classifications available, the range can be matched to the specific demands of different water-distribution setups, from field-level irrigation to broader farm water supply networks.
               </p>
               <p>
-                <Tx>{"The listed Agritec Pipe range covers 90 mm, 110 mm and 160 mm sizes, supported by a complete range of compatible agricultural fittings — including couplers, equal tees, elbows, elbow variants, and end caps — with several fitting categories extending up to 200 mm."}</Tx>
+                The listed Agritec Pipe range covers 90 mm, 110 mm and 160 mm sizes, supported by a complete range of compatible agricultural fittings — including couplers, equal tees, elbows, elbow variants, and end caps — with several fitting categories extending up to 200 mm.
               </p>
               <p>
-                <Tx>{"Beyond standard fittings, the range also includes reducer fittings and bushes to handle transitions between different pipe sizes, giving installers flexibility when designing or adapting a piping network. By offering pipes and compatible fittings together as part of one integrated agricultural range, Prayag simplifies sourcing and ensures better compatibility across the entire system."}</Tx>
+                Beyond standard fittings, the range also includes reducer fittings and bushes to handle transitions between different pipe sizes, giving installers flexibility when designing or adapting a piping network. By offering pipes and compatible fittings together as part of one integrated agricultural range, Prayag simplifies sourcing and ensures better compatibility across the entire system.
               </p>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn prayag-modal-close-btn" data-bs-dismiss="modal"><Tx>{"Close"}</Tx></button>
+              <button type="button" className="btn prayag-modal-close-btn" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -336,7 +329,7 @@ export function AgritechPage() {
       <section className="prayag-specs" aria-labelledby="agri-fittings-heading">
         <div className="container-fluid">
           <div className="prayag-specs__header" style={{ flexDirection: "column" }}>
-            <h2 id="agri-fittings-heading"><Tx>{"Specifications"}</Tx></h2>
+            <h2 id="agri-fittings-heading">Specifications</h2>
           </div>
           <TabGroup
             listId="prayagAgriFittingsTabs"
@@ -356,43 +349,43 @@ export function AgritechPage() {
                     <table className="prayag-specs__table">
                       <thead>
                         <tr>
-                          <th><Tx>{"Specification"}</Tx></th>
-                          <th><Tx>{"Details"}</Tx></th>
+                          <th>Specification</th>
+                          <th>Details</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td data-label="Specification"><Tx>{"Product Range"}</Tx></td>
-                          <td data-label="Details"><Tx>{"Agritec Pipe"}</Tx></td>
+                          <td data-label="Specification">Product Range</td>
+                          <td data-label="Details">Agritec Pipe</td>
                         </tr>
                         <tr>
-                          <td data-label="Specification"><Tx>{"Application"}</Tx></td>
-                          <td data-label="Details"><Tx>{"Agriculture / Water Distribution"}</Tx></td>
+                          <td data-label="Specification">Application</td>
+                          <td data-label="Details">Agriculture / Water Distribution</td>
                         </tr>
                         <tr>
-                          <td data-label="Specification"><Tx>{"Pressure Classes"}</Tx></td>
-                          <td data-label="Details"><Tx>{"PN-4, PN-6, PN-10"}</Tx></td>
+                          <td data-label="Specification">Pressure Classes</td>
+                          <td data-label="Details">PN-4, PN-6, PN-10</td>
                         </tr>
                         <tr>
-                          <td data-label="Specification"><Tx>{"Available Pipe Sizes"}</Tx></td>
-                          <td data-label="Details"><Tx>{"90 mm, 110 mm, 160 mm"}</Tx></td>
+                          <td data-label="Specification">Available Pipe Sizes</td>
+                          <td data-label="Details">90 mm, 110 mm, 160 mm</td>
                         </tr>
                         <tr>
-                          <td data-label="Specification"><Tx>{"Pipe Name"}</Tx></td>
-                          <td data-label="Details"><Tx>{"Smart Agri Pipe"}</Tx></td>
+                          <td data-label="Specification">Pipe Name</td>
+                          <td data-label="Details">Smart Agri Pipe</td>
                         </tr>
                         <tr>
-                          <td data-label="Specification"><Tx>{"Fittings"}</Tx></td>
-                          <td data-label="Details"><Tx>{"Coupler, Equal Tee, 90° Elbow, End Cap and other fittings"}</Tx></td>
+                          <td data-label="Specification">Fittings</td>
+                          <td data-label="Details">Coupler, Equal Tee, 90° Elbow, End Cap and other fittings</td>
                         </tr>
                         <tr>
-                          <td data-label="Specification"><Tx>{"Fitting Size Range"}</Tx></td>
-                          <td data-label="Details"><Tx>{"63 mm–200 mm depending on fitting type and pressure class"}</Tx></td>
+                          <td data-label="Specification">Fitting Size Range</td>
+                          <td data-label="Details">63 mm–200 mm depending on fitting type and pressure class</td>
                         </tr>
                       </tbody>
                     </table>
                     <p className="prayag-specs__note">
-                      <Tx>{"*The catalogue specifically lists PN-4 pipes in 90, 110 and 160 mm, PN-6 pipes in 90, 110 and 160 mm, and PN-10 in 110 mm."}</Tx>
+                      *The catalogue specifically lists PN-4 pipes in 90, 110 and 160 mm, PN-6 pipes in 90, 110 and 160 mm, and PN-10 in 110 mm.
                     </p>
                   </div>
                 ),
@@ -404,7 +397,7 @@ export function AgritechPage() {
       <section className="prayag-fitting-specs pt-0" aria-labelledby="fitting-ecosystem-heading">
         <div className="container-fluid">
           <header className="prayag-fitting-specs__header">
-            <h2 id="fitting-ecosystem-heading"><Tx>{"Types of Agriculture Fittings:"}</Tx></h2>
+            <h2 id="fitting-ecosystem-heading">Types of Agriculture Fittings:</h2>
           </header>
           <TabGroup
             listId="prayagFittingTabs"
@@ -430,9 +423,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/Agri---PIPE-Photoroom.webp")} alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Pipe"}</Tx></h3>
+                          <h3 className="cfs-card__title">Pipe</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 90 to 160"}</Tx></li>
+                            <li><strong>Range:</strong> 90 to 160</li>
                           </ul>
                         </div>
                       </article>
@@ -444,9 +437,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/Agri---REDUCER-COUPLER.webp")} alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Coupler"}</Tx></h3>
+                          <h3 className="cfs-card__title">Coupler</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 63 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 63 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -458,9 +451,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/Agri---EQUAL-TEE.webp")} alt="White Female Threaded Elbow 90°" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Equal Tee"}</Tx></h3>
+                          <h3 className="cfs-card__title">Equal Tee</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 63 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 63 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -472,9 +465,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/Agri---ELBOW.webp")} alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Elbow"}</Tx></h3>
+                          <h3 className="cfs-card__title">Elbow</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 63 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 63 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -486,9 +479,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/COUPLER-1-.webp")} alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Elbow 90°"}</Tx></h3>
+                          <h3 className="cfs-card__title">Elbow 90°</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 75 to 110"}</Tx></li>
+                            <li><strong>Range:</strong> 75 to 110</li>
                           </ul>
                         </div>
                       </article>
@@ -500,9 +493,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/Agri---END-CAP.webp")} alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"End Cap"}</Tx></h3>
+                          <h3 className="cfs-card__title">End Cap</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 63 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 63 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -523,9 +516,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/3-meters.webp")} alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Pipe 3 Metre"}</Tx></h3>
+                          <h3 className="cfs-card__title">Pipe 3 Metre</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 90 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 90 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -537,9 +530,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/5-meters.webp")} alt="White Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Pipe 5 Metre"}</Tx></h3>
+                          <h3 className="cfs-card__title">Pipe 5 Metre</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 90 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 90 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -551,9 +544,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/6-meters.webp")} alt="White Female Threaded Elbow 90°" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Pipe 6 Metre"}</Tx></h3>
+                          <h3 className="cfs-card__title">Pipe 6 Metre</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 90 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 90 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -565,9 +558,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/COUPLER-1-.webp")} alt="Blue Coupler" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Coupler"}</Tx></h3>
+                          <h3 className="cfs-card__title">Coupler</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 63 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 63 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -579,9 +572,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/EQUAL-TEE-1-.webp")} alt="Blue Equal Tee" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Equal Tee"}</Tx></h3>
+                          <h3 className="cfs-card__title">Equal Tee</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 63 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 63 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -593,9 +586,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/ELBOW-1-.webp")} alt="Blue Elbow" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Elbow"}</Tx></h3>
+                          <h3 className="cfs-card__title">Elbow</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 20 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 20 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -607,9 +600,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/ELBOW-1-.webp")} alt="Blue Pipe" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Elbow 45°"}</Tx></h3>
+                          <h3 className="cfs-card__title">Elbow 45°</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 20 to 160"}</Tx></li>
+                            <li><strong>Range:</strong> 20 to 160</li>
                           </ul>
                         </div>
                       </article>
@@ -621,9 +614,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/ELBOW-1-.webp")} alt="Blue Elbow 90°" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Elbow 90°"}</Tx></h3>
+                          <h3 className="cfs-card__title">Elbow 90°</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 40 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 40 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -635,9 +628,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/END-CAP.webp")} alt="Blue End Cap" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"End Cap"}</Tx></h3>
+                          <h3 className="cfs-card__title">End Cap</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 40 to 200"}</Tx></li>
+                            <li><strong>Range:</strong> 40 to 200</li>
                           </ul>
                         </div>
                       </article>
@@ -649,9 +642,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/Agri---REDUCER-COUPLER.webp")} alt="Blue End Cap" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Reducer Coupler"}</Tx></h3>
+                          <h3 className="cfs-card__title">Reducer Coupler</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 75 x 50 to 160 x 110"}</Tx></li>
+                            <li><strong>Range:</strong> 75 x 50 to 160 x 110</li>
                           </ul>
                         </div>
                       </article>
@@ -663,9 +656,9 @@ export function AgritechPage() {
                           <img {...fullImg("/sites/prayag/theme/agritec/REDUCER-TEE.webp")} alt="Blue End Cap" loading="lazy" width="600" height="400" className="cfs-card__img" />
                         </figure>
                         <div className="cfs-card__body">
-                          <h3 className="cfs-card__title"><Tx>{"Reducer Tee"}</Tx></h3>
+                          <h3 className="cfs-card__title">Reducer Tee</h3>
                           <ul className="cfs-card__meta">
-                            <li><strong><Tx>{"Range:"}</Tx></strong><Tx>{" 75 x 50 to 160 x 110"}</Tx></li>
+                            <li><strong>Range:</strong> 75 x 50 to 160 x 110</li>
                           </ul>
                         </div>
                       </article>

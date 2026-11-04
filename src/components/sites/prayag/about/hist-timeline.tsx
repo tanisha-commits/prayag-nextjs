@@ -1,15 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-/**
- * "Key Milestones" timeline (source inline script on /about-prayag):
- * - the spine fills with scroll progress (`--p`) between the first and last node,
- * - nodes behind the viewport centre are "passed", the nearest one is "active",
- * - cards reveal (card → year → title) once their top passes 90% of the viewport.
- * Without IntersectionObserver or with reduced motion everything stays in its final state.
- */
 export function HistTimeline({ items }: { items: { year: string; text: string }[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -82,8 +74,7 @@ export function HistTimeline({ items }: { items: { year: string; text: string }[
 
     window.addEventListener("scroll", request, { passive: true });
     window.addEventListener("resize", remeasure);
-    window.addEventListener("load", remeasure); // fonts / images can shift heights
-    // Client-side navigation never fires `load`; re-measure when lazy images above resize the page.
+    window.addEventListener("load", remeasure);
     const ro = new ResizeObserver(remeasure);
     ro.observe(root);
     remeasure();
@@ -109,8 +100,8 @@ export function HistTimeline({ items }: { items: { year: string; text: string }[
           <li className="hist-item" key={i}>
             <span className="hist-node" aria-hidden="true" />
             <div className="hist-card">
-              <span className="hist-year"><Tx>{item.year}</Tx></span>
-              <h3 className="hist-text"><Tx>{item.text}</Tx></h3>
+              <span className="hist-year">{item.year}</span>
+              <h3 className="hist-text">{item.text}</h3>
             </div>
           </li>
         ))}

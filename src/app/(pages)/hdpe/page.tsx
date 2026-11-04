@@ -1,14 +1,12 @@
 import { HdpePage } from "@/components/sites/prayag/product-category/hdpe/hdpe-page";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
-import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-// The source page has no meta description.
-const pageMetadataBase = pageMetadata({
+export const metadata = pageMetadata({
   title: "HDPE | Prayag",
   path: "/hdpe",
 });
 
-function HdpeRoute() {
+export default function HdpeRoute() {
   return (
     <>
       <BreadcrumbJsonLd
@@ -21,6 +19,3 @@ function HdpeRoute() {
     </>
   );
 }
-
-export default withPageContent("hdpe", HdpeRoute);
-export const generateMetadata = withSeo("hdpe", pageMetadataBase);

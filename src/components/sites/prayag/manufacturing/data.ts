@@ -1,7 +1,5 @@
 import type { ResponsiveImgProps } from "@/lib/optimized-image";
 
-// Content for /manufacturing-process (source: prayagindia.com/manufacturing-process).
-
 export const mfBanner = {
   image: "/sites/prayag/files/2026-10/Manufacturing-Process.webp",
   title: "Manufacturing Process",
@@ -10,11 +8,8 @@ export const mfBanner = {
 export type MfVideo = {
   id: string;
   poster: string;
-  /** Optimizer candidates for `poster`, added on the server (mf-page.tsx). */
   posterImg?: ResponsiveImgProps;
-  /** aria-label of the poster link */
   label: string;
-  /** iframe title */
   title: string;
 };
 
@@ -37,7 +32,6 @@ export const mfFilm: MfVideo = {
 };
 
 export const mfPlant = {
-  // Source heading: "Manufacturing&nbsp;<br>Plant"
   headingLines: ["Manufacturing ", "Plant"],
   paragraphs: [
     "Innovations, Technology, Quality and Affordability have been the pillars of Prayag’s exponential growth in quality and range. Using the cutting edge advanced technology with a focus on process quality control, ensure nothing but only masterpieces flow out of the manufacturing line.",

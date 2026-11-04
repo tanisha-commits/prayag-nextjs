@@ -1,17 +1,10 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
-/**
- * Theme script.js "scroll-progress-linked reveal" of `.product_split_reveal_sec`: the image slides
- * in from the left and the text from the right (100px, 50px at ≤768px) while the section's top
- * travels from the viewport bottom to 40% of the viewport height, eased out-cubic. Writes the
- * same inline opacity / transform as the source; reduced motion shows the final state.
- */
 export function SplitReveal({ image, content }: { image: ReactNode; content: ReactNode }) {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -72,12 +65,12 @@ export function SplitReveal({ image, content }: { image: ReactNode; content: Rea
       <div className="psr-container">
         <div className="psr-image-col">
           <div ref={imageRef} className="psr-image-wrap">
-            <Tx>{image}</Tx>
+            {image}
           </div>
         </div>
         <div className="psr-content-col">
           <div ref={contentRef} className="psr-content">
-            <Tx>{content}</Tx>
+            {content}
           </div>
         </div>
       </div>

@@ -1,21 +1,11 @@
-/*
- * Phone fixes for /cpvc-plumbing-solution. The generated cpvc-plumbing-solution.css mirrors the source,
- * which is broken here on phones. Desktop and tablet are untouched.
- */
-
-/* The features slider's dots strip is offset 40px right of the slider (source rule), which made the
-   page scroll sideways on phones. The dots themselves stay where they are; only the empty overflow
-   is clipped. */
 .pcat-cpvc-plumbing-solution .ngp-section {
   overflow-x: clip;
 }
 
 @media (max-width: 640px) {
-  /* The source keeps its desktop 90px side margins on phones, squeezing the cards to ~110px. */
   .pcat-cpvc-plumbing-solution .prayag-specs__inner {
     margin: 0;
   }
-  /* Title and subtitle shared one row and the subtitle ran off the screen at 320px. */
   .pcat-cpvc-plumbing-solution .prayag-specs__header {
     flex-wrap: wrap;
     align-items: baseline;
@@ -24,8 +14,6 @@
   .pcat-cpvc-plumbing-solution .prayag-specs .prayag-specs__subtitle {
     padding: 0;
   }
-  /* An inline padding-left (desktop table) beat the mobile 42% label column, so the
-     "SPECIFICATION" label was drawn over the value. */
   .pcat-cpvc-plumbing-solution .prayag-specs .prayag-specs__table tbody td[data-label="Specification"] {
     padding-left: 42% !important;
   }

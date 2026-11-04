@@ -2,17 +2,15 @@ import { CatalogueGrid } from "@/components/sites/prayag/catalogue/catalogue-gri
 import { catalogueBanner } from "@/components/sites/prayag/catalogue/data";
 import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
-import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-const pageMetadataBase = pageMetadata({
+export const metadata = pageMetadata({
   title: "Prayag Product Catalogue Information in India | Prayag",
   description:
     "Download the Prayag product catalogue to explore bathroom fittings, sanitaryware, pipes, kitchen sinks, water heaters, accessories and other product ranges.",
   path: "/download-cataglogue",
 });
 
-/** /download-cataglogue — the misspelt slug is the source URL and is kept on purpose. */
-function DownloadCatalogguePage() {
+export default function DownloadCatalogguePage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Download Cataglogue", path: "/download-cataglogue" }]} />
@@ -21,6 +19,3 @@ function DownloadCatalogguePage() {
     </>
   );
 }
-
-export default withPageContent("download-cataglogue", DownloadCatalogguePage);
-export const generateMetadata = withSeo("download-cataglogue", pageMetadataBase);

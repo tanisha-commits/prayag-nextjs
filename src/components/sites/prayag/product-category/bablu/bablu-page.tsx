@@ -2,11 +2,9 @@ import { PcatPage } from "../pcat-page";
 import { BabluReveal } from "./bablu-reveal";
 import { withBasePath } from "@/lib/base-path";
 import { fullImg } from "@/lib/image-dimensions";
-import { Tx } from "@/components/sites/prayag/cms/tx";
 
 const FILES = "/sites/prayag/files/2026-10";
 
-// Source images are /media/<id> links; the local copies are the identical backup files.
 const features = [
   {
     image: `${FILES}/redeem.webp`,
@@ -37,7 +35,6 @@ const guides = [
   { label: "HINDI", href: `${FILES}/Prayag_Ka_Bablu_App_Install_Guide_Hindi.pdf` },
 ];
 
-/** PRAYAG KA BABLU plumbers' loyalty programme (source basic page; styles live in the theme CSS). */
 export function BabluPage() {
   return (
     <PcatPage slug="prayag-ka-bablu-plumbers-loyalty-program">
@@ -52,7 +49,7 @@ export function BabluPage() {
             </div>
             <div className="col-md-6">
               <div className="breadcrumb_title">
-                <h1 className="black_title"><Tx>{"PRAYAG KA BABLU Plumbers’ Loyalty Program"}</Tx></h1>
+                <h1 className="black_title">PRAYAG KA BABLU Plumbers’ Loyalty Program</h1>
               </div>
             </div>
           </div>
@@ -63,12 +60,13 @@ export function BabluPage() {
           <div className="shell intro-grid">
             <div className="intro-copy reveal">
               <h2>
-                <Tx>{"Earn More. Recommend More."}</Tx>
+                Earn More. Recommend More.
                 <br />
-                <Tx>{"Grow With PRAYAG."}</Tx>
+                Grow With PRAYAG.
               </h2>
               <p className="lead">
-                <Tx>{"PRAYAG Ka Bablu App rewards plumbers for recommending and using PRAYAG products — with a simple, multi-language experience designed for ease of use."}</Tx>
+                PRAYAG Ka Bablu App rewards plumbers for recommending and using PRAYAG products — with a simple,
+                multi-language experience designed for ease of use.
               </p>
             </div>
             <div className="stats" aria-label="Programme statistics">
@@ -80,7 +78,7 @@ export function BabluPage() {
                 </div>
                 <div>
                   <strong>10+</strong>
-                  <span><Tx>{"Years"}</Tx></span>
+                  <span>Years</span>
                 </div>
               </article>
               <article className="stat-card reveal">
@@ -90,8 +88,8 @@ export function BabluPage() {
                   </svg>
                 </div>
                 <div>
-                  <strong><Tx>{"5 Lakhs+"}</Tx></strong>
-                  <span><Tx>{"Redeemed"}</Tx></span>
+                  <strong>5 Lakhs+</strong>
+                  <span>Redeemed</span>
                 </div>
               </article>
             </div>
@@ -100,7 +98,7 @@ export function BabluPage() {
         <section className="benefits section-pad" aria-labelledby="benefits-title">
           <div className="shell">
             <div className="section-heading reveal">
-              <h2 id="benefits-title"><Tx>{"Why Join PRAYAG Ka Bablu App?"}</Tx></h2>
+              <h2 id="benefits-title">Why Join PRAYAG Ka Bablu App?</h2>
             </div>
             <div className="journey-line" aria-hidden="true" />
             <div className="feature-grid">
@@ -112,13 +110,12 @@ export function BabluPage() {
                     <img src={withBasePath(f.image)} alt={f.alt} loading="lazy" />
                   </div>
                   <div className="feature-copy">
-                    {/* Decorative glyph; the heading carries the meaning. */}
                     <div className="feature-icon" aria-hidden="true">
-                      <Tx>{f.icon}</Tx>
+                      {f.icon}
                     </div>
                     <div>
-                      <h3><Tx>{f.title}</Tx></h3>
-                      <p><Tx>{f.text}</Tx></p>
+                      <h3>{f.title}</h3>
+                      <p>{f.text}</p>
                     </div>
                   </div>
                 </article>
@@ -131,11 +128,11 @@ export function BabluPage() {
             <div className="install-panel reveal">
               <div className="install-copy">
                 <h2 id="install-title">
-                  <Tx>{"How To Install"}</Tx>
+                  How To Install
                   <br />
-                  <Tx>{"PRAYAG Ka Bablu App?"}</Tx>
+                  PRAYAG Ka Bablu App?
                 </h2>
-                <p><Tx>{"Find Here 👉"}</Tx></p>
+                <p>Find Here 👉</p>
               </div>
               <div className="language-area">
                 <div className="language-grid">
@@ -152,7 +149,7 @@ export function BabluPage() {
                         ▶
                       </span>
                       <span>
-                        <b><Tx>{g.label}</Tx></b>
+                        <b>{g.label}</b>
                       </span>
                       <i aria-hidden="true">↗</i>
                     </a>
@@ -174,14 +171,14 @@ export function BabluPage() {
               />
             </div>
             <div className="partnership-copy reveal">
-              <p className="eyebrow"><Tx>{"PRAYAG KA BABLU is more than an app."}</Tx></p>
+              <p className="eyebrow">PRAYAG KA BABLU is more than an app.</p>
               <h2 id="partnership-title">
-                <Tx>{"It is a"}</Tx><br />
-                <span><Tx>{"partnership."}</Tx></span>
+                It is a<br />
+                <span>partnership.</span>
               </h2>
-              <p className="partnership-lead"><Tx>{"A shared journey of growth. A smarter way to grow with Prayag."}</Tx></p>
+              <p className="partnership-lead">A shared journey of growth. A smarter way to grow with Prayag.</p>
               <span className="blue-rule" />
-              <p className="support-intro"><Tx>{"For more information, connect with our Support Team:"}</Tx></p>
+              <p className="support-intro">For more information, connect with our Support Team:</p>
               <a className="support-bar" href="tel:18002570304">
                 <span className="call-icon" aria-hidden="true">
                   ☎

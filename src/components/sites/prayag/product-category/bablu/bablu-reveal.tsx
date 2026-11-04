@@ -2,12 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-/**
- * `.bablu-page` wrapper with the theme's reveal-on-scroll (script.js `bablu-reveal`): with
- * IntersectionObserver available it adds `bablu-js` (which hides `.reveal` items) and gives
- * each item `visible` once 12% of it is in view. Classes are set on the DOM like the source,
- * so server-rendered children are never re-rendered.
- */
 export function BabluReveal({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 

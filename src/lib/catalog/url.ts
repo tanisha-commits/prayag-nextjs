@@ -1,6 +1,5 @@
 import type { ListQuery } from "./queries";
 
-/** URL <-> list query. Filters are `f.<key>=<slug>` (repeatable), e.g. ?f.colour=gold&f.colour=chrome&sort=title. */
 export type PublicQuery = Pick<ListQuery, "category" | "filters" | "q" | "sort" | "page">;
 
 const SORTS = new Set(["title", "title-desc", "newest", "code"]);

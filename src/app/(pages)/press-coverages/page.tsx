@@ -1,26 +1,19 @@
 import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { PressGallery } from "@/components/sites/prayag/press/press-gallery";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
-import { getContent } from "@/lib/content";
+import { pressItems } from "@/content/prayag/press/items";
 import { imageDims } from "@/lib/image-dimensions";
 import { responsiveImg } from "@/lib/optimized-image";
-import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-const pageMetadataBase = pageMetadata({
+export const metadata = pageMetadata({
   title: "Prayag India - Press Coverages",
   description:
     "Our aim is to keep everyone updated about our company through press coverages and other commercial advertisements.",
   path: "/press-coverages",
 });
 
-/**
- * Optimizer candidates for the 96 press scans (originals up to several MB each). Card images are
- * `width:100%` × 199px (180px under 768px) with `object-fit: cover`, so a wide scan needs
- * max(column width, box height × aspect ratio) pixels; columns are 25vw from 992px, else 50vw.
- * Lightbox thumbnails are 96×64 covers; the lightbox image is at most the viewport.
- */
 function pressImages() {
-  return getContent("pages/press").items.map((item) => {
+  return pressItems.map((item) => {
     const dims = imageDims(item.image);
     const ratio = dims ? dims.width / dims.height : 1;
     const h = (px: number) => `${Math.ceil(px * ratio)}px`;
@@ -33,7 +26,7 @@ function pressImages() {
   });
 }
 
-function PressCoveragesPage() {
+export default function PressCoveragesPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "Press Coverages", path: "/press-coverages" }]} />
@@ -42,6 +35,3 @@ function PressCoveragesPage() {
     </>
   );
 }
-
-export default withPageContent("press-coverages", PressCoveragesPage);
-export const generateMetadata = withSeo("press-coverages", pageMetadataBase);

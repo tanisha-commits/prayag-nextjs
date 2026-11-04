@@ -1,6 +1,3 @@
-// Content for the Prayag homepage, taken from https://prayagindia.com/ (page--homepage.html.twig).
-// Cloned routes use local paths; routes not yet cloned still point at the live site (SOURCE).
-
 export const SOURCE = "https://prayagindia.com";
 const ASSET = "/sites/prayag";
 
@@ -14,9 +11,7 @@ export interface MegaMenu {
   label: string;
   links: NavLink[];
   image: string;
-  /** Natural size of `image` (reserves its box; the file is resized by the image optimizer). */
   imageSize: { width: number; height: number };
-  /** Products lists in two columns; the other menus in one. */
   columns: 1 | 2;
 }
 
@@ -33,12 +28,10 @@ export const productCategories: NavLink[] = [
   { label: "Hardware", href: "/hardware" },
 ];
 
-// The live site hides "Pipes & Fittings" in the mega menu, product grid and footer via CSS.
 export const visibleProductCategories = productCategories.filter(
   (c) => c.label !== "Pipes & Fittings",
 );
 
-// Local page offering View/Download of the official PDF (byte-identical copy of the live file).
 const warrantyPolicy: NavLink = {
   label: "Warranty Policy",
   href: "/warranty-policy",
@@ -89,7 +82,6 @@ export const megaMenus: (MegaMenu | NavLink)[] = [
   },
 ];
 
-// Same target as the source header search icon.
 export const searchHref = "/search/node?keys=products";
 
 export const plumbingSubcategories: NavLink[] = [
@@ -102,7 +94,6 @@ export const plumbingSubcategories: NavLink[] = [
   { label: "UGD Pipes & Fittings", href: "/ugd-pipes-fittings" },
   { label: "uPVC Column Pipes", href: "/upvc-column-pipes" },
   { label: "PPR Pipes", href: "/ppr-pipes" },
-  // Source links "/PVC-O%20Pipes", which the live site redirects to /pvc-o-pipes.
   { label: "PVC-O Pipes", href: "/pvc-o-pipes" },
 ];
 
@@ -120,7 +111,6 @@ export const panelQuickLinks: NavLink[] = [
   { label: "Contact Us", href: "/contact-us" },
 ];
 
-/** Hero banners: srcsets use the pre-resized copies from scripts/images/hero-banners.mjs; the original is the widest candidate. */
 export const heroSlides = [
   {
     alt: "Prayag Sukoon",
@@ -238,8 +228,6 @@ export const sponsors = [
   { src: `${ASSET}/theme/Lucknow_super_gainats.webp`, alt: "Lucknow Super Giants", years: "2023" },
 ];
 
-// The three most recent blog posts at capture time (2026-10-28). Titles are verbatim,
-// including the ".webp" the source shows on the first card.
 export const insights = [
   {
     href: "/double-bowl-kitchen-sink-price",

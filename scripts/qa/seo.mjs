@@ -1,10 +1,3 @@
-// Usage: node scripts/qa/seo.mjs [base=http://localhost:3000] [out.json]
-// Fetches every page of the local /sitemap.xml (GET only) and checks per page: HTTP 200, exactly one
-// <title>, meta description, canonical (absolute, production origin, equal to the page path),
-// robots meta (no accidental noindex), exactly one <h1>, heading levels not skipping downward,
-// <img> without alt, Open Graph title/url, JSON-LD parses. Then reports duplicate titles and
-// descriptions across pages, and checks robots.txt, a 404 status for an unknown URL, and that
-// sitemap URLs use the production origin.
 import fs from "fs";
 
 const base = (process.argv[2] ?? "http://localhost:3000").replace(/\/$/, "");

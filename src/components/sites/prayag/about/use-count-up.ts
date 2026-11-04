@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const DURATION = 1800; // ms, as in the source scripts
+const DURATION = 1800;
 
 type Parsed = { prefix: string; target: number; suffix: string; comma: boolean };
 
@@ -16,11 +16,6 @@ function format(n: number, info: Parsed) {
   return info.prefix + (info.comma ? n.toLocaleString("en-US") : String(n)) + info.suffix;
 }
 
-/**
- * Source counter behaviour (About + CEO pages): the final value is rendered up front; when
- * 60% of the element is visible it jumps to `start` and counts up over 1.8s with a cubic
- * ease-out. Skipped entirely with prefers-reduced-motion or without IntersectionObserver.
- */
 export function useCountUp<T extends HTMLElement>(value: string, start = 0) {
   const ref = useRef<T>(null);
   const [text, setText] = useState(value);

@@ -1,19 +1,13 @@
-// Content for /cpvc-plumbing-solution (source: prayagindia.com/cpvc-plumbing-solution, taxonomy/term/209).
-// Text is verbatim from the live page, including its typos.
-
 import type { Faq } from "./faq-section";
 
 export type FeatureCard = { title: string; text: string };
 
-/** One `.cp-card` of the "CPVC Fittings & Pipes Range" slider; `bar` picks `cp-card-bar--<bar>`. */
 export type RangeCard = { title: string; image: string; alt: string; bar: "blue" | "black" | "yellow" | "white"; range: string };
 
 export type AdvantageItem = { num: string; title: string; text: string };
 
-/** Technical specification row; `highlight` adds the source `cell-highlight` class. */
 export type SpecRow = { param: string; value: string; highlight: boolean };
 
-/** "Why Choose" slider; icons are the inline SVGs in feature-icons.tsx (same order). */
 export const features: FeatureCard[] = [
   { title: "Superior Hot Water Performance", text: "Engineered with a high Vicat Softening Temperature (>112°C) for reliable hot and cold water applications." },
   { title: "High Strength & Pressure Resistance", text: "Excellent burst strength and load-bearing capacity ensure safe performance under high water pressure." },
@@ -39,11 +33,6 @@ export const advantages: AdvantageItem[] = [
   { num: "03", title: "Trusted Legacy & Quality", text: "Backed by stringent quality control and a trusted legacy in plumbing solutions, Prayag offers more than just pipes—it delivers a complete, dependable piping system that professionals and homeowners can rely on for safe, efficient, and durable hot and cold water distribution." },
 ];
 
-/**
- * All 64 source cards, in source order. The source repeats several images (e.g. the seven
- * "Full Turn"/"Long" concealed valves share two photos) and keeps a card titled
- * "Pipe Sch 80 (Duplicate)"; both are reproduced as-is.
- */
 export const rangeCards: RangeCard[] = [
   { title: "Pipe SDR 11", image: "/sites/prayag/theme/cpvc/CPVC%20fittings/PIPE-SDR-11.webp", alt: "Pipe SDR 11", bar: "blue", range: "15 mm - 50 mm" },
   { title: "Pipe Sch 80", image: "/sites/prayag/theme/cpvc/CPVC%20fittings/PIPE-SDR-11.webp", alt: "Pipe Sch 80", bar: "blue", range: "65 mm - 150 mm" },

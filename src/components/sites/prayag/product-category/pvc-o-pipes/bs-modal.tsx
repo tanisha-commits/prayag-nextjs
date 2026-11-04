@@ -3,12 +3,10 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import "./bs-modal.css";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const OPEN_EVENT = "pcat:modal-open";
-const TRANSITION_MS = 300; // .modal.fade .modal-dialog transform transition
+const TRANSITION_MS = 300;
 
-/** Source `button[data-bs-toggle=modal]`: opens the Bootstrap modal named by `target`. */
 export function BsModalTrigger({ target, className, children }: { target: string; className: string; children: ReactNode }) {
   return (
     <button
@@ -25,12 +23,6 @@ export function BsModalTrigger({ target, className, children }: { target: string
   );
 }
 
-/**
- * Bootstrap 5.1 modal (`.modal.fade > .modal-dialog.modal-lg.modal-dialog-centered`) without
- * Bootstrap JS: display + `.show` with the fade/slide transitions, a `.modal-backdrop`, body scroll
- * lock, Esc, click outside the dialog, `[data-bs-dismiss]` buttons, focus kept inside while open and
- * returned to the trigger on close.
- */
 export function BsModal({
   id,
   title,
@@ -42,7 +34,6 @@ export function BsModal({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLElement | null>(null);
-  // closed -> (display) -> shown; hiding keeps display until the transition ends.
   const [state, setState] = useState<"closed" | "opening" | "shown" | "hiding">("closed");
   const labelId = `${id}Label`;
 
@@ -63,7 +54,6 @@ export function BsModal({
     const el = ref.current;
     if (!el) return;
     if (state === "opening") {
-      // Bootstrap: display first, reflow, then add .show so the fade/slide transitions run.
       const id = requestAnimationFrame(() => requestAnimationFrame(() => setState("shown")));
       return () => cancelAnimationFrame(id);
     }
@@ -114,7 +104,6 @@ export function BsModal({
         aria-modal={visible || undefined}
         role={visible ? "dialog" : undefined}
         style={visible ? { display: "block" } : undefined}
-        // Bootstrap closes on a click on the .modal itself (outside .modal-dialog's content).
         onClick={(e) => {
           if (e.target === e.currentTarget) hide();
         }}
@@ -123,14 +112,14 @@ export function BsModal({
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id={labelId}>
-                <Tx>{title}</Tx>
+                {title}
               </h5>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={hide} />
             </div>
             <div className="modal-body">{children}</div>
             <div className="modal-footer">
               <button type="button" className="btn prayag-modal-close-btn" data-bs-dismiss="modal" onClick={hide}>
-                <Tx>{"Close"}</Tx>
+                Close
               </button>
             </div>
           </div>

@@ -9,8 +9,6 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-// The source answers unknown URLs with HTTP 200 and a copy of the homepage ("soft 404").
-// The clone returns a real 404 with a way back to the main sections instead.
 export default function NotFound() {
   return (
     <>

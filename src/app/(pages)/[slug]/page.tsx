@@ -6,32 +6,21 @@ import { ArticleShare } from "@/components/sites/prayag/blog/article-share";
 import "@/components/sites/prayag/blog/article.css";
 import { CatalogRoute, catalogMetadata } from "@/components/sites/prayag/catalog/catalog-route";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
-import { CustomPageView } from "@/components/sites/prayag/cms/custom-page";
-import { getBlogArticle, getBlogIndex } from "@/lib/blog";
-import { readList, readListEntry } from "@/lib/content/store";
+import { blogIndex, getBlogArticle } from "@/lib/blog";
 import { withBasePath } from "@/lib/base-path";
 import { storedHtml } from "@/lib/stored-html";
 import { imageDims, responsiveImagesHtml } from "@/lib/image-dimensions";
 
-// Blog articles live at the site root on the source (e.g. /double-bowl-kitchen-sink-price) and are
-// generated statically. Products (/6102-rg-pillar-cock) also live at the root; they come from the
-// catalog database and render on demand. Category landings with filters have their own route
-// folders (/faucets). Anything else is a 404.
 export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return [...getBlogIndex().map((post) => ({ slug: post.slug })), ...readList("custom-pages").map((p) => ({ slug: p.key }))];
+  return blogIndex.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const article = await getBlogArticle(slug);
-  if (!article) {
-    const custom = readListEntry("custom-pages", slug)?.data;
-    if (custom)
-      return pageMetadata({ title: custom.metaTitle ?? `${custom.title} | Prayag`, description: custom.description ?? undefined, path: `/${slug}`, image: custom.bannerImage });
-    return catalogMetadata(slug);
-  }
+  if (!article) return catalogMetadata(slug);
   const meta = pageMetadata({
     title: article.metaTitle ?? `${article.title} | Prayag`,
     description: article.description ?? undefined,
@@ -44,19 +33,9 @@ export async function generateMetadata({ params }: PageProps<"/[slug]">): Promis
 export default async function BlogArticlePage({ params }: PageProps<"/[slug]">) {
   const { slug } = await params;
   const article = await getBlogArticle(slug);
-  // This route is statically generated, where reading searchParams fails in production. Category
-  // landings that use filters/pagination have their own route folders (e.g. ../faucets); any other
-  // category reached here (such as one added later in the admin) shows its first, unfiltered page.
-  if (!article) {
-    // Pages made from Markdown in the admin (Content → Custom pages).
-    const custom = readListEntry("custom-pages", slug)?.data;
-    if (custom) return <CustomPageView page={custom} />;
-    return <CatalogRoute path={slug} searchParams={Promise.resolve({})} />;
-  }
+  if (!article) return <CatalogRoute path={slug} searchParams={Promise.resolve({})} />;
 
   const url = `https://prayagindia.com/${article.slug}`;
-  // From 1200px the source banner is the image at its natural aspect ratio (height: auto), so the
-  // row height follows each banner (most are 1920x1000, some 3:2 or 16:9).
   const banner = imageDims(article.bannerImage);
   const bannerRatio = banner ? `${banner.width} / ${banner.height}` : "48 / 25";
 
@@ -69,7 +48,6 @@ export default async function BlogArticlePage({ params }: PageProps<"/[slug]">) 
         ]}
       />
 
-      {/* Source `.breadcrumb_main.single_blog` */}
       <div className="overflow-hidden">
         <div className="-mx-3 flex flex-wrap">
           <div
@@ -102,9 +80,6 @@ export default async function BlogArticlePage({ params }: PageProps<"/[slug]">) 
       <section id="pf-blog-detail-2026" className="pt-8 pb-14 sm:pt-14 sm:pb-20">
         <div className="mx-5 sm:mx-[120px]">
           <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-10 lg:grid-cols-[75%_25%] lg:gap-0">
-            {/* Source `.pf-bd-main { width: 90% }` applies at every width. Unlike the source, the grid
-                column may shrink (min-w-0) so wide tables scroll inside their box on mobile
-                instead of stretching the whole page past the viewport. */}
             <article className="w-[90%] min-w-0">
               <div className="pf-bd-content" dangerouslySetInnerHTML={{ __html: storedHtml(responsiveImagesHtml(article.bodyHtml)) }} />
             </article>

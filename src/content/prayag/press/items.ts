@@ -1,14 +1,3 @@
-/**
- * Press coverage cards, in source order, captured from https://prayagindia.com/press-coverages
- * (Drupal node 60, paragraph field `field_media_associations`). Generated — do not hand-edit text.
- *
- * - `details` is reproduced verbatim. The source template prints `<publication> | <date>` where the
- *   date is the paragraph's *created* timestamp (when the entry was added in Drupal), not the
- *   publication date; the publication name field is empty for every item, hence the leading "| ".
- * - `href` is the item's `field_uploaded_media_link` when it is a real external URL. 75 items have
- *   an empty value or the broken Drupal value `internal:#.`; they get `null` (no dead link).
- * - `image` is the local copy (see docs/research/prayag/press-assets.json).
- */
 export interface PressItem {
   image: string;
   title: string;

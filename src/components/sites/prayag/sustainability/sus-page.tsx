@@ -6,9 +6,7 @@ import { SusProjects } from "./sus-projects";
 import { SusRoot } from "./sus-root";
 import { withBasePath } from "@/lib/base-path";
 import { fullImg } from "@/lib/image-dimensions";
-import { Tx } from "@/components/sites/prayag/cms/tx";
 
-/** Body of /sustainability (source `.sus-page`; styles ported 1:1 into sustainability.css). */
 export function SusPage() {
   return (
     <SusRoot>
@@ -16,8 +14,8 @@ export function SusPage() {
         <div className="sus-wrap">
           <div className="sus-purpose__grid">
             <div className="sus-text">
-              <h2><Tx>{susPurpose.heading}</Tx></h2>
-              <p><Tx>{susPurpose.text}</Tx></p>
+              <h2>{susPurpose.heading}</h2>
+              <p>{susPurpose.text}</p>
             </div>
             <figure className="sus-media sus-mask" data-from="right">
               <div className="sus-media__frame">
@@ -32,16 +30,16 @@ export function SusPage() {
         <div className="sus-wrap">
           <div className="sus-trust__grid">
             <div className="sus-text">
-              <h2><Tx>{susTrust.heading}</Tx></h2>
+              <h2>{susTrust.heading}</h2>
               {susTrust.intro.map((t) => (
-                <p key={t}><Tx>{t}</Tx></p>
+                <p key={t}>{t}</p>
               ))}
               <ul>
                 {susTrust.projects.map((t) => (
-                  <li key={t}><Tx>{t}</Tx></li>
+                  <li key={t}>{t}</li>
                 ))}
               </ul>
-              <p><Tx>{susTrust.outro}</Tx></p>
+              <p>{susTrust.outro}</p>
             </div>
             <figure className="sus-media sus-mask" data-from="left">
               <div className="sus-media__frame">
@@ -62,7 +60,7 @@ export function SusPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element -- cover-cropped report thumbnail, as the source */}
                   <img {...fullImg(r.image)} alt={r.imageAlt} loading="lazy" />
                 </span>
-                <h3 className="sus-report__name"><Tx>{r.name}</Tx></h3>
+                <h3 className="sus-report__name">{r.name}</h3>
                 <span className="sus-report__icon" aria-hidden="true">
                   <svg
                     viewBox="0 0 24 24"

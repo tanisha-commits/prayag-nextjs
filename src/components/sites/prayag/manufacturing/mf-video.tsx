@@ -5,13 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { MfVideo as MfVideoData } from "./data";
 import { withBasePath } from "@/lib/base-path";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-/**
- * Click-to-play YouTube video (source `.mf-video`): the poster is a real link to the video
- * (works without JS); click / Enter / Space swaps in the embed with autoplay, shows a
- * "Loading video…" status, and after 8s without a load offers a "watch it on YouTube" link.
- */
 export function MfVideo({ video, cinema = false }: { video: MfVideoData; cinema?: boolean }) {
   const boxRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
@@ -33,7 +27,6 @@ export function MfVideo({ video, cinema = false }: { video: MfVideoData; cinema?
     setStatus("loading");
     playingRef.current = true;
     iframe.src = `https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1`;
-    // Toggled on the DOM (as the source does) so React never rewrites the reveal classes.
     box.classList.add("is-playing");
 
     clearTimeout(slowTimer.current);
@@ -48,7 +41,7 @@ export function MfVideo({ video, cinema = false }: { video: MfVideoData; cinema?
         frame.style.opacity = "1";
       });
     }
-    iframe.focus(); // keyboard users land on the player
+    iframe.focus();
   };
 
   return (
@@ -59,7 +52,7 @@ export function MfVideo({ video, cinema = false }: { video: MfVideoData; cinema?
         aria-label={video.label}
         onClick={play}
         onKeyDown={(e) => {
-          if (e.key === " " || e.key === "Spacebar") play(e); // links only react to Enter by default
+          if (e.key === " " || e.key === "Spacebar") play(e);
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element -- cover-cropped video poster, as the source */}
@@ -71,9 +64,9 @@ export function MfVideo({ video, cinema = false }: { video: MfVideoData; cinema?
         {status === "loading" && "Loading video…"}
         {status === "slow" && (
           <span>
-            <Tx>{"Still loading. If the video doesn"}</Tx><Tx>{"’"}</Tx><Tx>{"t start,"}</Tx><Tx>{" "}</Tx>
+            Still loading. If the video doesn{"’"}t start,{" "}
             <a href={withBasePath(watchUrl)} target="_blank" rel="noopener">
-              <Tx>{"watch it on YouTube"}</Tx>
+              watch it on YouTube
             </a>
             .
           </span>
@@ -87,7 +80,7 @@ export function MfVideo({ video, cinema = false }: { video: MfVideoData; cinema?
           allowFullScreen
           title={video.title}
           onLoad={() => {
-            if (!playingRef.current) return; // ignore the initial about:blank load
+            if (!playingRef.current) return;
             clearTimeout(slowTimer.current);
             setStatus("");
           }}

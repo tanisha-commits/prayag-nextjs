@@ -2,7 +2,6 @@
 
 import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export type PcatTab = {
   id: string;
@@ -11,13 +10,6 @@ export type PcatTab = {
   content: ReactNode;
 };
 
-/**
- * Source Bootstrap-markup tabs (`ul.nav > li.nav-item > button` + `.tab-content > .tab-pane.fade`)
- * driven by the page's inline script: a click moves `active` to the button and `active show` to its
- * pane. Adds the WAI-ARIA tabs keyboard pattern (roving tabindex, arrow keys / Home / End, automatic
- * activation) on top; panes stay `tabindex=0` as on the source. Sliders inside hidden panes need no
- * re-measuring (SlickCarousel lays out in percentages).
- */
 export function PcatTabs({
   tabs,
   listId,
@@ -71,7 +63,7 @@ export function PcatTabs({
               onClick={() => setSelected(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
             >
-              <Tx>{tab.label}</Tx>
+              {tab.label}
             </button>
           </li>
         ))}
@@ -86,7 +78,7 @@ export function PcatTabs({
             aria-labelledby={tab.id}
             tabIndex={0}
           >
-            <Tx>{tab.content}</Tx>
+            {tab.content}
           </div>
         ))}
       </div>

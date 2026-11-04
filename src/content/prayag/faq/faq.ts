@@ -1,9 +1,3 @@
-/**
- * FAQ tabs and answers from https://prayagindia.com/faq (theme template, not CMS fields).
- * Questions are plain text; answers keep the source HTML exactly (some are wrapped in <p>, some
- * are bare text, which changes their typography on the source too). Generated — do not hand-edit.
- * The source also has two empty, never-shown panes (#v-pills-home6/7, content "...") — omitted.
- */
 export interface FaqItem {
   question: string;
   answerHtml: string;

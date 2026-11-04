@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 export interface Fitting {
   line: string;
@@ -12,11 +11,6 @@ export interface Fitting {
   points: string[];
 }
 
-/**
- * Source `section.pt-fittings` tiles, each opening its `dialog.pt-fitting-dialog` with
- * showModal(). Closes on the close button, a backdrop click and Esc (native); focus then
- * returns to the tile that opened it. The dialogs follow the section, as on the source.
- */
 export function FittingTiles({ fittings }: { fittings: Fitting[] }) {
   const dialogs = useRef(new Map<string, HTMLDialogElement>());
   const tiles = useRef(new Map<string, HTMLButtonElement>());
@@ -26,10 +20,14 @@ export function FittingTiles({ fittings }: { fittings: Fitting[] }) {
       <section className="pt-fittings" id="advantge">
         <div className="container-fluid">
           <div className="pt-inner">
-            <p className="pt-eyebrow"><Tx>{"ADVANTAGE"}</Tx></p>
-            <h2 className="pt-title"><Tx>{"How Prayag Casing Pipes Work"}</Tx></h2>
+            <p className="pt-eyebrow">ADVANTAGE</p>
+            <h2 className="pt-title">How Prayag Casing Pipes Work</h2>
             <p className="pt-lede">
-              <Tx>{"Prayag Casing Pipes are installed along the borewell wall to create a strong and stable lining that prevents the surrounding soil from collapsing into the borehole. The casing protects the borewell from sand, silt, and external contaminants while providing a secure passage for the installation of column pipes and pumping systems. In water-bearing zones, well screen pipes with precision slots allow groundwater to enter while filtering out unwanted particles, ensuring a clean and efficient water supply."}</Tx>
+              Prayag Casing Pipes are installed along the borewell wall to create a strong and stable lining that
+              prevents the surrounding soil from collapsing into the borehole. The casing protects the borewell from
+              sand, silt, and external contaminants while providing a secure passage for the installation of column
+              pipes and pumping systems. In water-bearing zones, well screen pipes with precision slots allow
+              groundwater to enter while filtering out unwanted particles, ensuring a clean and efficient water supply.
             </p>
 
             <div className="pt-tile-grid">
@@ -48,14 +46,14 @@ export function FittingTiles({ fittings }: { fittings: Fitting[] }) {
                   onClick={() => dialogs.current.get(f.line)?.showModal()}
                 >
                   <span className="pt-tile-mark" aria-hidden="true">
-                    <Tx>{f.mark}</Tx>
+                    {f.mark}
                   </span>
                   <div>
-                    <p className="pt-tile-name"><Tx>{f.name}</Tx></p>
-                    <p className="pt-tile-sub"><Tx>{f.sub}</Tx></p>
+                    <p className="pt-tile-name">{f.name}</p>
+                    <p className="pt-tile-sub">{f.sub}</p>
                   </div>
                   <span className="pt-tile-hint">
-                    <Tx>{"View details"}</Tx>
+                    View details
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -91,8 +89,8 @@ export function FittingTiles({ fittings }: { fittings: Fitting[] }) {
         >
           <div className="pt-dialog-head">
             <div>
-              <h3 id={`pt-dlg-${f.line}-title`}><Tx>{f.name}</Tx></h3>
-              <p><Tx>{f.sub}</Tx></p>
+              <h3 id={`pt-dlg-${f.line}-title`}>{f.name}</h3>
+              <p>{f.sub}</p>
             </div>
             <button
               type="button"
@@ -115,10 +113,10 @@ export function FittingTiles({ fittings }: { fittings: Fitting[] }) {
             </button>
           </div>
           <div className="pt-dialog-body">
-            <p><Tx>{f.intro}</Tx></p>
+            <p>{f.intro}</p>
             <ul className="pt-dialog-list">
               {f.points.map((point) => (
-                <li key={point}><Tx>{point}</Tx></li>
+                <li key={point}>{point}</li>
               ))}
             </ul>
           </div>

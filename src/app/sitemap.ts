@@ -1,14 +1,8 @@
 import type { MetadataRoute } from "next";
-import { and, eq, isNull } from "drizzle-orm";
 import { SITE_URL } from "@/components/sites/prayag/seo";
-import { getBlogIndex } from "@/lib/blog";
-import { readList } from "@/lib/content/store";
-import { getDb } from "@/lib/db";
-import { categories, products } from "@/lib/db/schema";
+import { blogIndex } from "@/lib/blog";
+import { allCategories, allProducts } from "@/lib/catalog/queries";
 
-// Every indexable page: the hand-built pages, top-level category landings, published products and
-// blog articles. Nested category paths (/kitchen-sinks/quartz) are local filter views the live site
-// does not serve, and search/admin/API routes are not pages, so none of them are listed.
 const STATIC_PATHS = [
   "/",
   "/products",
@@ -41,22 +35,11 @@ const STATIC_PATHS = [
   "/pvc-o-pipes",
 ];
 
-// Rebuilt at most hourly, so catalog edits in the admin reach the sitemap without a deploy.
-export const revalidate = 3600;
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const db = getDb();
-  const categoryPaths = db
-    .select({ slug: categories.slug })
-    .from(categories)
-    .where(and(eq(categories.published, true), isNull(categories.parentId)))
-    .all()
-    .map((c) => `/${c.slug}`);
+  const categoryPaths = allCategories.filter((c) => c.published && c.parentId === null).map((c) => `/${c.slug}`);
   const entries = new Map<string, Date | undefined>();
   for (const path of [...STATIC_PATHS, ...categoryPaths]) entries.set(path, undefined);
-  for (const post of getBlogIndex()) entries.set(`/${post.slug}`, new Date(post.timestamp * 1000));
-  for (const page of readList("custom-pages")) entries.set(`/${page.key}`, new Date(page.updatedAt ?? Date.now()));
-  for (const p of db.select({ slug: products.slug, updatedAt: products.updatedAt }).from(products).where(eq(products.status, "published")).all())
-    entries.set(`/${p.slug}`, p.updatedAt);
+  for (const post of blogIndex) entries.set(`/${post.slug}`, new Date(post.timestamp * 1000));
+  for (const p of allProducts) if (p.status === "published") entries.set(`/${p.slug}`, p.updatedAt);
   return [...entries].map(([path, lastModified]) => ({ url: `${SITE_URL}${path === "/" ? "" : path}`, ...(lastModified ? { lastModified } : {}) }));
 }

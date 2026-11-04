@@ -5,19 +5,15 @@ import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 import type { BlogListItem } from "@/lib/blog";
 import { withBasePath } from "@/lib/base-path";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-const PER_PAGE = 15; // source: PER_PAGE in the /blog inline script
+const PER_PAGE = 15;
 
 type SortKey = "date_desc" | "date_asc" | "title_asc" | "title_desc";
 
-// Source selects combine Olivero's base `select` (54px tall, chevron, 18/54px padding) with
-// Bootstrap's `.form-control` border, radius and focus ring.
 const selectStyle = { backgroundImage: `url(${withBasePath("/sites/prayag/icons/chevron-down.svg")})` };
 const selectClass =
   "block h-[54px] w-full max-w-full cursor-pointer appearance-none rounded-[0.25rem] border border-[#ced4da] bg-white bg-[position:right_18px_center] bg-no-repeat py-1.5 pr-[54px] pl-[18px] text-[16px] leading-6 text-[#212529] transition-[border-color,box-shadow] duration-150 focus:border-[#86b7fe] focus:shadow-[0_0_0_0.25rem_rgba(13,110,253,0.25)] focus:outline-0";
 
-/** Source `section.blog`: Year + Sort filters, cards revealed 15 at a time ("Read More"/"Read Less"). */
 export function BlogList({ posts }: { posts: BlogListItem[] }) {
   const [year, setYear] = useState("all");
   const [sort, setSort] = useState<SortKey>("date_desc");
@@ -31,7 +27,6 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
 
   const matched = useMemo(() => {
     const filtered = posts.filter((p) => year === "all" || p.year === year);
-    // The source compares lower-cased titles (data-title) with localeCompare.
     const title = (p: BlogListItem) => p.title.toLowerCase();
     return [...filtered].sort((a, b) => {
       switch (sort) {
@@ -64,7 +59,7 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
         <div className="-mx-3 mb-6 flex flex-wrap">
           <div className="w-1/2 px-3 md:w-1/4">
             <label htmlFor="filterYear" className="mb-1.5 block font-semibold">
-              <Tx>{"Year"}</Tx>
+              Year
             </label>
             <select
               id="filterYear"
@@ -86,7 +81,7 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
           </div>
           <div className="w-1/2 px-3 md:w-1/4">
             <label htmlFor="sortBy" className="mb-1.5 block font-semibold">
-              <Tx>{"Sort By"}</Tx>
+              Sort By
             </label>
             <select
               id="sortBy"
@@ -110,7 +105,6 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
           {matched.slice(0, visible).map((post) => (
             <div key={post.slug} className="w-full px-3 md:w-1/3">
               <article className="group mb-[50px] h-full w-[95%]">
-                {/* Source: the image is always 300px tall; below 991px its box clips it to 180px. */}
                 <div className="mb-[18px] h-[180px] overflow-hidden lg:h-[300px]">
                   <Link href={`/${post.slug}`} tabIndex={-1} aria-hidden="true" className="relative block h-[300px]">
                     <Image
@@ -123,10 +117,10 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
                   </Link>
                 </div>
                 <div className="relative border-b border-[#c5bfbf] pl-[9px] before:absolute before:bottom-0 before:left-0 before:h-px before:w-0 before:bg-[#716f6f] before:transition-[width] before:duration-[800ms] before:content-[''] group-hover:before:w-full md:pl-[18px]">
-                  <p className="mb-3.5 text-[18px] leading-[1.2] font-normal text-[#212529] md:text-[16px]"><Tx>{post.date}</Tx></p>
+                  <p className="mb-3.5 text-[18px] leading-[1.2] font-normal text-[#212529] md:text-[16px]">{post.date}</p>
                   <h2 className="mb-6 line-clamp-2 w-full text-[17px] leading-[27px] font-medium md:text-[22px] md:leading-8 min-[1400px]:w-[90%] min-[1400px]:text-[20px] min-[1400px]:leading-[30px]">
                     <Link href={`/${post.slug}`} className="text-black">
-                      <Tx>{post.title}</Tx>
+                      {post.title}
                     </Link>
                   </h2>
                 </div>
@@ -135,7 +129,7 @@ export function BlogList({ posts }: { posts: BlogListItem[] }) {
           ))}
         </div>
 
-        {matched.length === 0 && <p className="text-center"><Tx>{"No blogs found for this year."}</Tx></p>}
+        {matched.length === 0 && <p className="text-center">No blogs found for this year.</p>}
 
         {matched.length > PER_PAGE && (
           <div className="my-6 text-center">

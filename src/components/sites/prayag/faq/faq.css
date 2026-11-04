@@ -1,7 +1,3 @@
-/*
- * /faq — ported from the source theme rules for `section.faq .faq_content` (vertical pills + Bootstrap 5
- * flush accordions), keeping the source class names. Bootstrap defaults the theme relies on are inlined.
- */
 section.faq {
   position: relative;
   padding: 60px 0;
@@ -18,7 +14,6 @@ section.faq {
   align-items: flex-start;
 }
 
-/* `.nav.flex-column.nav-pills.me-5` + `.faq_content .nav { width: 25% }` */
 .faq_content .nav {
   display: flex;
   flex-direction: column;
@@ -47,7 +42,6 @@ section.faq {
   border-bottom: 1px solid #ccc;
 }
 
-/* 20x20 like the source's width/height attributes; may shrink when the label wraps (source too). */
 .faq_content .nav-link svg {
   display: block;
   width: 20px;
@@ -138,7 +132,6 @@ section.faq {
   transform: rotate(-180deg);
 }
 
-/* The source removes every focus indicator here; keep one for keyboard users only. */
 .faq_content .nav-link:focus-visible,
 .faq_content .accordion-button:focus-visible {
   outline: 2px solid #000;

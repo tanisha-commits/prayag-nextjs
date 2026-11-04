@@ -1,18 +1,3 @@
-"""Extract the static parts of the Prayag product-category landing pages (banner, SEO content, FAQ).
-
-Usage: python3 -I scripts/prayag-category-pages.py <rendered-html-dir> <drupal-backup-root> [<slug>...]
-
-With slugs, only those pages are (re)extracted and merged into the existing JSON and asset map.
-
-<rendered-html-dir>/<slug>.html is the page DOM as Chrome renders https://prayagindia.com/<slug>.
-Writes src/content/prayag/catalog/category-pages.json:
-  { slug: { metaTitle, metaDescription, bannerHtml, sectionStyle, contentHtml, faqHtml, comingSoonHtml, tailHtml, liveOrder } }
-(tailHtml = markup between the last section and the footer, e.g. a stray button the source renders.)
-Scripts, <style> blocks (ported to the page CSS), preload <link>s, comments, data-once and
-inline event handlers are removed. Images are copied with scripts/prayag-assets.py (backup first,
-live GET otherwise) and pointed at the local copies; links to https://prayagindia.com/<path> become
-local /<path>. `liveOrder` is the source listing order from data/catalog/membership.json.
-"""
 import html as html_lib
 import json, os, re, subprocess, sys, tempfile
 
@@ -20,14 +5,11 @@ SLUGS = ["faucets", "ptmt-taps", "ceramicware", "kitchen-sinks", "water-heaters"
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 src_dir, backup, *only = sys.argv[1:]
 
-
 def section(h, cls):
-    """Outer HTML of the first top-level <section class="cls"> (sections are not nested on these pages)."""
     i = h.find(f'<section class="{cls}"')
     if i < 0:
         return ""
     return h[i:h.find("</section>", i) + len("</section>")]
-
 
 def clean(html):
     html = re.sub(r"<!--.*?-->", "", html, flags=re.S)
@@ -38,13 +20,11 @@ def clean(html):
     html = re.sub(r'href="https://prayagindia\.com(/[^"]*)?"', lambda m: f'href="{m.group(1) or "/"}"', html)
     return re.sub(r"\n\s*\n+", "\n", html).strip()
 
-
 def urls(html):
     found = set(re.findall(r'\ssrc="([^"]+)"', html))
     for ss in re.findall(r'\ssrcset="([^"]+)"', html):
         found |= {part.strip().split(" ")[0] for part in ss.split(",") if part.strip()}
     return {u for u in found if u.startswith(("/sites/", "/themes/", "https://prayagindia.com/"))}
-
 
 def localise(html, amap):
     def one(u):
@@ -52,7 +32,6 @@ def localise(html, amap):
     html = re.sub(r'(\ssrc=")([^"]+)(")', lambda m: m.group(1) + one(m.group(2)) + m.group(3), html)
     return re.sub(r'(\ssrcset=")([^"]+)(")', lambda m: m.group(1) + ", ".join(
         " ".join([one(p.strip().split(" ")[0])] + p.strip().split(" ")[1:]) for p in m.group(2).split(",") if p.strip()) + m.group(3), html)
-
 
 OUT = os.path.join(ROOT, "src/content/prayag/catalog/category-pages.json")
 ASSETS = os.path.join(ROOT, "docs/research/prayag/category-pages-assets.json")

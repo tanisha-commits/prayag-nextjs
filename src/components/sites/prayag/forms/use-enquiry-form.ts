@@ -16,11 +16,6 @@ const IDLE: EnquiryState = { phase: "idle", message: "", errors: {} };
 const NETWORK_ERROR =
   "Sorry, your enquiry could not be sent right now. Please check your connection and try again.";
 
-/**
- * Native-validation hooks equivalent to Drupal Webform's `webformRequiredError` behaviour
- * (modules/contrib/webform/js/webform.form.js): on `invalid` show the field's custom
- * pattern/required message in the browser bubble; clear it again on `input`/`change`.
- */
 export function webformValidityProps(field: FieldDef) {
   if (!field.requiredError && !field.patternError) return {};
   const onInvalid = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -35,11 +30,6 @@ export function webformValidityProps(field: FieldDef) {
   return { onInvalid, onInput: reset, onChange: reset };
 }
 
-/**
- * Submission state machine for the enquiry forms. The form only reaches `onSubmit` after the
- * browser's constraint validation passed (no `noValidate`, like the source). The server
- * re-validates and forwards; success is shown only for a 2xx forwarding result.
- */
 export function useEnquiryForm(formId: FormId) {
   const [state, setState] = useState<EnquiryState>(IDLE);
   const messageRef = useRef<HTMLDivElement>(null);

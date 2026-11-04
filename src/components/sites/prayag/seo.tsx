@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
 
 import { BASE_PATH } from "@/lib/base-path";
-/**
- * Production origin used for canonicals, Open Graph URLs, structured data and the sitemap. Never the
- * dev server: local pages still declare the production URLs. Override with NEXT_PUBLIC_SITE_URL only
- * when the site moves to another domain.
- */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://prayagindia.com").replace(/\/+$/, "") + BASE_PATH;
 
-/** Page metadata with the source title/description and a canonical matching the source URL. */
 export function pageMetadata({
   title,
   description,
@@ -21,7 +15,6 @@ export function pageMetadata({
   image?: string;
 }): Metadata {
   return {
-    // `absolute` because source titles already carry the " | Prayag" suffix.
     title: { absolute: title },
     description,
     alternates: { canonical: path },
@@ -36,10 +29,6 @@ export function pageMetadata({
   };
 }
 
-/**
- * Breadcrumb trail as structured data. The source shows no visible breadcrumb trail
- * (its "breadcrumb" is the image banner), so the trail is only exposed to crawlers.
- */
 export function BreadcrumbJsonLd({ items }: { items: { name: string; path: string }[] }) {
   const data = {
     "@context": "https://schema.org",
@@ -54,7 +43,6 @@ export function BreadcrumbJsonLd({ items }: { items: { name: string; path: strin
   return (
     <script
       type="application/ld+json"
-      // JSON.stringify output is escaped for "<" so content cannot close the script tag.
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   );

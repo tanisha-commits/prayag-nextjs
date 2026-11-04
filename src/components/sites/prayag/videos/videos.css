@@ -1,12 +1,3 @@
-/* ==========================================================================
-   Prayag video pages: /product-video, /feedback-videos (inline click-to-play cards)
-   and /video-tv-advertisement (cards opening a modal player).
-   Port of the theme rules for `section.video_wrapper`, `.video_item`, `.video_modal_outer`
-   (+ Bootstrap `.modal`) and the inline <style> of the product/feedback pages, which
-   overrides the theme's `.video_item` margin and heading weight on those two pages.
-   Unlayered, so it beats Tailwind's preflight; every rule is scoped under .vd-page.
-   ========================================================================== */
-
 .vd-page {
   position: relative;
   padding: 60px 0;
@@ -17,8 +8,6 @@
     padding: 50px 0;
   }
 }
-
-/* --- card ---------------------------------------------------------------- */
 
 .vd-page .vd-item {
   position: relative;
@@ -35,7 +24,6 @@
   line-height: 30px;
 }
 
-/* Product / feedback pages (page <style> wins over the theme). */
 .vd-page .vd-item--inline {
   margin-bottom: 30px;
 }
@@ -62,8 +50,6 @@
   outline: 3px solid #40ade3;
   outline-offset: 2px;
 }
-
-/* --- inline player (source .video-thumbnail-wrapper) --------------------- */
 
 .vd-page .vd-thumb-wrap {
   position: relative;
@@ -122,8 +108,6 @@
   border: 0;
 }
 
-/* --- TV cards (source a.video-link > .icon + img) ------------------------ */
-
 .vd-page .vd-link img {
   display: block;
   width: 100%;
@@ -131,7 +115,6 @@
   object-fit: cover;
 }
 
-/* Positioned against the whole card (image + heading), exactly as the source. */
 .vd-page .vd-icon {
   position: absolute;
   top: 50%;
@@ -166,8 +149,6 @@
     padding: 13px;
   }
 }
-
-/* --- modal (Bootstrap .modal.fade + .modal-dialog-centered) -------------- */
 
 .vd-backdrop {
   position: fixed;
@@ -242,7 +223,6 @@
   pointer-events: auto;
 }
 
-/* Inline inside the body, as the source: the line box adds a ~9px strip below the 600px player. */
 .vd-content iframe {
   display: inline;
   vertical-align: baseline;
@@ -255,7 +235,6 @@
   height: 609px;
 }
 
-/* Not in the source (it relies on Esc / backdrop click): shown only to keyboard users. */
 .vd-page .vd-close {
   position: absolute;
   top: -44px;

@@ -1,10 +1,9 @@
-import { getContent } from "@/lib/content";
+import { customerServiceImage, pageLinks, stats } from "./data";
 import { PrayagButton } from "./prayag-button";
 import { withBasePath } from "@/lib/base-path";
 import { img } from "@/lib/image-dimensions";
 
 export function CustomerService() {
-  const { stats, heading, text, buttonLabel, buttonHref, image: customerServiceImage } = getContent("home/customer-service");
   return (
     <section className="relative py-[50px] md:py-[60px]">
       <div className="prayag-container">
@@ -30,13 +29,14 @@ export function CustomerService() {
           <div className="mb-6 w-full px-3 md:mb-0 md:w-1/3 md:pr-0">
             <div className="bg-[#141414] p-[35px] md:h-[350px] xl:p-[50px]">
               <h3 className="mb-2 text-[28px] leading-9 font-medium text-white md:text-[30px] md:leading-[38px] xl:leading-[42px]">
-                {heading}
+                Customer Service
               </h3>
               <p className="mb-0 text-[15px] leading-[25px] text-white md:mb-[30px] min-[768px]:text-[16px] min-[768px]:leading-6 min-[1400px]:text-[18px] min-[1400px]:leading-7 xl:mb-10">
-                {text}
+                Prayag’s after-sales service guarantees fast responses, expert assistance, and hassle-free support
+                for every valued customer.
               </p>
-              <PrayagButton href={buttonHref} className="bg-[rgba(161,152,152,0.41)] px-6 py-2.5" label={`${buttonLabel}: ${heading}`}>
-                {buttonLabel}
+              <PrayagButton href={pageLinks.contact} className="bg-[rgba(161,152,152,0.41)] px-6 py-2.5" label="Know More about customer service">
+                Know More
               </PrayagButton>
             </div>
           </div>

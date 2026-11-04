@@ -5,23 +5,15 @@ import { cn } from "@/lib/utils";
 import { FieldError, FormMessages, Honeypot, SubmittingIndicator } from "../forms/form-feedback";
 import { useEnquiryForm, webformValidityProps } from "../forms/use-enquiry-form";
 import { withBasePath } from "@/lib/base-path";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
-/** Fields rendered in `col-md-12` on the source; the rest are `col-md-6`. */
 const FULL_WIDTH = new Set(["company_name", "address", "message"]);
 
-// Bootstrap `.form-select` chevron, as served by the source theme.
 const SELECT_ARROW = { backgroundImage: `url(${withBasePath("/sites/prayag/icons/form-select-chevron.svg")})` };
 
 const FIELD_BASE = "w-full rounded-[3px] border border-[#ccc] bg-white px-[18px] leading-[28.8px] placeholder:text-[#7e96a7]";
 const FIELD_FOCUS = "focus:outline-[6px] focus:outline-double focus:outline-[#2494db] focus:-outline-offset-1";
 const ERROR = "border-2 border-[#e33f1e]";
 
-/**
- * "Get in Touch" webform (`webform-submission-contact-node-4-add-form`). The per-type differences
- * (15.75px grey text + 4px top margin on text inputs, 18px elsewhere) are the source's computed
- * styles from overlapping theme rules, kept as-is.
- */
 export function ContactForm() {
   const { state, submit, clearFieldError, messageRef, submitting } = useEnquiryForm("contact");
 
@@ -125,7 +117,7 @@ export function ContactForm() {
               className={cn("mb-[18px] w-full px-[10px] min-[577px]:px-3", !FULL_WIDTH.has(field.name) && "min-[768px]:w-1/2")}
             >
               <label htmlFor={field.id} className="sr-only">
-                <Tx>{field.label}</Tx>
+                {field.label}
               </label>
               {renderControl(field)}
               <FieldError id={`${field.id}-error`} message={state.errors[field.name]} />

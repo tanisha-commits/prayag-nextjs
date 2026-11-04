@@ -1,8 +1,3 @@
-/*
- * Not from the source (hand-written; product-base.css is generated). The source theme removes the
- * focus outline (outline: 0), so keyboard users cannot see where they are. This ring only appears
- * for keyboard focus (:focus-visible), never on mouse clicks or at rest.
- */
 .pcat-product :is(a, button, summary, [tabindex]):focus-visible {
   outline: 2px solid #00aeef;
   outline-offset: 2px;

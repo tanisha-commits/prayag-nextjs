@@ -2,16 +2,15 @@ import { PageBanner } from "@/components/sites/prayag/page-banner";
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { productVideoPage } from "@/components/sites/prayag/videos/data";
 import { InlineVideoSection } from "@/components/sites/prayag/videos/video-sections";
-import { withPageContent, withSeo } from "@/lib/content/page-content";
 
-const pageMetadataBase = pageMetadata({
+export const metadata = pageMetadata({
   title: "Product Videos - Information, Support & Resources | Prayag",
   description:
     "Watch Prayag product videos to explore features, applications, installation insights and product ranges across bathroom, kitchen and plumbing solutions.",
   path: "/product-video",
 });
 
-function ProductVideoPage() {
+export default function ProductVideoPage() {
   const { banner, cards } = productVideoPage;
   return (
     <>
@@ -21,6 +20,3 @@ function ProductVideoPage() {
     </>
   );
 }
-
-export default withPageContent("product-video", ProductVideoPage);
-export const generateMetadata = withSeo("product-video", pageMetadataBase);

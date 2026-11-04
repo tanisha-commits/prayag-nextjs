@@ -1,4 +1,3 @@
-// Inline SVGs copied from the Prayag homepage markup.
 import type { SVGProps } from "react";
 
 type IconProps = SVGProps<SVGSVGElement>;
@@ -96,7 +95,6 @@ export function ChevronRightIcon(props: IconProps) {
   );
 }
 
-/** The arrow used in every `.prayag-btn`. */
 export function ArrowIcon(props: IconProps) {
   return (
     <svg width="22" height="12" viewBox="0 0 22 12" fill="none" aria-hidden="true" {...props}>

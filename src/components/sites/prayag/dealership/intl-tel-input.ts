@@ -1,9 +1,5 @@
 import { BASE_PATH } from "@/lib/base-path";
 
-/**
- * intl-tel-input v17.0.12 (MIT) — the exact version the source page loads from cdnjs. Self-hosted
- * under public/sites/prayag/vendor/ so no npm dependency or third-party runtime request is needed.
- */
 export const ITI_BASE = `${BASE_PATH}/sites/prayag/vendor/intl-tel-input-17.0.12`;
 
 export interface ItiInstance {

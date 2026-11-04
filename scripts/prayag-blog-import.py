@@ -1,19 +1,3 @@
-"""Build the local blog content from captured prayagindia.com article pages.
-
-Usage:
-  python3 -I scripts/prayag-blog-import.py <articles.json> <drupal-backup-root> <project-root> <asset-map-out.json>
-
-<articles.json> is produced by parsing the saved /blog listing and the 148 article pages
-(fields: slug, year, ts, listDate, listTitle, listImg, listAlt, metaTitle, description,
-title, published, bannerImg, bannerAlt, body, related[]).
-
-Writes:
-  src/content/prayag/blog/index.json        listing data (no bodies)
-  src/content/prayag/blog/articles/<slug>.json  one file per article
-  public/sites/prayag/files/...              images, copied from the read-only backup
-                                             (GET from the live site only when absent)
-"""
-
 import json
 import os
 import re
@@ -28,7 +12,6 @@ articles_json, backup, root, map_out = sys.argv[1:5]
 articles = json.load(open(articles_json))
 slugs = {a["slug"] for a in articles}
 
-# Local routes that exist in the clone; everything else stays on the live site.
 LOCAL_PAGES = {
     "", "about-prayag", "ceo-profile", "sustainability", "manufacturing-process",
     "dealership-enquiry", "contact-us", "blog", "warranty-policy",
@@ -41,13 +24,10 @@ LOCAL_PAGES = {
 
 asset_map = {}
 
-
 def local_asset(url):
-    """Copy a /sites/default/files or theme asset and return its public path."""
     path = urllib.parse.unquote(urllib.parse.urlparse(url).path)
     path = re.sub(r"/+", "/", path)
     if path.startswith("/sites/default/files/styles/"):
-        # image-style derivative: /styles/<style>/public/<rest>
         rest = path.split("/public/", 1)[1]
         rel, src_path = "files/" + rest, None
     elif path.startswith("/sites/default/files/"):
@@ -81,7 +61,6 @@ def local_asset(url):
         asset_map[url] = {"local": "/sites/prayag/" + rel, "from": origin}
     return "/sites/prayag/" + rel if os.path.exists(dest) else url
 
-
 def rewrite_href(href):
     m = re.match(r"^(?:https?://(?:www\.)?prayagindia\.com)?(/[^?#]*)?([?#].*)?$", href)
     if not m or href.startswith(("mailto:", "tel:")):
@@ -94,18 +73,15 @@ def rewrite_href(href):
         return "/" + slug + tail
     return SOURCE + path + tail
 
-
 def sanitize(body):
     body = re.sub(r"<script\b.*?</script>", "", body, flags=re.S | re.I)
     body = re.sub(r"<(iframe|object|embed)\b.*?</\1>", "", body, flags=re.S | re.I)
     body = re.sub(r"\s+on[a-z]+\s*=\s*(\"[^\"]*\"|'[^']*'|[^\s>]+)", "", body, flags=re.I)
     body = re.sub(r"(href|src)\s*=\s*\"\s*javascript:[^\"]*\"", r'\1="#"', body, flags=re.I)
-    # One h1 per page: the banner title. Demote any h1 inside article bodies.
     body = re.sub(r"<(/?)h1\b", r"<\1h2", body, flags=re.I)
     body = re.sub(r'(<img\b[^>]*\bsrc=")([^"]+)"', lambda m: m.group(1) + local_asset(m.group(2)) + '"', body)
     body = re.sub(r'(<a\b[^>]*\bhref=")([^"]*)"', lambda m: m.group(1) + rewrite_href(m.group(2)) + '"', body)
     return body.strip()
-
 
 out_dir = os.path.join(root, "src/content/prayag/blog")
 os.makedirs(os.path.join(out_dir, "articles"), exist_ok=True)

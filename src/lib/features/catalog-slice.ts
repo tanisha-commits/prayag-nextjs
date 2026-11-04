@@ -3,11 +3,6 @@ import { fetchCatalogList } from "@/lib/catalog/api";
 import type { PublicListResult } from "@/lib/catalog/public";
 import type { PublicQuery } from "@/lib/catalog/url";
 
-/**
- * Client view of a catalog listing. The database is the source of truth: the server renders the
- * first result, the slice is seeded from it, and later filter/sort/page changes are fetched from
- * /api/catalog/products. Only UI state lives here (query, result, loading/error, mobile filter panel).
- */
 export interface CatalogState {
   query: PublicQuery;
   result: PublicListResult | null;
@@ -43,7 +38,7 @@ export const catalogSlice = createSlice({
       state.requestId = action.meta.requestId;
     })
       .addCase(loadCatalog.fulfilled, (state, action) => {
-        if (state.requestId !== action.meta.requestId) return; // a newer request superseded this one
+        if (state.requestId !== action.meta.requestId) return;
         state.result = action.payload;
         state.status = "succeeded";
       })

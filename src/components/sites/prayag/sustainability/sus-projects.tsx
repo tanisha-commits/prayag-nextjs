@@ -4,14 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { SusProject } from "./data";
 import { withBasePath } from "@/lib/base-path";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const pad = (n: number) => (n < 10 ? `0${n}` : String(n));
 
-/**
- * "Our Projects" slider: native horizontal scroll with snap (swipe / trackpad work as-is);
- * prev/next buttons, "01 / 02" counter, progress line and arrow keys, as in the source.
- */
 export function SusProjects({ title, projects }: { title: string; projects: SusProject[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLSpanElement>(null);
@@ -46,7 +41,6 @@ export function SusProjects({ title, projects }: { title: string; projects: SusP
       ticking = false;
       const i = current();
       setIndex(i);
-      // Set imperatively (as the source does) so the line grows from scaleX(0) on load.
       if (fillRef.current) fillRef.current.style.transform = `scaleX(${(i + 1) / total})`;
     };
     const onScroll = () => {
@@ -72,7 +66,7 @@ export function SusProjects({ title, projects }: { title: string; projects: SusP
     <section className="sus-projects">
       <div className="sus-wrap">
         <h2 className="sus-projects__title" id="sus-projects-title" data-rv="">
-          <Tx>{title}</Tx>
+          {title}
         </h2>
         <div
           className="sus-track"
@@ -107,15 +101,15 @@ export function SusProjects({ title, projects }: { title: string; projects: SusP
                 </div>
                 <div className="sus-slide__body">
                   <div className="sus-slide__text">
-                    <h3><Tx>{p.title}</Tx></h3>
+                    <h3>{p.title}</h3>
                     {p.points ? (
                       <ul>
                         {p.points.map((t) => (
-                          <li key={t}><Tx>{t}</Tx></li>
+                          <li key={t}>{t}</li>
                         ))}
                       </ul>
                     ) : (
-                      <p><Tx>{p.text}</Tx></p>
+                      <p>{p.text}</p>
                     )}
                   </div>
                 </div>

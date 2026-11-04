@@ -8,17 +8,12 @@ import { paramsFromQuery, type PublicQuery } from "@/lib/catalog/url";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 import { ProductCard } from "./product-card";
-import { Tx } from "@/components/sites/prayag/cms/tx-client";
 
 const LABELS: Record<string, string> = {
   type: "Type", series: "Series", collection: "Collection", colour: "Colour", finish: "Finish", range: "Range",
   capacity: "Capacity", "plumbing type": "Plumbing type", "accessory range": "Range",
 };
 
-/**
- * Filterable product grid for one category, or for every category when `category` is omitted (site-wide
- * search, which needs a search term). Server-rendered first; later changes go through Redux.
- */
 export function CatalogBrowser({ category, initialQuery, initialResult }: { category?: string; initialQuery: PublicQuery; initialResult: PublicListResult }) {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -38,7 +33,6 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
     const q = { ...next, category };
     const qs = paramsFromQuery(q).toString();
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-    // Site-wide search without a term: nothing to list (the API needs a category or a term).
     if (!category && !q.q) dispatch(hydrateCatalog({ query: q, result: { items: [], total: 0, facets: [], page: 1, pageSize: result.pageSize } }));
     else dispatch(loadCatalog(q));
   };
@@ -56,7 +50,7 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
 
   const filters = (
     <div className="flex flex-col gap-6">
-      {result.facets.length === 0 && <p className="text-[14px] text-[#5b5f66]"><Tx>{"No filters for this selection."}</Tx></p>}
+      {result.facets.length === 0 && <p className="text-[14px] text-[#5b5f66]">No filters for this selection.</p>}
       {result.facets.map((f) => (
         <fieldset key={f.key} className="m-0 border-0 p-0">
           <legend className="mb-2 text-[15px] font-semibold text-black">{LABELS[f.key] ?? f.key}</legend>
@@ -68,8 +62,8 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
                   <label className="flex cursor-pointer items-center gap-2.5 text-[14px] text-[#333]">
                     <input type="checkbox" checked={checked} onChange={() => toggle(f.key, v.slug)} className="size-4 accent-[#007ac3]" />
                     {v.hex && <span aria-hidden="true" className="size-3.5 rounded-full border border-black/20" style={{ background: v.hex }} />}
-                    <span className="flex-1"><Tx>{v.value}</Tx></span>
-                    <span className="text-[12px] text-[#9aa0a6]"><Tx>{v.count}</Tx></span>
+                    <span className="flex-1">{v.value}</span>
+                    <span className="text-[12px] text-[#9aa0a6]">{v.count}</span>
                   </label>
                 </li>
               );
@@ -83,7 +77,7 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[260px_minmax(0,1fr)]">
       <aside className="hidden lg:block" aria-label="Filters">
-        <Tx>{filters}</Tx>
+        {filters}
       </aside>
 
       {state.filtersOpen && (
@@ -91,12 +85,12 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
           <button type="button" aria-label="Close filters" className="flex-1 bg-black/40" onClick={() => dispatch(setFiltersOpen(false))} />
           <div className="w-[min(340px,90vw)] overflow-y-auto bg-white p-5">
             <div className="mb-5 flex items-center justify-between">
-              <span className="text-[18px] font-semibold"><Tx>{"Filters"}</Tx></span>
+              <span className="text-[18px] font-semibold">Filters</span>
               <button type="button" className="text-[14px] text-[#007ac3]" onClick={() => dispatch(setFiltersOpen(false))}>
-                <Tx>{"Done"}</Tx>
+                Done
               </button>
             </div>
-            <Tx>{filters}</Tx>
+            {filters}
           </div>
         </div>
       )}
@@ -104,7 +98,7 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
       <div className="min-w-0">
         <div className="mb-5 flex flex-wrap items-center gap-3">
           <label className="relative min-w-[200px] flex-1">
-            <span className="sr-only"><Tx>{"Search products"}</Tx></span>
+            <span className="sr-only">Search products</span>
             <input
               type="search"
               value={search}
@@ -120,7 +114,7 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
             />
           </label>
           <label className="flex items-center gap-2 text-[14px] text-[#333]">
-            <Tx>{"Sort"}</Tx>
+            Sort
             <select
               value={query.sort ?? "title"}
               onChange={(e) => go({ ...query, sort: e.target.value as PublicQuery["sort"], page: undefined })}
@@ -133,7 +127,7 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
             </select>
           </label>
           <button type="button" className="h-11 rounded-[8px] border border-[#d1d5db] px-4 text-[14px] lg:hidden" onClick={() => dispatch(setFiltersOpen(true))}>
-            <Tx>{"Filters"}</Tx>{selectedCount ? ` (${selectedCount})` : ""}
+            Filters{selectedCount ? ` (${selectedCount})` : ""}
           </button>
         </div>
 
@@ -141,17 +135,17 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
           <span>{loading ? "Loading…" : `${result.total} product${result.total === 1 ? "" : "s"}`}</span>
           {(selectedCount > 0 || query.q) && (
             <button type="button" className="text-[#007ac3] underline" onClick={() => { setSearch(""); go({ sort: query.sort }); }}>
-              <Tx>{"Clear all filters"}</Tx>
+              Clear all filters
             </button>
           )}
         </div>
 
-        {state.status === "failed" && <p role="alert" className="mb-4 rounded-[8px] bg-[#fdecea] px-4 py-3 text-[14px] text-[#a12622]"><Tx>{state.error}</Tx><Tx>{" — please try again."}</Tx></p>}
+        {state.status === "failed" && <p role="alert" className="mb-4 rounded-[8px] bg-[#fdecea] px-4 py-3 text-[14px] text-[#a12622]">{state.error} — please try again.</p>}
 
         {awaitingTerm ? (
-          <p className="rounded-[10px] bg-[#f7f9fa] px-5 py-10 text-center text-[15px] text-[#5b5f66]"><Tx>{"Type a product name or item code to search all products."}</Tx></p>
+          <p className="rounded-[10px] bg-[#f7f9fa] px-5 py-10 text-center text-[15px] text-[#5b5f66]">Type a product name or item code to search all products.</p>
         ) : result.items.length === 0 ? (
-          <p className="rounded-[10px] bg-[#f7f9fa] px-5 py-10 text-center text-[15px] text-[#5b5f66]"><Tx>{"No products match these filters."}</Tx></p>
+          <p className="rounded-[10px] bg-[#f7f9fa] px-5 py-10 text-center text-[15px] text-[#5b5f66]">No products match these filters.</p>
         ) : (
           <ul className={cn("m-0 grid list-none grid-cols-2 gap-4 p-0 md:grid-cols-3 xl:grid-cols-4", loading && "opacity-60")}>
             {result.items.map((p) => (
@@ -165,13 +159,13 @@ export function CatalogBrowser({ category, initialQuery, initialResult }: { cate
         {pages > 1 && (
           <nav aria-label="Pagination" className="mt-8 flex items-center justify-center gap-2 text-[14px]">
             <button type="button" disabled={result.page <= 1} onClick={() => go({ ...query, page: result.page - 1 })} className="h-10 rounded-[8px] border border-[#d1d5db] px-4 disabled:opacity-40">
-              <Tx>{"Previous"}</Tx>
+              Previous
             </button>
             <span className="px-2">
-              <Tx>{"Page "}</Tx><Tx>{result.page}</Tx><Tx>{" of "}</Tx><Tx>{pages}</Tx>
+              Page {result.page} of {pages}
             </span>
             <button type="button" disabled={result.page >= pages} onClick={() => go({ ...query, page: result.page + 1 })} className="h-10 rounded-[8px] border border-[#d1d5db] px-4 disabled:opacity-40">
-              <Tx>{"Next"}</Tx>
+              Next
             </button>
           </nav>
         )}

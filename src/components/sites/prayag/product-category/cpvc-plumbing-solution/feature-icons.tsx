@@ -1,10 +1,6 @@
-// Inline SVG icons of the cPVC "Why Choose" slider, verbatim from the source markup (paths are
-// drawn twice there, once filled and once stroked). Marked aria-hidden: the label below names each.
-
 import type { ReactElement } from "react";
 
 export const featureIcons: ReactElement[] = [
-  // Superior Hot Water Performance
   (
     <svg key="0" aria-hidden="true" focusable="false" width="120" height="120" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_18_46)">
@@ -18,7 +14,6 @@ export const featureIcons: ReactElement[] = [
       </defs>
     </svg>
   ),
-  // High Strength & Pressure Resistance
   (
     <svg key="1" aria-hidden="true" focusable="false" width="120" height="120" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_18_3)">
@@ -32,7 +27,6 @@ export const featureIcons: ReactElement[] = [
       </defs>
     </svg>
   ),
-  // Corrosion & Chemical Resistant
   (
     <svg key="2" aria-hidden="true" focusable="false" width="120" height="120" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_18_7)">
@@ -45,7 +39,6 @@ export const featureIcons: ReactElement[] = [
       </defs>
     </svg>
   ),
-  // Food-Grade & Safe for Drinking Water
   (
     <svg key="3" aria-hidden="true" focusable="false" width="120" height="120" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_18_50)">
@@ -65,7 +58,6 @@ export const featureIcons: ReactElement[] = [
       </defs>
     </svg>
   ),
-  // Leak-Proof Plumbing System
   (
     <svg key="4" aria-hidden="true" focusable="false" width="120" height="120" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_18_14)">
@@ -93,7 +85,6 @@ export const featureIcons: ReactElement[] = [
       </defs>
     </svg>
   ),
-  // Easy Installation & Low Maintenance
   (
     <svg key="5" aria-hidden="true" focusable="false" width="120" height="120" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_18_32)">
@@ -117,7 +108,6 @@ export const featureIcons: ReactElement[] = [
       </defs>
     </svg>
   ),
-  // Complete Plumbing Solution
   (
     <svg key="6" aria-hidden="true" focusable="false" width="120" height="120" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_18_10)">

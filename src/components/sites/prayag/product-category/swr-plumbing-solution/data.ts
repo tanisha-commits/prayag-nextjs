@@ -1,6 +1,3 @@
-// Content of https://prayagindia.com/swr-plumbing-solution (taxonomy term 220), verbatim.
-// Three SWR fitting cards use the source's placehold.co placeholder images (kept as on the live page).
-
 import type { FittingPane, ImageCard, SpecTableData } from "../ppr-pipes/types";
 
 export const fittingPanes: FittingPane[] = [

@@ -1,27 +1,3 @@
-"""Write scoped CSS for the Prayag product-category pages from scripts/prayag-css-capture.mjs output.
-
-Usage:
-  python3 -I scripts/prayag-css-generate.py base <capture-dir> <out.css> [<root-class>]
-      Union of the theme rules used by every captured page -> pcat-base.css, scoped under .pcat
-      (or under <root-class>, e.g. .pcat-catalog for a separately captured page family).
-  python3 -I scripts/prayag-css-generate.py page <capture-dir> <slug> <out.css>
-      The page's own inline <style> rules -> <slug>.css, scoped under .pcat-<slug>.
-
-Scoping adds exactly one class to every selector (html/body -> div.<root>, which keeps their
-element point; :root -> .<root>), so base and page rules keep the source's specificity order,
-and nothing leaks into other routes (stylesheets of visited routes stay loaded in the App Router).
-Chrome's CSSOM expands `all: unset`; it is collapsed back. Font Awesome kit blocks, Drupal core
-(olivero) fonts and unreferenced keyframes are dropped; page keyframes are renamed <slug>-<name>.
-
-Two build-pipeline fixes:
-- Lightning CSS (Next's CSS transform) drops an earlier `!important` declaration when a later rule
-  with the identical selector sets the same property without it and another rule sits in between.
-  Such a later declaration can never apply, so it is removed here (cascade-equivalent).
-- Theme images referenced with absolute live URLs are blocked cross-site (Cross-Origin-Resource-
-  Policy); they are rewritten to the local copies under /sites/prayag/theme/ (same names as
-  scripts/prayag-assets.py), and a missing local copy is reported.
-"""
-
 import glob
 import json
 import os
@@ -35,7 +11,6 @@ GRAPHIK = (
     ("/ 1 Graphik, sans-serif", "/ 1 var(--font-graphik), sans-serif"),
 )
 
-
 def scoper(root):
     def scope(sel):
         s = sel.strip()
@@ -45,10 +20,8 @@ def scoper(root):
         return root + " " + s
     return scope
 
-
 THEME = "https://prayagindia.com/themes/custom/prayag/assets/images/"
 PUBLIC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "public")
-
 
 def local_urls(css):
     def sub(m):
@@ -59,9 +32,7 @@ def local_urls(css):
         return 'url("' + urllib.parse.quote(local) + '")'
     return re.sub(r'url\("' + re.escape(THEME) + r'([^"]+)"\)', sub, css)
 
-
 def drop_shadowed(rules):
-    """Remove normal declarations that an earlier same-selector `!important` one always beats."""
     important = {}
     for r in rules:
         if "at" in r:
@@ -74,13 +45,11 @@ def drop_shadowed(rules):
         r["body"] = "; ".join(kept) + (";" if kept else "")
     return rules
 
-
 def declarations(body):
     decls = [d.strip() for d in body.split(";") if d.strip()]
     if sum(d.endswith(": unset") for d in decls) > 100:
         decls = ["all: unset"] + [d for d in decls if not d.endswith(": unset")]
     return decls
-
 
 def emit(rules, root, rename=lambda t: t):
     scope = scoper(root)
@@ -108,7 +77,6 @@ def emit(rules, root, rename=lambda t: t):
     for a, b in GRAPHIK:
         css = css.replace(a, b)
     return css
-
 
 def base(capture, dst, root=".pcat"):
     union = {}
@@ -168,10 +136,8 @@ def base(capture, dst, root=".pcat"):
     open(dst, "w").write(header + emit(keep, root))
     print(dst, len(keep), "rules")
 
-
 def page(capture, slug, dst):
     sheets = json.load(open(os.path.join(capture, f"{slug}.pagecss.json")))
-    # Font Awesome's kit injects three <style> blocks on every page; page content uses no icons.
     sheets = [
         s for s in sheets
         if s["where"] == "content"
@@ -196,7 +162,6 @@ def page(capture, slug, dst):
 """
     open(dst, "w").write(header + emit(rules, root, rename))
     print(dst, len(rules), "rules", "keyframes:", sorted(frames))
-
 
 if __name__ == "__main__":
     if sys.argv[1] == "base":

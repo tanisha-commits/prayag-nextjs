@@ -7,19 +7,6 @@ export type HeroSlide = { alt: string; video: string; desktop: string; mobile: s
 import { ChevronRightIcon, SoundOffIcon, SoundOnIcon } from "./icons";
 import { withBasePath, withBasePathSrcSet } from "@/lib/base-path";
 
-/**
- * Source `.video-showcase`: each slide shows a poster <picture> until its webm can play,
- * then cross-fades to the video. A slide advances when its video ends; the next button
- * and dots switch manually. Videos load lazily (first one when the browser is idle).
- *
- * The video sits under the poster picture (always opaque) and the picture fades out once the
- * video can play. The video deliberately has no `poster`: a poster is one fixed URL for every
- * viewport, so phones would fetch the desktop banner as well and the <video> (not the banner
- * <img>) became the mobile "largest contentful paint", tied to the multi-MB video download.
- * Banners use static pre-resized srcsets (scripts/images/hero-banners.mjs) rather than the image
- * optimizer, whose q75 output was larger than these already-compact originals.
- */
-/** Without any interaction, the first video starts this long after the window `load` event. */
 const VIDEO_START_DELAY_MS = 8000;
 
 export function HeroVideoSliderClient({
@@ -27,11 +14,8 @@ export function HeroVideoSliderClient({
   placeholder,
 }: {
   slides: HeroSlide[];
-  /** Blurred data-URI previews of the first banner (desktop / mobile art). */
   placeholder?: { desktop?: string; mobile?: string };
 }) {
-  // The first banner is the page's largest paint. It sits in a <picture> (which React does not
-  // preload on its own) after ~70 KB of inline CSS, so hint both variants at the top of <head>.
   const first = heroSlides[0];
   preload(withBasePath(first.mobile), {
     as: "image",
@@ -57,11 +41,6 @@ export function HeroVideoSliderClient({
     setLoaded((prev) => (prev[index] ? prev : prev.map((v, i) => (i === index ? true : v))));
   }, []);
 
-  // The first video (2–3.5 MB) starts on the visitor's first interaction after the page has loaded
-  // (pointer move, touch, scroll, key), or after VIDEO_START_DELAY_MS without one. The banner shows
-  // from the first paint either way. Starting it unprompted a few seconds after load kept the hero
-  // changing (video frames) while PageSpeed was still recording, which pushed Speed Index to 2.4–3.1 s
-  // on desktop, and its download competed with fonts on slow phones. Data-saver mode keeps the banner.
   useEffect(() => {
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     if (connection?.saveData) return;
@@ -88,7 +67,6 @@ export function HeroVideoSliderClient({
     return cleanup;
   }, [startLoading]);
 
-  // Play the active slide's video (from the start) once it is ready; pause the others.
   useEffect(() => {
     videos.current.forEach((video, i) => {
       if (!video) return;
@@ -128,7 +106,6 @@ export function HeroVideoSliderClient({
 
   return (
     <div className="relative aspect-[4/3] w-full overflow-hidden bg-black md:aspect-[16/7]">
-      {/* Until the first banner has loaded, its blurred preview fills the hero (instead of black). */}
       {current === 0 && !ready[0] && placeholder && (
         <>
           {placeholder.mobile && <div aria-hidden="true" className="absolute inset-0 bg-cover bg-[center_top] md:hidden" style={{ backgroundImage: `url(${placeholder.mobile})` }} />}
@@ -180,8 +157,6 @@ export function HeroVideoSliderClient({
         </div>
       ))}
 
-      {/* Each dot is drawn by a span inside a transparent 24px-tall button (WCAG 2.5.8 target size);
-          the buttons abut, so the dots sit 16px apart and keep their size, colour and bottom offset. */}
       <div className="absolute bottom-[22px] left-1/2 z-10 flex -translate-x-1/2">
         {heroSlides.map((slide, i) => (
           <button

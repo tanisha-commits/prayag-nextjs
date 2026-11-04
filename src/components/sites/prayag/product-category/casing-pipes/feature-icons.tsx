@@ -1,5 +1,3 @@
-/* Feature icons of the "Why Choose" slider, inline SVG verbatim from the source (attributes camelCased). */
-
 export function RustProofIcon() {
   return (
     <svg aria-hidden="true" width="400" height="400" viewBox="0 0 400 400" fill="none">

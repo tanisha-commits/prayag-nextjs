@@ -10,7 +10,6 @@ import { LiveProductPage } from "./product-page/live-product-page";
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
-/** Metadata for a root-level product or a category path (e.g. "faucets", "ceramicware/wash-basin"). */
 export function catalogMetadata(path: string): Metadata {
   const product = publicProduct(path);
   if (product)
@@ -22,14 +21,12 @@ export function catalogMetadata(path: string): Metadata {
     });
   const category = publicCategory(path);
   if (!category) return {};
-  // Admin-set SEO wins; otherwise the live page's own title and description.
   const live = LIVE_CATEGORY_DATA[category.slug];
   const meta = pageMetadata({
     title: category.seoTitle || live?.metaTitle || `${category.name} | Prayag`,
     description: category.seoDescription || live?.metaDescription || category.description || undefined,
     path: `/${category.slug}`,
   });
-  // Nested paths (/kitchen-sinks/quartz) are local filter views; the live site redirects them home.
   return category.parent ? { ...meta, robots: { index: false, follow: true } } : meta;
 }
 
@@ -37,7 +34,6 @@ export async function CatalogRoute({ path, searchParams }: { path: string; searc
   const product = publicProduct(path);
   if (product) {
     const primary = product.categories[0];
-    // Product structured data from stored fields only (no prices, ratings or claims).
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "Product",
@@ -60,7 +56,6 @@ export async function CatalogRoute({ path, searchParams }: { path: string; searc
   if (!category) notFound();
   const live = LIVE_CATEGORY_PAGES[category.slug];
   if (live) {
-    // Source landing page: Drupal's 0-based ?page=, 9 per page in the source listing order.
     const params = await searchParams;
     const pageIndex = Math.max(0, Math.floor(Number(params.page)) || 0);
     const query = { ...queryFromParams({ ...params, page: undefined }, category.slug), page: pageIndex + 1 };

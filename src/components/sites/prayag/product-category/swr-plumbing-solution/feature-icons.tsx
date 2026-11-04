@@ -1,5 +1,3 @@
-// Inline SVG icons of the SWR "Why Choose" slider, copied from the source markup.
-
 export function DrainageIcon() {
   return (
     <svg aria-hidden="true" focusable="false" width="120" height="120" viewBox="0 0 419 417" fill="none" xmlns="http://www.w3.org/2000/svg">

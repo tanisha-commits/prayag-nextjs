@@ -1,5 +1,3 @@
-// Content for /about-prayag (source: prayagindia.com/about-prayag, Drupal "History" page).
-
 export const aboutBanner = {
   image: "/sites/prayag/files/2025-07/history.webp",
   title: "About Prayag",
@@ -40,6 +38,5 @@ export const aboutMilestones: { year: string; text: string }[] = [
   { year: "2023", text: "New manufacturing plants established at West Bengal & Varanasi (UP)" },
   { year: "2024", text: "Commenced production of PVC-O Pipes" },
   { year: "2025", text: "FRP Manhole Covers & PPR Pipes & Fittings introduced" },
-  // Trailing space is in the source.
   { year: "2025", text: "In Dec - Company renamed to Prayag Polymers Limited " },
 ];
