@@ -38,7 +38,7 @@ export function CompositePipesPage() {
         <div className="container-fluid p-0">
           <div className="row">
             <div className="col-md-6">
-              {/* eslint-disable-next-line @next/next/no-img-element -- source responsive banner (Drupal image styles) */}
+              {/* eslint-disable-next-line @next/next/no-img-element -- source responsive banner (art-directed image sizes) */}
               <img
                 src={transcodedUrl("/sites/prayag/files/styles/medium/public/2026-07/Composite_pipe_main_banner.webp")}
                 srcSet={transcodedSrcSet("/sites/prayag/files/styles/thumbnail/public/2026-07/Composite_pipe_main_banner.webp 300w, /sites/prayag/files/styles/thumbnail/public/2026-07/Composite_pipe_main_banner.webp 600w, /sites/prayag/files/styles/large/public/2026-07/Composite_pipe_main_banner.webp 1200w, /sites/prayag/files/styles/wide/public/2026-07/Composite_pipe_main_banner.webp 2000w")}

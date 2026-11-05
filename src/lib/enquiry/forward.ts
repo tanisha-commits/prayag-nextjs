@@ -36,7 +36,7 @@ export function readForwardingConfig(): ForwardingConfig {
   };
 }
 
-function phpInt(value: string): number {
+function toInteger(value: string): number {
   const n = Number(value.trim());
   if (Number.isFinite(n)) return Math.trunc(n);
   const lead = Number.parseInt(value.trim(), 10);
@@ -61,7 +61,7 @@ function ezeonePayload(formId: FormId, v: Values, authKey: string): Record<strin
       district: v.district,
       city: v.city,
       address: v.address,
-      pincode: phpInt(v.pincode),
+      pincode: toInteger(v.pincode),
       remark: v.remark,
       form_data: {
         dealership_requirement: v.dealership_requirements,

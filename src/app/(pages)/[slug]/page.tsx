@@ -8,13 +8,18 @@ import { CatalogRoute, catalogMetadata } from "@/components/sites/prayag/catalog
 import { BreadcrumbJsonLd, pageMetadata } from "@/components/sites/prayag/seo";
 import { blogIndex, getBlogArticle } from "@/lib/blog";
 import { withBasePath } from "@/lib/base-path";
+import { allProducts } from "@/lib/catalog/queries";
 import { storedHtml } from "@/lib/stored-html";
 import { imageDims, responsiveImagesHtml } from "@/lib/image-dimensions";
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return blogIndex.map((post) => ({ slug: post.slug }));
+  const slugs = new Set([
+    ...blogIndex.map((post) => post.slug),
+    ...allProducts.filter((product) => product.status === "published").map((product) => product.slug),
+  ]);
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/[slug]">): Promise<Metadata> {

@@ -7,15 +7,22 @@ const MAX_PRODUCT_LENGTH = 200;
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX = 20;
+const RATE_MAX_KEYS = 5000;
+const RATE_KEY_LENGTH = 64;
 const hits = new Map<string, number[]>();
 
 function rateLimited(key: string): boolean {
   const now = Date.now();
   const recent = (hits.get(key) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
   recent.push(now);
-  hits.set(key, recent);
-  if (hits.size > 5000) {
+  hits.delete(key);
+  hits.set(key, recent.slice(-(RATE_MAX + 1)));
+  if (hits.size > RATE_MAX_KEYS) {
     for (const [k, v] of hits) if (v.every((t) => now - t >= RATE_WINDOW_MS)) hits.delete(k);
+    for (const k of hits.keys()) {
+      if (hits.size <= RATE_MAX_KEYS) break;
+      hits.delete(k);
+    }
   }
   return recent.length > RATE_MAX;
 }
@@ -34,8 +41,36 @@ function reply(status: number, body: EnquiryResult): Response {
 }
 
 function clientKey(request: Request): string {
-  const fwd = request.headers.get("x-forwarded-for");
-  return (fwd ? fwd.split(",")[0] : request.headers.get("x-real-ip") ?? "local").trim();
+  const hops = (request.headers.get("x-forwarded-for") ?? "")
+    .split(",")
+    .map((hop) => hop.trim())
+    .filter(Boolean);
+  const key = hops.at(-1) ?? request.headers.get("x-real-ip")?.trim() ?? "local";
+  return key.slice(0, RATE_KEY_LENGTH);
+}
+
+async function readBody(request: Request, limit: number): Promise<string | null> {
+  if (!request.body) return "";
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > limit) {
+      await reader.cancel().catch(() => undefined);
+      return null;
+    }
+    chunks.push(value);
+  }
+  const bytes = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(bytes);
 }
 
 function sameOrigin(request: Request): boolean {
@@ -60,17 +95,19 @@ export async function handleEnquiry(formId: FormId, request: Request): Promise<R
   if (!(request.headers.get("content-type") ?? "").toLowerCase().startsWith("application/json")) {
     return reply(415, { status: "error", message: MESSAGES.rejected });
   }
-  const declared = Number(request.headers.get("content-length") ?? "0");
+  const declaredHeader = request.headers.get("content-length");
+  const declared = declaredHeader === null ? 0 : Number(declaredHeader);
+  if (!Number.isFinite(declared) || declared < 0) return reply(400, { status: "error", message: MESSAGES.rejected });
   if (declared > MAX_BODY_BYTES) return reply(413, { status: "error", message: MESSAGES.rejected });
   if (rateLimited(`${formId}:${clientKey(request)}`)) return reply(429, { status: "error", message: MESSAGES.rateLimited });
 
-  let raw: string;
+  let raw: string | null;
   try {
-    raw = await request.text();
+    raw = await readBody(request, MAX_BODY_BYTES);
   } catch {
     return reply(400, { status: "error", message: MESSAGES.rejected });
   }
-  if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) return reply(413, { status: "error", message: MESSAGES.rejected });
+  if (raw === null) return reply(413, { status: "error", message: MESSAGES.rejected });
 
   let body: unknown;
   try {

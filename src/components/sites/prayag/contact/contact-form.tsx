@@ -3,7 +3,7 @@
 import { CONTACT_FIELDS, type FieldDef } from "@/lib/enquiry/forms";
 import { cn } from "@/lib/utils";
 import { FieldError, FormMessages, Honeypot, SubmittingIndicator } from "../forms/form-feedback";
-import { useEnquiryForm, webformValidityProps } from "../forms/use-enquiry-form";
+import { useEnquiryForm, fieldValidityProps } from "../forms/use-enquiry-form";
 import { withBasePath } from "@/lib/base-path";
 
 const FULL_WIDTH = new Set(["company_name", "address", "message"]);
@@ -25,7 +25,7 @@ export function ContactForm() {
 
   const renderControl = (field: FieldDef) => {
     const err = state.errors[field.name];
-    const validity = webformValidityProps(field);
+    const validity = fieldValidityProps(field);
     const common = {
       id: field.id,
       name: field.name,
@@ -39,8 +39,6 @@ export function ContactForm() {
         clearFieldError(field.name);
       },
       onChange: validity.onChange,
-      "data-webform-required-error": field.requiredError,
-      "data-webform-pattern-error": field.patternError,
     };
     if (field.type === "select") {
       return (

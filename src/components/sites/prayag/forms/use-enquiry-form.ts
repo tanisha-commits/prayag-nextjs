@@ -16,7 +16,7 @@ const IDLE: EnquiryState = { phase: "idle", message: "", errors: {} };
 const NETWORK_ERROR =
   "Sorry, your enquiry could not be sent right now. Please check your connection and try again.";
 
-export function webformValidityProps(field: FieldDef) {
+export function fieldValidityProps(field: FieldDef) {
   if (!field.requiredError && !field.patternError) return {};
   const onInvalid = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const el = e.currentTarget;
