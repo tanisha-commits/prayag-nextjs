@@ -38,12 +38,12 @@ next-env.d.ts
 # Vercel
 .vercel
 
-# Local settings (not project config)
-.claude/settings.local.json
-
-# User-specific skills (not part of the template)
-.claude/skills/customize/
-.claude/skills/release/
+# Local editor/assistant tooling (not part of the project)
+.claude/
+.agents/
+.cursor/
+AGENTS.md
+CLAUDE.md
 
 # Local temp files
 temp/
@@ -53,9 +53,8 @@ temp/
 .env*
 !.env.example
 
-# Old local database (no longer used)
+# Local data (not used by the build)
 /data/
-admin-bootstrap.json
 
 __pycache__/
 *.pyc

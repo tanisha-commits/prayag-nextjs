@@ -57,7 +57,7 @@ export function PressGallery({ items }: { items: PressGalleryItem[] }) {
                     onClick={opener(i)}
                     aria-label={`View image: ${label}`}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element -- source sizing (fixed 199/180px cover crop) on 96 CMS scans */}
+                    {/* eslint-disable-next-line @next/next/no-img-element -- source sizing (fixed 199/180px cover crop) on 96 press scans */}
                     <img {...item.card} alt={item.title} loading={i < 8 ? "eager" : "lazy"} decoding="async" />
                   </a>
                   {item.title ? <h3 className="press_title">{item.title}</h3> : <div className="press_title" />}

@@ -22,6 +22,7 @@ const basePath = (process.env.BASE_PATH ?? "").trim().replace(/\/+$/, "").replac
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  agentRules: false,
   ...(basePath ? { basePath } : {}),
   env: { NEXT_PUBLIC_BASE_PATH: basePath },
   experimental: { inlineCss: true },

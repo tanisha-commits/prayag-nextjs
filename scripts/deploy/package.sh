@@ -19,7 +19,7 @@ cp -a .next/standalone "$OUT"
 rm -f "$OUT/public" "$OUT/.next/static"
 cp -a .next/static "$OUT/.next/static"
 cp -a public "$OUT/public"
-rm -rf "$OUT/data" "$OUT/.next/cache/images" && mkdir -p "$OUT/.next/cache/images"
+rm -rf "$OUT/.next/cache/images" && mkdir -p "$OUT/.next/cache/images"
 find "$OUT" -maxdepth 1 -name '.env*' -delete
 
 cat > "$OUT/DEPLOY.md" <<DOC

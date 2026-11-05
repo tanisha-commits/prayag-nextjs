@@ -27,17 +27,13 @@ Thumbs.db
 *.swp
 *.swo
 
-# Agent / AI tool configs (not needed at runtime)
+# Local editor/assistant tooling (not needed at runtime)
 .agents
 .claude
 .cursor
-.opencode
 AGENTS.md
 CLAUDE.md
-
-# Docs / research (large, not needed at runtime)
-docs
-scripts
+data
 
 # Docker files themselves (no need to copy into image)
 Dockerfile
@@ -47,5 +43,4 @@ docker-compose.yml
 # Misc
 *.tsbuildinfo
 README.md
-CHANGELOG.md
 LICENSE
