@@ -56,3 +56,6 @@ temp/
 # Old local database (no longer used)
 /data/
 admin-bootstrap.json
+
+__pycache__/
+*.pyc

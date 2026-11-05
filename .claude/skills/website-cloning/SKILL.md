@@ -21,13 +21,9 @@ These are the project rules that override any default.
 - Routes: `src/app/(pages)/<slug>/page.tsx` (shared header/footer from `(pages)/layout.tsx`).
   Products, blog articles and category landings resolve through `src/app/(pages)/[slug]/page.tsx`.
 - Components/data: `src/components/sites/prayag/<area>/`; content JSON in `src/content/prayag/`.
-- Assets: `python3 -I scripts/prayag-assets.py <page.html> <drupal-backup-root> public/sites/prayag docs/research/prayag/<page>-assets.json`
-  (falls back to GET from live when the backup is absent; check `file --mime-type` afterwards).
-- Pixel-faithful theme CSS: capture the live page's used rules and scope them under one root class:
-  ```bash
-  PLAYWRIGHT_DIR=$(npm root -g)/@playwright/cli node scripts/prayag-css-capture.mjs <capture-dir> <slug>
-  python3 -I scripts/prayag-css-generate.py base <capture-dir> <out.css> .pcat-<name>
-  ```
+- Assets: download what the page references into `public/sites/prayag/` (GET from live only) and record
+  them in `docs/research/prayag/<page>-assets.json`; check `file --mime-type` afterwards.
+- Pixel-faithful theme CSS: copy the live page's used rules and scope them under one root class `.pcat-<name>`.
   Then render the live DOM (same class names) inside `<div className="pcat-<name>">` and import the CSS.
   Use relative hrefs (`/faucets`), never `https://prayagindia.com/...`, for internal links.
 - SEO per page via `pageMetadata()` + `BreadcrumbJsonLd` from `src/components/sites/prayag/seo.tsx`,

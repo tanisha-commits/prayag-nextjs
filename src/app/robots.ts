@@ -3,7 +3,7 @@ import { SITE_URL } from "@/components/sites/prayag/seo";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/admin", "/api/", "/search"] },
+    rules: { userAgent: "*", allow: "/", disallow: ["/api/", "/search"] },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }
