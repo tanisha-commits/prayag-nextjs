@@ -11,9 +11,9 @@ fi
 
 HASH=$(git rev-parse --short HEAD)
 NAME="prayagindia-$(date +%F)-$HASH"
-OUT="dist/$NAME"
+OUT="out/$NAME"
 rm -rf "$OUT" "$OUT.zip"
-mkdir -p dist
+mkdir -p out
 
 cp -a .next/standalone "$OUT"
 rm -f "$OUT/public" "$OUT/.next/static"
@@ -37,5 +37,5 @@ Built with \`BASE_PATH=/prayagindia\` and \`output: standalone\`. Serve it under
 No database and no admin: all content, including the product catalog, is part of this build.
 DOC
 
-(cd dist && zip -qry "$NAME.zip" "$NAME" && unzip -tq "$NAME.zip" >/dev/null)
-echo "Ready: dist/$NAME.zip ($(du -h "dist/$NAME.zip" | cut -f1))"
+(cd out && zip -qry "$NAME.zip" "$NAME" && unzip -tq "$NAME.zip" >/dev/null)
+echo "Ready: out/$NAME.zip ($(du -h "out/$NAME.zip" | cut -f1))"

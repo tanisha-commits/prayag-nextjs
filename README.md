@@ -24,7 +24,7 @@ npm run dev                  # http://localhost:3000
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript check |
 | `npm run check` | Lint, typecheck and build |
-| `npm run deploy:package` | Build with `BASE_PATH=/prayagindia` and package a standalone zip in `dist/` |
+| `npm run deploy:package` | Build with `BASE_PATH=/prayagindia` and package a standalone zip in `out/` |
 
 ## Project structure
 
@@ -50,5 +50,5 @@ All settings are environment variables; see `.env.example`.
 
 The app builds with `output: "standalone"`.
 
-- **Server zip:** `npm run deploy:package` writes `dist/prayagindia-<date>-<commit>.zip`. Unzip it on the server and run `node server.js`.
+- **Server zip:** `npm run deploy:package` writes `out/prayagindia-<date>-<commit>.zip`. Unzip it on the server and run `node server.js`.
 - **Docker:** `docker compose up app` builds and runs the production image on port 3000.
