@@ -188,7 +188,7 @@ export const CONTACT_FIELDS: FieldDef[] = [
     label: "Name",
     type: "text",
     id: "edit-name--2",
-    placeholder: "Name1",
+    placeholder: "Name",
     required: true,
     requiredError: REQ,
     pattern: NAME_PATTERN,
