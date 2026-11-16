@@ -1,0 +1,56 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      # Jenkins on the Mac mini (job prayag-deploy) SSHes into the Prayag server and runs
+      # prayag-deploy.sh: build off-live, check the new build, PM2 rolling reload, auto-rollback
+      # on failure. The server records the result per commit; the next step reads it so the
+      # outcome and build log show here. Full log is also in Jenkins.
+      - name: Trigger Jenkins deploy (Mac mini -> Prayag server)
+        env:
+          TOKEN: ${{ secrets.JENKINS_WEBHOOK_TOKEN }}
+        run: |
+          date +%s > "$RUNNER_TEMP/started"
+          resp=$(curl -fsS -X POST "https://website-jenkins.abacusdesk.co.in/generic-webhook-trigger/invoke" \
+            -H "token: $TOKEN" -H "Content-Type: application/json" \
+            -d "{\"sha\": \"$GITHUB_SHA\"}")
+          echo "$resp"
+          echo "$resp" | grep -Eq '"triggered" *: *true' || { echo "::error::Jenkins did not start the prayag-deploy job"; exit 1; }
+
+      - name: Wait for deploy result
+        env:
+          STATUS_URL: ${{ vars.DEPLOY_STATUS_URL }}
+          STATUS_TOKEN: ${{ secrets.DEPLOY_STATUS_TOKEN }}
+        run: |
+          started=$(cat "$RUNNER_TEMP/started")
+          state=
+          for _ in $(seq 1 180); do # up to 30 minutes
+            json=$(curl -fsS -H "X-Deploy-Token: $STATUS_TOKEN" "$STATUS_URL/$GITHUB_SHA.json" 2>/dev/null || true)
+            if [ -n "$json" ] && [ "$(echo "$json" | jq -r .finished_epoch)" -ge "$started" ]; then
+              state=$(echo "$json" | jq -r .state)
+              break
+            fi
+            sleep 10
+          done
+          echo "------------------------------ server deploy log ------------------------------"
+          curl -fsS -H "X-Deploy-Token: $STATUS_TOKEN" "$STATUS_URL/$GITHUB_SHA.log" || echo "(log not available)"
+          echo "-------------------------------------------------------------------------------"
+          case "$state" in
+            success)     echo "Deployed ${GITHUB_SHA::7}" ;;
+            superseded)  echo "A newer commit is already live - nothing to deploy" ;;
+            rolled_back) echo "::error::New version failed its checks after release and was rolled back - the previous version is still live"; exit 1 ;;
+            failed)      echo "::error::Deploy failed - the live site was not changed"; exit 1 ;;
+            *)           echo "::error::No result from the server after 30 minutes - check Jenkins job prayag-deploy"; exit 1 ;;
+          esac
