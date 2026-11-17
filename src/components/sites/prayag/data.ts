@@ -145,6 +145,14 @@ export const panelQuickLinks: NavLink[] = [
 
 export const heroSlides = [
   {
+    alt: "Prayag 500 Rupees Film",
+    video: `${ASSET}/theme/prayag-homepage/prayag-500-rupees-opt.webm`,
+    desktop: `${ASSET}/theme/prayag-homepage/prayag-500-banner.webp`,
+    mobile: `${ASSET}/theme/prayag-500-mobile-banner.webp`,
+    desktopSrcSet: `${ASSET}/theme/hero/prayag-500-banner-1080w.webp 1080w, ${ASSET}/theme/hero/prayag-500-banner-1440w.webp 1440w, ${ASSET}/theme/prayag-homepage/prayag-500-banner.webp 1920w`,
+    mobileSrcSet: `${ASSET}/theme/hero/prayag-500-mobile-banner-480w.webp 480w, ${ASSET}/theme/hero/prayag-500-mobile-banner-640w.webp 640w, ${ASSET}/theme/prayag-500-mobile-banner.webp 800w`,
+  },
+  {
     alt: "Prayag Sukoon",
     video: `${ASSET}/theme/prayag-homepage/video_banner-opt.webm`,
     desktop: `${ASSET}/theme/prayag-homepage/kung-fu-banner.webp`,
