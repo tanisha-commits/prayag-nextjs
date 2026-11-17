@@ -52,20 +52,21 @@ export default function InvestorsPage() {
       <InvestorHero
         title="Building long-term value with transparency"
         intro="Welcome to the Investor Relations section of Prayag Polymers Limited. Find our corporate details, Board composition, governance policies and statutory filings in one place."
-      >
-        <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[18px] border border-white/30 bg-white/30 md:mt-14 lg:grid-cols-4">
-          {facts.map((f) => (
-            <div key={f.label} className="bg-[#0a8fd6] p-5 md:p-7">
-              <dt className="sr-only">{f.label}</dt>
-              <dd className="m-0">
-                <span className="block text-[34px] leading-none font-medium text-white md:text-[46px]">{f.value}</span>
-                <span className="mt-3 block h-px w-8 bg-white" aria-hidden="true" />
-                <span className="mt-3 block text-[14px] leading-5 text-white/90 md:text-[15px]">{f.label}</span>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </InvestorHero>
+        aside={
+          <dl className="grid grid-cols-2 gap-3 md:gap-4">
+            {facts.map((f) => (
+              <div key={f.label} className="rounded-[18px] border border-[#e6e9ee] bg-white p-5 shadow-[0_12px_30px_-24px_rgba(0,60,110,0.35)] md:p-6">
+                <dt className="sr-only">{f.label}</dt>
+                <dd className="m-0">
+                  <span className="block text-[32px] leading-none font-medium text-[#007ac3] md:text-[42px]">{f.value}</span>
+                  <span className="mt-3 block h-[2px] w-8 rounded-full bg-gradient-to-r from-[#007ac3] to-[#00aeef]" aria-hidden="true" />
+                  <span className="mt-3 block text-[14px] leading-5 text-[#5b6470] md:text-[15px]">{f.label}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        }
+      />
 
       <section className="bg-[#f6f7f9] py-12 md:py-20">
         <div className="prayag-container">
@@ -149,7 +150,7 @@ export default function InvestorsPage() {
             </ul>
           </div>
 
-          <div className="space-y-5">
+          <div className="space-y-5 lg:sticky lg:top-[100px] lg:self-start">
             <div className="rounded-[20px] border border-[#e6e9ee] bg-[#f6f7f9] p-6 md:p-8">
               <p className="mb-2 text-[12px] leading-4 font-medium tracking-[0.16em] text-[#007ac3] uppercase">Company at a glance</p>
               <h2 className="m-0 text-[22px] leading-8 font-medium text-black">{company.name}</h2>

@@ -1,4 +1,9 @@
 import Link from "next/link";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withBasePath } from "@/lib/base-path";
 import { cn } from "@/lib/utils";
 import { BreadcrumbJsonLd } from "../seo";
@@ -11,6 +16,9 @@ import {
   type InvestorDocument,
   type SectionKey,
 } from "./data";
+
+// Font Awesome styles are imported above; stop it injecting them again at runtime.
+config.autoAddCss = false;
 
 /* ------------------------------------------------------------------ */
 /* Icons                                                               */
@@ -133,25 +141,28 @@ export function InvestorHero({
   title,
   intro,
   section,
-  children,
+  aside,
 }: {
   title: string;
   intro?: string;
   section?: { key: SectionKey; title: string };
-  children?: React.ReactNode;
+  /** Optional content shown beside the heading on large screens (the overview's key facts). */
+  aside?: React.ReactNode;
 }) {
   const crumbs = [{ name: "Investors", path: INVESTORS_PATH }];
   if (section) crumbs.push({ name: section.title, path: sectionHref(section.key) });
 
+  const crumbLink = "!text-[#6b7280] transition-colors hover:!text-[#007ac3]";
+
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />
-      <section className="bg-gradient-to-br from-[#007ac3] to-[#00aeef] text-white">
-        <div className="prayag-container py-10 md:py-16 lg:py-20">
-          <nav aria-label="Breadcrumb" className="mb-6 text-[14px] leading-5 text-white/80">
+      <section className="border-b border-[#e6e9ee] bg-white">
+        <div className="prayag-container py-9 md:py-14">
+          <nav aria-label="Breadcrumb" className="mb-6 text-[14px] leading-5 text-[#9aa3ad]">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <li>
-                <a href={withBasePath("/")} className="!text-white/60 transition-colors hover:!text-white">
+                <a href={withBasePath("/")} className={crumbLink}>
                   Home
                 </a>
               </li>
@@ -159,30 +170,35 @@ export function InvestorHero({
               {section ? (
                 <>
                   <li>
-                    <Link href={INVESTORS_PATH} className="!text-white/60 transition-colors hover:!text-white">
+                    <Link href={INVESTORS_PATH} className={crumbLink}>
                       Investors
                     </Link>
                   </li>
                   <li aria-hidden="true">/</li>
-                  <li aria-current="page" className="text-white">
+                  <li aria-current="page" className="text-[#007ac3]">
                     {section.title}
                   </li>
                 </>
               ) : (
-                <li aria-current="page" className="text-white">
+                <li aria-current="page" className="text-[#007ac3]">
                   Investors
                 </li>
               )}
             </ol>
           </nav>
-          <p className="mb-3 text-[13px] leading-5 font-medium tracking-[0.18em] text-white/85 uppercase">
-            Investor Relations · {company.name}
-          </p>
-          <h1 className="m-0 max-w-[900px] text-[30px] leading-[1.15] font-medium text-white md:text-[44px] lg:text-[54px]">
-            {title}
-          </h1>
-          {intro && <p className="mt-4 max-w-[720px] text-[16px] leading-7 text-white/90 md:text-[18px] md:leading-8">{intro}</p>}
-          {children}
+          <div className={cn(aside && "grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] xl:gap-16")}>
+            <div>
+              <p className="mb-4 flex items-center gap-3 text-[13px] leading-5 font-medium tracking-[0.18em] text-[#007ac3] uppercase">
+                <span aria-hidden="true" className="h-[2px] w-8 rounded-full bg-gradient-to-r from-[#007ac3] to-[#00aeef]" />
+                Investor Relations
+              </p>
+              <h1 className="m-0 max-w-[900px] text-[30px] leading-[1.15] font-medium text-[#1a1a1a] md:text-[42px] lg:text-[50px]">
+                {title}
+              </h1>
+              {intro && <p className="mt-4 max-w-[680px] text-[16px] leading-7 text-[#5b6470] md:text-[18px] md:leading-8">{intro}</p>}
+            </div>
+            {aside}
+          </div>
         </div>
       </section>
     </>
@@ -233,7 +249,7 @@ export function InvestorSectionLayout({ active, children }: { active: SectionKey
                   href={INVESTORS_PATH}
                   className="mb-1 flex items-center gap-2 rounded-xl px-4 py-3 text-[13px] leading-5 font-medium tracking-[0.12em] !text-[#6b7280] uppercase transition-colors hover:!text-black"
                 >
-                  <span aria-hidden="true">←</span> Investors overview
+                  <FontAwesomeIcon icon={faArrowLeft} aria-hidden="true" className="!h-3.5 !w-3.5" /> Investors overview
                 </Link>
                 <ul className="space-y-1">
                   {investorSections.map((s) => {
@@ -288,10 +304,9 @@ export function PanelHeading({ eyebrow, title, text }: { eyebrow?: string; title
 
 function PdfBadge() {
   return (
-    <div aria-hidden="true" className="relative flex h-[60px] w-[48px] shrink-0 flex-col justify-end rounded-[8px] bg-[#e6f4fb] pb-2 text-center">
-      <span className="absolute top-0 right-0 size-3 rounded-bl-[6px] bg-[#b3def5]" />
-      <span className="text-[11px] leading-none font-semibold tracking-wide text-[#007ac3]">PDF</span>
-    </div>
+    <span aria-hidden="true" className="flex size-14 shrink-0 items-center justify-center rounded-[14px] bg-[#e6f4fb] text-[#007ac3]">
+      <FontAwesomeIcon icon={faFilePdf} className="!h-7 !w-auto" />
+    </span>
   );
 }
 
