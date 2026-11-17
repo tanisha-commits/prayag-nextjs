@@ -42,7 +42,6 @@ export const visibleProductCategories = productCategories.filter(
 );
 
 const investorLinks: NavLink[] = [
-  { label: "Investors Overview", href: "/investors" },
   { label: "Details of Company", href: "/investors/company-details" },
   { label: "Board & Committees", href: "/investors/board-and-committees" },
   { label: "Policies", href: "/investors/policies" },
@@ -137,7 +136,7 @@ export const panelQuickLinks: NavLink[] = [
   { label: "Product Video", href: "/product-video" },
   { label: "Video / TV Advertisement", href: "/video-tv-advertisement" },
   warrantyPolicy,
-  { label: "Investors", href: "/investors" },
+  { label: "Investors", href: "/investors/company-details" },
   { label: "Blog", href: "/blog" },
   { label: "Dealership Enquiry", href: "/dealership-enquiry" },
   { label: "Contact Us", href: "/contact-us" },

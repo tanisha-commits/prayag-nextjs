@@ -18,7 +18,6 @@ const STATIC_PATHS = [
   "/video-tv-advertisement",
   "/feedback-videos",
   "/warranty-policy",
-  "/investors",
   "/investors/company-details",
   "/investors/board-and-committees",
   "/investors/policies",

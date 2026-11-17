@@ -2,7 +2,6 @@ import Link from "next/link";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withBasePath } from "@/lib/base-path";
 import { cn } from "@/lib/utils";
@@ -149,8 +148,10 @@ export function InvestorHero({
   /** Optional content shown beside the heading on large screens (the overview's key facts). */
   aside?: React.ReactNode;
 }) {
-  const crumbs = [{ name: "Investors", path: INVESTORS_PATH }];
-  if (section) crumbs.push({ name: section.title, path: sectionHref(section.key) });
+  // The /investors overview is intentionally not linked anywhere, so section breadcrumbs skip it.
+  const crumbs = section
+    ? [{ name: section.title, path: sectionHref(section.key) }]
+    : [{ name: "Investors", path: INVESTORS_PATH }];
 
   const crumbLink = "!text-[#6b7280] transition-colors hover:!text-[#007ac3]";
 
@@ -169,11 +170,7 @@ export function InvestorHero({
               <li aria-hidden="true">/</li>
               {section ? (
                 <>
-                  <li>
-                    <Link href={INVESTORS_PATH} className={crumbLink}>
-                      Investors
-                    </Link>
-                  </li>
+                  <li>Investors</li>
                   <li aria-hidden="true">/</li>
                   <li aria-current="page" className="text-[#007ac3]">
                     {section.title}
@@ -216,14 +213,6 @@ export function InvestorSectionLayout({ active, children }: { active: SectionKey
         {/* Mobile / tablet: horizontally scrolling section tabs */}
         <nav aria-label="Investor sections" className="-mx-3 mb-6 overflow-x-auto px-3 lg:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <ul className="flex w-max gap-2">
-            <li>
-              <Link
-                href={INVESTORS_PATH}
-                className="block rounded-full border border-[#dfe3e8] bg-white px-4 py-2 text-[14px] leading-5 whitespace-nowrap !text-[#333]"
-              >
-                Overview
-              </Link>
-            </li>
             {investorSections.map((s) => (
               <li key={s.key}>
                 <Link
@@ -245,12 +234,6 @@ export function InvestorSectionLayout({ active, children }: { active: SectionKey
           <aside className="hidden lg:block">
             <div className="sticky top-[100px] space-y-5">
               <nav aria-label="Investor sections" className="rounded-[20px] border border-[#e6e9ee] bg-white p-3">
-                <Link
-                  href={INVESTORS_PATH}
-                  className="mb-1 flex items-center gap-2 rounded-xl px-4 py-3 text-[13px] leading-5 font-medium tracking-[0.12em] !text-[#6b7280] uppercase transition-colors hover:!text-black"
-                >
-                  <FontAwesomeIcon icon={faArrowLeft} aria-hidden="true" className="!h-3.5 !w-3.5" /> Investors overview
-                </Link>
                 <ul className="space-y-1">
                   {investorSections.map((s) => {
                     const current = s.key === active;
