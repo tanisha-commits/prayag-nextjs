@@ -1,0 +1,414 @@
+import Link from "next/link";
+import { withBasePath } from "@/lib/base-path";
+import { cn } from "@/lib/utils";
+import { BreadcrumbJsonLd } from "../seo";
+import {
+  INVESTORS_PATH,
+  company,
+  formatBytes,
+  investorSections,
+  sectionHref,
+  type InvestorDocument,
+  type SectionKey,
+} from "./data";
+
+/* ------------------------------------------------------------------ */
+/* Icons                                                               */
+/* ------------------------------------------------------------------ */
+
+type IconProps = { className?: string };
+const svg = {
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.6,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+  viewBox: "0 0 24 24",
+  "aria-hidden": true,
+};
+
+export function ArrowIcon({ className }: IconProps) {
+  return (
+    <svg {...svg} className={className}>
+      <path d="M7 17 17 7M8 7h9v9" />
+    </svg>
+  );
+}
+
+export function DownloadIcon({ className }: IconProps) {
+  return (
+    <svg {...svg} className={className}>
+      <path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" />
+    </svg>
+  );
+}
+
+export function EyeIcon({ className }: IconProps) {
+  return (
+    <svg {...svg} className={className}>
+      <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
+      <circle cx="12" cy="12" r="2.8" />
+    </svg>
+  );
+}
+
+export function MailIcon({ className }: IconProps) {
+  return (
+    <svg {...svg} className={className}>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3.5 6.5 8.5 6.5 8.5-6.5" />
+    </svg>
+  );
+}
+
+export function PinIcon({ className }: IconProps) {
+  return (
+    <svg {...svg} className={className}>
+      <path d="M12 21s-7-6.2-7-11.5a7 7 0 1 1 14 0C19 14.8 12 21 12 21Z" />
+      <circle cx="12" cy="9.5" r="2.5" />
+    </svg>
+  );
+}
+
+const sectionIconPaths: Record<SectionKey, React.ReactNode> = {
+  "company-details": (
+    <>
+      <path d="M4 21V5.5A1.5 1.5 0 0 1 5.5 4h7A1.5 1.5 0 0 1 14 5.5V21M14 10h4.5a1.5 1.5 0 0 1 1.5 1.5V21M2.5 21h19" />
+      <path d="M7.5 8h3M7.5 11.5h3M7.5 15h3" />
+    </>
+  ),
+  "board-and-committees": (
+    <>
+      <circle cx="12" cy="7.5" r="3" />
+      <circle cx="5" cy="10" r="2.2" />
+      <circle cx="19" cy="10" r="2.2" />
+      <path d="M6.5 20v-1.5a5.5 5.5 0 0 1 11 0V20M1.5 19v-.8A3.5 3.5 0 0 1 5 14.7M22.5 19v-.8a3.5 3.5 0 0 0-3.5-3.5" />
+    </>
+  ),
+  policies: (
+    <>
+      <path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.3 7.5 9.5 4.3-1.2 7.5-4.9 7.5-9.5V6L12 3Z" />
+      <path d="m8.8 12 2.2 2.2 4.3-4.4" />
+    </>
+  ),
+  "csr-annual-action-plan": (
+    <>
+      <path d="M12 20.5s-8-4.6-8-10.6A4.4 4.4 0 0 1 12 7.3a4.4 4.4 0 0 1 8 2.6c0 6-8 10.6-8 10.6Z" />
+      <path d="M8.5 12.5h2l1-2 1.5 4 1-2h1.5" />
+    </>
+  ),
+  "annual-returns": (
+    <>
+      <path d="M6 3h8.5L19 7.5V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" />
+      <path d="M14 3v5h5M8.5 17v-3M12 17v-5.5M15.5 17v-2" />
+    </>
+  ),
+  "notice-of-agm": (
+    <>
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2" />
+      <path d="M3.5 9.5h17M8 3v4M16 3v4M8 13.5h3M8 17h6" />
+    </>
+  ),
+  "agm-transcript": (
+    <>
+      <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5v-9Z" />
+      <path d="M8 8.5h8M8 12h5" />
+    </>
+  ),
+};
+
+export function SectionIcon({ section, className }: { section: SectionKey; className?: string }) {
+  return (
+    <svg {...svg} className={className}>
+      {sectionIconPaths[section]}
+    </svg>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero                                                                */
+/* ------------------------------------------------------------------ */
+
+export function InvestorHero({
+  title,
+  intro,
+  section,
+  children,
+}: {
+  title: string;
+  intro?: string;
+  section?: { key: SectionKey; title: string };
+  children?: React.ReactNode;
+}) {
+  const crumbs = [{ name: "Investors", path: INVESTORS_PATH }];
+  if (section) crumbs.push({ name: section.title, path: sectionHref(section.key) });
+
+  return (
+    <>
+      <BreadcrumbJsonLd items={crumbs} />
+      <section className="relative isolate overflow-hidden bg-[#0b0b0c] text-white">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(60%_90%_at_85%_0%,rgba(0,122,195,0.45),transparent_60%),radial-gradient(40%_70%_at_0%_100%,rgba(0,86,179,0.25),transparent_70%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:linear-gradient(to_bottom,black,transparent)]"
+        />
+        <div className="prayag-container py-10 md:py-16 lg:py-20">
+          <nav aria-label="Breadcrumb" className="mb-6 text-[14px] leading-5 text-white/60">
+            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <li>
+                <a href={withBasePath("/")} className="!text-white/60 transition-colors hover:!text-white">
+                  Home
+                </a>
+              </li>
+              <li aria-hidden="true">/</li>
+              {section ? (
+                <>
+                  <li>
+                    <Link href={INVESTORS_PATH} className="!text-white/60 transition-colors hover:!text-white">
+                      Investors
+                    </Link>
+                  </li>
+                  <li aria-hidden="true">/</li>
+                  <li aria-current="page" className="text-white">
+                    {section.title}
+                  </li>
+                </>
+              ) : (
+                <li aria-current="page" className="text-white">
+                  Investors
+                </li>
+              )}
+            </ol>
+          </nav>
+          <p className="mb-3 text-[13px] leading-5 font-medium tracking-[0.18em] text-[#5cc2ff] uppercase">
+            Investor Relations · {company.name}
+          </p>
+          <h1 className="m-0 max-w-[900px] text-[30px] leading-[1.15] font-medium text-white md:text-[44px] lg:text-[54px]">
+            {title}
+          </h1>
+          {intro && <p className="mt-4 max-w-[720px] text-[16px] leading-7 text-white/75 md:text-[18px] md:leading-8">{intro}</p>}
+          {children}
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Section layout with side navigation                                 */
+/* ------------------------------------------------------------------ */
+
+export function InvestorSectionLayout({ active, children }: { active: SectionKey; children: React.ReactNode }) {
+  return (
+    <section className="bg-[#f6f7f9] py-8 md:py-14">
+      <div className="prayag-container">
+        {/* Mobile / tablet: horizontally scrolling section tabs */}
+        <nav aria-label="Investor sections" className="-mx-3 mb-6 overflow-x-auto px-3 lg:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <ul className="flex w-max gap-2">
+            <li>
+              <Link
+                href={INVESTORS_PATH}
+                className="block rounded-full border border-[#dfe3e8] bg-white px-4 py-2 text-[14px] leading-5 whitespace-nowrap !text-[#333]"
+              >
+                Overview
+              </Link>
+            </li>
+            {investorSections.map((s) => (
+              <li key={s.key}>
+                <Link
+                  href={sectionHref(s.key)}
+                  aria-current={s.key === active ? "page" : undefined}
+                  className={cn(
+                    "block rounded-full border px-4 py-2 text-[14px] leading-5 whitespace-nowrap",
+                    s.key === active ? "border-black bg-black !text-white" : "border-[#dfe3e8] bg-white !text-[#333]",
+                  )}
+                >
+                  {s.navLabel}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="grid gap-8 lg:grid-cols-[290px_minmax(0,1fr)] xl:grid-cols-[320px_minmax(0,1fr)] xl:gap-10">
+          <aside className="hidden lg:block">
+            <div className="sticky top-[100px] space-y-5">
+              <nav aria-label="Investor sections" className="rounded-[20px] border border-[#e6e9ee] bg-white p-3">
+                <Link
+                  href={INVESTORS_PATH}
+                  className="mb-1 flex items-center gap-2 rounded-xl px-4 py-3 text-[13px] leading-5 font-medium tracking-[0.12em] !text-[#6b7280] uppercase transition-colors hover:!text-black"
+                >
+                  <span aria-hidden="true">←</span> Investors overview
+                </Link>
+                <ul className="space-y-1">
+                  {investorSections.map((s) => {
+                    const current = s.key === active;
+                    return (
+                      <li key={s.key}>
+                        <Link
+                          href={sectionHref(s.key)}
+                          aria-current={current ? "page" : undefined}
+                          className={cn(
+                            "group flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] leading-5 transition-colors",
+                            current ? "bg-black !text-white" : "!text-[#222] hover:bg-[#f1f4f7]",
+                          )}
+                        >
+                          <span className={cn("text-[12px] tabular-nums", current ? "text-[#5cc2ff]" : "text-[#9aa3ad]")}>{s.index}</span>
+                          <span className="flex-1">{s.navLabel}</span>
+                          <ArrowIcon className={cn("size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5", current ? "opacity-100" : "opacity-40")} />
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+              <InvestorContactCard compact />
+            </div>
+          </aside>
+
+          <div className="min-w-0">{children}</div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Content building blocks                                             */
+/* ------------------------------------------------------------------ */
+
+export function Panel({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <div className={cn("rounded-[20px] border border-[#e6e9ee] bg-white p-5 md:p-8", className)}>{children}</div>;
+}
+
+export function PanelHeading({ eyebrow, title, text }: { eyebrow?: string; title: string; text?: string }) {
+  return (
+    <div className="mb-6">
+      {eyebrow && <p className="mb-2 text-[12px] leading-4 font-medium tracking-[0.16em] text-[#007ac3] uppercase">{eyebrow}</p>}
+      <h2 className="m-0 text-[22px] leading-8 font-medium text-black md:text-[28px] md:leading-9">{title}</h2>
+      {text && <p className="mt-2 max-w-[680px] text-[15px] leading-6 text-[#5b6470] md:text-[16px]">{text}</p>}
+    </div>
+  );
+}
+
+function PdfBadge() {
+  return (
+    <div aria-hidden="true" className="relative flex h-[60px] w-[48px] shrink-0 flex-col justify-end rounded-[8px] bg-[#fdecec] pb-2 text-center">
+      <span className="absolute top-0 right-0 size-3 rounded-bl-[6px] bg-[#f6c9c9]" />
+      <span className="text-[11px] leading-none font-semibold tracking-wide text-[#d93025]">PDF</span>
+    </div>
+  );
+}
+
+const btnBase =
+  "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[15px] leading-5 font-medium transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d6efd]";
+
+export function DocumentActions({ doc, size = "md" }: { doc: InvestorDocument; size?: "md" | "lg" }) {
+  const lg = size === "lg" ? "px-7 py-3.5 text-[16px]" : "";
+  return (
+    <div className="flex flex-wrap gap-2.5">
+      <a
+        href={withBasePath(doc.file)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(btnBase, lg, "bg-black !text-white hover:-translate-y-0.5 hover:bg-[linear-gradient(135deg,#0056b3,#004085)]")}
+      >
+        <EyeIcon className="size-[18px]" />
+        View
+        <span className="sr-only"> {doc.title} (PDF, opens in a new tab)</span>
+      </a>
+      <a
+        href={withBasePath(doc.file)}
+        download={doc.downloadName}
+        className={cn(btnBase, lg, "border border-[#d5dae0] !text-black hover:-translate-y-0.5 hover:border-black hover:bg-black hover:!text-white")}
+      >
+        <DownloadIcon className="size-[18px]" />
+        Download
+        <span className="sr-only">
+          {" "}
+          {doc.title} (PDF, {formatBytes(doc.bytes)})
+        </span>
+      </a>
+    </div>
+  );
+}
+
+export function DocumentMeta({ doc }: { doc: InvestorDocument }) {
+  return (
+    <p className="text-[13px] leading-5 text-[#6b7280]">
+      PDF · {doc.pages} pages · {formatBytes(doc.bytes)}
+    </p>
+  );
+}
+
+export function DocumentCard({ doc, latest = false }: { doc: InvestorDocument; latest?: boolean }) {
+  return (
+    <article className="group flex flex-col gap-5 rounded-[18px] border border-[#e6e9ee] bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c9d3dd] hover:shadow-[0_18px_40px_-24px_rgba(0,40,80,0.35)] md:flex-row md:items-center md:p-6">
+      <div className="flex min-w-0 flex-1 items-start gap-4">
+        <PdfBadge />
+        <div className="min-w-0">
+          <div className="mb-1.5 flex flex-wrap items-center gap-2">
+            {doc.period && (
+              <span className="rounded-full bg-[#eef6fc] px-2.5 py-0.5 text-[12px] leading-5 font-medium text-[#005f99]">{doc.period}</span>
+            )}
+            {latest && <span className="rounded-full bg-black px-2.5 py-0.5 text-[12px] leading-5 font-medium text-white">Latest</span>}
+          </div>
+          <h3 className="m-0 text-[17px] leading-6 font-medium text-black md:text-[18px]">{doc.title}</h3>
+          {doc.description && <p className="mt-1 text-[14px] leading-[22px] text-[#5b6470]">{doc.description}</p>}
+          <div className="mt-1.5">
+            <DocumentMeta doc={doc} />
+          </div>
+        </div>
+      </div>
+      <div className="md:shrink-0">
+        <DocumentActions doc={doc} />
+      </div>
+    </article>
+  );
+}
+
+export function DocumentList({ docs, markLatest = false }: { docs: InvestorDocument[]; markLatest?: boolean }) {
+  return (
+    <div className="space-y-3.5">
+      {docs.map((d, i) => (
+        <DocumentCard key={d.file} doc={d} latest={markLatest && i === 0} />
+      ))}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Investor contact                                                    */
+/* ------------------------------------------------------------------ */
+
+export function InvestorContactCard({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className={cn("h-full rounded-[20px] bg-black text-white", compact ? "p-6" : "p-6 md:p-10")}>
+      <p className="mb-2 text-[12px] leading-4 font-medium tracking-[0.16em] text-[#5cc2ff] uppercase">Investor contact</p>
+      <h2 className={cn("m-0 font-medium text-white", compact ? "text-[19px] leading-7" : "text-[24px] leading-8 md:text-[30px] md:leading-10")}>
+        {compact ? "Questions about a disclosure?" : "Shareholder and investor queries"}
+      </h2>
+      {!compact && (
+        <p className="mt-3 max-w-[560px] text-[15px] leading-6 text-white/70 md:text-[16px]">
+          For any query relating to the Company&apos;s statutory documents or disclosures, please write to us at the email address
+          below.
+        </p>
+      )}
+      <ul className={cn("space-y-3 text-[15px] leading-6", compact ? "mt-4" : "mt-6")}>
+        <li className="flex gap-3">
+          <MailIcon className="mt-0.5 size-5 shrink-0 text-[#5cc2ff]" />
+          <a href={`mailto:${company.email}`} className="break-all !text-white underline-offset-4 hover:underline">
+            {company.email}
+          </a>
+        </li>
+        <li className="flex gap-3 text-white/80">
+          <PinIcon className="mt-0.5 size-5 shrink-0 text-[#5cc2ff]" />
+          <span>{company.registeredOffice}</span>
+        </li>
+      </ul>
+    </div>
+  );
+}
