@@ -30,7 +30,7 @@ export default function WarrantyPolicyPage() {
             exclusions for Prayag products.
           </p>
           <p className="mb-8 text-[14px] leading-6 text-[#555] md:text-[16px]">
-            PDF · 3 pages · 502 KB · file dated 30 January 2026
+            PDF · 3 pages · 558 KB · file dated 12 November 2026
           </p>
 
           <div className="mb-10 flex flex-wrap gap-4">
@@ -49,7 +49,7 @@ export default function WarrantyPolicyPage() {
               className={`${actionBase} border border-black text-black hover:bg-black hover:!text-white`}
             >
               Download PDF
-              <span className="sr-only"> (Warranty Policy, 502 KB)</span>
+              <span className="sr-only"> (Warranty Policy, 558 KB)</span>
             </a>
           </div>
 
