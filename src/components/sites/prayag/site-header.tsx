@@ -267,17 +267,13 @@ function MegaPanel({ menu, showImage }: { menu: MegaMenu; showImage: boolean }) 
 
 function MegaFeature({ feature }: { feature: MegaMenuFeature }) {
   return (
-    <div className="relative isolate overflow-hidden rounded-[18px] bg-[#0b0b0c] p-8 text-white">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[radial-gradient(70%_100%_at_100%_0%,rgba(0,122,195,0.55),transparent_65%)]"
-      />
-      <p className="m-0 text-[12px] leading-4 font-medium tracking-[0.16em] text-[#5cc2ff] uppercase">{feature.eyebrow}</p>
+    <div className="rounded-[18px] bg-gradient-to-br from-[#007ac3] to-[#00aeef] p-8 text-white">
+      <p className="m-0 text-[12px] leading-4 font-medium tracking-[0.16em] text-white/85 uppercase">{feature.eyebrow}</p>
       <p className="m-0 mt-3 text-[26px] leading-[34px] font-medium text-white">{feature.title}</p>
-      <p className="m-0 mt-2 max-w-[420px] text-[16px] leading-6 text-white/70">{feature.text}</p>
+      <p className="m-0 mt-2 max-w-[420px] text-[16px] leading-6 text-white/90">{feature.text}</p>
       <a
         href={withBasePath(feature.link.href)}
-        className="mt-6 inline-flex items-center rounded-full bg-white px-5 py-2.5 text-[15px] leading-5 font-medium !text-black transition-colors duration-300 hover:bg-[#5cc2ff]"
+        className="mt-6 inline-flex items-center rounded-full bg-white px-5 py-2.5 text-[15px] leading-5 font-medium !text-[#007ac3] transition-colors duration-300 hover:bg-[#e6f4fb]"
       >
         {feature.link.label}
       </a>

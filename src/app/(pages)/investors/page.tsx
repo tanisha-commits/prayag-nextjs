@@ -53,14 +53,14 @@ export default function InvestorsPage() {
         title="Building long-term value with transparency"
         intro="Welcome to the Investor Relations section of Prayag Polymers Limited. Find our corporate details, Board composition, governance policies and statutory filings in one place."
       >
-        <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[18px] border border-white/10 bg-white/10 md:mt-14 lg:grid-cols-4">
+        <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[18px] border border-white/30 bg-white/30 md:mt-14 lg:grid-cols-4">
           {facts.map((f) => (
-            <div key={f.label} className="bg-[#0b0b0c]/80 p-5 backdrop-blur md:p-7">
+            <div key={f.label} className="bg-[#0a8fd6] p-5 md:p-7">
               <dt className="sr-only">{f.label}</dt>
               <dd className="m-0">
                 <span className="block text-[34px] leading-none font-medium text-white md:text-[46px]">{f.value}</span>
-                <span className="mt-3 block h-px w-8 bg-[#5cc2ff]" aria-hidden="true" />
-                <span className="mt-3 block text-[14px] leading-5 text-white/70 md:text-[15px]">{f.label}</span>
+                <span className="mt-3 block h-px w-8 bg-white" aria-hidden="true" />
+                <span className="mt-3 block text-[14px] leading-5 text-white/90 md:text-[15px]">{f.label}</span>
               </dd>
             </div>
           ))}
@@ -86,10 +86,10 @@ export default function InvestorsPage() {
                 <li key={s.key}>
                   <Link
                     href={sectionHref(s.key)}
-                    className="group relative flex h-full flex-col overflow-hidden rounded-[20px] border border-[#e6e9ee] bg-white p-6 !text-black transition-all duration-300 hover:-translate-y-1 hover:border-black hover:shadow-[0_24px_50px_-30px_rgba(0,40,80,0.45)] md:p-7"
+                    className="group relative flex h-full flex-col overflow-hidden rounded-[20px] border border-[#e6e9ee] bg-white p-6 !text-black transition-all duration-300 hover:-translate-y-1 hover:border-[#007ac3] hover:shadow-[0_24px_50px_-30px_rgba(0,40,80,0.45)] md:p-7"
                   >
                     <div className="mb-8 flex items-start justify-between">
-                      <span className="flex size-12 items-center justify-center rounded-[14px] bg-[#eef6fc] text-[#007ac3] transition-colors duration-300 group-hover:bg-black group-hover:text-white">
+                      <span className="flex size-12 items-center justify-center rounded-[14px] bg-[#e6f4fb] text-[#007ac3] transition-colors duration-300 group-hover:bg-[#007ac3] group-hover:text-white">
                         <SectionIcon section={s.key} className="size-6" />
                       </span>
                       <span className="text-[13px] leading-5 font-medium text-[#9aa3ad] tabular-nums">{s.index}</span>
@@ -100,7 +100,7 @@ export default function InvestorsPage() {
                       <span className="text-[13px] leading-5 text-[#6b7280]">
                         {count ? `${count} document${count > 1 ? "s" : ""}` : "Read online"}
                       </span>
-                      <span className="flex size-9 items-center justify-center rounded-full border border-[#dfe3e8] transition-all duration-300 group-hover:border-black group-hover:bg-black group-hover:text-white">
+                      <span className="flex size-9 items-center justify-center rounded-full border border-[#dfe3e8] transition-all duration-300 group-hover:border-[#007ac3] group-hover:bg-[#007ac3] group-hover:text-white">
                         <ArrowIcon className="size-4" />
                       </span>
                     </div>
@@ -141,7 +141,7 @@ export default function InvestorsPage() {
                 </div>
                 <Link
                   href={sectionHref("agm-transcript")}
-                  className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-black px-5 py-2.5 text-[15px] leading-5 font-medium !text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[linear-gradient(135deg,#0056b3,#004085)] sm:self-auto"
+                  className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-[#007ac3] px-5 py-2.5 text-[15px] leading-5 font-medium !text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#00aeef] sm:self-auto"
                 >
                   Read transcript <ArrowIcon className="size-4" />
                 </Link>

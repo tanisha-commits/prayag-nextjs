@@ -146,17 +146,9 @@ export function InvestorHero({
   return (
     <>
       <BreadcrumbJsonLd items={crumbs} />
-      <section className="relative isolate overflow-hidden bg-[#0b0b0c] text-white">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[radial-gradient(60%_90%_at_85%_0%,rgba(0,122,195,0.45),transparent_60%),radial-gradient(40%_70%_at_0%_100%,rgba(0,86,179,0.25),transparent_70%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:linear-gradient(to_bottom,black,transparent)]"
-        />
+      <section className="bg-gradient-to-br from-[#007ac3] to-[#00aeef] text-white">
         <div className="prayag-container py-10 md:py-16 lg:py-20">
-          <nav aria-label="Breadcrumb" className="mb-6 text-[14px] leading-5 text-white/60">
+          <nav aria-label="Breadcrumb" className="mb-6 text-[14px] leading-5 text-white/80">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <li>
                 <a href={withBasePath("/")} className="!text-white/60 transition-colors hover:!text-white">
@@ -183,13 +175,13 @@ export function InvestorHero({
               )}
             </ol>
           </nav>
-          <p className="mb-3 text-[13px] leading-5 font-medium tracking-[0.18em] text-[#5cc2ff] uppercase">
+          <p className="mb-3 text-[13px] leading-5 font-medium tracking-[0.18em] text-white/85 uppercase">
             Investor Relations · {company.name}
           </p>
           <h1 className="m-0 max-w-[900px] text-[30px] leading-[1.15] font-medium text-white md:text-[44px] lg:text-[54px]">
             {title}
           </h1>
-          {intro && <p className="mt-4 max-w-[720px] text-[16px] leading-7 text-white/75 md:text-[18px] md:leading-8">{intro}</p>}
+          {intro && <p className="mt-4 max-w-[720px] text-[16px] leading-7 text-white/90 md:text-[18px] md:leading-8">{intro}</p>}
           {children}
         </div>
       </section>
@@ -223,7 +215,7 @@ export function InvestorSectionLayout({ active, children }: { active: SectionKey
                   aria-current={s.key === active ? "page" : undefined}
                   className={cn(
                     "block rounded-full border px-4 py-2 text-[14px] leading-5 whitespace-nowrap",
-                    s.key === active ? "border-black bg-black !text-white" : "border-[#dfe3e8] bg-white !text-[#333]",
+                    s.key === active ? "border-[#007ac3] bg-[#007ac3] !text-white" : "border-[#dfe3e8] bg-white !text-[#333]",
                   )}
                 >
                   {s.navLabel}
@@ -253,10 +245,10 @@ export function InvestorSectionLayout({ active, children }: { active: SectionKey
                           aria-current={current ? "page" : undefined}
                           className={cn(
                             "group flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] leading-5 transition-colors",
-                            current ? "bg-black !text-white" : "!text-[#222] hover:bg-[#f1f4f7]",
+                            current ? "bg-[#e6f4fb] font-medium !text-[#007ac3]" : "!text-[#222] hover:bg-[#f1f4f7]",
                           )}
                         >
-                          <span className={cn("text-[12px] tabular-nums", current ? "text-[#5cc2ff]" : "text-[#9aa3ad]")}>{s.index}</span>
+                          <span className={cn("text-[12px] tabular-nums", current ? "text-[#007ac3]" : "text-[#9aa3ad]")}>{s.index}</span>
                           <span className="flex-1">{s.navLabel}</span>
                           <ArrowIcon className={cn("size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5", current ? "opacity-100" : "opacity-40")} />
                         </Link>
@@ -296,9 +288,9 @@ export function PanelHeading({ eyebrow, title, text }: { eyebrow?: string; title
 
 function PdfBadge() {
   return (
-    <div aria-hidden="true" className="relative flex h-[60px] w-[48px] shrink-0 flex-col justify-end rounded-[8px] bg-[#fdecec] pb-2 text-center">
-      <span className="absolute top-0 right-0 size-3 rounded-bl-[6px] bg-[#f6c9c9]" />
-      <span className="text-[11px] leading-none font-semibold tracking-wide text-[#d93025]">PDF</span>
+    <div aria-hidden="true" className="relative flex h-[60px] w-[48px] shrink-0 flex-col justify-end rounded-[8px] bg-[#e6f4fb] pb-2 text-center">
+      <span className="absolute top-0 right-0 size-3 rounded-bl-[6px] bg-[#b3def5]" />
+      <span className="text-[11px] leading-none font-semibold tracking-wide text-[#007ac3]">PDF</span>
     </div>
   );
 }
@@ -314,7 +306,7 @@ export function DocumentActions({ doc, size = "md" }: { doc: InvestorDocument; s
         href={withBasePath(doc.file)}
         target="_blank"
         rel="noopener noreferrer"
-        className={cn(btnBase, lg, "bg-black !text-white hover:-translate-y-0.5 hover:bg-[linear-gradient(135deg,#0056b3,#004085)]")}
+        className={cn(btnBase, lg, "bg-[#007ac3] !text-white hover:-translate-y-0.5 hover:bg-[#00aeef]")}
       >
         <EyeIcon className="size-[18px]" />
         View
@@ -323,7 +315,7 @@ export function DocumentActions({ doc, size = "md" }: { doc: InvestorDocument; s
       <a
         href={withBasePath(doc.file)}
         download={doc.downloadName}
-        className={cn(btnBase, lg, "border border-[#d5dae0] !text-black hover:-translate-y-0.5 hover:border-black hover:bg-black hover:!text-white")}
+        className={cn(btnBase, lg, "border border-[#d5dae0] !text-[#1a1a1a] hover:-translate-y-0.5 hover:border-[#007ac3] hover:!text-[#007ac3]")}
       >
         <DownloadIcon className="size-[18px]" />
         Download
@@ -352,9 +344,9 @@ export function DocumentCard({ doc, latest = false }: { doc: InvestorDocument; l
         <div className="min-w-0">
           <div className="mb-1.5 flex flex-wrap items-center gap-2">
             {doc.period && (
-              <span className="rounded-full bg-[#eef6fc] px-2.5 py-0.5 text-[12px] leading-5 font-medium text-[#005f99]">{doc.period}</span>
+              <span className="rounded-full bg-[#e6f4fb] px-2.5 py-0.5 text-[12px] leading-5 font-medium text-[#007ac3]">{doc.period}</span>
             )}
-            {latest && <span className="rounded-full bg-black px-2.5 py-0.5 text-[12px] leading-5 font-medium text-white">Latest</span>}
+            {latest && <span className="rounded-full bg-[#00aeef] px-2.5 py-0.5 text-[12px] leading-5 font-medium text-white">Latest</span>}
           </div>
           <h3 className="m-0 text-[17px] leading-6 font-medium text-black md:text-[18px]">{doc.title}</h3>
           {doc.description && <p className="mt-1 text-[14px] leading-[22px] text-[#5b6470]">{doc.description}</p>}
@@ -386,26 +378,26 @@ export function DocumentList({ docs, markLatest = false }: { docs: InvestorDocum
 
 export function InvestorContactCard({ compact = false }: { compact?: boolean }) {
   return (
-    <div className={cn("h-full rounded-[20px] bg-black text-white", compact ? "p-6" : "p-6 md:p-10")}>
-      <p className="mb-2 text-[12px] leading-4 font-medium tracking-[0.16em] text-[#5cc2ff] uppercase">Investor contact</p>
-      <h2 className={cn("m-0 font-medium text-white", compact ? "text-[19px] leading-7" : "text-[24px] leading-8 md:text-[30px] md:leading-10")}>
+    <div className={cn("h-full rounded-[20px] border border-[#cfe9f7] bg-[#eef8fd] text-[#1a1a1a]", compact ? "p-6" : "p-6 md:p-10")}>
+      <p className="mb-2 text-[12px] leading-4 font-medium tracking-[0.16em] text-[#007ac3] uppercase">Investor contact</p>
+      <h2 className={cn("m-0 font-medium text-[#1a1a1a]", compact ? "text-[19px] leading-7" : "text-[24px] leading-8 md:text-[30px] md:leading-10")}>
         {compact ? "Questions about a disclosure?" : "Shareholder and investor queries"}
       </h2>
       {!compact && (
-        <p className="mt-3 max-w-[560px] text-[15px] leading-6 text-white/70 md:text-[16px]">
+        <p className="mt-3 max-w-[560px] text-[15px] leading-6 text-[#5b6470] md:text-[16px]">
           For any query relating to the Company&apos;s statutory documents or disclosures, please write to us at the email address
           below.
         </p>
       )}
       <ul className={cn("space-y-3 text-[15px] leading-6", compact ? "mt-4" : "mt-6")}>
         <li className="flex gap-3">
-          <MailIcon className="mt-0.5 size-5 shrink-0 text-[#5cc2ff]" />
-          <a href={`mailto:${company.email}`} className="break-all !text-white underline-offset-4 hover:underline">
+          <MailIcon className="mt-0.5 size-5 shrink-0 text-[#007ac3]" />
+          <a href={`mailto:${company.email}`} className="break-all font-medium !text-[#007ac3] underline-offset-4 hover:underline">
             {company.email}
           </a>
         </li>
-        <li className="flex gap-3 text-white/80">
-          <PinIcon className="mt-0.5 size-5 shrink-0 text-[#5cc2ff]" />
+        <li className="flex gap-3 text-[#5b6470]">
+          <PinIcon className="mt-0.5 size-5 shrink-0 text-[#007ac3]" />
           <span>{company.registeredOffice}</span>
         </li>
       </ul>

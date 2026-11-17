@@ -13,8 +13,8 @@ const section = getSection("board-and-committees");
 export const metadata = pageMetadata(sectionMetadataInput("board-and-committees"));
 
 const categoryStyle: Record<PersonCategory, { label: string; chip: string }> = {
-  executive: { label: "Executive", chip: "bg-black text-white" },
-  independent: { label: "Independent", chip: "bg-[#eef6fc] text-[#005f99]" },
+  executive: { label: "Executive", chip: "bg-[#007ac3] text-white" },
+  independent: { label: "Independent", chip: "bg-[#e6f4fb] text-[#007ac3]" },
   kmp: { label: "KMP", chip: "bg-[#f1f2f4] text-[#4b5563]" },
 };
 
@@ -45,7 +45,7 @@ export default function BoardAndCommitteesPage() {
                       aria-hidden="true"
                       className={cn(
                         "flex size-12 shrink-0 items-center justify-center rounded-full text-[15px] font-medium",
-                        m.category === "executive" ? "bg-black text-white" : "bg-white text-black ring-1 ring-[#dfe3e8]",
+                        m.category === "executive" ? "bg-[#007ac3] text-white" : "bg-white text-black ring-1 ring-[#dfe3e8]",
                       )}
                     >
                       {initials(m.name)}

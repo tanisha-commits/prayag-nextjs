@@ -59,7 +59,7 @@ export default function AgmTranscriptPage() {
                   <li key={c.id}>
                     <a
                       href={`#${c.id}`}
-                      className="block rounded-full border border-[#dfe3e8] px-3.5 py-1.5 text-[14px] leading-5 !text-[#333] transition-colors hover:border-black hover:!text-black"
+                      className="block rounded-full border border-[#dfe3e8] px-3.5 py-1.5 text-[14px] leading-5 !text-[#333] transition-colors hover:border-[#007ac3] hover:!text-[#007ac3]"
                     >
                       {i + 1}. {c.title}
                     </a>
@@ -102,7 +102,7 @@ export default function AgmTranscriptPage() {
               <p>{t.businessIntro}</p>
               <div className="overflow-x-auto rounded-[14px] border border-[#e6e9ee]">
                 <table className="w-full min-w-[620px] border-collapse text-left text-[15px] leading-6">
-                  <thead className="bg-black text-white">
+                  <thead className="bg-[#007ac3] text-white">
                     <tr>
                       <th scope="col" className="w-[70px] px-4 py-3 font-medium">No.</th>
                       <th scope="col" className="px-4 py-3 font-medium">Description of Resolution</th>
@@ -111,8 +111,8 @@ export default function AgmTranscriptPage() {
                   </thead>
                   {t.resolutions.map((g) => (
                     <tbody key={g.group}>
-                      <tr className="bg-[#eef6fc]">
-                        <th scope="colgroup" colSpan={3} className="px-4 py-2.5 text-[13px] font-medium tracking-[0.12em] text-[#005f99] uppercase">
+                      <tr className="bg-[#e6f4fb]">
+                        <th scope="colgroup" colSpan={3} className="px-4 py-2.5 text-[13px] font-medium tracking-[0.12em] text-[#007ac3] uppercase">
                           {g.group}
                         </th>
                       </tr>
@@ -124,7 +124,7 @@ export default function AgmTranscriptPage() {
                             <span
                               className={cn(
                                 "inline-block rounded-full px-2.5 py-0.5 text-[13px] leading-5 font-medium whitespace-nowrap",
-                                r.nature === "Special Resolution" ? "bg-black text-white" : "bg-[#f1f2f4] text-[#374151]",
+                                r.nature === "Special Resolution" ? "bg-[#007ac3] text-white" : "bg-[#f1f2f4] text-[#374151]",
                               )}
                             >
                               {r.nature}
@@ -145,7 +145,7 @@ export default function AgmTranscriptPage() {
             <div className="flex flex-wrap gap-3 border-t border-[#eef0f3] pt-6">
               <Link
                 href={sectionHref("notice-of-agm")}
-                className="inline-flex items-center gap-2 rounded-full border border-[#d5dae0] px-5 py-2.5 text-[15px] font-medium !text-black transition-all hover:border-black hover:bg-black hover:!text-white"
+                className="inline-flex items-center gap-2 rounded-full border border-[#d5dae0] px-5 py-2.5 text-[15px] font-medium !text-black transition-all hover:border-[#007ac3] hover:!text-[#007ac3]"
               >
                 View the Notice of the 37th AGM <ArrowIcon className="size-4" />
               </Link>

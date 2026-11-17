@@ -48,7 +48,7 @@ export default function CompanyDetailsPage() {
 
           <div className="grid gap-5 md:grid-cols-2">
             <Panel className="flex gap-4">
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-[12px] bg-[#eef6fc] text-[#007ac3]">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-[12px] bg-[#e6f4fb] text-[#007ac3]">
                 <PinIcon className="size-5" />
               </span>
               <div>
@@ -57,7 +57,7 @@ export default function CompanyDetailsPage() {
               </div>
             </Panel>
             <Panel className="flex gap-4">
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-[12px] bg-[#eef6fc] text-[#007ac3]">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-[12px] bg-[#e6f4fb] text-[#007ac3]">
                 <MailIcon className="size-5" />
               </span>
               <div>
