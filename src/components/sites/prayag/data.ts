@@ -41,16 +41,6 @@ export const visibleProductCategories = productCategories.filter(
   (c) => c.label !== "Pipes & Fittings",
 );
 
-const investorLinks: NavLink[] = [
-  { label: "Details of Company", href: "/investors/company-details" },
-  { label: "Board & Committees", href: "/investors/board-and-committees" },
-  { label: "Policies", href: "/investors/policies" },
-  { label: "CSR Annual Action Plan", href: "/investors/csr-annual-action-plan" },
-  { label: "Annual Returns", href: "/investors/annual-returns" },
-  { label: "Notice of AGM", href: "/investors/notice-of-agm" },
-  { label: "AGM Transcript", href: "/investors/agm-transcript" },
-];
-
 const warrantyPolicy: NavLink = {
   label: "Warranty Policy",
   href: "/warranty-policy",
@@ -90,17 +80,6 @@ export const megaMenus: (MegaMenu | NavLink)[] = [
     columns: 1,
   },
   {
-    label: "Investors",
-    links: investorLinks,
-    feature: {
-      eyebrow: "Investor Relations",
-      title: "37th Annual General Meeting",
-      text: "Read the Notice and the transcript of the 37th AGM held on 30 September 2026.",
-      link: { label: "View AGM Notice", href: "/investors/notice-of-agm" },
-    },
-    columns: 2,
-  },
-  {
     label: "Contact",
     links: [
       { label: "Dealership Enquiry", href: "/dealership-enquiry" },
@@ -136,7 +115,6 @@ export const panelQuickLinks: NavLink[] = [
   { label: "Product Video", href: "/product-video" },
   { label: "Video / TV Advertisement", href: "/video-tv-advertisement" },
   warrantyPolicy,
-  { label: "Investors", href: "/investors/company-details" },
   { label: "Blog", href: "/blog" },
   { label: "Dealership Enquiry", href: "/dealership-enquiry" },
   { label: "Contact Us", href: "/contact-us" },
